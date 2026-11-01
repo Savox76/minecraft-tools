@@ -8,7 +8,9 @@ Schreibt nach  _site/ :
   index.html, Styles, Skripte (aus site/)
   data/katalog.json            Übersicht aller Einträge
   data/builds/<id>.json        Modell, LEGO-Schritte, Teileliste
-  data/seiten/<id>.html        Plugin- und Anleitungs-Texte als HTML
+  data/seiten/<id>.html        Anleitungs-Texte als HTML
+  <pfad>/index.html            vorgerenderte Seiten mit Meta-Daten (tools/seiten.py)
+  bilder/, sitemap.xml, robots.txt, 404.html
   downloads/<id>/...           .litematic, .schem, teileliste.csv
 
 Aufruf:  python tools/build_site.py [--ohne-exporte]
@@ -235,6 +237,12 @@ def main():
 
     katalog = {'builds': [], 'plugins': [], 'fremd': [], 'docs': [], 'wuensche': [], 'kategorien': KATEGORIEN,
                'plugin_kategorien': PLUGIN_KATEGORIEN}
+    cfg = lies_json(os.path.join(ROOT, 'tools', 'site_config.json'))
+    if os.environ.get('SITE_URL'):
+        cfg['site_url'] = os.environ['SITE_URL']
+    from urllib.parse import urlparse
+    base = urlparse(cfg['site_url']).path or '/'
+    alle_builds, docs_html = [], {}
 
     for bid in sorted(os.listdir(os.path.join(ROOT, 'builds'))):
         ordner = os.path.join(ROOT, 'builds', bid)
@@ -258,10 +266,10 @@ def main():
             for d in downloads:
                 d['groesse'] = os.path.getsize(os.path.join(ziel, d['datei']))
         gesamt = sum(n for _, n in liste)
-        schreib_json(os.path.join(OUT, 'data', 'builds', f'{bid}.json'), {
-            **build, 'model': model, 'schritte': schritte,
-            'teileliste': [{'i': i, 'n': n} for i, n in liste], 'downloads': downloads,
-        })
+        daten = {**build, 'model': model, 'schritte': schritte,
+                 'teileliste': [{'i': i, 'n': n} for i, n in liste], 'downloads': downloads}
+        schreib_json(os.path.join(OUT, 'data', 'builds', f'{bid}.json'), daten)
+        alle_builds.append(daten)
         katalog['builds'].append({
             k: build.get(k) for k in ('id', 'titel', 'beschreibung', 'kategorie', 'tags', 'edition',
                                       'schwierigkeit', 'bauzeit_stunden', 'grundflaeche', 'status')
@@ -289,8 +297,10 @@ def main():
         with open(os.path.join(ROOT, 'docs', name), encoding='utf-8') as f:
             meta, text = front_matter(f.read())
         os.makedirs(os.path.join(OUT, 'data', 'seiten'), exist_ok=True)
+        inhalt = re.sub(r'href="#/([^"]+)"', lambda m: 'href="%s%s/"' % (base, m.group(1).rstrip('/')), md_html(text))
+        docs_html[did] = inhalt
         with open(os.path.join(OUT, 'data', 'seiten', f'doc-{did}.html'), 'w', encoding='utf-8') as f:
-            f.write(md_html(text))
+            f.write(inhalt)
         katalog['docs'].append({'id': did, 'titel': meta.get('titel', did), 'kurz': meta.get('kurz', ''),
                                 'reihenfolge': int(meta.get('reihenfolge', 99))})
         print(f'Anleitung {did}')
@@ -303,6 +313,11 @@ def main():
     schreib_json(os.path.join(OUT, 'data', 'katalog.json'), katalog)
     with open(os.path.join(OUT, '.nojekyll'), 'w') as f:
         f.write('')
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from seiten import Seiten
+    s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html)
+    s.alles()
+    print(f'Seiten: {len(s.adressen)} Adressen in sitemap.xml · Basis {cfg["site_url"]}')
     print('Fertig:', OUT)
 
 

@@ -1,6 +1,7 @@
 import { prepare, draw, partIcon, shapeOf, VIEWS } from './render.js';
 
 const REPO = 'https://github.com/Savox76/minecraft-tools';
+const BASE = document.querySelector('meta[name="site-base"]')?.content || '/';
 const main = document.getElementById('inhalt');
 const fmt = (n) => Number(n).toLocaleString('de-DE');
 const stacks = (n) => { const s = Math.floor(n / 64), r = n % 64; return s ? `${s} St.${r ? ' + ' + r : ''}` : `${r}`; };
@@ -29,11 +30,11 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => redr
 let KAT = null;
 const builds = new Map();
 async function katalog() {
-  if (!KAT) KAT = await (await fetch('data/katalog.json')).json();
+  if (!KAT) KAT = await (await fetch(`${BASE}data/katalog.json`)).json();
   return KAT;
 }
 async function ladeBau(id) {
-  if (!builds.has(id)) builds.set(id, fetch(`data/builds/${id}.json`).then((r) => r.json()));
+  if (!builds.has(id)) builds.set(id, fetch(`${BASE}data/builds/${id}.json`).then((r) => r.json()));
   return builds.get(id);
 }
 const farben = () => ({ fadeTo: cssv('--sheet'), highlight: cssv('--hl'), ground: cssv('--sheet-2'), gridLine: cssv('--line') });
@@ -51,7 +52,7 @@ const stunden = (b) => b && b.length ? `${b[0]}–${b[1]} Std.` : '';
 const initialen = (n) => (n.match(/[A-ZÄÖÜ]/g) || [n[0]]).slice(0, 2).join('');
 
 function bauKarte(b) {
-  return `<a class="karte" href="#/bau/${b.id}" data-thumb="${b.id}">
+  return `<a class="karte" href="${BASE}bau/${b.id}/" data-thumb="${b.id}">
     <div class="bild"><canvas aria-hidden="true"></canvas></div>
     <div class="text">
       <div class="chips">${editionen(b.edition)}${b.status === 'entwurf' ? '<span class="marker entwurf">Entwurf</span>' : ''}</div>
@@ -61,7 +62,7 @@ function bauKarte(b) {
     </div></a>`;
 }
 function pluginKarte(p) {
-  return `<a class="karte plugin-karte" href="#/plugin/${p.id}">
+  return `<a class="karte plugin-karte" href="${BASE}plugin/${p.id}/">
     <div class="text">
       <div class="plugin-kopf"><span class="plugin-symbol" aria-hidden="true">${initialen(p.name)}</span>
         <div><h3>${esc(p.name)}</h3><span class="marker">v${esc(p.version)}</span></div></div>
@@ -69,7 +70,7 @@ function pluginKarte(p) {
       <div class="fakten"><span class="marker">${esc(KAT.plugin_kategorien[p.kategorie] || p.kategorie)}</span><span class="marker">${p.befehle.length} Befehle</span>${p.status === 'doku' ? '<span class="marker entwurf">Download folgt</span>' : ''}</div>
     </div></a>`;
 }
-const docLink = (d) => `<a class="liste-link" href="#/anleitung/${d.id}"><div><h3>${esc(d.titel)}</h3><p>${esc(d.kurz)}</p></div><span class="pfeil" aria-hidden="true">→</span></a>`;
+const docLink = (d) => `<a class="liste-link" href="${BASE}anleitung/${d.id}/"><div><h3>${esc(d.titel)}</h3><p>${esc(d.kurz)}</p></div><span class="pfeil" aria-hidden="true">→</span></a>`;
 
 // Vorschaubilder erst zeichnen, wenn sie sichtbar werden
 const thumbObs = new IntersectionObserver((entries) => {
@@ -97,7 +98,7 @@ async function startSeite() {
       <span class="eyebrow">Minecraft-Baupläne · Paper-Plugins</span>
       <h1>Bauen wie mit LEGO. Schritt für Schritt.</h1>
       <p class="lede">Jeder Bauplan zeigt pro Schritt genau, welche Blöcke du brauchst und wo sie hinkommen. Dazu Plugins für deinen eigenen Server. Alles kostenlos und einzeln zum Herunterladen.</p>
-      <div class="knoepfe"><a class="btn" href="#/bauplaene">Baupläne ansehen</a><a class="btn zwei" href="#/wuensche">Bauplan wünschen</a></div>
+      <div class="knoepfe"><a class="btn" href="${BASE}bauplaene/">Baupläne ansehen</a><a class="btn zwei" href="${BASE}wuensche/">Bauplan wünschen</a></div>
       <div class="zahlen">
         <div><b>${k.builds.length}</b><span>Baupläne</span></div>
         <div><b>${fmt(sum)}</b><span>Blöcke geplant</span></div>
@@ -107,21 +108,21 @@ async function startSeite() {
     </div>
     <figure class="held-bild" style="margin:0">
       <canvas id="held-cv" aria-label="Animation: Villa am Wasser wird Schritt für Schritt gebaut"></canvas>
-      <figcaption class="unter"><span id="held-text">Villa am Wasser</span><a href="#/bau/villa-am-wasser">Zum Bauplan →</a></figcaption>
+      <figcaption class="unter"><span id="held-text">Villa am Wasser</span><a href="${BASE}bau/villa-am-wasser/">Zum Bauplan →</a></figcaption>
     </figure>
   </div></section>
   <section class="abschnitt"><div class="wrap">
-    <div class="abschnitt-kopf"><div><h2>Baupläne</h2><p>Türme, Villen und Farmen. Jeder Plan mit LEGO-Schritten, Teileliste und Dateien für Litematica und WorldEdit.</p></div><a class="btn zwei klein" href="#/bauplaene">Alle Baupläne</a></div>
+    <div class="abschnitt-kopf"><div><h2>Baupläne</h2><p>Türme, Villen und Farmen. Jeder Plan mit LEGO-Schritten, Teileliste und Dateien für Litematica und WorldEdit.</p></div><a class="btn zwei klein" href="${BASE}bauplaene/">Alle Baupläne</a></div>
     <div class="raster">${k.builds.map(bauKarte).join('')}</div>
   </div></section>
   <section class="abschnitt"><div class="wrap">
-    <div class="abschnitt-kopf"><div><h2>Eigene Plugins für Paper</h2><p>Shop, Lager, Arbeiter, Admin-Schutz und mehr. Entwickelt für einen fairen Server, auf dem keiner anderen schaden kann.</p></div><a class="btn zwei klein" href="#/plugins">Alle Plugins</a></div>
+    <div class="abschnitt-kopf"><div><h2>Eigene Plugins für Paper</h2><p>Shop, Lager, Arbeiter, Admin-Schutz und mehr. Entwickelt für einen fairen Server, auf dem keiner anderen schaden kann.</p></div><a class="btn zwei klein" href="${BASE}plugins/">Alle Plugins</a></div>
     <div class="raster">${k.plugins.slice(0, 4).map(pluginKarte).join('')}</div>
   </div></section>
   <section class="abschnitt"><div class="wrap zwei-spalten">
     <div><div class="abschnitt-kopf"><div><h2>Anleitungen</h2><p>Server-Wissen, das beim Bauen hilft.</p></div></div>${k.docs.map(docLink).join('')}</div>
     <div><div class="abschnitt-kopf"><div><h2>Was soll als Nächstes kommen?</h2><p>Wünsch dir ein Bauwerk. Die meistgewünschten werden zuerst gebaut.</p></div></div>
-      ${wunschListe(k, 4)}<div style="margin-top:12px"><a class="btn" href="#/wuensche">Bauplan wünschen</a></div></div>
+      ${wunschListe(k, 4)}<div style="margin-top:12px"><a class="btn" href="${BASE}wuensche/">Bauplan wünschen</a></div></div>
   </div></section>`;
   watchThumbs(main);
   heldAnimation();
@@ -183,7 +184,7 @@ function fremdKarte(p) {
       <p>${esc(p.zweck)}</p>
       ${p.einsatz ? `<p class="einsatz"><b>Auf dem Server:</b> ${esc(p.einsatz)}</p>` : ''}
       <div class="fakten"><span class="marker ${p.status === 'empfohlen' ? '' : 'ok'}">${p.status === 'empfohlen' ? 'Empfohlen' : 'Im Einsatz'}</span>
-        ${p.anleitung ? `<a class="marker" href="#/anleitung/${esc(p.anleitung)}">Anleitung</a>` : ''}
+        ${p.anleitung ? `<a class="marker" href="${BASE}anleitung/${esc(p.anleitung)}/">Anleitung</a>` : ''}
         ${p.link ? `<a class="marker" href="${esc(p.link)}" target="_blank" rel="noopener">Download-Seite ↗</a>` : ''}</div>
     </div></div>`;
 }
@@ -236,7 +237,7 @@ async function pluginSeite(id) {
   if (!p) return nichtGefunden();
   const wer = { spieler: 'Spieler', admin: 'Admin', konsole: 'Konsole' };
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <div class="krumen"><a href="#/plugins">Plugins</a> / ${esc(p.name)}</div>
+    <div class="krumen"><a href="${BASE}plugins/">Plugins</a> / ${esc(p.name)}</div>
     <div class="plugin-kopf"><span class="plugin-symbol" aria-hidden="true">${initialen(p.name)}</span><h1>${esc(p.name)}</h1></div>
     <p class="lede">${esc(p.beschreibung)}</p>
     <dl class="specs">
@@ -271,16 +272,16 @@ async function anleitungSeite(id) {
   const k = await katalog();
   const d = k.docs.find((x) => x.id === id);
   if (!d) return nichtGefunden();
-  const html = await (await fetch(`data/seiten/doc-${id}.html`)).text();
+  const html = await (await fetch(`${BASE}data/seiten/doc-${id}.html`)).text();
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <div class="krumen"><a href="#/anleitungen">Anleitungen</a> / ${esc(d.titel)}</div>
+    <div class="krumen"><a href="${BASE}anleitungen/">Anleitungen</a> / ${esc(d.titel)}</div>
     <h1>${esc(d.titel)}</h1><p class="lede">${esc(d.kurz)}</p></div></section>
     <section class="tafel"><div class="wrap"><article class="prosa">${html}</article></div></section>`;
   main.querySelectorAll('.prosa a[href^="http"]').forEach((a) => { a.target = '_blank'; a.rel = 'noopener'; });
 }
 
 function nichtGefunden() {
-  main.innerHTML = `<section class="detail-kopf"><div class="wrap"><h1>Nicht gefunden</h1><p class="lede">Diese Seite gibt es nicht. <a href="#/">Zur Startseite</a></p></div></section>`;
+  main.innerHTML = `<section class="detail-kopf"><div class="wrap"><h1>Nicht gefunden</h1><p class="lede">Diese Seite gibt es nicht. <a href="${BASE}">Zur Startseite</a></p></div></section>`;
 }
 
 /* ---------- Bauplan-Detail ---------- */
@@ -292,7 +293,7 @@ async function bauSeite(id, tab) {
   const tabs = [['anleitung', 'Anleitung'], ['teile', 'Teileliste'], ['ebenen', 'Ebenen'], ['downloads', 'Downloads']];
   tab = tabs.some((t) => t[0] === tab) ? tab : 'anleitung';
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <div class="krumen"><a href="#/bauplaene">Baupläne</a> / ${esc(k.kategorien[d.kategorie] || '')}</div>
+    <div class="krumen"><a href="${BASE}bauplaene/">Baupläne</a> / ${esc(k.kategorien[d.kategorie] || '')}</div>
     <h1>${esc(d.titel)}</h1>
     <p class="lede">${esc(d.beschreibung)}</p>
     <dl class="specs">
@@ -309,7 +310,7 @@ async function bauSeite(id, tab) {
   </div></section>
   <section class="tafel"><div class="wrap" id="tafel"></div></section>`;
   main.querySelectorAll('.reiter button').forEach((b) => b.addEventListener('click', () => {
-    history.replaceState(null, '', `#/bau/${id}/${b.dataset.tab}`);
+    history.replaceState(null, '', `${BASE}bau/${id}/` + (b.dataset.tab === 'anleitung' ? '' : '#' + b.dataset.tab));
     main.querySelectorAll('.reiter button').forEach((x) => x.setAttribute('aria-selected', x === b));
     zeigeTab(b.dataset.tab);
   }));
@@ -512,7 +513,7 @@ async function bauSeite(id, tab) {
       schem: ['WorldEdit', 'Für WorldEdit oder FastAsyncWorldEdit auf dem Server: in den Ordner plugins/WorldEdit/schematics legen, dann //schem load.'],
       csv: ['Teileliste', 'Alle Blöcke mit Anzahl und Stacks, öffnet sich in Excel, LibreOffice oder Google Tabellen.'],
     };
-    el.innerHTML = `${d.downloads.length ? `<div class="dl-raster">${d.downloads.map((x) => `<div class="dl"><span class="eyebrow">${info[x.art][0]}</span><span class="endung">.${x.art}</span><p>${info[x.art][1]}</p><a class="btn" href="downloads/${d.id}/${x.datei}" download>Herunterladen <span style="font-weight:400;opacity:.75">${(x.groesse / 1024).toFixed(x.groesse < 10240 ? 1 : 0)} KB</span></a></div>`).join('')}</div>` : '<div class="leer">Downloads werden beim nächsten Aufbau der Seite erzeugt.</div>'}
+    el.innerHTML = `${d.downloads.length ? `<div class="dl-raster">${d.downloads.map((x) => `<div class="dl"><span class="eyebrow">${info[x.art][0]}</span><span class="endung">.${x.art}</span><p>${info[x.art][1]}</p><a class="btn" href="${BASE}downloads/${d.id}/${x.datei}" download>Herunterladen <span style="font-weight:400;opacity:.75">${(x.groesse / 1024).toFixed(x.groesse < 10240 ? 1 : 0)} KB</span></a></div>`).join('')}</div>` : '<div class="leer">Downloads werden beim nächsten Aufbau der Seite erzeugt.</div>'}
       ${d.status === 'entwurf' ? `<div class="hinweis" style="margin-top:18px"><span aria-hidden="true">⚠️</span><span>Dieser Bauplan ist ein Entwurf: Die Richtung von Treppen, Türen und Trichtern stimmt in den Dateien eventuell noch nicht. Nach dem Einfügen kurz prüfen.</span></div>` : ''}
       <p style="margin-top:18px;color:var(--ink-soft)">Quelle des Bauplans auf GitHub: <a href="${REPO}/tree/main/builds/${d.id}">builds/${d.id}</a></p>`;
   }
@@ -521,10 +522,19 @@ async function bauSeite(id, tab) {
 /* ---------- Router ---------- */
 let keyHandler = null;
 document.addEventListener('keydown', (e) => keyHandler && keyHandler(e));
+const TITEL = 'Savox Bauwerkstatt';
 async function route() {
   redrawers = []; keyHandler = null;
-  const parts = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/').filter(Boolean);
-  const [a, b, c] = parts;
+  // alte Links der Form #/bau/... auf echte Adressen umleiten
+  if (location.hash.startsWith('#/')) {
+    const alt = location.hash.slice(2).split('/').filter(Boolean);
+    const tab = alt[0] === 'bau' && alt[2] ? '#' + alt[2] : '';
+    history.replaceState(null, '', BASE + (alt.length ? alt.slice(0, alt[0] === 'bau' ? 2 : 2).join('/') + '/' : '') + tab);
+  }
+  let pfad = decodeURIComponent(location.pathname);
+  if (pfad.startsWith(BASE)) pfad = pfad.slice(BASE.length);
+  const [a, b] = pfad.split('/').filter(Boolean);
+  const c = location.hash.replace(/^#/, '') || undefined;
   const nav = { bau: 'bauplaene', bauplaene: 'bauplaene', plugins: 'plugins', plugin: 'plugins', anleitungen: 'anleitungen', anleitung: 'anleitungen', wuensche: 'wuensche' }[a] || '';
   document.querySelectorAll('[data-nav]').forEach((l) => {
     if (l.dataset.nav === nav) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current');
@@ -544,8 +554,22 @@ async function route() {
     main.innerHTML = `<section class="detail-kopf"><div class="wrap"><h1>Das hat nicht geklappt</h1><p class="lede">Die Daten konnten nicht geladen werden. Lade die Seite neu oder versuch es später noch einmal.</p></div></section>`;
   }
   const h1 = main.querySelector('h1');
-  document.title = h1 && a ? `${h1.textContent} · Savox Bauwerkstatt` : 'Savox Bauwerkstatt';
-  if (!c) window.scrollTo(0, 0);
+  if (!erstAufruf) document.title = h1 && a ? `${h1.textContent} · ${TITEL}` : TITEL;
+  erstAufruf = false;
 }
-window.addEventListener('hashchange', route);
+let erstAufruf = true;   // beim ersten Laden bleibt der vorgerenderte Seitentitel
+// interne Links ohne Neuladen öffnen
+document.addEventListener('click', (e) => {
+  const l = e.target.closest('a[href]');
+  if (!l || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  if (l.target || l.hasAttribute('download')) return;
+  const url = new URL(l.href, location.href);
+  if (url.origin !== location.origin || !url.pathname.startsWith(BASE)) return;
+  if (/\.(xml|txt|json|png|svg|litematic|schem|csv)$/.test(url.pathname)) return;
+  if (url.pathname === location.pathname && url.hash) return;   // Sprungmarken auf derselben Seite
+  e.preventDefault();
+  history.pushState(null, '', url.pathname + url.search + url.hash);
+  route().then(() => window.scrollTo(0, 0));
+});
+window.addEventListener('popstate', route);
 route();

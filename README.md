@@ -21,7 +21,7 @@ Wie es weitergeht, steht im [Masterplan](MASTERPLAN.md).
 
 ```
 pip install -r tools/requirements.txt
-python tools/build_site.py
+SITE_URL=http://localhost:8000/ python tools/build_site.py
 python -m http.server -d _site 8000
 ```
 

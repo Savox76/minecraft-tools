@@ -26,8 +26,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Python-Pakete
-        run: pip install -r tools/requirements.txt
+      - name: Python-Pakete und Schrift für Vorschaubilder
+        run: |
+          pip install -r tools/requirements.txt
+          fc-list | grep -q DejaVuSans-Bold || (sudo apt-get update -q && sudo apt-get install -y -q fonts-dejavu-core)
       - name: Labels für Wünsche anlegen
         if: github.event_name != 'pull_request'
         env:
@@ -58,3 +60,21 @@ jobs:
     steps:
       - id: deploy
         uses: actions/deploy-pages@v4
+      - name: Suchmaschinen über neue Seiten informieren (IndexNow für Bing, Yandex, Seznam u. a.)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        env:
+          SEITE: ${{ steps.deploy.outputs.page_url }}
+        run: |
+          KEY=$(curl -fsS "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/tools/site_config.json" | python3 -c "import json,sys;print(json.load(sys.stdin)['indexnow_key'])")
+          sleep 20
+          curl -fsS "${SEITE}urls.txt" -o urls.txt
+          HOST=$(python3 -c "from urllib.parse import urlparse;print(urlparse('${SEITE}').netloc)")
+          python3 - <<PY
+          import json
+          urls = [u.strip() for u in open('urls.txt') if u.strip()]
+          json.dump({'host': '$HOST', 'key': '$KEY', 'keyLocation': '${SEITE}$KEY.txt', 'urlList': urls}, open('indexnow.json', 'w'))
+          print(len(urls), 'Adressen')
+          PY
+          curl -sS -o /dev/null -w "IndexNow: HTTP %{http_code}\n" -X POST -H "Content-Type: application/json; charset=utf-8" \
+            --data @indexnow.json https://api.indexnow.org/indexnow
