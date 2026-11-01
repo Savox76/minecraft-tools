@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 116 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 117 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -444,11 +444,11 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-130 Einträge: 130 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
+131 Einträge: 131 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
 
 **Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
 
-### Skillfarmen (XP) (8)
+### Skillfarmen (XP) (9)
 
 Erfahrung für Verzauberungen und Reparaturen.
 
@@ -461,7 +461,8 @@ Erfahrung für Verzauberungen und Reparaturen.
 | 5 | Lohenfarm | mittel | An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 6 | Goldfarm auf dem Nether-Dach | groß | Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold. | 💡 Idee |
 | 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
-| 8 | Handelshalle mit Dorfbewohnern | mittel | Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin. Plugin: arbeiter (optional). | 💡 Idee |
+| 8 | Kleine Handelshalle | klein | Sechs Dorfbewohner in einer Reihe, jeder in einer eigenen Zelle hinter seinem Arbeitsblock. Gehandelt wird über den Block hinweg, so kann niemand weglaufen. Mit zwei Bibliothekaren für Verzauberungsbücher, etwa 15 × 9 Blöcke. Plugin: arbeiter (optional). | 💡 Idee |
+| 117 | Große Handelshalle | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
 
 ### Farmen für Baumaterial (20)
 
@@ -719,7 +720,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 <!-- abhaengigkeiten:start -->
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
-| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Handelshalle mit Dorfbewohnern |
+| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle |
 | FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |

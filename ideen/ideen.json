@@ -205,9 +205,9 @@
   {
    "nr": 8,
    "kategorie": "xp",
-   "groesse": "mittel",
-   "titel": "Handelshalle mit Dorfbewohnern",
-   "text": "Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin.",
+   "groesse": "klein",
+   "titel": "Kleine Handelshalle",
+   "text": "Sechs Dorfbewohner in einer Reihe, jeder in einer eigenen Zelle hinter seinem Arbeitsblock. Gehandelt wird über den Block hinweg, so kann niemand weglaufen. Mit zwei Bibliothekaren für Verzauberungsbücher, etwa 15 × 9 Blöcke.",
    "status": "idee",
    "plugins": [
     {
@@ -216,8 +216,26 @@
     }
    ],
    "en": {
-    "titel": "Villager trading hall",
-    "text": "Villagers in single cells with their job block. Trading gives XP, emeralds and enchanted books. Fits the Arbeiter plugin."
+    "titel": "Small trading hall",
+    "text": "Six villagers in a row, each in its own cell behind its job block. You trade across the block, so nobody can wander off. With two librarians for enchanted books, about 15 × 9 blocks."
+   }
+  },
+  {
+   "nr": 117,
+   "kategorie": "xp",
+   "groesse": "groß",
+   "titel": "Große Handelshalle",
+   "text": "16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt.",
+   "status": "idee",
+   "plugins": [
+    {
+     "id": "arbeiter",
+     "stufe": "optional"
+    }
+   ],
+   "en": {
+    "titel": "Large trading hall",
+    "text": "16 cells in two facing rows, all 13 professions once and several librarians. With a minecart track to bring villagers in and a curing station for zombie villagers that gives permanently better prices."
    }
   },
   {
