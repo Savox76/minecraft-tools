@@ -16,6 +16,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
 | Geplant | 💡 116 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
 **Entwurf** heißt: Die Richtung von Treppen, Türen und Trichtern ist in den Dateien noch nicht in einer Testwelt geprüft (siehe Phase 1).
@@ -26,6 +27,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 - **Eigene und fremde Plugins bleiben getrennt.** Eigene Plugins bekommen `plugins/eigene/<id>/plugin.json` und `README.md`, fremde einen Eintrag in `plugins/fremd/plugins.json` (nur Beschreibung, Einsatz und Link zur offiziellen Seite, keine Dateien). Die Website zeigt beides automatisch in getrennten Bereichen.
 - **Änderungen gehen direkt auf `main`.**
 - **Alles zweisprachig:** Neue Baupläne, Plugins und Anleitungen bekommen eine englische Fassung (`"en"` in `build.json` und `plugin.json`, `docs/en/<id>.md`, neue Blocknamen in `tools/i18n/bloecke_en.json`). Fehlt sie, zeigt die englische Seite den deutschen Text und der Build gibt einen Hinweis aus.
+- **Abhängigkeiten aktuell halten:** Kommt ein Werkzeug, Dienst oder Plugin dazu oder ändert sich eine Version, wird Abschnitt 16 angepasst. Welche Baupläne und Ideen welche Plugins brauchen, erzeugt `python tools/ideen_masterplan.py`.
 - **Keine erzeugten Dateien im Repo:** Website, `.litematic`, `.schem`, `.jar` und PDFs baut GitHub Actions bei jedem Push neu.
 
 ---
@@ -637,3 +639,84 @@ Wissen rund um Server, Farmen und Bauen.
 | A13 | Wahrzeichen in Blöcke umrechnen | Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt. | 💡 Idee |
 | A14 | Elytra finden und nutzen | Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze. | 💡 Idee |
 <!-- ideen:ende -->
+
+---
+
+## 16. Abhängigkeiten
+
+Alles, wovon das Projekt abhängt. Bei Updates (neue Minecraft-Version, neue Plugin-Version, neue Python-Version) diese Liste durchgehen. Die Tabelle 16.6 wird automatisch aus den Daten erzeugt (`python tools/ideen_masterplan.py`), alles andere wird von Hand gepflegt.
+
+### 16.1 Website bauen (Python)
+
+| Was | Version | Wofür | Wo festgelegt |
+|---|---|---|---|
+| Python | 3.12 | Erzeugt Website, LEGO-Schritte, Bilder und Downloads | `.github/workflows/website.yml` |
+| litemapy | 0.11.0b0 (fest) | Schreibt `.litematic`-Dateien | `tools/requirements.txt` |
+| nbtlib | ≥ 2.0, < 3 | Schreibt `.schem`-Dateien (NBT) | `tools/requirements.txt` |
+| Markdown | ≥ 3.5, < 4 | Anleitungen aus `docs/` in HTML umwandeln | `tools/requirements.txt` |
+| Pillow | ≥ 10 | Vorschaubilder und Link-Vorschaubilder | `tools/requirements.txt` |
+| DejaVu-Schriften | `fonts-dejavu-core` | Schrift in den Link-Vorschaubildern | Workflow installiert sie bei Bedarf |
+
+Im Browser läuft die Website ohne fremde Bibliotheken: eigenes JavaScript (ES-Module) und Canvas für die 3D-Ansicht.
+
+### 16.2 GitHub und Dienste
+
+| Was | Wofür | Hinweis |
+|---|---|---|
+| GitHub-Repo `Savox76/minecraft-tools` | Quelle für alles | Änderungen direkt auf `main` |
+| GitHub Actions: `actions/checkout@v4`, `actions/setup-python@v5`, `actions/upload-pages-artifact@v3`, `actions/deploy-pages@v4` | Website bei jedem Push und täglich neu bauen und veröffentlichen | `deploy-pages@v4` läuft bereits mit Hinweis auf Node 24; bei Gelegenheit auf neuere Versionen heben |
+| GitHub Pages | Hosting unter `savox76.github.io/minecraft-tools/` | Muss in den Repo-Einstellungen auf „GitHub Actions“ stehen |
+| GitHub Issues und Labels (`bauwunsch`, `plugin-wunsch`, `fehler`, `angenommen`) | Wünsche und Abstimmung mit 👍 | Workflow legt die Labels an, `tools/fetch_wishes.py` liest die Wünsche täglich |
+| Google Fonts: Archivo, Atkinson Hyperlegible, JetBrains Mono | Schriften der Website | Werden vom Browser geladen; ohne Verbindung greift eine Systemschrift |
+| IndexNow (`api.indexnow.org`) | Meldet neue Seiten an Bing und weitere Suchmaschinen | Schlüssel in `tools/site_config.json` |
+| Google Search Console, Bing Webmaster Tools | Sichtbarkeit bei Google und Bing | Bestätigungscode fehlt noch (siehe 14.) |
+
+### 16.3 Lokal ansehen und testen
+
+| Was | Wofür |
+|---|---|
+| `python -m http.server` | Website lokal ansehen (siehe README) |
+| Playwright mit Chromium | Nur für Bildschirm-Tests beim Entwickeln, nicht im Repo und nicht im Workflow |
+
+### 16.4 Spiel und Server
+
+| Was | Version | Wofür |
+|---|---|---|
+| Minecraft Java | 1.21 oder neuer | Baupläne sind für Java geplant; Downloads werden mit Daten-Version 3953 (1.21) geschrieben und von neueren Versionen umgewandelt. Ideen mit dem Crafter brauchen mindestens 1.21 |
+| Minecraft Bedrock | über Geyser und Floodgate | Bedrock-Spieler auf dem Java-Server; Baupläne mit Bedrock-Markierung lassen sich dort nachbauen |
+| Paper | passend zur Minecraft-Version | Server-Software für alle Plugins |
+| Java | 21 oder neuer | Paper und FakePlayerPlugin (AFKDummyForFarming bräuchte Java 25) |
+| Litematica (Mod, Java) | aktuelle Version zur Minecraft-Version | Öffnet die `.litematic`-Downloads als Geisterblöcke |
+| WorldEdit oder FastAsyncWorldEdit | aktuelle Version | Fügt die `.schem`-Downloads auf dem Server ein |
+
+### 16.5 Plugins untereinander
+
+Laut Dokumentation der eigenen Plugins. Ob es harte Abhängigkeiten sind (Plugin startet sonst nicht) oder weiche (Funktion fällt nur weg), wird geprüft, sobald der Quellcode im Repo ist (Phase 4).
+
+| Plugin | Braucht oder nutzt | Wofür |
+|---|---|---|
+| Alle eigenen Plugins | Paper | Laufen nur auf Paper |
+| Arbeiter | ServerShop | Arbeiter werden mit Coins gekauft; Händler öffnen den Shop einer Kategorie |
+| Arbeiter | InfiniteLager | Arbeiter können in das private Lager ihres Besitzers liefern |
+| Arbeiter | FakePlayerPlugin oder ChunkLoader (empfohlen) | Arbeiter arbeiten nur in geladenen Chunks |
+| ServerHilfe | alle eigenen Plugins (nur Texte) | Das Hilfe-Buch erklärt Shop, Lager, Arbeiter und Farm-Bot; bei neuen Befehlen die Texte anpassen |
+| Floodgate | Geyser | Floodgate lässt Bedrock-Spieler ohne Java-Konto herein; die Verbindung selbst stellt Geyser her. Geyser fehlt noch in der Liste der fremden Plugins |
+| EasyCommandBlocker | Befehle aller Plugins | Die Liste der für Spieler sichtbaren Befehle muss bei neuen Befehlen ergänzt werden |
+
+### 16.6 Baupläne und Ideen brauchen Plugins
+
+Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
+
+<!-- abhaengigkeiten:start -->
+| Plugin | Benötigt von | Empfohlen für | Optional bei |
+|---|---|---|---|
+| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Handelshalle mit Dorfbewohnern |
+| FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
+| Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
+| InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
+| ServerHilfe (eigenes) | – | Idee Nr. 53 Rathaus mit Uhrturm am Spawn | – |
+| ServerShop (eigenes) | Idee Nr. 26 Marktplatz für Spieler-Shops | – | – |
+| spark (fremdes) | Idee Nr. A7 Lag finden mit spark | – | – |
+
+Ohne Plugin (reines Minecraft): Eiffelturm, Leuchtturm, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
+<!-- abhaengigkeiten:ende -->
