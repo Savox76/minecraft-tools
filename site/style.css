@@ -375,7 +375,7 @@ td code, .prosa code { font: .86em var(--f-mono); background: var(--sheet-2); bo
 .idee[data-kat="xp"] { --ton: #7cc242; } .idee[data-kat="farmen"] { --ton: #5aa864; } .idee[data-kat="monster"] { --ton: #6b8f3a; }
 .idee[data-kat="produktion"] { --ton: #e08a2e; } .idee[data-kat="funktional"] { --ton: #c0392b; } .idee[data-kat="tiere"] { --ton: #b07a4a; }
 .idee[data-kat="spiel"] { --ton: #8e5cc8; } .idee[data-kat="monumente"] { --ton: #c9a227; } .idee[data-kat="gebaeude"] { --ton: #4a90c2; }
-.idee[data-kat="anleitungen"] { --ton: var(--ink-soft); }
+.idee[data-kat="anleitungen"] { --ton: var(--ink-soft); } .idee[data-kat="mystery"] { --ton: #5b4a8c; }
 .ideen-gruppe.empfohlen { background: var(--callout); border: 1.5px solid var(--callout-line); border-radius: 14px; padding: 18px; }
 @media (max-width: 640px) {
   .ideen-filter { position: static; backdrop-filter: none; }

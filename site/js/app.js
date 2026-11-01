@@ -407,8 +407,7 @@ async function pluginSeite(id) {
     </dl>
     ${p.status === 'doku' ? `<div class="hinweis"><span aria-hidden="true">⏳</span><span>${esc(lo(p, 'status_text'))}</span></div>` : ''}
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-      <a class="btn ${p.status === 'doku' ? 'aus' : ''}" href="${REPO}/releases" aria-disabled="${p.status === 'doku'}">${tr('.jar herunterladen', 'Download .jar')}</a>
-      <a class="btn zwei" href="${REPO}/tree/main/plugins/eigene/${p.id}">${tr('Auf GitHub ansehen', 'View on GitHub')}</a>
+      ${p.status === 'doku' ? `<span class="btn aus" aria-disabled="true">${tr('Download folgt', 'Download coming soon')}</span>` : `<a class="btn" href="${BASE}downloads/plugins/${p.id}.jar" download>${tr('.jar herunterladen', 'Download .jar')}</a>`}
     </div>
   </div></section>
   <section class="tafel"><div class="wrap">
@@ -730,8 +729,7 @@ async function bauSeite(id, tab) {
       csv: [tr('Teileliste', 'Parts list'), tr('Alle Blöcke mit Anzahl und Stacks, öffnet sich in Excel, LibreOffice oder Google Tabellen.', 'All blocks with count and stacks, opens in Excel, LibreOffice or Google Sheets.')],
     };
     el.innerHTML = `${d.downloads.length ? `<div class="dl-raster">${d.downloads.map((x) => `<div class="dl"><span class="eyebrow">${info[x.art][0]}</span><span class="endung">.${x.art}</span><p>${info[x.art][1]}</p><a class="btn" href="${BASE}downloads/${d.id}/${x.datei}" download>${tr('Herunterladen', 'Download')} <span style="font-weight:400;opacity:.75">${(x.groesse / 1024).toFixed(x.groesse < 10240 ? 1 : 0)} KB</span></a></div>`).join('')}</div>` : `<div class="leer">${tr('Downloads werden beim nächsten Aufbau der Seite erzeugt.', 'Downloads are generated on the next site build.')}</div>`}
-      ${d.status === 'entwurf' ? `<div class="hinweis" style="margin-top:18px"><span aria-hidden="true">⚠️</span><span>${tr('Dieser Bauplan ist ein Entwurf: Die Richtung von Treppen, Türen und Trichtern stimmt in den Dateien eventuell noch nicht. Nach dem Einfügen kurz prüfen.', 'This build is a draft: the direction of stairs, doors and hoppers may not be right in the files yet. Check briefly after pasting.')}</span></div>` : ''}
-      <p style="margin-top:18px;color:var(--ink-soft)">${tr('Quelle des Bauplans auf GitHub:', 'Build source on GitHub:')} <a href="${REPO}/tree/main/builds/${d.id}">builds/${d.id}</a></p>`;
+      ${d.status === 'entwurf' ? `<div class="hinweis" style="margin-top:18px"><span aria-hidden="true">⚠️</span><span>${tr('Dieser Bauplan ist ein Entwurf: Die Richtung von Treppen, Türen und Trichtern stimmt in den Dateien eventuell noch nicht. Nach dem Einfügen kurz prüfen.', 'This build is a draft: the direction of stairs, doors and hoppers may not be right in the files yet. Check briefly after pasting.')}</span></div>` : ''}`;
   }
 }
 

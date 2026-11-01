@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 135 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 149 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -28,6 +28,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 - **Änderungen gehen direkt auf `main`.**
 - **Alles zweisprachig:** Neue Baupläne, Plugins und Anleitungen bekommen eine englische Fassung (`"en"` in `build.json` und `plugin.json`, `docs/en/<id>.md`, neue Blocknamen in `tools/i18n/bloecke_en.json`). Fehlt sie, zeigt die englische Seite den deutschen Text und der Build gibt einen Hinweis aus.
 - **Abhängigkeiten aktuell halten:** Kommt ein Werkzeug, Dienst oder Plugin dazu oder ändert sich eine Version, wird Abschnitt 16 angepasst. Welche Baupläne und Ideen welche Plugins brauchen, erzeugt `python tools/ideen_masterplan.py`.
+- **Keine Links zum Quellcode auf der Website:** Die Website verlinkt nicht auf das GitHub-Repo, den Quellcode der Seite, der Plugins oder der Baupläne. Downloads (`.litematic`, `.schem`, CSV, später `.jar`) liegen direkt auf der Website. Ausnahme bisher: die Wunsch-Formulare (GitHub-Issues).
 - **Kein Bezug zu LEGO:** LEGO ist die Marke eines anderen Unternehmens. Auf der Website und im Repo heißt es Bauschritte, Bauheft und Schritt-für-Schritt-Anleitung.
 - **Keine erzeugten Dateien im Repo:** Website, `.litematic`, `.schem`, `.jar` und PDFs baut GitHub Actions bei jedem Push neu.
 
@@ -445,7 +446,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-149 Einträge: 149 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
+163 Einträge: 163 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
 
 **Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
 
@@ -570,6 +571,27 @@ Für Events und gemeinsame Abende auf dem Server.
 | 100 | Heckenlabyrinth | mittel | Ein Irrgarten aus Laub mit Schatz in der Mitte. | 💡 Idee |
 | 101 | Elytra-Startturm | mittel | Ein hoher Turm mit Startplattform und gepolstertem Landeplatz. | 💡 Idee |
 | 102 | Bogenschießstand | klein | Zielblöcke geben ein Redstone-Signal, ein Lämpchen zeigt Treffer an. | 💡 Idee |
+
+### Mystery-Bauwerke (14)
+
+Bauwerke mit Geheimnissen: versteckte Gänge, Rätsel, Ruinen und verlassene Orte.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 136 | Spukvilla mit Geheimgängen | groß | Eine verfallene Villa mit knarrenden Dielen, verdeckten Kolbentüren hinter Bildern und Regalen und einem Gang, der in eine verborgene Gruft führt. | 💡 Idee |
+| 137 | Escape-Room-Haus | mittel | Ein Haus voller Redstone-Rätsel: Hinweise auf Schildern und in Büchern, Hebel in der richtigen Reihenfolge öffnen den nächsten Raum. Ideal für Server-Events. | 💡 Idee |
+| 138 | Rätselgrab in der Wüste | groß | Ein Grabmal mit Fallen, Druckplatten-Rätseln und einer Schatzkammer, die sich nur mit dem richtigen Code öffnet. | 💡 Idee |
+| 139 | Versunkene Tempelstadt | groß | Ruinen einer Stadt am Meeresgrund, halb im Sand begraben, mit Säulen, eingestürzten Dächern und einem Tempel voller Prismarin. | 💡 Idee |
+| 140 | Steinkreis mit Geheimkammer | mittel | Uralte Steine im Kreis. Wer die Hebel an den Steinen richtig umlegt, öffnet eine Treppe in eine Kammer darunter. | 💡 Idee |
+| 141 | Verlassenes Bergwerk | mittel | Ein Stollen mit Holzstützen, rostigen Schienen, umgekippten Loren und einem eingestürzten Gang, hinter dem etwas Seltsames leuchtet. | 💡 Idee |
+| 142 | Geisterschiff | mittel | Ein Wrack mit zerrissenen Segeln, schief im Nebel liegend, mit Laternen, die nachts von allein zu leuchten scheinen. | 💡 Idee |
+| 143 | Bibliothek hinter dem Wasserfall | mittel | Ein Wasserfall verdeckt den Eingang zu einer Höhle mit Bücherregalen, Lesepult und einer Karte zum nächsten Geheimnis. | 💡 Idee |
+| 144 | Hexenturm im Sumpf | mittel | Ein schiefer Turm auf Stelzen mit Kesseln, Braustand, Kräutergarten und einer Falltür ins Ungewisse. | 💡 Idee |
+| 145 | Geisterdorf | groß | Ein verlassenes Dorf mit leeren Häusern, Spinnweben, überwucherten Wegen und einem Brunnen, der tiefer führt, als er sollte. | 💡 Idee |
+| 146 | Uhrturm mit Geheimkammer | mittel | Hinter dem Ziffernblatt liegt eine Kammer mit Zahnrädern aus Blöcken. Ein versteckter Mechanismus öffnet den Weg nach oben. | 💡 Idee |
+| 147 | Schwarzer Monolith | klein | Ein glatter Block aus Obsidian mitten im Nirgendwo, mit Inschriften auf Schildern und einer Kammer, die nur nachts erreichbar ist. | 💡 Idee |
+| 148 | Friedhof mit Gruft | mittel | Grabsteine, alte Bäume, eine Kapelle und darunter eine Gruft mit Kerzen und einem versiegelten Raum. | 💡 Idee |
+| 149 | Sternwarte der Sterndeuter | mittel | Ein Turm mit Kuppel, Sternbildern aus Lichtblöcken im Boden und einem Rätsel, das nur mit Blick in den Nachthimmel lösbar ist. | 💡 Idee |
 
 ### Monumente (29)
 

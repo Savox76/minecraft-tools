@@ -497,13 +497,13 @@ T = {
   skip='Zum Inhalt', start='Bauwerkstatt, Startseite', zusatz='Baupläne und Plugins für Minecraft', bauplaene='Baupläne', plugins='Plugins',
   anleitungen='Anleitungen', wuensche='Wünsche', geplant='Geplant', sprache='Sprache', thema='Darstellung',
   auto='Automatisch', hell='Hell', dunkel='Dunkel', fuss='Minecraft-Baupläne und Plugins kostenlos für alle Kreativen.',
-  github='Quellcode auf GitHub', disclaimer='Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden. Blöcke werden mit eigenen Farben dargestellt, nicht mit Minecraft-Texturen.',
+  disclaimer='Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden. Blöcke werden mit eigenen Farben dargestellt, nicht mit Minecraft-Texturen.',
   bloecke='Blöcke', schritte='Schritte', entwurf='Entwurf', alle_seiten='Alle Seiten'),
  'en': dict(
   skip='Skip to content', start='Bauwerkstatt, home', zusatz='Build plans and plugins for Minecraft', bauplaene='Builds', plugins='Plugins',
   anleitungen='Guides', wuensche='Wishes', geplant='Planned', sprache='Language', thema='Appearance',
   auto='Automatic', hell='Light', dunkel='Dark', fuss='Minecraft build plans and plugins, free for all creators.',
-  github='Source code on GitHub', disclaimer='Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Blocks are shown in our own colours, not with Minecraft textures.',
+  disclaimer='Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Blocks are shown in our own colours, not with Minecraft textures.',
   bloecke='blocks', schritte='steps', entwurf='Draft', alle_seiten='All pages'),
 }
 
@@ -601,7 +601,7 @@ class Seiten:
             'BILD': self.voll(bild or self.og('og-start')), 'BILD_ALT': H(bild_alt or titel),
             'VERIFIKATION': '\n'.join(verif), 'JSONLD': json.dumps(jsonld, ensure_ascii=False).replace('</', '<\\/'),
             'INHALT': inhalt, 'FUSS_LINKS': self.fuss_links(), 'NAV': nav, 'SPRACHE': sprache, 'THEMA': thema,
-            'TXT_SKIP': L['skip'], 'TXT_ZUSATZ': L['zusatz'], 'TXT_START': L['start'], 'TXT_FUSS': L['fuss'], 'TXT_GITHUB': L['github'],
+            'TXT_SKIP': L['skip'], 'TXT_ZUSATZ': L['zusatz'], 'TXT_START': L['start'], 'TXT_FUSS': L['fuss'],
             'TXT_DISCLAIMER': L['disclaimer'], 'V': self.cfg.get('version', '1'), 'TXT_ALLE_SEITEN': L['alle_seiten'], 'START': self.link(),
         }
         text = self.vorlage

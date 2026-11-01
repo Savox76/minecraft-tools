@@ -65,6 +65,15 @@
    }
   },
   {
+   "id": "mystery",
+   "name": "Mystery-Bauwerke",
+   "text": "Bauwerke mit Geheimnissen: versteckte Gänge, Rätsel, Ruinen und verlassene Orte.",
+   "en": {
+    "name": "Mystery builds",
+    "text": "Builds with secrets: hidden passages, puzzles, ruins and abandoned places."
+   }
+  },
+  {
    "id": "monumente",
    "name": "Monumente",
    "text": "Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.",
@@ -2012,6 +2021,174 @@
    "en": {
     "titel": "Dam",
     "text": "A massive dam wall between two mountains, waterfalls from the outlets at the front and a road on top."
+   }
+  },
+  {
+   "nr": 136,
+   "kategorie": "mystery",
+   "groesse": "groß",
+   "titel": "Spukvilla mit Geheimgängen",
+   "text": "Eine verfallene Villa mit knarrenden Dielen, verdeckten Kolbentüren hinter Bildern und Regalen und einem Gang, der in eine verborgene Gruft führt.",
+   "status": "idee",
+   "en": {
+    "titel": "Haunted mansion with secret passages",
+    "text": "A run-down mansion with creaky floors, hidden piston doors behind paintings and shelves, and a passage leading down to a hidden crypt."
+   }
+  },
+  {
+   "nr": 137,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Escape-Room-Haus",
+   "text": "Ein Haus voller Redstone-Rätsel: Hinweise auf Schildern und in Büchern, Hebel in der richtigen Reihenfolge öffnen den nächsten Raum. Ideal für Server-Events.",
+   "status": "idee",
+   "en": {
+    "titel": "Escape room house",
+    "text": "A house full of redstone puzzles: clues on signs and in books, levers in the right order open the next room. Ideal for server events."
+   }
+  },
+  {
+   "nr": 138,
+   "kategorie": "mystery",
+   "groesse": "groß",
+   "titel": "Rätselgrab in der Wüste",
+   "text": "Ein Grabmal mit Fallen, Druckplatten-Rätseln und einer Schatzkammer, die sich nur mit dem richtigen Code öffnet.",
+   "status": "idee",
+   "en": {
+    "titel": "Puzzle tomb in the desert",
+    "text": "A tomb with traps, pressure plate puzzles and a treasure chamber that only opens with the right code."
+   }
+  },
+  {
+   "nr": 139,
+   "kategorie": "mystery",
+   "groesse": "groß",
+   "titel": "Versunkene Tempelstadt",
+   "text": "Ruinen einer Stadt am Meeresgrund, halb im Sand begraben, mit Säulen, eingestürzten Dächern und einem Tempel voller Prismarin.",
+   "status": "idee",
+   "en": {
+    "titel": "Sunken temple city",
+    "text": "Ruins of a city on the sea floor, half buried in sand, with columns, collapsed roofs and a temple full of prismarine."
+   }
+  },
+  {
+   "nr": 140,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Steinkreis mit Geheimkammer",
+   "text": "Uralte Steine im Kreis. Wer die Hebel an den Steinen richtig umlegt, öffnet eine Treppe in eine Kammer darunter.",
+   "status": "idee",
+   "en": {
+    "titel": "Stone circle with hidden chamber",
+    "text": "Ancient stones in a circle. Flip the levers on the stones in the right order and a staircase opens into a chamber below."
+   }
+  },
+  {
+   "nr": 141,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Verlassenes Bergwerk",
+   "text": "Ein Stollen mit Holzstützen, rostigen Schienen, umgekippten Loren und einem eingestürzten Gang, hinter dem etwas Seltsames leuchtet.",
+   "status": "idee",
+   "en": {
+    "titel": "Abandoned mine",
+    "text": "A tunnel with wooden supports, rusty rails, tipped-over minecarts and a collapsed passage with something strange glowing behind it."
+   }
+  },
+  {
+   "nr": 142,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Geisterschiff",
+   "text": "Ein Wrack mit zerrissenen Segeln, schief im Nebel liegend, mit Laternen, die nachts von allein zu leuchten scheinen.",
+   "status": "idee",
+   "en": {
+    "titel": "Ghost ship",
+    "text": "A wreck with torn sails, lying crooked in the fog, with lanterns that seem to light up by themselves at night."
+   }
+  },
+  {
+   "nr": 143,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Bibliothek hinter dem Wasserfall",
+   "text": "Ein Wasserfall verdeckt den Eingang zu einer Höhle mit Bücherregalen, Lesepult und einer Karte zum nächsten Geheimnis.",
+   "status": "idee",
+   "en": {
+    "titel": "Library behind the waterfall",
+    "text": "A waterfall hides the entrance to a cave with bookshelves, a lectern and a map to the next secret."
+   }
+  },
+  {
+   "nr": 144,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Hexenturm im Sumpf",
+   "text": "Ein schiefer Turm auf Stelzen mit Kesseln, Braustand, Kräutergarten und einer Falltür ins Ungewisse.",
+   "status": "idee",
+   "en": {
+    "titel": "Witch tower in the swamp",
+    "text": "A crooked tower on stilts with cauldrons, brewing stand, herb garden and a trapdoor into the unknown."
+   }
+  },
+  {
+   "nr": 145,
+   "kategorie": "mystery",
+   "groesse": "groß",
+   "titel": "Geisterdorf",
+   "text": "Ein verlassenes Dorf mit leeren Häusern, Spinnweben, überwucherten Wegen und einem Brunnen, der tiefer führt, als er sollte.",
+   "status": "idee",
+   "en": {
+    "titel": "Ghost village",
+    "text": "An abandoned village with empty houses, cobwebs, overgrown paths and a well that goes deeper than it should."
+   }
+  },
+  {
+   "nr": 146,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Uhrturm mit Geheimkammer",
+   "text": "Hinter dem Ziffernblatt liegt eine Kammer mit Zahnrädern aus Blöcken. Ein versteckter Mechanismus öffnet den Weg nach oben.",
+   "status": "idee",
+   "en": {
+    "titel": "Clock tower with secret room",
+    "text": "Behind the clock face lies a room with gears made of blocks. A hidden mechanism opens the way to the top."
+   }
+  },
+  {
+   "nr": 147,
+   "kategorie": "mystery",
+   "groesse": "klein",
+   "titel": "Schwarzer Monolith",
+   "text": "Ein glatter Block aus Obsidian mitten im Nirgendwo, mit Inschriften auf Schildern und einer Kammer, die nur nachts erreichbar ist.",
+   "status": "idee",
+   "en": {
+    "titel": "Black monolith",
+    "text": "A smooth block of obsidian in the middle of nowhere, with inscriptions on signs and a chamber only reachable at night."
+   }
+  },
+  {
+   "nr": 148,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Friedhof mit Gruft",
+   "text": "Grabsteine, alte Bäume, eine Kapelle und darunter eine Gruft mit Kerzen und einem versiegelten Raum.",
+   "status": "idee",
+   "en": {
+    "titel": "Graveyard with crypt",
+    "text": "Gravestones, old trees, a chapel and beneath it a crypt with candles and a sealed room."
+   }
+  },
+  {
+   "nr": 149,
+   "kategorie": "mystery",
+   "groesse": "mittel",
+   "titel": "Sternwarte der Sterndeuter",
+   "text": "Ein Turm mit Kuppel, Sternbildern aus Lichtblöcken im Boden und einem Rätsel, das nur mit Blick in den Nachthimmel lösbar ist.",
+   "status": "idee",
+   "en": {
+    "titel": "Stargazers’ observatory",
+    "text": "A domed tower with constellations of light blocks in the floor and a puzzle that can only be solved by looking at the night sky."
    }
   }
  ]
