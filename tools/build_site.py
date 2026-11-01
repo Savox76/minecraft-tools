@@ -377,6 +377,16 @@ def main():
         pruefe_plugins(f'ideen/ideen.json Nr. {i["nr"]}', i.get('plugins'))
         if i.get('bauplan') and i['bauplan'] not in gebaut:
             print(f'  Hinweis: Idee {i["nr"]} verweist auf unbekannten Bauplan {i["bauplan"]}')
+    # „Als Nächstes“: immer ANZAHL offene Ideen. Fehlt eine (z. B. nach einem fertigen Bauplan), zieht
+    # tools/ideen_masterplan.py per Zufall nach und speichert das. Hier nur zur Sicherheit, mit festem Startwert,
+    # damit die Website nicht bei jedem Bauen etwas anderes zeigt.
+    import random
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from empfehlung import nachruecken, text as empf_text
+    fertig_nrs = sorted(str(i['nr']) for i in ideen['ideen'] if i['status'] == 'verfuegbar')
+    for i in nachruecken(ideen, random.Random('|'.join(fertig_nrs))):
+        print(f'  Hinweis: „Als Nächstes“ vorläufig ergänzt um Nr. {i["nr"]} {i["titel"]}; mit python tools/ideen_masterplan.py fest speichern')
+    ideen['empfohlen_text'] = {'de': empf_text(ideen, 'de'), 'en': empf_text(ideen, 'en')}
     # Fertige Ideen (status verfuegbar) sind jetzt Baupläne: sie stehen nur noch im Masterplan unter „Umgesetzt“
     umgesetzt = [i for i in ideen['ideen'] if i['status'] == 'verfuegbar']
     ideen['ideen'] = [i for i in ideen['ideen'] if i['status'] != 'verfuegbar']

@@ -27,6 +27,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 - **Eigene und fremde Plugins bleiben getrennt.** Eigene Plugins bekommen `plugins/eigene/<id>/plugin.json` und `README.md`, fremde einen Eintrag in `plugins/fremd/plugins.json` (nur Beschreibung, Einsatz und Link zur offiziellen Seite, keine Dateien). Die Website zeigt beides automatisch in getrennten Bereichen.
 - **Änderungen gehen direkt auf `main`.**
 - **Alles zweisprachig:** Neue Baupläne, Plugins und Anleitungen bekommen eine englische Fassung (`"en"` in `build.json` und `plugin.json`, `docs/en/<id>.md`, neue Blocknamen in `tools/i18n/bloecke_en.json`). Fehlt sie, zeigt die englische Seite den deutschen Text und der Build gibt einen Hinweis aus.
+- **Fertig heißt: nachrücken lassen.** Ist ein Bauplan aus der Ideenliste fertig, `status` auf `verfuegbar` setzen und `python tools/ideen_masterplan.py` ausführen. Die Idee wandert unter „Umgesetzt“, und unter „Als Nächstes“ rückt per Zufall eine neue nach (Abschnitt 15).
 - **Abhängigkeiten aktuell halten:** Kommt ein Werkzeug, Dienst oder Plugin dazu oder ändert sich eine Version, wird Abschnitt 16 angepasst. Welche Baupläne und Ideen welche Plugins brauchen, erzeugt `python tools/ideen_masterplan.py`.
 - **Keine Links zum Quellcode auf der Website:** Die Website verlinkt nicht auf das GitHub-Repo, den Quellcode der Seite, der Plugins oder der Baupläne. Downloads (`.litematic`, `.schem`, CSV, später `.jar`) liegen direkt auf der Website. Ausnahme bisher: die Wunsch-Formulare (GitHub-Issues).
 - **Kein Bezug zu LEGO:** LEGO ist die Marke eines anderen Unternehmens. Auf der Website und im Repo heißt es Bauschritte, Bauheft und Schritt-für-Schritt-Anleitung.
@@ -440,7 +441,8 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Ablauf**
 - Neue Idee: Eintrag in `ideen/ideen.json` mit der nächsten freien Nummer, danach `python tools/ideen_masterplan.py` ausführen. Das schreibt die Tabellen unten neu.
 - Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. **Fertige Ideen verschwinden dann automatisch von der Geplant-Seite** und stehen hier unten unter „Umgesetzt“ zur Erinnerung. In `ideen/ideen.json` bleiben sie erhalten (Nummern werden nie neu vergeben).
-- Der Text über „Als Nächstes“ auf der Geplant-Seite steht in `ideen/ideen.json` unter `empfohlen_text` und wird angepasst, wenn sich die Empfehlung ändert (`"empfohlen": true` an der Idee).
+- **„Als Nächstes“ rückt per Zufall nach:** Auf der Geplant-Seite stehen immer **3** offene Bauplan-Ideen unter „Als Nächstes“ (`"empfohlen": true`). Ist eine davon fertig, zieht `python tools/ideen_masterplan.py` per Zufall eine andere offene Bauplan-Idee nach (keine Anleitungen) und speichert sie in `ideen/ideen.json`. So bleibt die Auswahl fest, bis wieder etwas fertig ist. Vergisst man den Aufruf, ergänzt der Website-Build vorläufig selbst und meldet einen Hinweis. Die Regel steht in `tools/empfehlung.py`.
+- Der Text über „Als Nächstes“ steht in `ideen/ideen.json` unter `empfohlen_text`, mit `fuer` = die Nummern, zu denen er passt. Rückt eine Idee nach, für die er nicht passt, erscheint automatisch ein allgemeiner Text.
 - Plugins: Braucht eine Idee ein Plugin, steht es unter `plugins` mit `id` und `stufe` (`benoetigt`, `empfohlen`, `optional`). Die Geplant-Seite zeigt es auf der Karte.
 - Abstimmen: Auf der Geplant-Seite führt „Wünschen“ zu einem vorausgefüllten Bauwunsch („Idee #61: Kakaofarm“). Gibt es dazu schon einen offenen Wunsch, zeigt die Seite dessen 👍-Stimmen und verlinkt dorthin.
 - Größe: klein (bis etwa 15 × 15), mittel, groß. Für Nachbauten echter Wahrzeichen gibt der Bauplan einen Maßstab an (wie beim Eiffelturm 1:3).
@@ -450,7 +452,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 <!-- ideen:start -->
 163 offene Ideen (163 💡 Idee, 0 🔨 in Arbeit), 1 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
-**Als Nächstes empfohlen:** Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
+**Als Nächstes empfohlen:** Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation, Nr. 50 Japanisches Teehaus mit Garten.
 
 ### Skillfarmen (XP) (9)
 

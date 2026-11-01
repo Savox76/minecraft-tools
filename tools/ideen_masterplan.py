@@ -7,6 +7,9 @@ Mit --pruefen wird nur geprüft, ob der Masterplan aktuell ist (wird von build_s
 """
 import json, os, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from empfehlung import nachruecken, ANZAHL  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 START, ENDE = '<!-- ideen:start -->', '<!-- ideen:ende -->'
 A_START, A_ENDE = '<!-- abhaengigkeiten:start -->', '<!-- abhaengigkeiten:ende -->'
@@ -99,6 +102,16 @@ def main():
     pfad = os.path.join(ROOT, 'MASTERPLAN.md')
     with open(pfad, encoding='utf-8') as f:
         text = f.read()
+    if '--pruefen' not in sys.argv:
+        gezogen = nachruecken(daten)
+        if gezogen:
+            with open(os.path.join(ROOT, 'ideen', 'ideen.json'), 'w', encoding='utf-8') as f:
+                json.dump(daten, f, ensure_ascii=False, indent=1)
+                f.write('\n')
+            for i in gezogen:
+                print('Als Nächstes neu (per Zufall): Nr. %s %s' % (i['nr'], i['titel']))
+    elif sum(1 for i in daten['ideen'] if i['status'] != 'verfuegbar' and i.get('empfohlen')) < ANZAHL:
+        print('Hinweis: Unter „Als Nächstes“ stehen weniger als %d Ideen. Bitte python tools/ideen_masterplan.py ausführen.' % ANZAHL)
     neu = ersetze(text, START, ENDE, tabellen(daten))
     neu = ersetze(neu, A_START, A_ENDE, abhaengigkeiten(daten))
     if '--pruefen' in sys.argv:
