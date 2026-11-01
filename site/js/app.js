@@ -40,11 +40,11 @@ function setzeThema(t) {
   redrawAll();
 }
 document.querySelectorAll('[data-thema]').forEach((b) => b.addEventListener('click', () => setzeThema(b.dataset.thema)));
-document.querySelector('.thema-wahl')?.addEventListener('keydown', (e) => {
+document.querySelectorAll('.thema-wahl').forEach((gruppe) => gruppe.addEventListener('keydown', (e) => {
   if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
   const k = ['auto', 'hell', 'dunkel'], i = (k.indexOf(liesThema()) + (e.key === 'ArrowRight' ? 1 : 2)) % 3;
-  setzeThema(k[i]); document.querySelector(`[data-thema="${k[i]}"]`).focus();
-});
+  setzeThema(k[i]); gruppe.querySelector(`[data-thema="${k[i]}"]`).focus();
+}));
 setTimeout(() => setzeThema(liesThema()));
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => redrawAll());
 

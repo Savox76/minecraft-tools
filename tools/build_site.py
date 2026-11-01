@@ -246,6 +246,11 @@ def main():
     js = js.replace('__VERSION__', version).replace("from './render.js'", "from './render.js?v=%s'" % version)
     with open(pfad_js, 'w', encoding='utf-8') as f:
         f.write(js)
+    pfad_css = os.path.join(OUT, 'style.css')
+    with open(pfad_css, encoding='utf-8') as f:
+        css = f.read()
+    with open(pfad_css, 'w', encoding='utf-8') as f:
+        f.write(css.replace('__VERSION__', version))
 
     katalog = {'builds': [], 'plugins': [], 'fremd': [], 'docs': [], 'wuensche': [], 'kategorien': KATEGORIEN,
                'plugin_kategorien': PLUGIN_KATEGORIEN, 'kategorien_en': KATEGORIEN_EN,

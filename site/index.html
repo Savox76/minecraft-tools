@@ -36,14 +36,20 @@
 </head>
 <body>
 <a class="skip" href="#inhalt">{{TXT_SKIP}}</a>
-<header class="kopf">
-  <div class="kopf-innen">
+<div class="banner">
+  <div class="banner-innen">
     <a class="marke" href="{{START}}" aria-label="{{TXT_START}}">
-      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M16 3 29 10.5v11L16 29 3 21.5v-11z" fill="var(--ink)"/><path d="M16 3 29 10.5 16 18 3 10.5z" fill="var(--hl)"/><path d="M16 18v11L3 21.5v-11z" fill="var(--ink-soft)"/></svg>
+      <svg viewBox="0 0 32 32" width="44" height="44" aria-hidden="true"><path d="M16 3 29 10.5v11L16 29 3 21.5v-11z" fill="var(--ink)"/><path d="M16 3 29 10.5 16 18 3 10.5z" fill="var(--hl)"/><path d="M16 18v11L3 21.5v-11z" fill="var(--ink-soft)"/></svg>
       <span class="marke-text"><b>Bauwerkstatt</b><small>{{TXT_ZUSATZ}}</small></span>
     </a>
+    <div class="schalter schalter-banner">{{SPRACHE}}{{THEMA}}</div>
+  </div>
+</div>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="marke-klein" href="{{START}}" aria-label="{{TXT_START}}"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><path d="M16 3 29 10.5v11L16 29 3 21.5v-11z" fill="var(--ink)"/><path d="M16 3 29 10.5 16 18 3 10.5z" fill="var(--hl)"/><path d="M16 18v11L3 21.5v-11z" fill="var(--ink-soft)"/></svg></a>
     <nav class="nav" aria-label="Menu">{{NAV}}</nav>
-    <div class="schalter">{{SPRACHE}}{{THEMA}}</div>
+    <div class="schalter schalter-leiste">{{SPRACHE}}{{THEMA}}</div>
   </div>
 </header>
 <main id="inhalt" tabindex="-1">{{INHALT}}</main>

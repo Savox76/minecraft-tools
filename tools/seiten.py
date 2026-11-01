@@ -194,6 +194,252 @@ def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.92, schatten=F
     return bild.resize((breite, hoehe), Image.LANCZOS)
 
 
+def landschaft(nacht=False, spalten=240, zeilen=22, B=8):
+    """Blockige Landschaft im Minecraft-Stil (eigene Farben, keine Texturen von Mojang).
+
+    Von links nach rechts: Meer, Strand mit Leuchtturm, Wiese mit Haus und Feld, Wald, Berge mit Schnee,
+    am rechten Rand wieder hinunter zum Wasser, damit sich das Bild nahtlos wiederholen lässt.
+    Ein Block ist B Pixel groß; die Website zeigt das Bild pixelgenau (image-rendering: pixelated).
+    """
+    import math, random
+    from PIL import Image, ImageDraw
+    W, H = spalten * B, zeilen * B
+    img = Image.new('RGB', (W, H))
+    g = ImageDraw.Draw(img, 'RGBA')      # RGBA-Farben werden auf dem RGB-Bild überblendet
+    rnd = random.Random(11)
+
+    def ton(c, f):
+        return tuple(max(0, min(255, int(v * f))) for v in c[:3])
+
+    def nf(c):
+        """Farbe bei Nacht: dunkler und bläulich."""
+        if not nacht:
+            return tuple(c[:3])
+        r, gg, b = c[:3]
+        return (int(r * .42 + 8), int(gg * .46 + 12), int(b * .56 + 34))
+
+    # ---- Himmel
+    oben, unten = ((10, 20, 44), (36, 58, 98)) if nacht else ((118, 176, 236), (204, 230, 250))
+    for y in range(H):
+        t = y / (H - 1)
+        g.line([(0, y), (W, y)], fill=tuple(int(oben[i] + (unten[i] - oben[i]) * t) for i in range(3)))
+    if nacht:
+        for _ in range(220):
+            x, y = rnd.randrange(W), rnd.randrange(int(H * .7))
+            gross = rnd.random() < .18
+            hell = rnd.choice((170, 210, 245))
+            g.rectangle([x, y, x + (1 if gross else 0), y + (1 if gross else 0)], fill=(hell, hell, min(255, hell + 10)))
+        mx, my = 92 * B, 1 * B + 4
+        g.rectangle([mx - 3, my - 3, mx + 3 * B + 2, my + 3 * B + 2], fill=(230, 232, 210, 40))
+        g.rectangle([mx, my, mx + 3 * B - 1, my + 3 * B - 1], fill=(228, 230, 212))
+        for dx, dy in ((4, 5), (14, 12), (7, 16)):
+            g.rectangle([mx + dx, my + dy, mx + dx + 3, my + dy + 3], fill=(198, 200, 184))
+    else:
+        sx, sy = 92 * B, 1 * B + 4
+        g.rectangle([sx - 4, sy - 4, sx + 3 * B + 3, sy + 3 * B + 3], fill=(255, 238, 160, 110))
+        g.rectangle([sx, sy, sx + 3 * B - 1, sy + 3 * B - 1], fill=(255, 247, 200))
+
+    for cx, cy, cb, ch in ((8, 4, 10, 1), (44, 2, 12, 1), (110, 3, 9, 1), (156, 1, 14, 2), (208, 3, 11, 1)):
+        farbe = (210, 220, 240, 45) if nacht else (255, 255, 255, 240)
+        unten_ = (190, 200, 222, 45) if nacht else (222, 233, 245, 255)
+        g.rectangle([cx * B, cy * B, (cx + cb) * B - 1, (cy + ch) * B - 1], fill=farbe)
+        g.rectangle([(cx + 2) * B, cy * B - B // 2, (cx + cb - 3) * B - 1, cy * B - 1], fill=farbe)
+        g.rectangle([cx * B, (cy + ch) * B - 2, (cx + cb) * B - 1, (cy + ch) * B - 1], fill=unten_)
+
+    # ---- Höhen in Blöcken vom unteren Rand
+    WASSER = 8
+    def hoehe(c):
+        if c < 40:                       # Meer (hier steht auf der Website der Name)
+            return 3 + (1 if math.sin(c * .9) > .5 else 0)
+        if c < 58:                       # Strand steigt an
+            return min(9, 4 + (c - 40) // 3)
+        if c < 104:                      # Wiese
+            return int(round(9.4 + 1.0 * math.sin(c / 7.5) + .6 * math.sin(c / 2.9)))
+        if c < 150:                      # Wald, leicht hügelig
+            return int(round(10 + 1.6 * math.sin(c / 9) + .8 * math.sin(c / 3.7)))
+        if c < 218:                      # Berg
+            t = (c - 150) / 68          # zwei Gipfel, der linke höher
+            spitze = max(19.5 - abs(t - .36) * 42, 16.5 - abs(t - .72) * 36)
+            return int(round(max(10, spitze + .9 * math.sin(c / 2.3))))
+        return max(3, int(round(10 - (c - 218) / 22 * 7)))   # hinab zum Wasser (Übergang zum Bildanfang)
+
+    def ferne(c):                        # Bergkette im Dunst
+        u = 2 * math.pi * c / spalten          # periodisch, damit die Naht beim Wiederholen nicht auffällt
+        v = 11 + 4.5 * abs(math.sin(u * 3)) + 2.2 * math.sin(u * 8)
+        return int(round(max(0, min(16, v))))
+
+    def pixelblock(c, r, farbe, alpha=255, rausch=.07, oben=None, rand=None):
+        x0, y0 = c * B, H - (r + 1) * B
+        for i in range(0, B, 2):
+            for j in range(0, B, 2):
+                fc = farbe
+                if oben is not None and (j < 2 or (j < 4 and rnd.random() < (rand or .45))):
+                    fc = oben
+                f = 1 + rnd.uniform(-rausch, rausch)
+                g.rectangle([x0 + i, y0 + j, x0 + i + 1, y0 + j + 1], fill=nf(ton(fc, f)) + (alpha,))
+
+    hoehen = [hoehe(c) for c in range(spalten)]
+
+    # ---- ferne Berge
+    for c in range(spalten):
+        hb = ferne(c)
+        for r in range(hb):
+            dunst = (176, 196, 218) if not nacht else (150, 160, 180)
+            fc = (242, 246, 252) if r >= 14 else (140, 146, 156)
+            mix = tuple(int(fc[i] * .45 + dunst[i] * .55) for i in range(3))
+            x0, y0 = c * B, H - (r + 1) * B
+            g.rectangle([x0, y0, x0 + B - 1, y0 + B - 1], fill=nf(mix))
+
+    # ---- Vordergrund
+    GRAS, ERDE, STEIN, SAND, SANDST, FELS = (96, 160, 54), (134, 96, 67), (128, 130, 135), (220, 208, 164), (190, 176, 134), (96, 98, 104)
+    for c, h in enumerate(hoehen):
+        steil = abs(h - hoehen[c - 1]) >= 2 or abs(h - hoehen[(c + 1) % spalten]) >= 2
+        for r in range(h):
+            if r == 0:
+                pixelblock(c, r, FELS)
+            elif (c < 58 or c >= 230) and r >= h - 2:
+                pixelblock(c, r, SAND)
+            elif c < 58 or c >= 230:
+                pixelblock(c, r, SANDST)
+            elif r == h - 1 and h >= 15:
+                pixelblock(c, r, STEIN, oben=(242, 247, 253), rand=.6)          # Schnee
+            elif r == h - 2 and h >= 17:
+                pixelblock(c, r, (232, 238, 246))                                # Schneeschicht
+            elif r == h - 1 and steil and h >= 12:
+                pixelblock(c, r, STEIN)                                          # nackter Fels an steilen Stellen
+            elif r == h - 1:
+                pixelblock(c, r, ERDE, oben=GRAS)
+            elif r >= h - 3 and h < 13:
+                pixelblock(c, r, ERDE)
+            else:
+                fc = STEIN
+                if r < h - 4 and rnd.random() < .022:
+                    fc = rnd.choice(((58, 58, 62), (200, 164, 124)))             # Kohle, Eisen
+                pixelblock(c, r, fc)
+
+    # ---- Wasser (links Meer, rechts der Übergang)
+    for c in range(spalten):
+        for r in range(hoehen[c], WASSER):
+            x0, y0 = c * B, H - (r + 1) * B
+            g.rectangle([x0, y0, x0 + B - 1, y0 + B - 1], fill=(30, 60, 130, 175) if nacht else (52, 108, 222, 170))
+            if r == WASSER - 1:
+                g.rectangle([x0, y0, x0 + B - 1, y0 + 1], fill=(120, 160, 230, 200) if nacht else (170, 210, 250, 230))
+
+    def setze(c, r, fc, alpha=255, rausch=.08):
+        if 0 <= c < spalten:
+            pixelblock(c, r, fc, alpha=alpha, rausch=rausch)
+
+    # ---- Leuchtturm am Strand
+    lc, lb = 52, hoehen[52]
+    for k in range(8):
+        for dc in (0, 1):
+            setze(lc + dc, lb + k, (200, 42, 42) if k % 2 == 0 else (238, 238, 232))
+    for dc in (-1, 0, 1, 2):
+        setze(lc + dc, lb + 8, (110, 114, 120))
+    for dc in (0, 1):
+        x0, y0 = (lc + dc) * B, H - (lb + 10) * B
+        g.rectangle([x0, y0, x0 + B - 1, y0 + B - 1], fill=(255, 216, 96) if nacht else (238, 232, 196))
+        g.rectangle([x0 + 1, y0 + 1, x0 + B - 2, y0 + B - 2], outline=(80, 80, 86) if not nacht else (255, 236, 160))
+        setze(lc + dc, lb + 10, (160, 34, 34))
+    if nacht:
+        ly = H - (lb + 9.5) * B
+        # Lichtkegel nach links übers Meer, läuft weich aus (keine Kante an der Bildnaht)
+        enden = [lc - 10, lc - 20, lc - 30, lc - 40]
+        for k, ende in enumerate(enden):
+            t = (lc - ende) / 46
+            g.polygon([(lc * B, ly - 3), (ende * B, ly - 3 - t * 4.5 * B), (ende * B, ly + 4 + t * 3 * B), (lc * B, ly + 4)], fill=(255, 222, 130, 16))
+        g.polygon([((lc + 2) * B, ly - 3), ((lc + 26) * B, ly - 2.2 * B), ((lc + 26) * B, ly + 1.2 * B), ((lc + 2) * B, ly + 4)], fill=(255, 222, 130, 18))
+
+    # ---- Haus mit Feld auf der Wiese
+    hc = 72
+    hb = hoehen[hc]
+    for c in range(hc - 3, hc + 4):        # Boden einebnen
+        hoehen[c] = hb
+    for k in range(3):
+        for dc in range(-3, 4):
+            if abs(dc) == 3:
+                setze(hc + dc, hb + k, (104, 78, 46))                           # Eckpfosten
+            elif k == 1 and dc in (-2, 2):
+                x0, y0 = (hc + dc) * B, H - (hb + k + 1) * B
+                g.rectangle([x0, y0, x0 + B - 1, y0 + B - 1], fill=(255, 210, 110) if nacht else (170, 210, 236))
+                g.rectangle([x0, y0, x0 + B - 1, y0 + B - 1], outline=nf((104, 78, 46)))
+            elif dc == 0 and k < 2:
+                setze(hc, hb + k, (90, 64, 38))                                  # Tür
+            else:
+                setze(hc + dc, hb + k, (184, 148, 96))                           # Bretter
+    for k, breite in ((3, 4), (4, 3), (5, 2), (6, 1)):
+        for dc in range(-breite, breite + 1):
+            setze(hc + dc, hb + k, (150, 62, 50))                                # Dach
+    setze(hc + 2, hb + 6, (120, 120, 126)); setze(hc + 2, hb + 7, (120, 120, 126))   # Schornstein
+    if not nacht:
+        for k, (dx, dy) in enumerate(((2, 0), (3, -1), (2, -2))):
+            x0, y0 = (hc + 2) * B + dx * 3, H - (hb + 9) * B + dy * 6
+            g.rectangle([x0, y0, x0 + 4, y0 + 4], fill=(235, 238, 242, 170 - k * 40))
+    fb = hoehen[83]
+    for c in range(79, 90):
+        hoehen[c] = fb
+        x0, y0 = c * B, H - fb * B
+        g.rectangle([x0, y0 - 2, x0 + B - 1, y0 + 1], fill=nf((110, 78, 50)))           # Ackerboden
+        if c == 84:
+            g.rectangle([x0, y0 - 2, x0 + B - 1, y0 + 1], fill=(70, 120, 210) if not nacht else (40, 70, 130))
+            continue
+        for i in range(0, B, 2):
+            hh = rnd.randrange(4, 8)
+            g.rectangle([x0 + i, y0 - 2 - hh, x0 + i, y0 - 3], fill=nf((200, 178, 70) if c % 3 else (150, 170, 60)))
+
+    # ---- Bäume
+    def eiche(c, birke=False):
+        h0 = hoehen[c]
+        stamm = (230, 226, 212) if birke else (104, 78, 46)
+        laub = (118, 166, 70) if birke else (66, 124, 42)
+        hoch = 4 + rnd.randrange(2)
+        for k in range(hoch):
+            setze(c, h0 + k, stamm)
+            if birke and k % 2:
+                x0, y0 = c * B, H - (h0 + k + 1) * B
+                g.rectangle([x0 + 2, y0 + 3, x0 + 4, y0 + 4], fill=nf((60, 60, 60)))
+        for dr, breite in ((hoch - 2, 2), (hoch - 1, 2), (hoch, 1), (hoch + 1, 1)):
+            for dc in range(-breite, breite + 1):
+                if dr >= hoch and abs(dc) == breite and rnd.random() < .4:
+                    continue
+                setze(c + dc, h0 + dr, laub, rausch=.12)
+
+    def fichte(c):
+        h0 = hoehen[c]
+        for k in range(7):
+            setze(c, h0 + k, (78, 58, 36))
+        for k, breite in ((2, 2), (3, 1), (4, 2), (5, 1), (6, 1), (7, 0), (8, 0)):
+            for dc in range(-breite, breite + 1):
+                setze(c + dc, h0 + k, (38, 82, 52), rausch=.12)
+
+    for c in (63, 94, 99):
+        eiche(c, birke=(c == 94))
+    c = 106
+    while c < 150:
+        fichte(c) if rnd.random() < .7 else eiche(c, birke=rnd.random() < .3)
+        c += rnd.randrange(4, 7)
+    for c in (156, 162, 208, 214):
+        if hoehen[c] < 15:
+            fichte(c)
+
+    # ---- Blumen und Gras auf der Wiese
+    for c in list(range(59, 76)) + list(range(91, 150)):
+        if 79 <= c < 90:
+            continue
+        x0, y0 = c * B, H - (hoehen[c] + 1) * B
+        z = rnd.random()
+        if z < .25 and c < 104:
+            farbe = rnd.choice(((228, 58, 58), (250, 208, 58), (242, 242, 242), (118, 148, 238), (228, 118, 200)))
+            x = x0 + rnd.randrange(1, 5)
+            g.rectangle([x + 1, y0 + 4, x + 1, y0 + 7], fill=nf((60, 120, 40)))
+            g.rectangle([x, y0 + 2, x + 2, y0 + 4], fill=nf(farbe))
+        elif z < .5:
+            for k in range(3):
+                x = x0 + rnd.randrange(0, 7)
+                g.rectangle([x, y0 + 4 + rnd.randrange(2), x, y0 + 7], fill=nf((88, 150, 50)))
+    return img
+
+
 def schrift(groesse, fett=True):
     from PIL import ImageFont
     for p in (['/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'] if fett else []) + \
@@ -436,6 +682,7 @@ class Seiten:
     def alles(self):
         os.makedirs(os.path.join(self.out, 'bilder'), exist_ok=True)
         self.karten_bilder()
+        self.banner()
         for lang in SPRACHEN:
             self.lang = lang
             self.og_bilder()
@@ -461,6 +708,11 @@ class Seiten:
             img = zeichne_modell(b['model'], 800, 600, schnitt=schnitt)
             img.save(os.path.join(self.out, 'bilder', '%s.png' % b['id']), optimize=True)
             self.modellbilder[b['id']] = zeichne_modell(b['model'], 590, 590, schnitt=schnitt, fuellung=.9, schatten=True)
+
+    def banner(self):
+        """Minecraft-Landschaft für den Kopfbereich, als Tag- und Nachtbild."""
+        for nacht, name in ((False, 'banner-tag.png'), (True, 'banner-nacht.png')):
+            landschaft(nacht).save(os.path.join(self.out, 'bilder', name), optimize=True)
 
     def og_bilder(self):
         z = T[self.lang]['zusatz']

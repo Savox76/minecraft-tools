@@ -22,6 +22,12 @@
   --plan-linie-stark: rgba(255, 255, 255, .14);
   --plan-ink: #f2f6fb;
   --plan-ink-soft: #b8c9de;
+  --leiste: #262d35;
+  --banner-bild: url("bilder/banner-tag.png?v=__VERSION__");
+  --banner-himmel: #cce5f9;
+  --banner-ink: #13202c;
+  --banner-soft: #2b4155;
+  --banner-schatten: 0 1px 0 rgba(255, 255, 255, .55);
   --ok: #2f8f4e;
   --warn: #b7791f;
   --f-display: "Archivo", "Segoe UI", system-ui, sans-serif;
@@ -35,14 +41,14 @@
   :root:not([data-theme="light"]) {
     --page: #0e141a; --sheet: #17202a; --sheet-2: #131b23; --ink: #e8eef4; --ink-soft: #a9b7c4; --ink-mute: #7f8d9b;
     --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c;
-    --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12);
+    --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12); --leiste: #151a20; --banner-bild: url("bilder/banner-nacht.png?v=__VERSION__"); --banner-himmel: #223a62; --banner-ink: #f2f6fb; --banner-soft: #b8c9de; --banner-schatten: 0 1px 3px rgba(0, 0, 0, .6);
     --ok: #5cc27e; --warn: #e0a64a; --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --page: #0e141a; --sheet: #17202a; --sheet-2: #131b23; --ink: #e8eef4; --ink-soft: #a9b7c4; --ink-mute: #7f8d9b;
   --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c;
-  --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12);
+  --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12); --leiste: #151a20; --banner-bild: url("bilder/banner-nacht.png?v=__VERSION__"); --banner-himmel: #223a62; --banner-ink: #f2f6fb; --banner-soft: #b8c9de; --banner-schatten: 0 1px 3px rgba(0, 0, 0, .6);
   --ok: #5cc27e; --warn: #e0a64a; --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25); color-scheme: dark;
 }
 
@@ -70,39 +76,62 @@ p { margin: 0; }
 }
 .eyebrow { font-size: .86rem; font-weight: 700; color: var(--ink-mute); }
 
-/* Kopf */
-.kopf { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 11; background: var(--page); }
-.kopf-innen { display: flex; align-items: center; gap: 18px; min-height: 60px; flex-wrap: wrap; }
-.marke { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-size: 1.2rem; font-weight: 500; white-space: nowrap; }
-.marke b { font-stretch: 118%; letter-spacing: -.01em; }
-.marke b { font-weight: 800; }
-.marke-text { display: flex; flex-direction: column; line-height: 1.05; }
-.marke-text small { font: 600 .74rem var(--f-body); color: var(--ink-mute); margin-top: 3px; }
-@media (max-width: 640px) { .marke-text small { display: none; } }
-.nav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
-.nav a { text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; color: var(--ink-soft); }
-.nav a:hover { color: var(--ink); background: var(--sheet); }
-.nav a[aria-current="page"] { color: var(--ink); background: var(--sheet); box-shadow: inset 0 -3px 0 var(--hl); }
+/* Kopf: Minecraft-Landschaft als Banner (tagsüber hell, im Dunkelmodus Nacht), darunter die Menüleiste,
+   die beim Scrollen stehen bleibt. Das Bild erzeugt tools/seiten.py (landschaft), 8 px pro Block. */
+.banner {
+  --ink: var(--banner-ink); --ink-soft: var(--banner-soft);
+  position: relative; height: 176px; color: var(--banner-ink);
+  background: var(--banner-himmel) var(--banner-bild) repeat-x;
+  background-size: auto 176px;
+  background-position: max(0px, calc((100vw - 1200px) / 2)) bottom;
+  image-rendering: pixelated;
+}
+.banner-innen {
+  width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  padding: 26px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+}
+.marke { display: flex; align-items: center; gap: 14px; text-decoration: none; font-family: var(--f-display); white-space: nowrap; }
+.marke b { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 900; font-stretch: 122%; letter-spacing: -.015em; line-height: 1; text-shadow: var(--banner-schatten); }
+.marke-text { display: flex; flex-direction: column; }
+.marke-text small { font: 700 .92rem var(--f-body); color: var(--banner-soft); margin-top: 6px; text-shadow: var(--banner-schatten); }
+.kopf {
+  --ink: var(--plan-ink); --ink-soft: var(--plan-ink-soft);
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--leiste); color: var(--plan-ink);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 11; background: var(--leiste); }
+.kopf-innen { display: flex; align-items: center; gap: 14px; min-height: 52px; }
+.marke-klein { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; flex: none; }
+.marke-klein:hover { background: rgba(255, 255, 255, .1); }
+.nav { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav a { text-decoration: none; padding: 14px 12px 12px; font-weight: 700; color: var(--plan-ink-soft); border-bottom: 3px solid transparent; }
+.nav a:hover { color: var(--plan-ink); }
+.nav a[aria-current="page"] { color: var(--plan-ink); border-bottom-color: var(--hl); }
 .schalter { display: flex; gap: 8px; align-items: center; }
-.sprache, .thema-wahl { display: flex; padding: 3px; gap: 2px; border: 1px solid var(--line); background: var(--sheet); border-radius: 10px; }
+.schalter-leiste { margin-left: auto; }
+.schalter-banner { display: none; }
+.sprache, .thema-wahl { display: flex; padding: 3px; gap: 2px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); border-radius: 9px; }
 .sprache a, .thema-wahl button {
-  min-width: 34px; height: 32px; padding: 0 8px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-soft);
+  min-width: 34px; height: 30px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--plan-ink-soft);
   display: grid; place-items: center; cursor: pointer; text-decoration: none; font: 800 .8rem var(--f-display); font-stretch: 112%;
 }
-.sprache a:hover, .thema-wahl button:hover { color: var(--ink); background: var(--sheet-2); }
-.sprache a[aria-current="true"], .thema-wahl button[aria-checked="true"] { background: var(--ink); color: var(--page); }
+.sprache a:hover, .thema-wahl button:hover { color: var(--plan-ink); background: rgba(255, 255, 255, .1); }
+.sprache a[aria-current="true"], .thema-wahl button[aria-checked="true"] { background: var(--plan-ink); color: var(--leiste); }
 @media (max-width: 640px) {
-  .kopf-innen { gap: 8px; padding-block: 8px; }
-  .nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; }
-  .schalter { margin-left: auto; }
-  .schalter { gap: 6px; }
-  .marke { font-size: .92rem; gap: 7px; }
-  .marke svg { width: 26px; height: 26px; }
-  .sprache, .thema-wahl { padding: 2px; }
-  .sprache a, .thema-wahl button { min-width: 26px; height: 30px; padding: 0 3px; }
+  .banner { height: 136px; background-position: -96px bottom; }
+  .banner-innen { padding-top: 16px; }
+  .marke { gap: 10px; }
+  .marke svg { width: 34px; height: 34px; }
+  .marke-text small { font-size: .82rem; }
+  .schalter-leiste { display: none; }
+  .schalter-banner { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .schalter-banner .sprache, .schalter-banner .thema-wahl { background: rgba(20, 30, 40, .72); border-color: rgba(255, 255, 255, .25); padding: 2px; }
+  .schalter-banner .sprache a, .schalter-banner .thema-wahl button { min-width: 28px; height: 28px; padding: 0 4px; }
+  .nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { padding-inline: 10px; white-space: nowrap; }
 }
-@media (max-width: 360px) { .marke span { display: none; } }
+@media (max-width: 380px) { .marke-text small { display: none; } }
 
 main { display: block; min-height: 60vh; }
 main:focus { outline: none; }
@@ -323,7 +352,7 @@ td code, .prosa code { font: .86em var(--f-mono); background: var(--sheet-2); bo
 .ideen-zahlen { display: flex; gap: 6px 22px; flex-wrap: wrap; margin-top: 16px; color: var(--ink-soft); }
 .ideen-zahlen div { display: flex; gap: 6px; align-items: baseline; }
 .ideen-zahlen b { font: 850 1.25rem var(--f-display); font-stretch: 118%; color: var(--ink); font-variant-numeric: tabular-nums; }
-.ideen-filter { position: sticky; top: 61px; z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 12px 0; }
+.ideen-filter { position: sticky; top: 52px; z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 12px 0; }
 .ideen-filter .wrap { display: flex; flex-direction: column; gap: 10px; }
 .ideen-filter .chips { flex-wrap: wrap; }
 .ideen-filter .chip { white-space: nowrap; }
