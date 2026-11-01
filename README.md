@@ -10,6 +10,7 @@ Minecraft-Baupläne im LEGO-Stil und Plugins für Paper-Server, kostenlos und ei
 | [`plugins/eigene/`](plugins/eigene/) | Eigene Paper-Plugins mit Dokumentation |
 | [`plugins/fremd/`](plugins/fremd/) | Plugins anderer Entwickler, die auf dem Server laufen oder empfohlen werden |
 | [`docs/`](docs/) | Anleitungen (Farm-Bot, CoreProtect), englisch in `docs/en/` |
+| [`ideen/`](ideen/) | Geplante Baupläne und Anleitungen mit Kurztext, Quelle der Seite „Geplant“ |
 | [`site/`](site/) | Die Website |
 | [`tools/`](tools/) | Erzeugt Website-Daten, LEGO-Schritte, `.litematic`, `.schem` und Teilelisten |
 

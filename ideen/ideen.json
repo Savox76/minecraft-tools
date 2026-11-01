@@ -1,0 +1,1646 @@
+{
+ "_hinweis": "Ideen für neue Baupläne und Anleitungen. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py).",
+ "kategorien": [
+  {
+   "id": "xp",
+   "name": "Skillfarmen (XP)",
+   "text": "Erfahrung für Verzauberungen und Reparaturen.",
+   "en": {
+    "name": "XP farms",
+    "text": "Experience for enchanting and repairs."
+   }
+  },
+  {
+   "id": "farmen",
+   "name": "Farmen für Baumaterial",
+   "text": "Liefern die Blöcke und Rohstoffe für die Baupläne.",
+   "en": {
+    "name": "Farms for building materials",
+    "text": "Deliver the blocks and materials for the builds."
+   }
+  },
+  {
+   "id": "monster",
+   "name": "Monsterfarmen",
+   "text": "Material für Redstone und Raketen.",
+   "en": {
+    "name": "Mob farms",
+    "text": "Materials for redstone and rockets."
+   }
+  },
+  {
+   "id": "produktion",
+   "name": "Verarbeitung und Fabriken",
+   "text": "Machen aus Rohstoffen fertige Dinge, ganz von selbst.",
+   "en": {
+    "name": "Processing and factories",
+    "text": "Turn raw materials into finished goods by themselves."
+   }
+  },
+  {
+   "id": "funktional",
+   "name": "Funktionale Bauten",
+   "text": "Technik und Komfort für Basis und Server.",
+   "en": {
+    "name": "Functional builds",
+    "text": "Technology and comfort for your base and server."
+   }
+  },
+  {
+   "id": "tiere",
+   "name": "Tiere",
+   "text": "Gehege, Ställe und Aquarien.",
+   "en": {
+    "name": "Animals",
+    "text": "Pens, stables and aquariums."
+   }
+  },
+  {
+   "id": "spiel",
+   "name": "Spiel und Freizeit",
+   "text": "Für Events und gemeinsame Abende auf dem Server.",
+   "en": {
+    "name": "Games and fun",
+    "text": "For events and evenings together on the server."
+   }
+  },
+  {
+   "id": "monumente",
+   "name": "Monumente",
+   "text": "Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.",
+   "en": {
+    "name": "Monuments",
+    "text": "Replicas of famous landmarks at a suitable scale."
+   }
+  },
+  {
+   "id": "gebaeude",
+   "name": "Gebäude",
+   "text": "Eigene Entwürfe vom Wachturm bis zum Luftschiff.",
+   "en": {
+    "name": "Buildings",
+    "text": "Original designs from watchtower to airship."
+   }
+  },
+  {
+   "id": "anleitungen",
+   "name": "Anleitungen",
+   "text": "Wissen rund um Server, Farmen und Bauen.",
+   "en": {
+    "name": "Guides",
+    "text": "Know-how about servers, farms and building."
+   }
+  }
+ ],
+ "ideen": [
+  {
+   "nr": 1,
+   "kategorie": "xp",
+   "groesse": "klein",
+   "titel": "Kaktus-XP-Farm mit Ofenbatterie",
+   "text": "Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster.",
+   "status": "idee",
+   "empfohlen": true,
+   "en": {
+    "titel": "Cactus XP farm with furnace array",
+    "text": "Cactus grows by itself and hoppers feed it into a row of furnaces. Every cactus becomes green dye and gives 1 XP, stored in the furnace until you empty it. No mobs needed."
+   }
+  },
+  {
+   "nr": 2,
+   "kategorie": "xp",
+   "groesse": "klein",
+   "titel": "Seetang-XP-Ofen",
+   "text": "Wie die Kaktus-Farm, nur mit Seetang. Gibt weniger Erfahrung, liefert dafür getrockneten Seetang, der als Block ein guter Brennstoff ist.",
+   "status": "idee",
+   "en": {
+    "titel": "Kelp XP furnace",
+    "text": "Like the cactus farm, but with kelp. Less XP, but you get dried kelp, which makes good fuel as a block."
+   }
+  },
+  {
+   "nr": 3,
+   "kategorie": "xp",
+   "groesse": "mittel",
+   "titel": "Dunkelraum-Monsterfarm",
+   "text": "Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden.",
+   "status": "idee",
+   "en": {
+    "titel": "Dark room mob farm",
+    "text": "A dark tower where mobs spawn and drop into a chamber where one hit is enough. Bones, arrows, gunpowder and string on the side."
+   }
+  },
+  {
+   "nr": 4,
+   "kategorie": "xp",
+   "groesse": "klein",
+   "titel": "Spawner-XP-Farm",
+   "text": "Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt.",
+   "status": "idee",
+   "en": {
+    "titel": "Spawner XP farm",
+    "text": "Built around a zombie or skeleton spawner you found. Very productive and quick to build, but only possible where a spawner is."
+   }
+  },
+  {
+   "nr": 5,
+   "kategorie": "xp",
+   "groesse": "mittel",
+   "titel": "Lohenfarm",
+   "text": "An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen.",
+   "status": "idee",
+   "en": {
+    "titel": "Blaze farm",
+    "text": "At a blaze spawner in a Nether fortress. Lots of XP and blaze rods for brewing stands and eyes of ender."
+   }
+  },
+  {
+   "nr": 6,
+   "kategorie": "xp",
+   "groesse": "groß",
+   "titel": "Goldfarm auf dem Nether-Dach",
+   "text": "Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold.",
+   "status": "idee",
+   "en": {
+    "titel": "Gold farm on the Nether roof",
+    "text": "Zombified piglins are lured with turtle eggs and drop into a chamber. Huge amounts of XP and gold."
+   }
+  },
+  {
+   "nr": 7,
+   "kategorie": "xp",
+   "groesse": "groß",
+   "titel": "Endermanfarm im End",
+   "text": "Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein.",
+   "status": "idee",
+   "en": {
+    "titel": "Enderman farm in the End",
+    "text": "The fastest XP source in the game, plus ender pearls. The Ender Dragon has to be defeated first."
+   }
+  },
+  {
+   "nr": 8,
+   "kategorie": "xp",
+   "groesse": "mittel",
+   "titel": "Handelshalle mit Dorfbewohnern",
+   "text": "Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin.",
+   "status": "idee",
+   "en": {
+    "titel": "Villager trading hall",
+    "text": "Villagers in single cells with their job block. Trading gives XP, emeralds and enchanted books. Fits the Arbeiter plugin."
+   }
+  },
+  {
+   "nr": 9,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Kleine Bambusfarm",
+   "text": "Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke.",
+   "status": "idee",
+   "empfohlen": true,
+   "en": {
+    "titel": "Small bamboo farm",
+    "text": "One row of 8 bamboo plants. Observers detect growth, pistons break the bamboo and hoppers collect everything. About 8 × 4 blocks."
+   }
+  },
+  {
+   "nr": 10,
+   "kategorie": "farmen",
+   "groesse": "groß",
+   "titel": "Große Bambusfarm",
+   "text": "Zwei Reihen mit je 16 Pflanzen. Eine Trichterlore unter Glas sammelt in eine Fasskette. Genug für Bambusbretter und Mosaik in großen Mengen.",
+   "status": "idee",
+   "en": {
+    "titel": "Large bamboo farm",
+    "text": "Two rows of 16 plants each. A hopper minecart under glass collects into a chain of barrels. Enough for bamboo planks and mosaic in large amounts."
+   }
+  },
+  {
+   "nr": 12,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Melonen- und Kürbisfarm",
+   "text": "Beobachter und Kolben ernten, sobald eine Frucht wächst. Kürbisse für Laternen und Golems, Melonen als Essen.",
+   "status": "idee",
+   "en": {
+    "titel": "Melon and pumpkin farm",
+    "text": "Observers and pistons harvest as soon as a fruit grows. Pumpkins for lanterns and golems, melons as food."
+   }
+  },
+  {
+   "nr": 13,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Wollfarm",
+   "text": "Schafe fressen Gras, ein Werfer mit Schere schert sie automatisch. Eine Farbe pro Kammer für bunte Bauten.",
+   "status": "idee",
+   "en": {
+    "titel": "Wool farm",
+    "text": "Sheep eat grass and a dispenser with shears shears them automatically. One colour per chamber for colourful builds."
+   }
+  },
+  {
+   "nr": 14,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Honig- und Waben-Farm",
+   "text": "Bienenstöcke mit Werfern für Flaschen und Scheren. Honigblöcke, Waben für Kerzen und gewachste Kupferblöcke.",
+   "status": "idee",
+   "en": {
+    "titel": "Honey and honeycomb farm",
+    "text": "Beehives with dispensers for bottles and shears. Honey blocks, honeycomb for candles and waxed copper."
+   }
+  },
+  {
+   "nr": 15,
+   "kategorie": "farmen",
+   "groesse": "mittel",
+   "titel": "Eisenfarm",
+   "text": "Dorfbewohner werden von einem Zombie erschreckt, dabei entstehen Eisengolems. Eisen für Trichter, Schienen und Laternen.",
+   "status": "idee",
+   "en": {
+    "titel": "Iron farm",
+    "text": "Villagers are scared by a zombie and iron golems spawn. Iron for hoppers, rails and lanterns."
+   }
+  },
+  {
+   "nr": 16,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Schneefarm mit Schneegolems",
+   "text": "Schneegolems hinterlassen Schnee, der automatisch abgebaut wird. Schneeblöcke und Eis zum Bauen.",
+   "status": "idee",
+   "en": {
+    "titel": "Snow farm with snow golems",
+    "text": "Snow golems leave snow that is collected automatically. Snow blocks and ice for building."
+   }
+  },
+  {
+   "nr": 17,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Lava aus Tropfstein",
+   "text": "Spitzer Tropfstein unter einer Lavaquelle füllt einen Kessel. Unendlich Lava als Brennstoff, ohne in den Nether zu müssen.",
+   "status": "idee",
+   "en": {
+    "titel": "Lava from dripstone",
+    "text": "Pointed dripstone under a lava source fills a cauldron. Endless lava as fuel without going to the Nether."
+   }
+  },
+  {
+   "nr": 18,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Basalt-Generator",
+   "text": "Lava, Blaueis und Seelenerde erzeugen immer neuen Basalt. Daraus wird polierter Basalt und glatter Basalt.",
+   "status": "idee",
+   "en": {
+    "titel": "Basalt generator",
+    "text": "Lava, blue ice and soul soil keep creating new basalt. Turns into polished and smooth basalt."
+   }
+  },
+  {
+   "nr": 19,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Bruchstein-Generator",
+   "text": "Lava und Wasser erzeugen Bruchstein nach, du baust nur noch ab. Grundlage für Steinziegel, glatten Stein und Treppen.",
+   "status": "idee",
+   "en": {
+    "titel": "Cobblestone generator",
+    "text": "Lava and water keep producing cobblestone, you only mine. The base for stone bricks, smooth stone and stairs."
+   }
+  },
+  {
+   "nr": 20,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Moosfarm",
+   "text": "Werfer mit Knochenmehl lassen Moos wachsen. Moos, Azaleen und Material für den Komposter.",
+   "status": "idee",
+   "en": {
+    "titel": "Moss farm",
+    "text": "Dispensers with bone meal make moss grow. Moss, azaleas and material for the composter."
+   }
+  },
+  {
+   "nr": 21,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Kuh- und Hühnerfarm",
+   "text": "Kleine Gehege mit Begrenzung, damit die Tiere nicht überhandnehmen. Leder für Bücher, Federn, Eier und Fleisch.",
+   "status": "idee",
+   "en": {
+    "titel": "Cow and chicken farm",
+    "text": "Small pens with a limit so the animals do not get out of hand. Leather for books, feathers, eggs and meat."
+   }
+  },
+  {
+   "nr": 60,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Zuckerrohrfarm",
+   "text": "Eine Reihe Zuckerrohr mit Beobachtern und Kolben. Papier für Bücher, Karten und Raketen.",
+   "status": "idee",
+   "en": {
+    "titel": "Sugar cane farm",
+    "text": "A row of sugar cane with observers and pistons. Paper for books, maps and rockets."
+   }
+  },
+  {
+   "nr": 61,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Kakaofarm",
+   "text": "Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm. Für Kekse und braunen Farbstoff.",
+   "status": "idee",
+   "en": {
+    "titel": "Cocoa farm",
+    "text": "Observers and pistons harvest cocoa beans on jungle logs. For cookies and brown dye."
+   }
+  },
+  {
+   "nr": 62,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Blumenfarm",
+   "text": "Ein Werfer mit Knochenmehl auf Gras lässt Blumen wachsen. Alle Grundfarben für Wolle, Beton und Glas.",
+   "status": "idee",
+   "en": {
+    "titel": "Flower farm",
+    "text": "A dispenser with bone meal on grass grows flowers. All basic colours for wool, concrete and glass."
+   }
+  },
+  {
+   "nr": 64,
+   "kategorie": "farmen",
+   "groesse": "mittel",
+   "titel": "Tonfarm",
+   "text": "Werfer mit Wasserflaschen machen Erde zu Schlamm, Tropfstein darunter macht daraus Ton. Für Terrakotta und Ziegel.",
+   "status": "idee",
+   "en": {
+    "titel": "Clay farm",
+    "text": "Dispensers with water bottles turn dirt into mud, dripstone below turns it into clay. For terracotta and bricks."
+   }
+  },
+  {
+   "nr": 65,
+   "kategorie": "farmen",
+   "groesse": "groß",
+   "titel": "Froschlicht-Farm",
+   "text": "Frösche fressen kleine Magmawürfel und lassen dabei Froschlichter fallen. Leuchtblöcke in drei Farben.",
+   "status": "idee",
+   "en": {
+    "titel": "Froglight farm",
+    "text": "Frogs eat small magma cubes and drop froglights. Light blocks in three colours."
+   }
+  },
+  {
+   "nr": 66,
+   "kategorie": "farmen",
+   "groesse": "mittel",
+   "titel": "Amethyst-Farm",
+   "text": "An einer gefundenen Geode: Beobachter merken reife Kristalle, Kolben brechen sie ab. Für Fernrohr und getöntes Glas.",
+   "status": "idee",
+   "en": {
+    "titel": "Amethyst farm",
+    "text": "At a geode you found: observers detect ripe crystals and pistons break them. For spyglasses and tinted glass."
+   }
+  },
+  {
+   "nr": 67,
+   "kategorie": "farmen",
+   "groesse": "mittel",
+   "titel": "Chorusfrucht-Farm im End",
+   "text": "Halbautomatisch: Chorusblumen wachsen nach, du erntest. Chorusfrüchte werden zu Purpurblöcken.",
+   "status": "idee",
+   "en": {
+    "titel": "Chorus fruit farm in the End",
+    "text": "Semi-automatic: chorus flowers regrow and you harvest. Chorus fruit turns into purpur blocks."
+   }
+  },
+  {
+   "nr": 68,
+   "kategorie": "farmen",
+   "groesse": "klein",
+   "titel": "Pilzfarm",
+   "text": "Ein dunkler Raum, in dem sich Pilze von selbst ausbreiten. Für Suppen und Riesenpilz-Deko.",
+   "status": "idee",
+   "en": {
+    "titel": "Mushroom farm",
+    "text": "A dark room where mushrooms spread by themselves. For stews and giant mushroom decoration."
+   }
+  },
+  {
+   "nr": 22,
+   "kategorie": "monster",
+   "groesse": "mittel",
+   "titel": "Schleimfarm",
+   "text": "In einem Schleim-Chunk oder Sumpf. Schleimbälle für Klebekolben und Schleimblöcke.",
+   "status": "idee",
+   "en": {
+    "titel": "Slime farm",
+    "text": "In a slime chunk or swamp. Slimeballs for sticky pistons and slime blocks."
+   }
+  },
+  {
+   "nr": 23,
+   "kategorie": "monster",
+   "groesse": "groß",
+   "titel": "Hexenfarm",
+   "text": "An einer Sumpfhütte. Redstone, Leuchtsteinstaub, Zucker und Flaschen.",
+   "status": "idee",
+   "en": {
+    "titel": "Witch farm",
+    "text": "At a swamp hut. Redstone, glowstone dust, sugar and bottles."
+   }
+  },
+  {
+   "nr": 24,
+   "kategorie": "monster",
+   "groesse": "mittel",
+   "titel": "Creeperfarm",
+   "text": "Nur Creeper spawnen auf Spezialblöcken. Schießpulver für Raketen.",
+   "status": "idee",
+   "en": {
+    "titel": "Creeper farm",
+    "text": "Only creepers spawn on special blocks. Gunpowder for rockets."
+   }
+  },
+  {
+   "nr": 11,
+   "kategorie": "produktion",
+   "groesse": "klein",
+   "titel": "Bambus-Brennstoffstation",
+   "text": "Koppelt die Bambusfarm an die Ofenbatterie. Die Öfen laufen dann ohne Kohle.",
+   "status": "idee",
+   "empfohlen": true,
+   "en": {
+    "titel": "Bamboo fuel station",
+    "text": "Connects the bamboo farm to the furnace array. The furnaces then run without coal."
+   }
+  },
+  {
+   "nr": 63,
+   "kategorie": "produktion",
+   "groesse": "klein",
+   "titel": "Komposter-Kette",
+   "text": "Überschuss aus Bambus, Kaktus und Seetang wird in Kompostern zu Knochenmehl.",
+   "status": "idee",
+   "en": {
+    "titel": "Composter chain",
+    "text": "Surplus bamboo, cactus and kelp turns into bone meal in composters."
+   }
+  },
+  {
+   "nr": 69,
+   "kategorie": "produktion",
+   "groesse": "klein",
+   "titel": "Holzkohle-Station",
+   "text": "Stämme vom Holzfäller-Arbeiter werden in Öfen zu Holzkohle.",
+   "status": "idee",
+   "en": {
+    "titel": "Charcoal station",
+    "text": "Logs from the lumberjack worker turn into charcoal in furnaces."
+   }
+  },
+  {
+   "nr": 70,
+   "kategorie": "produktion",
+   "groesse": "mittel",
+   "titel": "Erz-Schmelzstation",
+   "text": "Eine Einwurftruhe verteilt auf viele Öfen gleichzeitig, die Ausgabe landet sortiert in Fässern.",
+   "status": "idee",
+   "en": {
+    "titel": "Ore smelting station",
+    "text": "One input chest feeds many furnaces at once, the output lands sorted in barrels."
+   }
+  },
+  {
+   "nr": 71,
+   "kategorie": "produktion",
+   "groesse": "mittel",
+   "titel": "Automatische Werkbank (Crafter)",
+   "text": "Der Crafter aus 1.21 stellt Dinge selbst her, zum Beispiel Brot, Papier oder Eisenblöcke.",
+   "status": "idee",
+   "en": {
+    "titel": "Automatic crafting (Crafter)",
+    "text": "The Crafter from 1.21 makes things by itself, for example bread, paper or iron blocks."
+   }
+  },
+  {
+   "nr": 72,
+   "kategorie": "produktion",
+   "groesse": "mittel",
+   "titel": "Raketen-Fabrik",
+   "text": "Papier und Schießpulver werden per Crafter zu Raketen für Elytra-Flüge.",
+   "status": "idee",
+   "en": {
+    "titel": "Rocket factory",
+    "text": "Paper and gunpowder become rockets for elytra flights via the Crafter."
+   }
+  },
+  {
+   "nr": 73,
+   "kategorie": "produktion",
+   "groesse": "mittel",
+   "titel": "Automatische Brauerei",
+   "text": "Braustände mit Trichtern für Zutaten und Lohenpulver. Tränke in Serie.",
+   "status": "idee",
+   "en": {
+    "titel": "Automatic brewery",
+    "text": "Brewing stands with hoppers for ingredients and blaze powder. Potions in batches."
+   }
+  },
+  {
+   "nr": 74,
+   "kategorie": "produktion",
+   "groesse": "klein",
+   "titel": "Automatische Küche",
+   "text": "Räucheröfen mit Trichtern, gefüttert aus der Kuh- und Hühnerfarm.",
+   "status": "idee",
+   "en": {
+    "titel": "Automatic kitchen",
+    "text": "Smokers with hoppers, fed from the cow and chicken farm."
+   }
+  },
+  {
+   "nr": 75,
+   "kategorie": "produktion",
+   "groesse": "mittel",
+   "titel": "Buch-Station",
+   "text": "Zuckerrohr und Leder werden zu Büchern und Bücherregalen.",
+   "status": "idee",
+   "en": {
+    "titel": "Book station",
+    "text": "Sugar cane and leather become books and bookshelves."
+   }
+  },
+  {
+   "nr": 25,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Verzauberungsraum",
+   "text": "Zaubertisch mit 15 Bücherregalen, dazu Amboss und Schleifstein. Passt direkt zu den XP-Farmen.",
+   "status": "idee",
+   "en": {
+    "titel": "Enchanting room",
+    "text": "Enchanting table with 15 bookshelves, plus anvil and grindstone. Goes right with the XP farms."
+   }
+  },
+  {
+   "nr": 26,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Marktplatz für Spieler-Shops",
+   "text": "Stände für die Shop-Truhen aus dem ServerShop-Plugin, mit Schildern und Laternen.",
+   "status": "idee",
+   "en": {
+    "titel": "Market square for player shops",
+    "text": "Stalls for the shop chests from the ServerShop plugin, with signs and lanterns."
+   }
+  },
+  {
+   "nr": 27,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Lorenbahnhof",
+   "text": "Gleise vom Spawn zu allen Farmen, mit Haltestellen und Fahrplan-Schildern.",
+   "status": "idee",
+   "en": {
+    "titel": "Minecart station",
+    "text": "Rails from spawn to all farms, with stops and timetable signs."
+   }
+  },
+  {
+   "nr": 76,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Blasen-Aufzug",
+   "text": "Seelensand fährt hoch, Magmablock runter. Als eigener Bauplan zum Einbauen in jedes Haus.",
+   "status": "idee",
+   "en": {
+    "titel": "Bubble elevator",
+    "text": "Soul sand goes up, magma block goes down. A separate plan to fit into any house."
+   }
+  },
+  {
+   "nr": 77,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Item-Aufzug",
+   "text": "Eine Blasensäule hebt Gegenstände vom Keller nach oben ins Lager.",
+   "status": "idee",
+   "en": {
+    "titel": "Item elevator",
+    "text": "A bubble column lifts items from the cellar up into storage."
+   }
+  },
+  {
+   "nr": 78,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Versteckte Kolbentür 2 × 2",
+   "text": "Öffnet per Knopf oder Druckplatte und verschwindet in der Wand.",
+   "status": "idee",
+   "en": {
+    "titel": "Hidden 2 × 2 piston door",
+    "text": "Opens with a button or pressure plate and disappears into the wall."
+   }
+  },
+  {
+   "nr": 79,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Geheimgang hinter Bücherregal",
+   "text": "Der klassische Geheimeingang, zum Beispiel zum Lager.",
+   "status": "idee",
+   "en": {
+    "titel": "Secret passage behind a bookshelf",
+    "text": "The classic secret entrance, for example to the storage."
+   }
+  },
+  {
+   "nr": 80,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Tresor mit Zahlenschloss",
+   "text": "Ein Redstone-Kombinationsschloss mit Hebeln. Nur wer den Code kennt, kommt rein.",
+   "status": "idee",
+   "en": {
+    "titel": "Vault with combination lock",
+    "text": "A redstone combination lock with levers. Only those who know the code get in."
+   }
+  },
+  {
+   "nr": 81,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Automatisches Licht",
+   "text": "Ein Tageslichtsensor schaltet Redstone-Lampen ab Abend ein.",
+   "status": "idee",
+   "en": {
+    "titel": "Automatic lights",
+    "text": "A daylight sensor turns on redstone lamps in the evening."
+   }
+  },
+  {
+   "nr": 82,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Zugbrücke",
+   "text": "Kolben fahren die Brücke ein und aus. Passt zur Burg.",
+   "status": "idee",
+   "en": {
+    "titel": "Drawbridge",
+    "text": "Pistons retract and extend the bridge. Goes with the castle."
+   }
+  },
+  {
+   "nr": 83,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Leuchtfeuer-Pyramide",
+   "text": "Eisenblöcke aus der Eisenfarm, Effekte wie Eile beim Abbauen.",
+   "status": "idee",
+   "en": {
+    "titel": "Beacon pyramid",
+    "text": "Iron blocks from the iron farm, effects such as Haste for mining."
+   }
+  },
+  {
+   "nr": 84,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Aquisitor-Rahmen",
+   "text": "Gibt Atmung unter Wasser, zum Beispiel rund um die Glaskuppel.",
+   "status": "idee",
+   "en": {
+    "titel": "Conduit frame",
+    "text": "Gives water breathing, for example around the glass dome."
+   }
+  },
+  {
+   "nr": 85,
+   "kategorie": "funktional",
+   "groesse": "groß",
+   "titel": "Nether-Knotenpunkt",
+   "text": "Portale zu allen Basen und eine Eisstraße für schnelle Bootsfahrten.",
+   "status": "idee",
+   "en": {
+    "titel": "Nether hub",
+    "text": "Portals to all bases and an ice road for fast boat travel."
+   }
+  },
+  {
+   "nr": 86,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Kartenraum",
+   "text": "Karten in Rahmen ergeben eine große Wandkarte der Welt.",
+   "status": "idee",
+   "en": {
+    "titel": "Map room",
+    "text": "Maps in item frames form a large wall map of the world."
+   }
+  },
+  {
+   "nr": 87,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Farm-Bot-Zentrale",
+   "text": "Ein sicherer, beleuchteter Raum für den Farm-Bot, mitten zwischen den Farmen.",
+   "status": "idee",
+   "en": {
+    "titel": "Farm bot base",
+    "text": "A safe, lit room for the farm bot, right between the farms."
+   }
+  },
+  {
+   "nr": 88,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Lagerhalle mit Einlagern-Truhen",
+   "text": "Für das InfiniteLager-Plugin, gemeinsamer und privater Bereich getrennt.",
+   "status": "idee",
+   "en": {
+    "titel": "Warehouse with deposit chests",
+    "text": "For the InfiniteLager plugin, with shared and private areas kept apart."
+   }
+  },
+  {
+   "nr": 89,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Werkstatt",
+   "text": "Amboss, Schleifstein, Schmiedetisch, Webstuhl und Steinsäge an einem Ort.",
+   "status": "idee",
+   "en": {
+    "titel": "Workshop",
+    "text": "Anvil, grindstone, smithing table, loom and stonecutter in one place."
+   }
+  },
+  {
+   "nr": 90,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Ausrüstungsraum",
+   "text": "Rüstungsständer, Waffen und Werkzeuge geordnet an der Wand.",
+   "status": "idee",
+   "en": {
+    "titel": "Armoury",
+    "text": "Armour stands, weapons and tools neatly on the wall."
+   }
+  },
+  {
+   "nr": 91,
+   "kategorie": "funktional",
+   "groesse": "mittel",
+   "titel": "Beleuchteter Spawn",
+   "text": "Ein Laternen-Raster, damit am Spawn keine Monster entstehen, und das sieht trotzdem gut aus.",
+   "status": "idee",
+   "en": {
+    "titel": "Lit spawn area",
+    "text": "A lantern grid so no mobs spawn at spawn, and it still looks good."
+   }
+  },
+  {
+   "nr": 103,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Sortiermodul",
+   "text": "Eine einzelne Sortierstrecke zum Anbauen an jede Farm, ohne ganzes Kellerlager.",
+   "status": "idee",
+   "en": {
+    "titel": "Sorting module",
+    "text": "A single sorting line to attach to any farm, without a whole cellar storage."
+   }
+  },
+  {
+   "nr": 104,
+   "kategorie": "funktional",
+   "groesse": "klein",
+   "titel": "Müllschlucker",
+   "text": "Eine Truhe, deren Inhalt in Kaktus oder Lava verschwindet. Für Überschuss, den niemand braucht.",
+   "status": "idee",
+   "en": {
+    "titel": "Trash can",
+    "text": "A chest whose contents disappear into cactus or lava. For surplus nobody needs."
+   }
+  },
+  {
+   "nr": 92,
+   "kategorie": "tiere",
+   "groesse": "klein",
+   "titel": "Schildkröten-Brutstation",
+   "text": "Ein Strand mit Schildkröten, deren Eier geschützt schlüpfen. Für Schildkrötenpanzer und Tränke.",
+   "status": "idee",
+   "en": {
+    "titel": "Turtle hatchery",
+    "text": "A beach with turtles whose eggs hatch safely. For turtle shells and potions."
+   }
+  },
+  {
+   "nr": 93,
+   "kategorie": "tiere",
+   "groesse": "klein",
+   "titel": "Axolotl-Aquarium",
+   "text": "Ein großes Glasbecken als Deko im Haus. Axolotl helfen später auch beim Kampf unter Wasser.",
+   "status": "idee",
+   "en": {
+    "titel": "Axolotl aquarium",
+    "text": "A large glass tank as decoration in the house. Axolotls also help in underwater fights."
+   }
+  },
+  {
+   "nr": 94,
+   "kategorie": "tiere",
+   "groesse": "mittel",
+   "titel": "Pferdestall mit Koppel",
+   "text": "Boxen, Heulager und eine Koppel zum Züchten schneller Pferde.",
+   "status": "idee",
+   "en": {
+    "titel": "Horse stable with paddock",
+    "text": "Stalls, hay storage and a paddock for breeding fast horses."
+   }
+  },
+  {
+   "nr": 95,
+   "kategorie": "tiere",
+   "groesse": "klein",
+   "titel": "Tierheim für zahme Tiere",
+   "text": "Ein sicheres Haus für Hunde, Katzen und Papageien, geschützt vor Monstern.",
+   "status": "idee",
+   "en": {
+    "titel": "Shelter for tamed pets",
+    "text": "A safe house for dogs, cats and parrots, protected from mobs."
+   }
+  },
+  {
+   "nr": 97,
+   "kategorie": "tiere",
+   "groesse": "mittel",
+   "titel": "Schnüffler-Gehege",
+   "text": "Schnüffler graben seltene Samen aus: Fackellilien und Kannenpflanzen für besondere Gärten.",
+   "status": "idee",
+   "en": {
+    "titel": "Sniffer enclosure",
+    "text": "Sniffers dig up rare seeds: torchflowers and pitcher plants for special gardens."
+   }
+  },
+  {
+   "nr": 98,
+   "kategorie": "spiel",
+   "groesse": "mittel",
+   "titel": "Arena mit Tribüne",
+   "text": "Für Mob-Kämpfe oder Duelle, mit Zuschauerrängen und Eingangstoren.",
+   "status": "idee",
+   "en": {
+    "titel": "Arena with stands",
+    "text": "For mob fights or duels, with spectator seats and entrance gates."
+   }
+  },
+  {
+   "nr": 99,
+   "kategorie": "spiel",
+   "groesse": "mittel",
+   "titel": "Parkour-Strecke",
+   "text": "Sprünge in Stufen von leicht bis schwer, mit Kontrollpunkten.",
+   "status": "idee",
+   "en": {
+    "titel": "Parkour course",
+    "text": "Jumps in stages from easy to hard, with checkpoints."
+   }
+  },
+  {
+   "nr": 100,
+   "kategorie": "spiel",
+   "groesse": "mittel",
+   "titel": "Heckenlabyrinth",
+   "text": "Ein Irrgarten aus Laub mit Schatz in der Mitte.",
+   "status": "idee",
+   "en": {
+    "titel": "Hedge maze",
+    "text": "A maze made of leaves with a treasure in the middle."
+   }
+  },
+  {
+   "nr": 101,
+   "kategorie": "spiel",
+   "groesse": "mittel",
+   "titel": "Elytra-Startturm",
+   "text": "Ein hoher Turm mit Startplattform und gepolstertem Landeplatz.",
+   "status": "idee",
+   "en": {
+    "titel": "Elytra launch tower",
+    "text": "A tall tower with a launch platform and a padded landing area."
+   }
+  },
+  {
+   "nr": 102,
+   "kategorie": "spiel",
+   "groesse": "klein",
+   "titel": "Bogenschießstand",
+   "text": "Zielblöcke geben ein Redstone-Signal, ein Lämpchen zeigt Treffer an.",
+   "status": "idee",
+   "en": {
+    "titel": "Archery range",
+    "text": "Target blocks send a redstone signal and a lamp shows hits."
+   }
+  },
+  {
+   "nr": 30,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Brandenburger Tor",
+   "text": "Das Berliner Wahrzeichen mit Säulen und der Quadriga aus Kupfer.",
+   "status": "idee",
+   "en": {
+    "titel": "Brandenburg Gate",
+    "text": "The Berlin landmark with columns and the copper quadriga."
+   }
+  },
+  {
+   "nr": 31,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Big Ben",
+   "text": "Der Uhrturm in London mit vier Zifferblättern, gut im Maßstab 1:2.",
+   "status": "idee",
+   "en": {
+    "titel": "Big Ben",
+    "text": "The London clock tower with four clock faces, works well at 1:2 scale."
+   }
+  },
+  {
+   "nr": 32,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Kölner Dom",
+   "text": "Zwei Türme, Spitzbögen und bunte Glasfenster.",
+   "status": "idee",
+   "en": {
+    "titel": "Cologne Cathedral",
+    "text": "Two towers, pointed arches and stained glass windows."
+   }
+  },
+  {
+   "nr": 33,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Frauenkirche Dresden",
+   "text": "Die steinerne Glockenkuppel aus hellem Sandstein.",
+   "status": "idee",
+   "en": {
+    "titel": "Dresden Frauenkirche",
+    "text": "The stone bell-shaped dome made of light sandstone."
+   }
+  },
+  {
+   "nr": 34,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Freiheitsstatue",
+   "text": "Gebaut aus Kupfer, das im Spiel mit der Zeit von selbst grün wird.",
+   "status": "idee",
+   "en": {
+    "titel": "Statue of Liberty",
+    "text": "Built from copper, which turns green by itself over time in the game."
+   }
+  },
+  {
+   "nr": 35,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Schiefer Turm von Pisa",
+   "text": "Die Schräge entsteht durch versetzte Ringe, dazu Säulengänge.",
+   "status": "idee",
+   "en": {
+    "titel": "Leaning Tower of Pisa",
+    "text": "The lean comes from offset rings, plus arcades."
+   }
+  },
+  {
+   "nr": 36,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Kolosseum",
+   "text": "Ovale Arena mit Bögen, teilweise eingestürzt wie im Original.",
+   "status": "idee",
+   "en": {
+    "titel": "Colosseum",
+    "text": "Oval arena with arches, partly collapsed like the original."
+   }
+  },
+  {
+   "nr": 37,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Schloss Neuschwanstein",
+   "text": "Türme und Spitzdächer auf einem Felsen.",
+   "status": "idee",
+   "en": {
+    "titel": "Neuschwanstein Castle",
+    "text": "Towers and pointed roofs on a rock."
+   }
+  },
+  {
+   "nr": 38,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Tower Bridge",
+   "text": "Zwei Türme mit Klappbrücke, die mit Kolben funktionieren kann.",
+   "status": "idee",
+   "en": {
+    "titel": "Tower Bridge",
+    "text": "Two towers with a bascule bridge that can work with pistons."
+   }
+  },
+  {
+   "nr": 39,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Pyramide mit Grabkammer",
+   "text": "Braucht viel Sandstein. Sand lässt sich auf Paper nicht farmen, also vorher sammeln.",
+   "status": "idee",
+   "en": {
+    "titel": "Pyramid with burial chamber",
+    "text": "Needs a lot of sandstone. Sand cannot be farmed on Paper, so collect it first."
+   }
+  },
+  {
+   "nr": 40,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Japanische Pagode",
+   "text": "Fünf Stockwerke mit geschwungenen Dächern.",
+   "status": "idee",
+   "en": {
+    "titel": "Japanese pagoda",
+    "text": "Five storeys with curved roofs."
+   }
+  },
+  {
+   "nr": 41,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Maya-Tempel",
+   "text": "Stufenpyramide mit großer Treppe und Dschungel-Deko.",
+   "status": "idee",
+   "en": {
+    "titel": "Maya temple",
+    "text": "Step pyramid with a large staircase and jungle decoration."
+   }
+  },
+  {
+   "nr": 42,
+   "kategorie": "monumente",
+   "groesse": "klein",
+   "titel": "Stonehenge",
+   "text": "Ein Steinkreis, gut als erstes Monument.",
+   "status": "idee",
+   "en": {
+    "titel": "Stonehenge",
+    "text": "A stone circle, good as a first monument."
+   }
+  },
+  {
+   "nr": 111,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Parthenon",
+   "text": "Der griechische Tempel auf der Akropolis, mit umlaufenden Säulen.",
+   "status": "idee",
+   "en": {
+    "titel": "Parthenon",
+    "text": "The Greek temple on the Acropolis, with columns all around."
+   }
+  },
+  {
+   "nr": 112,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Chinesische Mauer",
+   "text": "Ein Abschnitt mit Wachtürmen, der sich über Hügel zieht.",
+   "status": "idee",
+   "en": {
+    "titel": "Great Wall of China",
+    "text": "A section with watchtowers winding over hills."
+   }
+  },
+  {
+   "nr": 113,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Taj Mahal",
+   "text": "Weißer Palast mit großer Kuppel, vier Minaretten und Wasserbecken.",
+   "status": "idee",
+   "en": {
+    "titel": "Taj Mahal",
+    "text": "White palace with a large dome, four minarets and a reflecting pool."
+   }
+  },
+  {
+   "nr": 114,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Holstentor Lübeck",
+   "text": "Das Backsteintor mit zwei runden Türmen und Spitzhelmen.",
+   "status": "idee",
+   "en": {
+    "titel": "Holsten Gate Lübeck",
+    "text": "The brick gate with two round towers and conical spires."
+   }
+  },
+  {
+   "nr": 115,
+   "kategorie": "monumente",
+   "groesse": "mittel",
+   "titel": "Rialtobrücke",
+   "text": "Steinbrücke mit Läden über einem Kanal, wie in Venedig.",
+   "status": "idee",
+   "en": {
+    "titel": "Rialto Bridge",
+    "text": "Stone bridge with shops over a canal, like in Venice."
+   }
+  },
+  {
+   "nr": 116,
+   "kategorie": "monumente",
+   "groesse": "klein",
+   "titel": "Moai-Köpfe",
+   "text": "Die steinernen Köpfe der Osterinsel, schnell gebaut und gut als Deko am Strand.",
+   "status": "idee",
+   "en": {
+    "titel": "Moai heads",
+    "text": "The stone heads of Easter Island, quick to build and great as beach decoration."
+   }
+  },
+  {
+   "nr": 28,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Windmühle",
+   "text": "Deko-Hülle für eine Bambus- oder Melonenfarm. Sieht aus wie ein Bauwerk, darin steckt eine Farm.",
+   "status": "idee",
+   "en": {
+    "titel": "Windmill",
+    "text": "A decorative shell for a bamboo or melon farm. Looks like a building, with a farm inside."
+   }
+  },
+  {
+   "nr": 29,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Hafen mit Steg und Bootshaus",
+   "text": "Passt zur Villa am Wasser und zum Leuchtturm.",
+   "status": "idee",
+   "en": {
+    "titel": "Harbour with pier and boathouse",
+    "text": "Goes with the Villa by the Water and the lighthouse."
+   }
+  },
+  {
+   "nr": 43,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Mittelalterliche Burg",
+   "text": "Ringmauer, Torhaus, Bergfried und Burghof.",
+   "status": "idee",
+   "en": {
+    "titel": "Medieval castle",
+    "text": "Curtain wall, gatehouse, keep and courtyard."
+   }
+  },
+  {
+   "nr": 44,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Wachturm",
+   "text": "Steinturm mit Holzdach und Leiter, gut für Grenzen und Wege.",
+   "status": "idee",
+   "en": {
+    "titel": "Watchtower",
+    "text": "Stone tower with a wooden roof and ladder, good for borders and paths."
+   }
+  },
+  {
+   "nr": 45,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Fachwerkdorf",
+   "text": "Bäckerei, Schmiede und Gasthaus im Fachwerkstil.",
+   "status": "idee",
+   "en": {
+    "titel": "Half-timbered village",
+    "text": "Bakery, smithy and inn in half-timbered style."
+   }
+  },
+  {
+   "nr": 46,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Bauernhof mit Scheune und Silo",
+   "text": "Farmen aus der Liste lassen sich darin unauffällig verstecken.",
+   "status": "idee",
+   "en": {
+    "titel": "Farmstead with barn and silo",
+    "text": "Farms from this list can be hidden inside."
+   }
+  },
+  {
+   "nr": 47,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Blockhütte am See",
+   "text": "Rundholz, Kamin und ein kleiner Steg.",
+   "status": "idee",
+   "en": {
+    "titel": "Log cabin by the lake",
+    "text": "Logs, a fireplace and a small jetty."
+   }
+  },
+  {
+   "nr": 48,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Baumhaus im Riesen-Dschungelbaum",
+   "text": "Mehrere Plattformen, verbunden mit Hängebrücken.",
+   "status": "idee",
+   "en": {
+    "titel": "Treehouse in a giant jungle tree",
+    "text": "Several platforms connected by rope bridges."
+   }
+  },
+  {
+   "nr": 49,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Unterwasser-Glaskuppel",
+   "text": "Eine Wohnkuppel am Meeresgrund mit Blick auf die Fische.",
+   "status": "idee",
+   "en": {
+    "titel": "Underwater glass dome",
+    "text": "A living dome on the sea floor with a view of the fish."
+   }
+  },
+  {
+   "nr": 50,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Japanisches Teehaus mit Garten",
+   "text": "Kirschbaumholz, Teich und Steinlaternen.",
+   "status": "idee",
+   "en": {
+    "titel": "Japanese tea house with garden",
+    "text": "Cherry wood, a pond and stone lanterns."
+   }
+  },
+  {
+   "nr": 51,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Zwergenhalle im Berg",
+   "text": "Eine große Halle mit Säulen, in den Berg gebaut statt in die Tiefe.",
+   "status": "idee",
+   "en": {
+    "titel": "Dwarven hall in the mountain",
+    "text": "A large hall with pillars, built into the mountain instead of deep down."
+   }
+  },
+  {
+   "nr": 52,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Hochhaus",
+   "text": "Moderne Glasfassade, jede Etage als eigener Bauabschnitt.",
+   "status": "idee",
+   "en": {
+    "titel": "Skyscraper",
+    "text": "Modern glass facade, every floor as its own build section."
+   }
+  },
+  {
+   "nr": 53,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Rathaus mit Uhrturm am Spawn",
+   "text": "Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln.",
+   "status": "idee",
+   "en": {
+    "titel": "Town hall with clock tower at spawn",
+    "text": "A meeting point for everyone, with help signs and notice boards."
+   }
+  },
+  {
+   "nr": 54,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Hängebrücke",
+   "text": "Über eine Schlucht oder einen Fluss, mit Seilen aus Ketten oder Zäunen.",
+   "status": "idee",
+   "en": {
+    "titel": "Rope bridge",
+    "text": "Across a ravine or a river, with ropes made of chains or fences."
+   }
+  },
+  {
+   "nr": 55,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Gartenpavillon mit Brunnen",
+   "text": "Ein schneller Einstieg, passt zu den Villen.",
+   "status": "idee",
+   "en": {
+    "titel": "Garden pavilion with fountain",
+    "text": "A quick start, goes with the villas."
+   }
+  },
+  {
+   "nr": 56,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Große Bibliothek",
+   "text": "Bücherregale über zwei Etagen, Lesesaal und Galerie.",
+   "status": "idee",
+   "en": {
+    "titel": "Grand library",
+    "text": "Bookshelves over two floors, a reading room and a gallery."
+   }
+  },
+  {
+   "nr": 57,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Dorfkapelle",
+   "text": "Kleiner Bau mit Glockenturm und Buntglas.",
+   "status": "idee",
+   "en": {
+    "titel": "Village chapel",
+    "text": "A small building with a bell tower and stained glass."
+   }
+  },
+  {
+   "nr": 58,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Luftschiff",
+   "text": "Hülle aus Wolle, Gondel aus Holz, schwebt über dem Spawn.",
+   "status": "idee",
+   "en": {
+    "titel": "Airship",
+    "text": "A wool envelope and a wooden gondola, floating above spawn."
+   }
+  },
+  {
+   "nr": 59,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Piratenschiff",
+   "text": "Masten, Segel aus Wolle und ein Kanonendeck.",
+   "status": "idee",
+   "en": {
+    "titel": "Pirate ship",
+    "text": "Masts, wool sails and a cannon deck."
+   }
+  },
+  {
+   "nr": 96,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Fischerhütte mit Angelsteg",
+   "text": "Kleine Hütte am Wasser, Fässer für den Fang und ein Steg zum Angeln.",
+   "status": "idee",
+   "en": {
+    "titel": "Fishing hut with pier",
+    "text": "A small hut by the water, barrels for the catch and a pier for fishing."
+   }
+  },
+  {
+   "nr": 105,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Weihnachtsmarkt",
+   "text": "Buden, Tannenbäume mit Lichtern und ein Glühwein-Stand. Passt zur Adventszeit auf dem Server.",
+   "status": "idee",
+   "en": {
+    "titel": "Christmas market",
+    "text": "Stalls, lit fir trees and a mulled wine stand. Fits the Advent season on the server."
+   }
+  },
+  {
+   "nr": 106,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Winterdorf mit Iglus",
+   "text": "Iglus aus Schnee, Eisbahn und Lagerfeuer für ein Winter-Event.",
+   "status": "idee",
+   "en": {
+    "titel": "Winter village with igloos",
+    "text": "Snow igloos, an ice rink and campfires for a winter event."
+   }
+  },
+  {
+   "nr": 107,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "U-Bahn-Station",
+   "text": "Unterirdischer Bahnsteig für das Lorennetz, mit Treppen und Lichtern.",
+   "status": "idee",
+   "en": {
+    "titel": "Subway station",
+    "text": "An underground platform for the minecart network, with stairs and lights."
+   }
+  },
+  {
+   "nr": 108,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Wasserrad",
+   "text": "Ein Mühlrad am Bach als Deko, passt zu Fachwerkdorf und Bauernhof.",
+   "status": "idee",
+   "en": {
+    "titel": "Water wheel",
+    "text": "A mill wheel at a stream as decoration, goes with the village and the farmstead."
+   }
+  },
+  {
+   "nr": 109,
+   "kategorie": "gebaeude",
+   "groesse": "klein",
+   "titel": "Marktbrunnen",
+   "text": "Ein verzierter Brunnen als Mittelpunkt für Marktplatz oder Spawn.",
+   "status": "idee",
+   "en": {
+    "titel": "Market fountain",
+    "text": "An ornate fountain as the centrepiece for the market square or spawn."
+   }
+  },
+  {
+   "nr": 110,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Sternwarte",
+   "text": "Kuppel mit Fernrohr-Raum und Sternenkarte an der Wand.",
+   "status": "idee",
+   "en": {
+    "titel": "Observatory",
+    "text": "A dome with a telescope room and a star map on the wall."
+   }
+  },
+  {
+   "nr": "A1",
+   "kategorie": "anleitungen",
+   "titel": "Redstone-Grundlagen",
+   "text": "Beobachter, Komparator, Verstärker und Trichter-Richtungen einfach erklärt, mit Bildern.",
+   "status": "idee",
+   "en": {
+    "titel": "Redstone basics",
+    "text": "Observers, comparators, repeaters and hopper directions explained simply, with pictures."
+   }
+  },
+  {
+   "nr": "A2",
+   "kategorie": "anleitungen",
+   "titel": "Litematica einrichten",
+   "text": "Mod installieren, Bauplan laden und die Geisterblöcke richtig ausrichten.",
+   "status": "idee",
+   "en": {
+    "titel": "Setting up Litematica",
+    "text": "Install the mod, load a build and align the ghost blocks correctly."
+   }
+  },
+  {
+   "nr": "A3",
+   "kategorie": "anleitungen",
+   "titel": "WorldEdit-Dateien einfügen",
+   "text": "Eine .schem-Datei auf den Server laden und an der richtigen Stelle einsetzen.",
+   "status": "idee",
+   "en": {
+    "titel": "Pasting WorldEdit files",
+    "text": "Upload a .schem file to the server and paste it in the right spot."
+   }
+  },
+  {
+   "nr": "A4",
+   "kategorie": "anleitungen",
+   "titel": "Paper-Server einrichten",
+   "text": "Von der Installation über die Einstellungen bis zu den ersten Plugins.",
+   "status": "idee",
+   "en": {
+    "titel": "Setting up a Paper server",
+    "text": "From installation and settings to the first plugins."
+   }
+  },
+  {
+   "nr": "A5",
+   "kategorie": "anleitungen",
+   "titel": "Bedrock-Spieler verbinden",
+   "text": "Geyser und Floodgate einrichten, Whitelist ohne Passwort.",
+   "status": "idee",
+   "en": {
+    "titel": "Connecting Bedrock players",
+    "text": "Set up Geyser and Floodgate, whitelist without a password."
+   }
+  },
+  {
+   "nr": "A6",
+   "kategorie": "anleitungen",
+   "titel": "Automatische Backups",
+   "text": "Die Welt regelmäßig sichern und im Notfall zurückspielen.",
+   "status": "idee",
+   "en": {
+    "titel": "Automatic backups",
+    "text": "Back up the world regularly and restore it in an emergency."
+   }
+  },
+  {
+   "nr": "A7",
+   "kategorie": "anleitungen",
+   "titel": "Lag finden mit spark",
+   "text": "Messung starten, Bericht lesen, typische Ursachen beheben.",
+   "status": "idee",
+   "en": {
+    "titel": "Finding lag with spark",
+    "text": "Start a profile, read the report, fix typical causes."
+   }
+  },
+  {
+   "nr": "A8",
+   "kategorie": "anleitungen",
+   "titel": "Rohstoff-Übersicht",
+   "text": "Welche Farm liefert welches Baumaterial, und was sich nicht farmen lässt.",
+   "status": "idee",
+   "en": {
+    "titel": "Material overview",
+    "text": "Which farm delivers which building material, and what cannot be farmed."
+   }
+  },
+  {
+   "nr": "A9",
+   "kategorie": "anleitungen",
+   "titel": "Server von außen erreichbar machen",
+   "text": "Tunnel statt Portfreigabe, und worauf man dabei achten muss.",
+   "status": "idee",
+   "en": {
+    "titel": "Making the server reachable",
+    "text": "A tunnel instead of port forwarding, and what to watch out for."
+   }
+  },
+  {
+   "nr": "A10",
+   "kategorie": "anleitungen",
+   "titel": "Spielerleitfaden",
+   "text": "Regeln, wichtige Befehle und das Hilfe-Buch für neue Spieler.",
+   "status": "idee",
+   "en": {
+    "titel": "Player guide",
+    "text": "Rules, important commands and the help book for new players."
+   }
+  },
+  {
+   "nr": "A11",
+   "kategorie": "anleitungen",
+   "titel": "Farmen klein halten",
+   "text": "Überlauf-Stopp mit Komparator: Die Farm hält an, wenn das Fass halb voll ist.",
+   "status": "idee",
+   "en": {
+    "titel": "Keeping farms small",
+    "text": "Overflow stop with a comparator: the farm stops when the barrel is half full."
+   }
+  },
+  {
+   "nr": "A12",
+   "kategorie": "anleitungen",
+   "titel": "Dorfbewohner-Handel verbessern",
+   "text": "Arbeitsblöcke, Heilen von Zombie-Dorfbewohnern und bessere Preise.",
+   "status": "idee",
+   "en": {
+    "titel": "Better villager trading",
+    "text": "Job blocks, curing zombie villagers and better prices."
+   }
+  },
+  {
+   "nr": "A13",
+   "kategorie": "anleitungen",
+   "titel": "Wahrzeichen in Blöcke umrechnen",
+   "text": "Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt.",
+   "status": "idee",
+   "en": {
+    "titel": "Converting landmarks to blocks",
+    "text": "How to pick a scale from real measurements so the replica stays doable."
+   }
+  },
+  {
+   "nr": "A14",
+   "kategorie": "anleitungen",
+   "titel": "Elytra finden und nutzen",
+   "text": "Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze.",
+   "status": "idee",
+   "en": {
+    "titel": "Finding and using elytra",
+    "text": "Find an End city, repair the elytra, rockets and safe landing spots."
+   }
+  }
+ ]
+}

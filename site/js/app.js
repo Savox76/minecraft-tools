@@ -16,8 +16,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const relPfad = () => { const p = decodeURIComponent(location.pathname); return p.startsWith(BASE) ? p.slice(BASE.length) : p.replace(/^\//, ''); };
 const L = /^en(\/|$)/.test(relPfad()) ? 'en' : 'de';
 const SEG = {
-  de: { liste: 'bauplaene', bau: 'bau', plugins: 'plugins', plugin: 'plugin', anleitungen: 'anleitungen', anleitung: 'anleitung', wuensche: 'wuensche' },
-  en: { liste: 'builds', bau: 'build', plugins: 'plugins', plugin: 'plugin', anleitungen: 'guides', anleitung: 'guide', wuensche: 'wishes' },
+  de: { liste: 'bauplaene', bau: 'bau', plugins: 'plugins', plugin: 'plugin', anleitungen: 'anleitungen', anleitung: 'anleitung', wuensche: 'wuensche', geplant: 'geplant' },
+  en: { liste: 'builds', bau: 'build', plugins: 'plugins', plugin: 'plugin', anleitungen: 'guides', anleitung: 'guide', wuensche: 'wishes', geplant: 'planned' },
 };
 const url = (art = 'start', id = null, lang = L) => BASE + (lang === 'en' ? 'en/' : '') + (art === 'start' ? '' : SEG[lang][art] + '/' + (id ? id + '/' : ''));
 const de = L === 'de';
@@ -149,7 +149,7 @@ async function startSeite() {
   <section class="abschnitt"><div class="wrap zwei-spalten">
     <div><div class="abschnitt-kopf"><div><h2>${tr('Anleitungen', 'Guides')}</h2><p>${tr('Server-Wissen, das beim Bauen hilft.', 'Server know-how that helps with building.')}</p></div></div>${k.docs.map(docLink).join('')}</div>
     <div><div class="abschnitt-kopf"><div><h2>${tr('Was soll als Nächstes kommen?', 'What should come next?')}</h2><p>${tr('Wünsch dir ein Bauwerk. Die meistgewünschten werden zuerst gebaut.', 'Request a build. The most requested ones are made first.')}</p></div></div>
-      ${wunschListe(k, 4)}<div style="margin-top:12px"><a class="btn" href="${url('wuensche')}">${tr('Bauplan wünschen', 'Request a build')}</a></div></div>
+      ${wunschListe(k, 4)}<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="${url('wuensche')}">${tr('Bauplan wünschen', 'Request a build')}</a><a class="btn zwei" href="${url('geplant')}">${tr(`${k.ideen_anzahl || ''} geplante Ideen`, `${k.ideen_anzahl || ''} planned ideas`)}</a></div></div>
   </div></section>`;
   watchThumbs(main);
   heldAnimation();
@@ -257,7 +257,82 @@ async function wuenscheSeite() {
     </div>
     <p style="margin-top:12px;color:var(--ink-mute);font-size:.9rem">${tr('Zum Einreichen und Abstimmen brauchst du ein kostenloses GitHub-Konto. Die Liste unten wird einmal täglich aktualisiert.', 'You need a free GitHub account to submit and vote. The list below is updated once a day.')}</p>
   </div></section>
-  <section class="abschnitt" style="padding-top:8px"><div class="wrap" style="max-width:820px"><h2 style="margin-bottom:14px">${tr('Offene Wünsche', 'Open wishes')}</h2>${wunschListe(k)}</div></section>`;
+  <section class="abschnitt" style="padding-top:8px"><div class="wrap" style="max-width:820px">
+    <a class="liste-link" href="${url('geplant')}"><div><h3>${tr(`${k.ideen_anzahl || ''} Ideen sind schon geplant`, `${k.ideen_anzahl || ''} ideas are already planned`)}</h3><p>${tr('Schau zuerst dort nach und stimm für eine Idee ab, bevor du einen neuen Wunsch anlegst.', 'Check there first and vote for an idea before creating a new wish.')}</p></div><span class="pfeil" aria-hidden="true">→</span></a>
+    <h2 style="margin:22px 0 14px">${tr('Offene Wünsche', 'Open wishes')}</h2>${wunschListe(k)}</div></section>`;
+}
+
+async function geplantSeite() {
+  const k = await katalog();
+  const D = await (await fetch(`${BASE}data/ideen.json?v=${V}`)).json();
+  const IDS = D.ideen;
+  const GR = { klein: tr('klein', 'small'), mittel: tr('mittel', 'medium'), groß: tr('groß', 'large') };
+  const ST = { idee: tr('Idee', 'Idea'), 'in-arbeit': tr('In Arbeit', 'In progress'), verfuegbar: tr('Verfügbar', 'Available') };
+  // vorhandene Wünsche zu einer Idee: Titel enthält „Idee #61“
+  const stimmen = new Map();
+  for (const w of k.wuensche || []) {
+    const m = /Idee #(A?\d+)\b/i.exec(w.titel);
+    if (m && (!stimmen.has(m[1].toUpperCase()) || stimmen.get(m[1].toUpperCase()).stimmen < w.stimmen)) stimmen.set(m[1].toUpperCase(), w);
+  }
+  const karte = (i, mitId = true) => {
+    const w = stimmen.get(String(i.nr).toUpperCase());
+    let aktion;
+    if (i.status === 'verfuegbar' && i.bauplan) aktion = `<a class="btn klein" href="${url('bau', i.bauplan)}">${tr('Zum Bauplan', 'View build')} →</a>`;
+    else if (w) aktion = `<a class="btn zwei klein" href="${esc(w.url)}" target="_blank" rel="noopener">👍 ${w.stimmen} · ${tr('Mitstimmen', 'Vote too')}</a>`;
+    else {
+      const ziel = `${REPO}/issues/new?template=bauwunsch.yml&title=${encodeURIComponent(`Bauwunsch: Idee #${i.nr} ${i.titel}`)}&bauwerk=${encodeURIComponent(i.titel)}`;
+      aktion = `<a class="btn zwei klein" href="${esc(ziel)}" target="_blank" rel="noopener">👍 ${tr('Wünschen', 'Vote')}</a>`;
+    }
+    return `<article class="idee" data-kat="${i.kategorie}"${mitId ? ` id="idee-${i.nr}"` : ''}>
+      <div class="idee-kopf"><span class="idee-nr">Nr. ${i.nr}</span><span class="marker">${esc(GR[i.groesse] || tr('Anleitung', 'Guide'))}</span><span class="marker status-${i.status}">${ST[i.status]}</span></div>
+      <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p><div class="idee-fuss">${aktion}</div></article>`;
+  };
+  const zahl = (st) => IDS.filter((i) => i.status === st).length;
+  const filter = { kat: 'alle', gr: 'alle', q: '' };
+  main.innerHTML = `<section class="detail-kopf"><div class="wrap">
+    <span class="eyebrow">${tr('Was kommt', 'What is coming')}</span><h1>${tr('Geplant', 'Planned')}</h1>
+    <p class="lede">${tr('Alle Ideen für neue Baupläne und Anleitungen: Farmen, Fabriken, Gebäude und Monumente. Stimm mit „Wünschen“ ab, was zuerst gebaut wird.', 'All ideas for new builds and guides: farms, factories, buildings and monuments. Vote with “Vote” for what gets built first.')}</p>
+    <div class="ideen-zahlen">
+      <div><b>${IDS.filter((i) => i.kategorie !== 'anleitungen').length}</b><span>${tr('Bauplan-Ideen', 'build ideas')}</span></div>
+      <div><b>${IDS.filter((i) => i.kategorie === 'anleitungen').length}</b><span>${tr('Anleitungen', 'guides')}</span></div>
+      <div><b>${zahl('in-arbeit')}</b><span>${ST['in-arbeit']}</span></div>
+      <div><b>${zahl('verfuegbar')}</b><span>${ST.verfuegbar}</span></div>
+    </div>
+  </div></section>
+  <div class="ideen-filter"><div class="wrap">
+    <label class="suche"><span class="sr">${tr('Ideen durchsuchen', 'Search ideas')}</span>
+      <input type="search" id="q" placeholder="${tr('Suchen, z. B. Bambus, Burg, Redstone', 'Search, e.g. bamboo, castle, redstone')}" autocomplete="off"></label>
+    <div class="chips" role="group" aria-label="${tr('Kategorie', 'Category')}">
+      ${[['alle', tr('Alle', 'All')], ...D.kategorien.map((c) => [c.id, lo(c, 'name')])].map(([id, n]) => `<button class="chip" data-kat="${id}" aria-pressed="${id === 'alle'}">${esc(n)}</button>`).join('')}
+    </div>
+    <div class="chips klein" role="group" aria-label="${tr('Größe', 'Size')}">
+      ${[['alle', tr('Jede Größe', 'Any size')], ['klein', GR.klein], ['mittel', GR.mittel], ['groß', GR.groß]].map(([id, n]) => `<button class="chip" data-gr="${id}" aria-pressed="${id === 'alle'}">${esc(n)}</button>`).join('')}
+    </div>
+  </div></div>
+  <section class="abschnitt" style="padding-top:18px"><div class="wrap" id="ideen"></div></section>`;
+  const box = main.querySelector('#ideen');
+  const passt = (i) => (filter.kat === 'alle' || i.kategorie === filter.kat) && (filter.gr === 'alle' || i.groesse === filter.gr)
+    && (!filter.q || `${i.nr} ${lo(i, 'titel')} ${lo(i, 'text')} ${i.titel}`.toLowerCase().includes(filter.q));
+  const zeige = () => {
+    const teile = [];
+    const ohneFilter = filter.kat === 'alle' && filter.gr === 'alle' && !filter.q;
+    const empf = IDS.filter((i) => i.empfohlen);
+    if (ohneFilter && empf.length) teile.push(`<section class="ideen-gruppe empfohlen"><h2>${tr('Als Nächstes', 'Up next')}</h2><p>${tr('Diese drei ergeben zusammen einen kleinen Kreislauf: Bambus heizt die Öfen, der Kaktus liefert dabei XP und Farbstoff.', 'Together these three form a small loop: bamboo heats the furnaces while the cactus delivers XP and dye.')}</p><div class="ideen-raster">${empf.map((i) => karte(i, false)).join('')}</div></section>`);
+    for (const c of D.kategorien) {
+      const liste = IDS.filter((i) => i.kategorie === c.id && passt(i));
+      if (liste.length) teile.push(`<section class="ideen-gruppe" id="kat-${c.id}"><h2>${esc(lo(c, 'name'))} <span class="anzahl">${liste.length}</span></h2><p>${esc(lo(c, 'text'))}</p><div class="ideen-raster">${liste.map(karte).join('')}</div></section>`);
+    }
+    box.innerHTML = teile.join('') || `<div class="leer">${tr('Nichts gefunden. Wünsch dir die Idee doch einfach!', 'Nothing found. Why not request it?')} <a href="${url('wuensche')}">${tr('Zu den Wünschen', 'Go to wishes')}</a></div>`;
+  };
+  main.querySelectorAll('[data-kat].chip').forEach((b) => b.addEventListener('click', () => {
+    filter.kat = b.dataset.kat; main.querySelectorAll('[data-kat].chip').forEach((x) => x.setAttribute('aria-pressed', x === b)); zeige();
+  }));
+  main.querySelectorAll('[data-gr]').forEach((b) => b.addEventListener('click', () => {
+    filter.gr = b.dataset.gr; main.querySelectorAll('[data-gr]').forEach((x) => x.setAttribute('aria-pressed', x === b)); zeige();
+  }));
+  let qt; main.querySelector('#q').addEventListener('input', (e) => { clearTimeout(qt); qt = setTimeout(() => { filter.q = e.target.value.trim().toLowerCase(); zeige(); }, 120); });
+  zeige();
+  if (location.hash.startsWith('#idee-')) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });
 }
 
 async function pluginSeite(id) {
@@ -638,7 +713,7 @@ async function route() {
   const id = teile[1] || null;
   const c = location.hash.replace(/^#/, '') || undefined;
   aktuell = { art, id };
-  const nav = { bau: 'liste', liste: 'liste', plugins: 'plugins', plugin: 'plugins', anleitungen: 'anleitungen', anleitung: 'anleitungen', wuensche: 'wuensche' }[art] || '';
+  const nav = { bau: 'liste', liste: 'liste', plugins: 'plugins', plugin: 'plugins', anleitungen: 'anleitungen', anleitung: 'anleitungen', wuensche: 'wuensche', geplant: 'geplant' }[art] || '';
   document.querySelectorAll('[data-nav]').forEach((l) => {
     if (l.dataset.nav === nav) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current');
   });
@@ -649,6 +724,7 @@ async function route() {
     else if (art === 'plugins') await pluginsSeite();
     else if (art === 'anleitungen') await anleitungenSeite();
     else if (art === 'wuensche') await wuenscheSeite();
+    else if (art === 'geplant') await geplantSeite();
     else if (art === 'bau') await bauSeite(id, c);
     else if (art === 'plugin') await pluginSeite(id);
     else if (art === 'anleitung') await anleitungSeite(id);

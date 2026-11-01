@@ -12,9 +12,9 @@ H = html.escape
 SPRACHEN = ('de', 'en')
 SEG = {
     'de': {'liste': 'bauplaene', 'bau': 'bau', 'plugins': 'plugins', 'plugin': 'plugin',
-           'anleitungen': 'anleitungen', 'anleitung': 'anleitung', 'wuensche': 'wuensche'},
+           'anleitungen': 'anleitungen', 'anleitung': 'anleitung', 'wuensche': 'wuensche', 'geplant': 'geplant'},
     'en': {'liste': 'builds', 'bau': 'build', 'plugins': 'plugins', 'plugin': 'plugin',
-           'anleitungen': 'guides', 'anleitung': 'guide', 'wuensche': 'wishes'},
+           'anleitungen': 'guides', 'anleitung': 'guide', 'wuensche': 'wishes', 'geplant': 'planned'},
 }
 
 
@@ -248,13 +248,13 @@ def og_bild(ziel, titel, unterzeile, modell_bild=None):
 T = {
  'de': dict(
   skip='Zum Inhalt', start='Savox Bauwerkstatt, Startseite', bauplaene='Baupläne', plugins='Plugins',
-  anleitungen='Anleitungen', wuensche='Wünsche', sprache='Sprache', thema='Darstellung',
+  anleitungen='Anleitungen', wuensche='Wünsche', geplant='Geplant', sprache='Sprache', thema='Darstellung',
   auto='Automatisch', hell='Hell', dunkel='Dunkel', fuss='Minecraft-Baupläne und Plugins kostenlos für alle Kreativen.',
   github='Quellcode auf GitHub', disclaimer='Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden. Blöcke werden mit eigenen Farben dargestellt, nicht mit Minecraft-Texturen.',
   bloecke='Blöcke', schritte='Schritte', entwurf='Entwurf', alle_seiten='Alle Seiten'),
  'en': dict(
   skip='Skip to content', start='Savox Bauwerkstatt, home', bauplaene='Builds', plugins='Plugins',
-  anleitungen='Guides', wuensche='Wishes', sprache='Language', thema='Appearance',
+  anleitungen='Guides', wuensche='Wishes', geplant='Planned', sprache='Language', thema='Appearance',
   auto='Automatic', hell='Light', dunkel='Dark', fuss='Minecraft build plans and plugins, free for all creators.',
   github='Source code on GitHub', disclaimer='Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Blocks are shown in our own colours, not with Minecraft textures.',
   bloecke='blocks', schritte='steps', entwurf='Draft', alle_seiten='All pages'),
@@ -279,7 +279,8 @@ def lok(obj, key, lang):
 
 
 class Seiten:
-    def __init__(self, out, root, cfg, katalog, builds, docs_html, bloecke_en):
+    def __init__(self, out, root, cfg, katalog, builds, docs_html, bloecke_en, ideen=None):
+        self.ideen = ideen or {'kategorien': [], 'ideen': []}
         self.out, self.root, self.cfg = out, root, cfg
         self.url = cfg['site_url'].rstrip('/') + '/'
         self.base = urlparse(self.url).path or '/'
@@ -306,7 +307,7 @@ class Seiten:
     def kopfleiste(self, art, id):
         L = T[self.lang]
         nav = ''.join('<a href="%s" data-nav="%s">%s</a>' % (self.link(a), a, L[n]) for a, n in
-                      (('liste', 'bauplaene'), ('plugins', 'plugins'), ('anleitungen', 'anleitungen'), ('wuensche', 'wuensche')))
+                      (('liste', 'bauplaene'), ('plugins', 'plugins'), ('anleitungen', 'anleitungen'), ('geplant', 'geplant'), ('wuensche', 'wuensche')))
         anders = 'en' if self.lang == 'de' else 'de'
         sprache = ('<div class="sprache" role="group" aria-label="%s">%s</div>' % (L['sprache'], ''.join(
             '<a href="%s" hreflang="%s" lang="%s" data-lang="%s"%s>%s</a>' % (
@@ -420,6 +421,7 @@ class Seiten:
             for d in self.k['docs']:
                 self.anleitung(d)
             self.wuensche()
+            self.geplant()
         self.lang = 'de'
         self.fehlerseite()
         self.sitemap()
@@ -663,6 +665,62 @@ class Seiten:
         self.schreibe('wuensche', None, t('Minecraft-Bauplan wünschen | Savox Bauwerkstatt', 'Request a Minecraft build | Savox Bauwerkstatt'),
                       t('Wünsch dir einen Minecraft-Bauplan oder ein Plugin. Die meistgewünschten Bauwerke werden zuerst als LEGO-Anleitung gebaut.',
                         'Request a Minecraft build plan or a plugin. The most requested builds are made into LEGO-style instructions first.'), inhalt, ld)
+
+    def geplant(self):
+        t, lang = self.t, self.lang
+        IDS = self.ideen['ideen']
+        GR = {'klein': t('klein', 'small'), 'mittel': t('mittel', 'medium'), 'groß': t('groß', 'large')}
+        ST = {'idee': t('Idee', 'Idea'), 'in-arbeit': t('In Arbeit', 'In progress'), 'verfuegbar': t('Verfügbar', 'Available')}
+        repo = 'https://github.com/Savox76/minecraft-tools'
+        from urllib.parse import quote
+
+        def karte(i, mit_id=True):
+            titel = lok(i, 'titel', lang)
+            gr = GR.get(i.get('groesse'), t('Anleitung', 'Guide'))
+            if i['status'] == 'verfuegbar' and i.get('bauplan'):
+                aktion = '<a class="btn klein" href="%s">%s →</a>' % (self.link('bau', i['bauplan']), t('Zum Bauplan', 'View build'))
+            else:
+                ziel = '%s/issues/new?template=bauwunsch.yml&title=%s&bauwerk=%s' % (
+                    repo, quote('Bauwunsch: Idee #%s %s' % (i['nr'], i['titel'])), quote(i['titel']))
+                aktion = '<a class="btn zwei klein" href="%s" rel="noopener">👍 %s</a>' % (H(ziel), t('Wünschen', 'Vote'))
+            return ('<article class="idee" data-kat="%s"%s><div class="idee-kopf"><span class="idee-nr">Nr. %s</span>'
+                    '<span class="marker">%s</span><span class="marker status-%s">%s</span></div><h3>%s</h3><p>%s</p>'
+                    '<div class="idee-fuss">%s</div></article>') % (
+                i['kategorie'], (' id="idee-%s"' % i['nr']) if mit_id else '', i['nr'], H(gr), i['status'], ST[i['status']], H(titel), H(lok(i, 'text', lang)), aktion)
+
+        teile = []
+        empf = [i for i in IDS if i.get('empfohlen')]
+        if empf:
+            teile.append('<section class="ideen-gruppe empfohlen"><h2>%s</h2><p>%s</p><div class="ideen-raster">%s</div></section>' % (
+                t('Als Nächstes', 'Up next'), t('Diese drei ergeben zusammen einen kleinen Kreislauf: Bambus heizt die Öfen, der Kaktus liefert dabei XP und Farbstoff.',
+                                              'Together these three form a small loop: bamboo heats the furnaces while the cactus delivers XP and dye.'),
+                ''.join(karte(i, False) for i in empf)))
+        for k in self.ideen['kategorien']:
+            liste = [i for i in IDS if i['kategorie'] == k['id']]
+            if liste:
+                teile.append('<section class="ideen-gruppe" id="kat-%s"><h2>%s <span class="anzahl">%d</span></h2><p>%s</p><div class="ideen-raster">%s</div></section>' % (
+                    k['id'], H(lok(k, 'name', lang)), len(liste), H(lok(k, 'text', lang)), ''.join(karte(i) for i in liste)))
+        zahl = {st: sum(1 for i in IDS if i['status'] == st) for st in ST}
+        inhalt = self.kopf(t('Was kommt', 'What is coming'), t('Geplant', 'Planned'),
+                           t('Alle Ideen für neue Baupläne und Anleitungen: Farmen, Fabriken, Gebäude und Monumente. Stimm mit „Wünschen“ ab, was zuerst gebaut wird.',
+                             'All ideas for new builds and guides: farms, factories, buildings and monuments. Vote with “Vote” for what gets built first.')) + \
+            ('<section class="abschnitt" style="padding-top:8px"><div class="wrap"><div class="ideen-zahlen">%s</div>%s</div></section>') % (
+                ''.join('<div><b>%d</b><span>%s</span></div>' % (n, l) for n, l in (
+                    (sum(1 for i in IDS if i['kategorie'] != 'anleitungen'), t('Bauplan-Ideen', 'build ideas')),
+                    (sum(1 for i in IDS if i['kategorie'] == 'anleitungen'), t('Anleitungen', 'guides')),
+                    (zahl['in-arbeit'], ST['in-arbeit']), (zahl['verfuegbar'], ST['verfuegbar']))),
+                ''.join(teile))
+        ld = {'@context': 'https://schema.org', '@graph': [
+            {'@type': 'CollectionPage', 'name': t('Geplante Minecraft-Baupläne', 'Planned Minecraft builds'), 'url': self.voll(pfad(lang, 'geplant')), 'inLanguage': lang},
+            {'@type': 'ItemList', 'numberOfItems': len(IDS), 'itemListElement': [
+                {'@type': 'ListItem', 'position': n + 1, 'name': lok(i, 'titel', lang)} for n, i in enumerate(IDS)]},
+            self.krumen_ld([('Start', 'start', None), (t('Geplant', 'Planned'), 'geplant', None)])]}
+        self.schreibe('geplant', None,
+                      t('Geplante Minecraft-Baupläne: %d Ideen für Farmen, Gebäude und Monumente | Savox Bauwerkstatt',
+                        'Planned Minecraft builds: %d ideas for farms, buildings and monuments | Savox Bauwerkstatt') % len(IDS),
+                      t('Was als Nächstes kommt: XP-Farmen, Bambusfarm, Fabriken mit dem Crafter, Burg, Kölner Dom, Taj Mahal und mehr. Stimm ab, welcher Minecraft-Bauplan zuerst entsteht.',
+                        'What comes next: XP farms, bamboo farm, Crafter factories, castle, Cologne Cathedral, Taj Mahal and more. Vote on which Minecraft build is made first.'),
+                      inhalt, ld)
 
     def fehlerseite(self):
         inhalt = self.kopf(None, 'Seite nicht gefunden · Page not found', 'Diese Seite gibt es nicht (mehr). · This page does not exist.')

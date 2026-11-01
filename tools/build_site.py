@@ -349,12 +349,25 @@ def main():
     if os.path.isfile(wpfad):
         katalog['wuensche'] = lies_json(wpfad)
 
+    # Ideen für die Seite „Geplant“ (Quelle: ideen/ideen.json, siehe Masterplan Abschnitt 15)
+    ideen = lies_json(os.path.join(ROOT, 'ideen', 'ideen.json'))
+    ideen.pop('_hinweis', None)
+    gebaut = {b['id'] for b in katalog['builds']}
+    for i in ideen['ideen']:
+        if i.get('bauplan') and i['bauplan'] not in gebaut:
+            print(f'  Hinweis: Idee {i["nr"]} verweist auf unbekannten Bauplan {i["bauplan"]}')
+    schreib_json(os.path.join(OUT, 'data', 'ideen.json'), ideen)
+    katalog['ideen_anzahl'] = len(ideen['ideen'])
+    print(f'Ideen    {len(ideen["ideen"])}')
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'ideen_masterplan.py'), '--pruefen'])
+
     schreib_json(os.path.join(OUT, 'data', 'katalog.json'), katalog)
     with open(os.path.join(OUT, '.nojekyll'), 'w') as f:
         f.write('')
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from seiten import Seiten
-    s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html, bloecke_en)
+    s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html, bloecke_en, ideen)
     s.alles()
     print(f'Seiten: {s.anzahl} Adressen (Deutsch und Englisch) in sitemap.xml · Basis {cfg["site_url"]}')
     print('Fertig:', OUT)

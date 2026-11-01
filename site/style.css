@@ -274,3 +274,40 @@ td code, .prosa code { font: .86em var(--f-mono); background: var(--sheet-2); bo
 .vor-bild { display: block; width: 100%; max-width: 720px; height: auto; border-radius: 14px; background: var(--sheet); border: 1px solid var(--line); }
 .vor-liste { margin: 10px 0 0; padding-left: 20px; }
 .vor-liste li { margin-bottom: 6px; }
+
+/* Geplant */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ideen-zahlen { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.ideen-zahlen div { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 10px 16px; display: flex; flex-direction: column; min-width: 110px; }
+.ideen-zahlen b { font: 800 1.7rem/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.ideen-zahlen span { font-size: .84rem; color: var(--ink-mute); margin-top: 4px; }
+.ideen-filter { position: sticky; top: 61px; z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 12px 0; }
+.ideen-filter .wrap { display: flex; flex-direction: column; gap: 10px; }
+.ideen-filter .chips { flex-wrap: wrap; }
+.ideen-filter .chip { white-space: nowrap; }
+.ideen-filter .chips.klein .chip { font-size: .8rem; padding: 5px 11px; }
+.suche input { width: 100%; max-width: 460px; font: 1rem var(--f-body); padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--ink); }
+.suche input:focus { border-color: var(--ink-soft); outline: none; }
+.ideen-gruppe { margin-bottom: 34px; scroll-margin-top: 190px; }
+.ideen-gruppe > h2 { display: flex; align-items: baseline; gap: 10px; }
+.ideen-gruppe > h2 .anzahl { font: 600 .9rem var(--f-mono); color: var(--ink-mute); }
+.ideen-gruppe > p { color: var(--ink-soft); margin: 4px 0 14px; }
+.ideen-raster { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.idee { --ton: var(--ink-mute); background: var(--sheet); border: 1px solid var(--line); border-left: 4px solid var(--ton); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; scroll-margin-top: 200px; }
+.idee h3 { font-size: 1.05rem; }
+.idee p { color: var(--ink-soft); font-size: .92rem; }
+.idee-kopf { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.idee-nr { font: 700 .78rem var(--f-mono); color: var(--ink-mute); margin-right: auto; }
+.idee-fuss { margin-top: auto; padding-top: 8px; }
+.marker.status-in-arbeit { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); }
+.marker.status-verfuegbar { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.idee[data-kat="xp"] { --ton: #7cc242; } .idee[data-kat="farmen"] { --ton: #5aa864; } .idee[data-kat="monster"] { --ton: #6b8f3a; }
+.idee[data-kat="produktion"] { --ton: #e08a2e; } .idee[data-kat="funktional"] { --ton: #c0392b; } .idee[data-kat="tiere"] { --ton: #b07a4a; }
+.idee[data-kat="spiel"] { --ton: #8e5cc8; } .idee[data-kat="monumente"] { --ton: #c9a227; } .idee[data-kat="gebaeude"] { --ton: #4a90c2; }
+.idee[data-kat="anleitungen"] { --ton: var(--ink-soft); }
+.ideen-gruppe.empfohlen { background: var(--callout); border: 1.5px solid var(--callout-line); border-radius: 16px; padding: 18px; }
+@media (max-width: 640px) {
+  .ideen-filter { position: static; backdrop-filter: none; }
+  .ideen-filter .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+  .ideen-zahlen div { min-width: 0; flex: 1 1 40%; }
+}

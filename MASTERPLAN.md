@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Ideen für neue Inhalte | 💡 91 Bauplan-Vorschläge (Farmen, Gebäude, Monumente, Produktionen, Funktionales) und 10 Anleitungen | Abschnitt 15 |
+| Geplant | 💡 116 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
 **Entwurf** heißt: Die Richtung von Treppen, Türen und Trichtern ist in den Dateien noch nicht in einer Testwelt geprüft (siehe Phase 1).
@@ -354,7 +354,6 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 - **Zeitraffer-Animation:** jeder Bauplan als kurzes Video oder GIF, Schritt für Schritt
 - **Varianten:** Größen (1:1, 1:2) und Materialvarianten (Holz- oder Steinversion) per Klick
 - **Bauplan-Pakete:** zusammengehörige Pläne gebündelt, z. B. „Villa am Wasser + Kellerlager + Gewächshaus“
-- **Geplant-Seite:** die Ideen aus Abschnitt 15 auf der Website zeigen, damit Besucher sehen, was kommt, und mit abstimmen können
 - **Server-Setup-Assistent:** Paper, Plugins, Bot und Einstellungen in einem geführten Ablauf (Desktop-App)
 
 ---
@@ -418,138 +417,220 @@ Suchmaschinen bewerten eine Seite auch danach, wer auf sie verlinkt.
 
 ---
 
-## 15. Ideen-Speicher: mögliche neue Baupläne
+## 15. Ideen-Speicher: geplante Baupläne und Anleitungen
 
-Vorschläge für künftige Baupläne. Wird einer umgesetzt, bekommt er einen Ordner `builds/<id>/` und folgt dem Ablauf aus 4.1. Status: 💡 Idee · 🔨 in Arbeit · ✅ als Bauplan verfügbar. Größe: klein (bis etwa 15 × 15), mittel, groß.
+Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer, Kategorie, Größe, Status und kurzem Text auf Deutsch und Englisch. Daraus entstehen automatisch die Seite **Geplant** auf der Website (`/geplant/`, englisch `/en/planned/`) und die Tabellen unten.
+
+**Ablauf**
+- Neue Idee: Eintrag in `ideen/ideen.json` mit der nächsten freien Nummer, danach `python tools/ideen_masterplan.py` ausführen. Das schreibt die Tabellen unten neu.
+- Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. Die Geplant-Seite verlinkt dann direkt auf den Bauplan.
+- Abstimmen: Auf der Geplant-Seite führt „Wünschen“ zu einem vorausgefüllten Bauwunsch („Idee #61: Kakaofarm“). Gibt es dazu schon einen offenen Wunsch, zeigt die Seite dessen 👍-Stimmen und verlinkt dorthin.
+- Größe: klein (bis etwa 15 × 15), mittel, groß. Für Nachbauten echter Wahrzeichen gibt der Bauplan einen Maßstab an (wie beim Eiffelturm 1:3).
 
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
-### 15.1 Farmen und Technik
+<!-- ideen:start -->
+130 Einträge: 130 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
 
-| Nr. | Vorschlag | Größe | Was es bringt | Status |
+**Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
+
+### Skillfarmen (XP) (8)
+
+Erfahrung für Verzauberungen und Reparaturen.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus → grüner Farbstoff, 1 XP pro Stück, XP sammelt sich im Ofen. Ohne Monster | 💡 |
-| 2 | Seetang-XP-Ofen | klein | Weniger XP, dafür getrockneter Seetang als Brennstoff | 💡 |
-| 3 | Dunkelraum-Monsterfarm | mittel | XP, Knochen, Pfeile, Schießpulver, Fäden | 💡 |
-| 4 | Spawner-XP-Farm (Zombie/Skelett) | klein | Viel XP, nur an einem gefundenen Spawner | 💡 |
-| 5 | Lohenfarm | mittel | XP und Lohenruten, an einer Netherfestung | 💡 |
-| 6 | Goldfarm auf dem Nether-Dach | groß | Sehr viel XP und Gold | 💡 |
-| 7 | Endermanfarm im End | groß | Schnellste XP-Quelle, Drache muss besiegt sein | 💡 |
-| 8 | Handelshalle mit Dorfbewohnern | mittel | XP, Smaragde, Verzauberungsbücher; passt zum Arbeiter-Plugin | 💡 |
-| 9 | Kleine Bambusfarm | klein | 8 Pflanzen, Beobachter und Kolben, Trichter; etwa 8 × 4 | 💡 |
-| 10 | Große Bambusfarm | groß | 2 × 16 Pflanzen, Trichterlore unter Glas, Fasskette | 💡 |
-| 11 | Bambus-Brennstoffstation | klein | Bambus heizt die Ofenbatterie aus Nr. 1 ohne Kohle | 💡 |
-| 12 | Melonen- und Kürbisfarm | klein | Beobachter und Kolben ernten automatisch | 💡 |
-| 13 | Wollfarm | klein | Schafe, Werfer mit Schere; eine Farbe pro Kammer | 💡 |
-| 14 | Honig- und Waben-Farm | klein | Honigblöcke, Waben für Kerzen | 💡 |
-| 15 | Eisenfarm | mittel | Eisen für Trichter, Schienen, Laternen | 💡 |
-| 16 | Schneefarm mit Schneegolems | klein | Schneeblöcke und Eis | 💡 |
-| 17 | Lava aus Tropfstein | klein | Unendlich Lava im Kessel als Brennstoff | 💡 |
-| 18 | Basalt-Generator | klein | Lava, Blaueis, Seelenerde → Basalt | 💡 |
-| 19 | Bruchstein-Generator | klein | Lava und Wasser, nur noch abbauen | 💡 |
-| 20 | Moosfarm | klein | Moos, Azaleen, Kompost per Knochenmehl-Werfer | 💡 |
-| 21 | Kuh- und Hühnerfarm | klein | Leder für Bücher, Federn, Eier, Fleisch | 💡 |
-| 22 | Schleimfarm | mittel | Schleimbälle für Klebekolben | 💡 |
-| 23 | Hexenfarm | groß | Redstone, Leuchtsteinstaub, Zucker | 💡 |
-| 24 | Creeperfarm | mittel | Schießpulver für Raketen | 💡 |
-| 25 | Verzauberungsraum | klein | Zaubertisch mit 15 Bücherregalen, Amboss, Schleifstein | 💡 |
-| 26 | Marktplatz für Spieler-Shops | mittel | Stände für die Shop-Truhen aus ServerShop | 💡 |
-| 27 | Lorenbahnhof | mittel | Gleise vom Spawn zu allen Farmen | 💡 |
-| 28 | Windmühle | klein | Deko-Hülle für eine Bambus- oder Melonenfarm | 💡 |
-| 29 | Hafen mit Steg und Bootshaus | mittel | Passt zu Villa am Wasser und Leuchtturm | 💡 |
+| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster. | 💡 Idee |
+| 2 | Seetang-XP-Ofen | klein | Wie die Kaktus-Farm, nur mit Seetang. Gibt weniger Erfahrung, liefert dafür getrockneten Seetang, der als Block ein guter Brennstoff ist. | 💡 Idee |
+| 3 | Dunkelraum-Monsterfarm | mittel | Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden. | 💡 Idee |
+| 4 | Spawner-XP-Farm | klein | Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt. | 💡 Idee |
+| 5 | Lohenfarm | mittel | An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen. | 💡 Idee |
+| 6 | Goldfarm auf dem Nether-Dach | groß | Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold. | 💡 Idee |
+| 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
+| 8 | Handelshalle mit Dorfbewohnern | mittel | Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin. | 💡 Idee |
 
-Empfohlener Start: Nr. 1, 9 und 11 als Kreislauf (Bambus heizt die Öfen, Kaktus liefert XP und Farbstoff).
+### Farmen für Baumaterial (20)
 
-### 15.2 Gebäude und Monumente
+Liefern die Blöcke und Rohstoffe für die Baupläne.
 
-| Nr. | Vorschlag | Größe | Besonderheit | Status |
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 30 | Brandenburger Tor | mittel | Säulen, Quadriga aus Kupfer und Stein | 💡 |
-| 31 | Big Ben (Elizabeth Tower) | groß | Uhrturm mit vier Zifferblättern, gut im Maßstab 1:2 | 💡 |
-| 32 | Kölner Dom | groß | Zwei Türme, Spitzbögen, bunte Glasfenster | 💡 |
-| 33 | Frauenkirche Dresden | groß | Steinerne Glockenkuppel aus Sandstein | 💡 |
-| 34 | Freiheitsstatue | groß | Aus Kupfer, das von selbst grün wird | 💡 |
-| 35 | Schiefer Turm von Pisa | mittel | Schräge durch versetzte Ringe, Säulengänge | 💡 |
-| 36 | Kolosseum | groß | Ovale Arena mit Bögen, teilweise eingestürzt | 💡 |
-| 37 | Schloss Neuschwanstein | groß | Türme, Spitzdächer, auf einem Felsen | 💡 |
-| 38 | Tower Bridge | groß | Zwei Türme mit Klappbrücke (Kolben möglich) | 💡 |
-| 39 | Pyramide mit Grabkammer | groß | Viel Sandstein; Sand ist auf Paper nicht farmbar | 💡 |
-| 40 | Japanische Pagode | mittel | Fünf Stockwerke, geschwungene Dächer | 💡 |
-| 41 | Maya-Tempel | mittel | Stufenpyramide mit Treppe, Dschungel-Deko | 💡 |
-| 42 | Stonehenge | klein | Steinkreis, gut als erstes Monument | 💡 |
-| 43 | Mittelalterliche Burg | groß | Ringmauer, Torhaus, Bergfried, Burghof | 💡 |
-| 44 | Wachturm | klein | Steinturm mit Holzdach und Leiter | 💡 |
-| 45 | Fachwerkdorf | mittel | Bäckerei, Schmiede und Gasthaus | 💡 |
-| 46 | Bauernhof mit Scheune und Silo | mittel | Farmen aus 15.1 lassen sich darin verstecken | 💡 |
-| 47 | Blockhütte am See | klein | Rundholz, Kamin, Steg | 💡 |
-| 48 | Baumhaus im Riesen-Dschungelbaum | mittel | Mehrere Plattformen mit Hängebrücken | 💡 |
-| 49 | Unterwasser-Glaskuppel | mittel | Wohnkuppel am Meeresgrund, viel Glas | 💡 |
-| 50 | Japanisches Teehaus mit Garten | klein | Kirschbaumholz, Teich, Steinlaternen | 💡 |
-| 51 | Zwergenhalle im Berg | groß | Große Halle mit Säulen, in den Berg gebaut statt in die Tiefe | 💡 |
-| 52 | Hochhaus | groß | Moderne Glasfassade, Etagen einzeln baubar | 💡 |
-| 53 | Rathaus mit Uhrturm am Spawn | mittel | Hilfe-Schilder, Treffpunkt für alle | 💡 |
-| 54 | Hängebrücke | mittel | Über eine Schlucht oder einen Fluss | 💡 |
-| 55 | Gartenpavillon mit Brunnen | klein | Schneller Einstieg, passt zu den Villen | 💡 |
-| 56 | Große Bibliothek | mittel | Bücherregale über zwei Etagen, Lesesaal | 💡 |
-| 57 | Dorfkapelle | klein | Glockenturm, Buntglas | 💡 |
-| 58 | Luftschiff | mittel | Hülle aus Wolle, Gondel aus Holz | 💡 |
-| 59 | Piratenschiff | mittel | Masten, Segel aus Wolle, Kanonendeck | 💡 |
+| 9 | Kleine Bambusfarm | klein | Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke. | 💡 Idee |
+| 10 | Große Bambusfarm | groß | Zwei Reihen mit je 16 Pflanzen. Eine Trichterlore unter Glas sammelt in eine Fasskette. Genug für Bambusbretter und Mosaik in großen Mengen. | 💡 Idee |
+| 12 | Melonen- und Kürbisfarm | klein | Beobachter und Kolben ernten, sobald eine Frucht wächst. Kürbisse für Laternen und Golems, Melonen als Essen. | 💡 Idee |
+| 13 | Wollfarm | klein | Schafe fressen Gras, ein Werfer mit Schere schert sie automatisch. Eine Farbe pro Kammer für bunte Bauten. | 💡 Idee |
+| 14 | Honig- und Waben-Farm | klein | Bienenstöcke mit Werfern für Flaschen und Scheren. Honigblöcke, Waben für Kerzen und gewachste Kupferblöcke. | 💡 Idee |
+| 15 | Eisenfarm | mittel | Dorfbewohner werden von einem Zombie erschreckt, dabei entstehen Eisengolems. Eisen für Trichter, Schienen und Laternen. | 💡 Idee |
+| 16 | Schneefarm mit Schneegolems | klein | Schneegolems hinterlassen Schnee, der automatisch abgebaut wird. Schneeblöcke und Eis zum Bauen. | 💡 Idee |
+| 17 | Lava aus Tropfstein | klein | Spitzer Tropfstein unter einer Lavaquelle füllt einen Kessel. Unendlich Lava als Brennstoff, ohne in den Nether zu müssen. | 💡 Idee |
+| 18 | Basalt-Generator | klein | Lava, Blaueis und Seelenerde erzeugen immer neuen Basalt. Daraus wird polierter Basalt und glatter Basalt. | 💡 Idee |
+| 19 | Bruchstein-Generator | klein | Lava und Wasser erzeugen Bruchstein nach, du baust nur noch ab. Grundlage für Steinziegel, glatten Stein und Treppen. | 💡 Idee |
+| 20 | Moosfarm | klein | Werfer mit Knochenmehl lassen Moos wachsen. Moos, Azaleen und Material für den Komposter. | 💡 Idee |
+| 21 | Kuh- und Hühnerfarm | klein | Kleine Gehege mit Begrenzung, damit die Tiere nicht überhandnehmen. Leder für Bücher, Federn, Eier und Fleisch. | 💡 Idee |
+| 60 | Zuckerrohrfarm | klein | Eine Reihe Zuckerrohr mit Beobachtern und Kolben. Papier für Bücher, Karten und Raketen. | 💡 Idee |
+| 61 | Kakaofarm | klein | Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm. Für Kekse und braunen Farbstoff. | 💡 Idee |
+| 62 | Blumenfarm | klein | Ein Werfer mit Knochenmehl auf Gras lässt Blumen wachsen. Alle Grundfarben für Wolle, Beton und Glas. | 💡 Idee |
+| 64 | Tonfarm | mittel | Werfer mit Wasserflaschen machen Erde zu Schlamm, Tropfstein darunter macht daraus Ton. Für Terrakotta und Ziegel. | 💡 Idee |
+| 65 | Froschlicht-Farm | groß | Frösche fressen kleine Magmawürfel und lassen dabei Froschlichter fallen. Leuchtblöcke in drei Farben. | 💡 Idee |
+| 66 | Amethyst-Farm | mittel | An einer gefundenen Geode: Beobachter merken reife Kristalle, Kolben brechen sie ab. Für Fernrohr und getöntes Glas. | 💡 Idee |
+| 67 | Chorusfrucht-Farm im End | mittel | Halbautomatisch: Chorusblumen wachsen nach, du erntest. Chorusfrüchte werden zu Purpurblöcken. | 💡 Idee |
+| 68 | Pilzfarm | klein | Ein dunkler Raum, in dem sich Pilze von selbst ausbreiten. Für Suppen und Riesenpilz-Deko. | 💡 Idee |
 
-Für Nachbauten echter Wahrzeichen wird der Maßstab im Bauplan angegeben (wie beim Eiffelturm 1:3), damit Höhe und Blockzahl realistisch bleiben.
+### Monsterfarmen (3)
 
-### 15.3 Weitere Produktionen
+Material für Redstone und Raketen.
 
-| Nr. | Vorschlag | Größe | Was es bringt | Status |
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 60 | Zuckerrohrfarm | klein | Papier für Bücher, Karten und Raketen | 💡 |
-| 61 | Kakaofarm | klein | Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm: Kekse, brauner Farbstoff | 💡 |
-| 62 | Blumenfarm | klein | Knochenmehl-Werfer auf Gras, alle Grundfarben für Wolle, Beton und Glas | 💡 |
-| 63 | Komposter-Kette | klein | Überschuss aus Bambus, Kaktus und Seetang wird zu Knochenmehl | 💡 |
-| 64 | Tonfarm | mittel | Werfer mit Wasserflaschen machen Erde zu Schlamm, Tropfstein darunter macht daraus Ton: Terrakotta, Ziegel | 💡 |
-| 65 | Froschlicht-Farm | groß | Frösche fressen kleine Magmawürfel: Leuchtblöcke in drei Farben | 💡 |
-| 66 | Amethyst-Farm | mittel | An einer gefundenen Geode, Beobachter und Kolben: Amethyst für Fernrohr und getöntes Glas | 💡 |
-| 67 | Chorusfrucht-Farm im End | mittel | Halbautomatisch: Purpurblöcke zum Bauen | 💡 |
-| 68 | Pilzfarm | klein | Dunkler Raum: Pilze für Suppen und Riesenpilz-Deko | 💡 |
-| 69 | Holzkohle-Station | klein | Stämme vom Holzfäller-Arbeiter werden zu Holzkohle | 💡 |
-| 70 | Erz-Schmelzstation | mittel | Einwurftruhe, viele Öfen gleichzeitig, sortierte Ausgabe | 💡 |
-| 71 | Automatische Werkbank (Crafter) | mittel | Seit 1.21: stellt z. B. Brot, Papier oder Eisenblöcke selbst her | 💡 |
-| 72 | Raketen-Fabrik | mittel | Papier und Schießpulver per Crafter: Raketen für Elytra-Flüge | 💡 |
-| 73 | Automatische Brauerei | mittel | Braustände mit Trichtern, Tränke in Serie | 💡 |
-| 74 | Automatische Küche | klein | Räucheröfen mit Trichtern, gefüttert aus Kuh- und Hühnerfarm | 💡 |
-| 75 | Buch-Station | mittel | Zuckerrohr und Leder werden zu Büchern und Bücherregalen | 💡 |
+| 22 | Schleimfarm | mittel | In einem Schleim-Chunk oder Sumpf. Schleimbälle für Klebekolben und Schleimblöcke. | 💡 Idee |
+| 23 | Hexenfarm | groß | An einer Sumpfhütte. Redstone, Leuchtsteinstaub, Zucker und Flaschen. | 💡 Idee |
+| 24 | Creeperfarm | mittel | Nur Creeper spawnen auf Spezialblöcken. Schießpulver für Raketen. | 💡 Idee |
 
-### 15.4 Funktionale Bauten
+### Verarbeitung und Fabriken (9)
 
-| Nr. | Vorschlag | Größe | Wozu | Status |
+Machen aus Rohstoffen fertige Dinge, ganz von selbst.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 76 | Blasen-Aufzug | klein | Seelensand hoch, Magmablock runter, als eigener Bauplan zum Einbauen | 💡 |
-| 77 | Item-Aufzug | klein | Blasensäule hebt Gegenstände vom Keller ins Lager | 💡 |
-| 78 | Versteckte Kolbentür 2 × 2 | klein | Öffnet per Knopf oder Druckplatte, verschwindet in der Wand | 💡 |
-| 79 | Geheimgang hinter Bücherregal | klein | Klassischer Geheimeingang zum Lager | 💡 |
-| 80 | Tresor mit Zahlenschloss | mittel | Redstone-Kombinationsschloss mit Hebeln | 💡 |
-| 81 | Automatisches Licht | klein | Tageslichtsensor schaltet Redstone-Lampen ab Abend ein | 💡 |
-| 82 | Zugbrücke | mittel | Kolben fahren die Brücke ein, passt zur Burg | 💡 |
-| 83 | Leuchtfeuer-Pyramide | mittel | Eisenblöcke aus der Eisenfarm, Effekte wie Eile beim Abbauen | 💡 |
-| 84 | Aquisitor-Rahmen | klein | Atmen unter Wasser rund um die Glaskuppel | 💡 |
-| 85 | Nether-Knotenpunkt | groß | Portale zu allen Basen, Eisstraße für schnelle Bootsfahrten | 💡 |
-| 86 | Kartenraum | mittel | Karten in Rahmen ergeben eine Wandkarte der Welt | 💡 |
-| 87 | Farm-Bot-Zentrale | klein | Sicherer, beleuchteter Raum für den Bot mitten zwischen den Farmen | 💡 |
-| 88 | Lagerhalle mit Einlagern-Truhen | mittel | Für das InfiniteLager-Plugin, gemeinsam und privat getrennt | 💡 |
-| 89 | Werkstatt | klein | Amboss, Schleifstein, Schmiedetisch, Webstuhl und Steinsäge an einem Ort | 💡 |
-| 90 | Ausrüstungsraum | klein | Rüstungsständer, Waffen und Werkzeuge geordnet | 💡 |
-| 91 | Beleuchteter Spawn | mittel | Laternen-Raster, damit am Spawn keine Monster entstehen | 💡 |
+| 11 | Bambus-Brennstoffstation | klein | Koppelt die Bambusfarm an die Ofenbatterie. Die Öfen laufen dann ohne Kohle. | 💡 Idee |
+| 63 | Komposter-Kette | klein | Überschuss aus Bambus, Kaktus und Seetang wird in Kompostern zu Knochenmehl. | 💡 Idee |
+| 69 | Holzkohle-Station | klein | Stämme vom Holzfäller-Arbeiter werden in Öfen zu Holzkohle. | 💡 Idee |
+| 70 | Erz-Schmelzstation | mittel | Eine Einwurftruhe verteilt auf viele Öfen gleichzeitig, die Ausgabe landet sortiert in Fässern. | 💡 Idee |
+| 71 | Automatische Werkbank (Crafter) | mittel | Der Crafter aus 1.21 stellt Dinge selbst her, zum Beispiel Brot, Papier oder Eisenblöcke. | 💡 Idee |
+| 72 | Raketen-Fabrik | mittel | Papier und Schießpulver werden per Crafter zu Raketen für Elytra-Flüge. | 💡 Idee |
+| 73 | Automatische Brauerei | mittel | Braustände mit Trichtern für Zutaten und Lohenpulver. Tränke in Serie. | 💡 Idee |
+| 74 | Automatische Küche | klein | Räucheröfen mit Trichtern, gefüttert aus der Kuh- und Hühnerfarm. | 💡 Idee |
+| 75 | Buch-Station | mittel | Zuckerrohr und Leder werden zu Büchern und Bücherregalen. | 💡 Idee |
 
-### 15.5 Ideen für Anleitungen
+### Funktionale Bauten (21)
+
+Technik und Komfort für Basis und Server.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 25 | Verzauberungsraum | klein | Zaubertisch mit 15 Bücherregalen, dazu Amboss und Schleifstein. Passt direkt zu den XP-Farmen. | 💡 Idee |
+| 26 | Marktplatz für Spieler-Shops | mittel | Stände für die Shop-Truhen aus dem ServerShop-Plugin, mit Schildern und Laternen. | 💡 Idee |
+| 27 | Lorenbahnhof | mittel | Gleise vom Spawn zu allen Farmen, mit Haltestellen und Fahrplan-Schildern. | 💡 Idee |
+| 76 | Blasen-Aufzug | klein | Seelensand fährt hoch, Magmablock runter. Als eigener Bauplan zum Einbauen in jedes Haus. | 💡 Idee |
+| 77 | Item-Aufzug | klein | Eine Blasensäule hebt Gegenstände vom Keller nach oben ins Lager. | 💡 Idee |
+| 78 | Versteckte Kolbentür 2 × 2 | klein | Öffnet per Knopf oder Druckplatte und verschwindet in der Wand. | 💡 Idee |
+| 79 | Geheimgang hinter Bücherregal | klein | Der klassische Geheimeingang, zum Beispiel zum Lager. | 💡 Idee |
+| 80 | Tresor mit Zahlenschloss | mittel | Ein Redstone-Kombinationsschloss mit Hebeln. Nur wer den Code kennt, kommt rein. | 💡 Idee |
+| 81 | Automatisches Licht | klein | Ein Tageslichtsensor schaltet Redstone-Lampen ab Abend ein. | 💡 Idee |
+| 82 | Zugbrücke | mittel | Kolben fahren die Brücke ein und aus. Passt zur Burg. | 💡 Idee |
+| 83 | Leuchtfeuer-Pyramide | mittel | Eisenblöcke aus der Eisenfarm, Effekte wie Eile beim Abbauen. | 💡 Idee |
+| 84 | Aquisitor-Rahmen | klein | Gibt Atmung unter Wasser, zum Beispiel rund um die Glaskuppel. | 💡 Idee |
+| 85 | Nether-Knotenpunkt | groß | Portale zu allen Basen und eine Eisstraße für schnelle Bootsfahrten. | 💡 Idee |
+| 86 | Kartenraum | mittel | Karten in Rahmen ergeben eine große Wandkarte der Welt. | 💡 Idee |
+| 87 | Farm-Bot-Zentrale | klein | Ein sicherer, beleuchteter Raum für den Farm-Bot, mitten zwischen den Farmen. | 💡 Idee |
+| 88 | Lagerhalle mit Einlagern-Truhen | mittel | Für das InfiniteLager-Plugin, gemeinsamer und privater Bereich getrennt. | 💡 Idee |
+| 89 | Werkstatt | klein | Amboss, Schleifstein, Schmiedetisch, Webstuhl und Steinsäge an einem Ort. | 💡 Idee |
+| 90 | Ausrüstungsraum | klein | Rüstungsständer, Waffen und Werkzeuge geordnet an der Wand. | 💡 Idee |
+| 91 | Beleuchteter Spawn | mittel | Ein Laternen-Raster, damit am Spawn keine Monster entstehen, und das sieht trotzdem gut aus. | 💡 Idee |
+| 103 | Sortiermodul | klein | Eine einzelne Sortierstrecke zum Anbauen an jede Farm, ohne ganzes Kellerlager. | 💡 Idee |
+| 104 | Müllschlucker | klein | Eine Truhe, deren Inhalt in Kaktus oder Lava verschwindet. Für Überschuss, den niemand braucht. | 💡 Idee |
+
+### Tiere (5)
+
+Gehege, Ställe und Aquarien.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 92 | Schildkröten-Brutstation | klein | Ein Strand mit Schildkröten, deren Eier geschützt schlüpfen. Für Schildkrötenpanzer und Tränke. | 💡 Idee |
+| 93 | Axolotl-Aquarium | klein | Ein großes Glasbecken als Deko im Haus. Axolotl helfen später auch beim Kampf unter Wasser. | 💡 Idee |
+| 94 | Pferdestall mit Koppel | mittel | Boxen, Heulager und eine Koppel zum Züchten schneller Pferde. | 💡 Idee |
+| 95 | Tierheim für zahme Tiere | klein | Ein sicheres Haus für Hunde, Katzen und Papageien, geschützt vor Monstern. | 💡 Idee |
+| 97 | Schnüffler-Gehege | mittel | Schnüffler graben seltene Samen aus: Fackellilien und Kannenpflanzen für besondere Gärten. | 💡 Idee |
+
+### Spiel und Freizeit (5)
+
+Für Events und gemeinsame Abende auf dem Server.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 98 | Arena mit Tribüne | mittel | Für Mob-Kämpfe oder Duelle, mit Zuschauerrängen und Eingangstoren. | 💡 Idee |
+| 99 | Parkour-Strecke | mittel | Sprünge in Stufen von leicht bis schwer, mit Kontrollpunkten. | 💡 Idee |
+| 100 | Heckenlabyrinth | mittel | Ein Irrgarten aus Laub mit Schatz in der Mitte. | 💡 Idee |
+| 101 | Elytra-Startturm | mittel | Ein hoher Turm mit Startplattform und gepolstertem Landeplatz. | 💡 Idee |
+| 102 | Bogenschießstand | klein | Zielblöcke geben ein Redstone-Signal, ein Lämpchen zeigt Treffer an. | 💡 Idee |
+
+### Monumente (19)
+
+Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 30 | Brandenburger Tor | mittel | Das Berliner Wahrzeichen mit Säulen und der Quadriga aus Kupfer. | 💡 Idee |
+| 31 | Big Ben | groß | Der Uhrturm in London mit vier Zifferblättern, gut im Maßstab 1:2. | 💡 Idee |
+| 32 | Kölner Dom | groß | Zwei Türme, Spitzbögen und bunte Glasfenster. | 💡 Idee |
+| 33 | Frauenkirche Dresden | groß | Die steinerne Glockenkuppel aus hellem Sandstein. | 💡 Idee |
+| 34 | Freiheitsstatue | groß | Gebaut aus Kupfer, das im Spiel mit der Zeit von selbst grün wird. | 💡 Idee |
+| 35 | Schiefer Turm von Pisa | mittel | Die Schräge entsteht durch versetzte Ringe, dazu Säulengänge. | 💡 Idee |
+| 36 | Kolosseum | groß | Ovale Arena mit Bögen, teilweise eingestürzt wie im Original. | 💡 Idee |
+| 37 | Schloss Neuschwanstein | groß | Türme und Spitzdächer auf einem Felsen. | 💡 Idee |
+| 38 | Tower Bridge | groß | Zwei Türme mit Klappbrücke, die mit Kolben funktionieren kann. | 💡 Idee |
+| 39 | Pyramide mit Grabkammer | groß | Braucht viel Sandstein. Sand lässt sich auf Paper nicht farmen, also vorher sammeln. | 💡 Idee |
+| 40 | Japanische Pagode | mittel | Fünf Stockwerke mit geschwungenen Dächern. | 💡 Idee |
+| 41 | Maya-Tempel | mittel | Stufenpyramide mit großer Treppe und Dschungel-Deko. | 💡 Idee |
+| 42 | Stonehenge | klein | Ein Steinkreis, gut als erstes Monument. | 💡 Idee |
+| 111 | Parthenon | groß | Der griechische Tempel auf der Akropolis, mit umlaufenden Säulen. | 💡 Idee |
+| 112 | Chinesische Mauer | mittel | Ein Abschnitt mit Wachtürmen, der sich über Hügel zieht. | 💡 Idee |
+| 113 | Taj Mahal | groß | Weißer Palast mit großer Kuppel, vier Minaretten und Wasserbecken. | 💡 Idee |
+| 114 | Holstentor Lübeck | mittel | Das Backsteintor mit zwei runden Türmen und Spitzhelmen. | 💡 Idee |
+| 115 | Rialtobrücke | mittel | Steinbrücke mit Läden über einem Kanal, wie in Venedig. | 💡 Idee |
+| 116 | Moai-Köpfe | klein | Die steinernen Köpfe der Osterinsel, schnell gebaut und gut als Deko am Strand. | 💡 Idee |
+
+### Gebäude (26)
+
+Eigene Entwürfe vom Wachturm bis zum Luftschiff.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 28 | Windmühle | klein | Deko-Hülle für eine Bambus- oder Melonenfarm. Sieht aus wie ein Bauwerk, darin steckt eine Farm. | 💡 Idee |
+| 29 | Hafen mit Steg und Bootshaus | mittel | Passt zur Villa am Wasser und zum Leuchtturm. | 💡 Idee |
+| 43 | Mittelalterliche Burg | groß | Ringmauer, Torhaus, Bergfried und Burghof. | 💡 Idee |
+| 44 | Wachturm | klein | Steinturm mit Holzdach und Leiter, gut für Grenzen und Wege. | 💡 Idee |
+| 45 | Fachwerkdorf | mittel | Bäckerei, Schmiede und Gasthaus im Fachwerkstil. | 💡 Idee |
+| 46 | Bauernhof mit Scheune und Silo | mittel | Farmen aus der Liste lassen sich darin unauffällig verstecken. | 💡 Idee |
+| 47 | Blockhütte am See | klein | Rundholz, Kamin und ein kleiner Steg. | 💡 Idee |
+| 48 | Baumhaus im Riesen-Dschungelbaum | mittel | Mehrere Plattformen, verbunden mit Hängebrücken. | 💡 Idee |
+| 49 | Unterwasser-Glaskuppel | mittel | Eine Wohnkuppel am Meeresgrund mit Blick auf die Fische. | 💡 Idee |
+| 50 | Japanisches Teehaus mit Garten | klein | Kirschbaumholz, Teich und Steinlaternen. | 💡 Idee |
+| 51 | Zwergenhalle im Berg | groß | Eine große Halle mit Säulen, in den Berg gebaut statt in die Tiefe. | 💡 Idee |
+| 52 | Hochhaus | groß | Moderne Glasfassade, jede Etage als eigener Bauabschnitt. | 💡 Idee |
+| 53 | Rathaus mit Uhrturm am Spawn | mittel | Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln. | 💡 Idee |
+| 54 | Hängebrücke | mittel | Über eine Schlucht oder einen Fluss, mit Seilen aus Ketten oder Zäunen. | 💡 Idee |
+| 55 | Gartenpavillon mit Brunnen | klein | Ein schneller Einstieg, passt zu den Villen. | 💡 Idee |
+| 56 | Große Bibliothek | mittel | Bücherregale über zwei Etagen, Lesesaal und Galerie. | 💡 Idee |
+| 57 | Dorfkapelle | klein | Kleiner Bau mit Glockenturm und Buntglas. | 💡 Idee |
+| 58 | Luftschiff | mittel | Hülle aus Wolle, Gondel aus Holz, schwebt über dem Spawn. | 💡 Idee |
+| 59 | Piratenschiff | mittel | Masten, Segel aus Wolle und ein Kanonendeck. | 💡 Idee |
+| 96 | Fischerhütte mit Angelsteg | klein | Kleine Hütte am Wasser, Fässer für den Fang und ein Steg zum Angeln. | 💡 Idee |
+| 105 | Weihnachtsmarkt | mittel | Buden, Tannenbäume mit Lichtern und ein Glühwein-Stand. Passt zur Adventszeit auf dem Server. | 💡 Idee |
+| 106 | Winterdorf mit Iglus | klein | Iglus aus Schnee, Eisbahn und Lagerfeuer für ein Winter-Event. | 💡 Idee |
+| 107 | U-Bahn-Station | mittel | Unterirdischer Bahnsteig für das Lorennetz, mit Treppen und Lichtern. | 💡 Idee |
+| 108 | Wasserrad | klein | Ein Mühlrad am Bach als Deko, passt zu Fachwerkdorf und Bauernhof. | 💡 Idee |
+| 109 | Marktbrunnen | klein | Ein verzierter Brunnen als Mittelpunkt für Marktplatz oder Spawn. | 💡 Idee |
+| 110 | Sternwarte | mittel | Kuppel mit Fernrohr-Raum und Sternenkarte an der Wand. | 💡 Idee |
+
+### Anleitungen (14)
+
+Wissen rund um Server, Farmen und Bauen.
 
 | Nr. | Anleitung | Inhalt | Status |
 |---|---|---|---|
-| A1 | Redstone-Grundlagen | Beobachter, Komparator, Verstärker und Trichter-Richtungen einfach erklärt | 💡 |
-| A2 | Litematica einrichten | Mod installieren, Bauplan laden, Geisterblöcke ausrichten | 💡 |
-| A3 | WorldEdit-Dateien einfügen | `.schem` auf den Server laden und an der richtigen Stelle einsetzen | 💡 |
-| A4 | Paper-Server einrichten | Von der Installation bis zu den ersten Plugins | 💡 |
-| A5 | Bedrock-Spieler verbinden | Geyser und Floodgate, Whitelist ohne Passwort | 💡 |
-| A6 | Automatische Backups | Welt regelmäßig sichern und im Notfall zurückspielen | 💡 |
-| A7 | Lag finden mit spark | Messung starten, Bericht lesen, typische Ursachen | 💡 |
-| A8 | Rohstoff-Übersicht | Welche Farm liefert welches Baumaterial, und was sich nicht farmen lässt | 💡 |
-| A9 | Server von außen erreichbar machen | Tunnel statt Portfreigabe, worauf man achten muss | 💡 |
-| A10 | Spielerleitfaden | Regeln, wichtige Befehle und Hilfe-Buch für neue Spieler | 💡 |
+| A1 | Redstone-Grundlagen | Beobachter, Komparator, Verstärker und Trichter-Richtungen einfach erklärt, mit Bildern. | 💡 Idee |
+| A2 | Litematica einrichten | Mod installieren, Bauplan laden und die Geisterblöcke richtig ausrichten. | 💡 Idee |
+| A3 | WorldEdit-Dateien einfügen | Eine .schem-Datei auf den Server laden und an der richtigen Stelle einsetzen. | 💡 Idee |
+| A4 | Paper-Server einrichten | Von der Installation über die Einstellungen bis zu den ersten Plugins. | 💡 Idee |
+| A5 | Bedrock-Spieler verbinden | Geyser und Floodgate einrichten, Whitelist ohne Passwort. | 💡 Idee |
+| A6 | Automatische Backups | Die Welt regelmäßig sichern und im Notfall zurückspielen. | 💡 Idee |
+| A7 | Lag finden mit spark | Messung starten, Bericht lesen, typische Ursachen beheben. | 💡 Idee |
+| A8 | Rohstoff-Übersicht | Welche Farm liefert welches Baumaterial, und was sich nicht farmen lässt. | 💡 Idee |
+| A9 | Server von außen erreichbar machen | Tunnel statt Portfreigabe, und worauf man dabei achten muss. | 💡 Idee |
+| A10 | Spielerleitfaden | Regeln, wichtige Befehle und das Hilfe-Buch für neue Spieler. | 💡 Idee |
+| A11 | Farmen klein halten | Überlauf-Stopp mit Komparator: Die Farm hält an, wenn das Fass halb voll ist. | 💡 Idee |
+| A12 | Dorfbewohner-Handel verbessern | Arbeitsblöcke, Heilen von Zombie-Dorfbewohnern und bessere Preise. | 💡 Idee |
+| A13 | Wahrzeichen in Blöcke umrechnen | Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt. | 💡 Idee |
+| A14 | Elytra finden und nutzen | Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze. | 💡 Idee |
+<!-- ideen:ende -->
