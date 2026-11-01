@@ -122,5 +122,92 @@
   ],
   "schmelzvorgaenge": 465,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Cellar Storage",
+    "beschreibung": "Cellar room with an automatic item sorter for 12 item types, an input chest, an overflow barrel and a wall of barrels for manual storage. Fits under the Villa by the Water.",
+    "grundflaeche": "17 × 12, fits under the Villa by the Water",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Floor with redstone",
+        "text": "A 17 × 12 room with stone brick walls. In the floor under the sorter, each column gets from front to back: a redstone torch (directly below the lower hopper, on the south side of the next block), stone bricks, a repeater facing south, stone bricks. 12 columns side by side, one per item type."
+      },
+      {
+        "name": "Barrels & lower hoppers",
+        "text": "Barrels at the front, behind each one a hopper pointing into the barrel. Behind that two stone bricks as a platform and at the very back redstone dust one step lower. Barrels instead of chests, because chests placed side by side merge into double chests. On the west wall, barrels for things you sort yourself."
+      },
+      {
+        "name": "Filter & comparator",
+        "text": "Above each lower hopper a filter hopper pointing backwards to the comparator (not down). The comparator points away from the hopper, with redstone dust behind it."
+      },
+      {
+        "name": "Transport line",
+        "text": "At the top a continuous row of hoppers, all pointing east. The input chest at the start in layer 4, an overflow barrel at the end for everything that is not sorted."
+      },
+      {
+        "name": "Ceiling & stairs",
+        "text": "Hanging lanterns, spruce ceiling, stairs up on the east side."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "How the filter works",
+        "text": "Each filter hopper gets 41 of the item type in the first slot and 1 placeholder item in each of the other four slots. The comparator then outputs strength 2. When another matching item arrives it rises to 3, the torch turns off and the lower hopper pulls exactly one item into the barrel."
+      },
+      {
+        "titel": "Rename the placeholders",
+        "text": "Use a cheap block for the placeholders, for example dirt, and rename it on an anvil, e.g. to “Filter”. That way it can never mix with real items. You need 4 per column."
+      },
+      {
+        "titel": "16-stack items",
+        "text": "For items that only stack to 16 (eggs, ender pearls, signs), put 10 instead of 41 in the first slot. The filter cannot sort unstackable things like tools, those end up in the overflow barrel."
+      },
+      {
+        "titel": "Test it",
+        "text": "Before you fill the storage, throw in a few matching and non-matching items. Matching ones land in the barrel, everything else travels on to the overflow barrel at the end."
+      },
+      {
+        "titel": "Label it",
+        "text": "An item frame with the item on each barrel shows you at a glance what is where."
+      },
+      {
+        "titel": "Extend it",
+        "text": "The columns can be extended as far as you like: just add more columns to the east and move the overflow barrel along. This room with 12 columns fits under the Villa by the Water."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and process further"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "for floors and doors"
+      },
+      {
+        "name": "Nether quartz",
+        "quelle": "Nether",
+        "hinweis": "for polished diorite"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and bars"
+      },
+      {
+        "name": "Redstone",
+        "quelle": "Cleric villager (trading) or witch farm",
+        "hinweis": "torches, dust, repeaters, comparators"
+      }
+    ]
+  }
 }

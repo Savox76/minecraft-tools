@@ -129,5 +129,97 @@
   ],
   "schmelzvorgaenge": 6130,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Mediterranean Villa",
+    "beschreibung": "A Tuscan-style Mediterranean villa: four wings around a courtyard with a fountain and colonnade, shutters, a hipped roof of bricks and cypresses at the entrance.",
+    "grundflaeche": "27 × 27, courtyard 9 × 9",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Foundation & courtyard",
+        "text": "A 27 × 27 square of smooth sandstone with a terracotta courtyard in the middle. A small platform in front of the entrance to the south."
+      },
+      {
+        "name": "Ground floor & colonnade",
+        "text": "Outer wall with a sandstone plinth, inside a second ring of walls with doors to the courtyard. The rooms lie in between. Around the courtyard the colonnade with arches of sandstone stairs, the fountain in the middle."
+      },
+      {
+        "name": "Intermediate floor",
+        "text": "Upper floor of oak planks, outside a cornice of smooth sandstone all the way round."
+      },
+      {
+        "name": "Upper floor",
+        "text": "The upper floor rests on the colonnade, which makes it larger inside than the floor below. Windows with shutters. The roof overhang starts in layer 9."
+      },
+      {
+        "name": "Hipped roof",
+        "text": "The roof rises from the outside and from the courtyard towards the middle of each wing. Each ring sits one block higher, the ridge is made of brick blocks."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "Build one quarter",
+        "text": "The floor plan is symmetrical in both directions. Finish one quarter and copy it to the other three, the fountain is the centre point."
+      },
+      {
+        "titel": "Hipped roof",
+        "text": "Each roof ring sits one block higher than the outer one, the same towards the courtyard. Minecraft shapes the corner stairs automatically if you place them in order."
+      },
+      {
+        "titel": "Lots of bricks",
+        "text": "The roof takes the most materials. Bricks are made from clay balls in a furnace. A row of furnaces with hoppers and kelp as fuel is a must here."
+      },
+      {
+        "titel": "Shutters",
+        "text": "Place spruce trapdoors left and right of the window on the outer wall and flip them up. That gives the typical southern look."
+      },
+      {
+        "titel": "Cypresses stay green",
+        "text": "Leaves you place yourself never decay. So you can stack the cypresses entirely from spruce leaves that you harvest with shears."
+      },
+      {
+        "titel": "Colonnade",
+        "text": "The arches are made of upside-down sandstone stairs in layer 3 right next to the columns. Aim at the upper half of the neighbouring block when placing them."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "for glass, concrete and sandstone"
+      },
+      {
+        "name": "Clay blocks",
+        "quelle": "Mud on dripstone (clay farm)",
+        "hinweis": "directly for terracotta, break into 4 clay balls for bricks"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "for floors and doors"
+      },
+      {
+        "name": "Leaves (with shears)",
+        "quelle": "Harvest trees with shears",
+        "hinweis": "hedges, trees and cypresses"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and bars"
+      }
+    ]
+  }
 }

@@ -77,5 +77,39 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Villagers work for you: 11 professions, paid with coins.",
+    "beschreibung": "Buyable villagers that work for their owner: harvesting, chopping wood, digging, fishing, smelting and more. Every player may have 25 workers. Workers only use what belongs to their owner and are invulnerable.",
+    "funktionen": [
+      "11 professions plus free villagers without a profession (prices in coins): farmer 500, lumberjack 750, miner 1000, digger 400, guard 600, shepherd 600, fisher 400, collector 300, smelter 500, beekeeper 400, lamplighter 200",
+      "Menu by right-click: pause, set chest, deliver into private storage, change and show work area, move workplace, change profession, dismiss (50 % back)",
+      "Fair rules: only your own fields, furnaces, beehives and chests; other players’ trees, named, tamed or leashed animals are off limits",
+      "Work areas of different players never overlap; at least 32 blocks from other players’ homes; no-go zones configurable (e.g. spawn)",
+      "Lumberjack replants 2×2 trees as 2×2 (dark oak, pale oak, giant spruce, large jungle tree)",
+      "Traders for admins: open the shop for one category",
+      "Workers only work in loaded chunks (player, farm bot or chunk loader nearby)"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "All professions, prices and areas",
+      "Buy a worker: ohne | bauer | holzfaeller | bergarbeiter | graeber | waechter | hirte | fischer | sammler | schmelzer | imker | lichtwart",
+      "Your workers and what they are doing",
+      "Open the menu (or right-click the worker)",
+      "Replace a worker that disappeared",
+      "Administration",
+      "Place or remove a trader"
+    ],
+    "config": [
+      "Areas where no workers work (world, X, Z, radius)"
+    ],
+    "changelog": [
+      [
+        "Lumberjack replants 2×2 trees as 2×2"
+      ],
+      [
+        "First version with 11 professions, menu, traders and fair rules"
+      ]
+    ]
+  }
 }

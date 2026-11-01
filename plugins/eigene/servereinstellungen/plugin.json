@@ -65,5 +65,35 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "The most important server settings by chat command, with SuperOP rights.",
+    "beschreibung": "Admins change the most important server settings in chat. Every change is saved immediately and survives a restart. Some settings, such as creative and spectator mode, only the SuperOP may change.",
+    "funktionen": [
+      "Settings: kreativ, zuschauer, abenteuer, schwierigkeit, pvp, inventar-behalten, feuer-ausbreitung, explosions-schaden, mob-griefing, monster-spawnen, phantome, wetterwechsel, zeit, reichweite, ein-spieler-schlaf, nether, end",
+      "Creative and spectator mode locked from the start, even for admins; only the SuperOP can unlock them",
+      "Range of 2 to 16 chunks around players and farm bots in which farms run",
+      "One sleeping player ends the night (important because farm bots never sleep)",
+      "Changes are announced in chat (can be turned off)"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Show all settings",
+      "Explanation and current value",
+      "Change a setting, e.g. /einstellungen zeit tag",
+      "After editing the config.yml directly",
+      "Show SuperOPs",
+      "Manage SuperOPs"
+    ],
+    "config": [
+      "Which settings only the SuperOP may change"
+    ],
+    "changelog": [
+      [
+        "SuperOP rights",
+        "Range for farms and farm bots",
+        "One-player sleep"
+      ]
+    ]
+  }
 }

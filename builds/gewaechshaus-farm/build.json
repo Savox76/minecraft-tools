@@ -140,5 +140,109 @@
   ],
   "schmelzvorgaenge": 609,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Greenhouse Farm",
+    "beschreibung": "A glass greenhouse that is an automatic farm: a farmer villager harvests carrots and potatoes and throws the surplus to a second villager behind glass. The crops fall into hoppers and end up in a chest.",
+    "grundflaeche": "15 × 15 plus niche",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Floor, farmland & hoppers",
+        "text": "A 15 × 15 base of stone bricks with 9 × 9 farmland in the middle and a single water source exactly in the centre that hydrates the whole field. In front of the north wall, 5 hoppers sit flush in the floor and lead into the chest. Outside to the north, a small niche for the second villager."
+      },
+      {
+        "name": "Crops, walls & tech",
+        "text": "Carrots on the left, potatoes on the right, a lily pad over the water. Glass walls with dark oak posts, entrance through a fence gate (villagers cannot open fence gates). Composter as the farmer’s workstation, bed and lanterns. The second villager sits behind glass in the niche."
+      },
+      {
+        "name": "Glass roof",
+        "text": "Gable roof of glass with rafters made of dark oak stairs, ridge at layer 12. The gable ends are glazed too."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "How the farm works",
+        "text": "A farmer harvests ripe carrots and potatoes and replants them. Once he has enough, he throws the surplus to the second villager. That one sits behind glass, so the crops bounce off and fall into the hoppers in front of the pane."
+      },
+      {
+        "titel": "Two villagers",
+        "text": "You need a farmer and a second villager without the farmer profession. Bring them from a village by boat or minecart, or cure zombie villagers with a potion of weakness and a golden apple. You get the farmer when an unemployed villager claims the composter."
+      },
+      {
+        "titel": "Only carrots and potatoes",
+        "text": "The farmer throws these two on directly. Wheat and beetroot work worse with this setup. Plant the whole field yourself at the start, after that it runs on its own."
+      },
+      {
+        "titel": "Building the niche",
+        "text": "The second villager stands in a 1 × 1 niche right behind the glass pane in the north wall. The farmer must be able to see him but not reach him. The hoppers lie right in front of the pane."
+      },
+      {
+        "titel": "Only runs nearby",
+        "text": "Like every farm it only works when a player is nearby. So build it close to your villa or your storage."
+      },
+      {
+        "titel": "Connect to storage",
+        "text": "Instead of a chest, the hopper line can lead straight into the input chest of your cellar storage. Carrots and potatoes then land in the right barrel automatically."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and process further"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "for glass, concrete and sandstone"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak, 2×2)",
+        "hinweis": "for roof and slabs"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "for floors and doors"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and bars"
+      },
+      {
+        "name": "Dirt",
+        "quelle": "Dig from the surface",
+        "hinweis": "becomes farmland with a hoe"
+      },
+      {
+        "name": "Carrots",
+        "quelle": "Village or zombies",
+        "hinweis": "plant once, after that the farmer harvests"
+      },
+      {
+        "name": "Potatoes",
+        "quelle": "Village or zombies",
+        "hinweis": "plant once, after that the farmer harvests"
+      },
+      {
+        "name": "Lily pad",
+        "quelle": "Swamp",
+        "hinweis": "cover over the water source"
+      },
+      {
+        "name": "Wool",
+        "quelle": "Shear sheep",
+        "hinweis": "for the bed"
+      }
+    ]
+  }
 }

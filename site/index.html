@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="{{LANG}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,9 +7,11 @@
 <meta name="description" content="{{BESCHREIBUNG}}">
 <meta name="site-base" content="{{BASE}}">
 <link rel="canonical" href="{{URL}}">
+{{ALTERNATES}}
 <meta name="robots" content="{{ROBOTS}}">
 <meta property="og:site_name" content="Savox Bauwerkstatt">
-<meta property="og:locale" content="de_DE">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta property="og:locale:alternate" content="{{OG_LOCALE_ALT}}">
 <meta property="og:type" content="{{OG_TYP}}">
 <meta property="og:title" content="{{OG_TITEL}}">
 <meta property="og:description" content="{{BESCHREIBUNG}}">
@@ -29,33 +31,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="{{BASE}}style.css">
+<script>try{var t=localStorage.getItem('bw.thema');if(t==='hell'||t==='dunkel')document.documentElement.dataset.theme=t==='hell'?'light':'dark'}catch(e){}</script>
 <script type="application/ld+json">{{JSONLD}}</script>
 </head>
 <body>
-<a class="skip" href="#inhalt">Zum Inhalt</a>
+<a class="skip" href="#inhalt">{{TXT_SKIP}}</a>
 <header class="kopf">
   <div class="kopf-innen">
-    <a class="marke" href="{{BASE}}" aria-label="Savox Bauwerkstatt, Startseite">
+    <a class="marke" href="{{START}}" aria-label="{{TXT_START}}">
       <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M16 3 29 10.5v11L16 29 3 21.5v-11z" fill="var(--ink)"/><path d="M16 3 29 10.5 16 18 3 10.5z" fill="var(--hl)"/><path d="M16 18v11L3 21.5v-11z" fill="var(--ink-soft)"/></svg>
       <span>Savox <b>Bauwerkstatt</b></span>
     </a>
-    <nav class="nav" aria-label="Hauptmenü">
-      <a href="{{BASE}}bauplaene/" data-nav="bauplaene">Baupläne</a>
-      <a href="{{BASE}}plugins/" data-nav="plugins">Plugins</a>
-      <a href="{{BASE}}anleitungen/" data-nav="anleitungen">Anleitungen</a>
-      <a href="{{BASE}}wuensche/" data-nav="wuensche">Wünsche</a>
-    </nav>
-    <button class="thema" id="thema" type="button" aria-label="Hell oder dunkel umschalten">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
-    </button>
+    <nav class="nav" aria-label="Menu">{{NAV}}</nav>
+    <div class="schalter">{{SPRACHE}}{{THEMA}}</div>
   </div>
 </header>
 <main id="inhalt" tabindex="-1">{{INHALT}}</main>
 <footer class="fuss">
   <div class="fuss-innen">
-    <p><b>Savox Bauwerkstatt</b> · Minecraft-Baupläne und Plugins kostenlos für alle Kreativen. <a href="https://github.com/Savox76/minecraft-tools">Quellcode auf GitHub</a></p>
-    <nav class="fuss-links" aria-label="Alle Seiten">{{FUSS_LINKS}}</nav>
-    <p class="klein">Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden. Blöcke werden mit eigenen Farben dargestellt, nicht mit Minecraft-Texturen.</p>
+    <p><b>Savox Bauwerkstatt</b> · {{TXT_FUSS}} <a href="https://github.com/Savox76/minecraft-tools">{{TXT_GITHUB}}</a></p>
+    <nav class="fuss-links" aria-label="{{TXT_ALLE_SEITEN}}">{{FUSS_LINKS}}</nav>
+    <p class="klein">{{TXT_DISCLAIMER}}</p>
   </div>
 </footer>
 <script type="module" src="{{BASE}}js/app.js"></script>

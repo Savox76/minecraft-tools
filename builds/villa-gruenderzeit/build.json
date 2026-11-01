@@ -147,5 +147,112 @@
   ],
   "schmelzvorgaenge": 3562,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Victorian-Era Villa",
+    "beschreibung": "A German town villa from around 1900: brick with white cornices, a steep roof with dormers and chimneys, a veranda and an octagonal corner tower with a pointed spire.",
+    "grundflaeche": "21 × 15 plus Ø 7 tower and veranda",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Plinth & veranda",
+        "text": "Main house 21 × 15 on a stone brick plinth, octagonal tower at the south-east corner. In front the spruce veranda, steps and a hedge."
+      },
+      {
+        "name": "Ground floor",
+        "text": "Stone brick plinth, above it brick walls with tall windows. Above each window a white lintel of polished diorite. Veranda with fence posts, lanterns and a flat roof."
+      },
+      {
+        "name": "Upper floor",
+        "text": "Layer 6 is the white cornice around the house and tower. Then the upper floor with windows and in layer 11 the stone brick crown moulding."
+      },
+      {
+        "name": "Roof, dormers & tower",
+        "text": "A steep gable roof of dark oak stairs, each row one block higher, ridge at layer 19. Brick gables with a round window, two dormers with small gable roofs, chimneys with wall caps. The tower rises well above the roof with three more rows of windows."
+      },
+      {
+        "name": "Tower spire",
+        "text": "The spire starts with an overhang and tapers in rings of stairs to the top with iron bars and a lightning rod."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "45-degree roof",
+        "text": "Each row of dark oak stairs sits one block higher and one block further in. At the ridge everything meets in a row of slabs."
+      },
+      {
+        "titel": "White frames",
+        "text": "Polished diorite needs nether quartz. Without the Nether, smooth sandstone or birch wood also work for cornices and lintels."
+      },
+      {
+        "titel": "Counting the tower",
+        "text": "The tower is an octagon 7 blocks across. The grid shows the shape, and it repeats from the bottom up to layer 16."
+      },
+      {
+        "titel": "Dormers",
+        "text": "The two dormers break up the roof surface to the south. Place the whole roof first, then cut in the dormers and close them with bricks."
+      },
+      {
+        "titel": "Smoke from the chimney",
+        "text": "A campfire at the top of the chimney makes smoke rise. With a hay bale underneath it rises higher."
+      },
+      {
+        "titel": "Garden",
+        "text": "The oak leaf hedge frames the plot. A gravel or stone brick path from the veranda to the gap in the hedge completes it."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and process further"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "for glass, concrete and sandstone"
+      },
+      {
+        "name": "Clay blocks",
+        "quelle": "Mud on dripstone (clay farm)",
+        "hinweis": "directly for terracotta, break into 4 clay balls for bricks"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak, 2×2)",
+        "hinweis": "for roof and slabs"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "for floors and doors"
+      },
+      {
+        "name": "Leaves (with shears)",
+        "quelle": "Harvest trees with shears",
+        "hinweis": "hedges, trees and cypresses"
+      },
+      {
+        "name": "Nether quartz",
+        "quelle": "Nether",
+        "hinweis": "for polished diorite"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and bars"
+      },
+      {
+        "name": "Copper ingots",
+        "quelle": "Drowned or a little copper ore",
+        "hinweis": "lightning rod, optional"
+      }
+    ]
+  }
 }

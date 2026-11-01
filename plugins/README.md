@@ -9,6 +9,8 @@ Jeder Ordner enthält:
 - `plugin.json`: Daten für die Website (Version, Funktionen, Befehle, Einstellungen, Änderungen)
 - `README.md`: dieselben Infos zum Lesen auf GitHub
 
+Englische Texte stehen in `plugin.json` unter `"en"`: `kurz`, `beschreibung`, `funktionen`, `status_text` sowie `befehle`, `config` und `changelog` als Listen in derselben Reihenfolge wie auf Deutsch.
+
 | Plugin | Version | Kurz |
 |---|---|---|
 | [AdminLogin](eigene/adminlogin/) | 1.2.0 | Admin-Passwort beim Betreten, SuperOP, Sperre nach Fehlversuchen |
@@ -33,5 +35,6 @@ Plugins anderer Entwickler. Hier liegen nur Beschreibung, Einsatz auf dem Server
 | `link` | offizielle Download-Seite (optional) |
 | `anleitung` | ID einer Anleitung in `docs/` (optional) |
 | `status` | `im-einsatz` oder `empfohlen` |
+| `en` | englische Fassung von `zweck` und `einsatz` |
 
 Die Liste ist vorläufig, aus den Server-Notizen übernommen, und wird mit der vollständigen Plugin-Liste ergänzt.

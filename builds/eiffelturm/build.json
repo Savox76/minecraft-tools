@@ -141,5 +141,104 @@
   ],
   "schmelzvorgaenge": 684,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Eiffel Tower",
+    "beschreibung": "The Eiffel Tower in Paris at 1 : 3 scale, built from dark oak: four curved legs with arches, two platforms, a glazed observation deck and an antenna. A landmark you can see from everywhere.",
+    "grundflaeche": "43 × 43 (45 × 45 with platform)",
+    "massstab": "approx. 1 : 3 (1 block ≈ 3 m)",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Foundation & plinths",
+        "text": "The four leg plinths made of stone bricks. Mark the centre first, then lay out the four squares."
+      },
+      {
+        "name": "Legs up to the arches",
+        "text": "Each leg is a hollow square: corners are planks, sides are fences, and every 4th layer is a full ring of planks as a cross brace. The legs move inwards as they rise. From layer 6, add the arches between the legs."
+      },
+      {
+        "name": "Frieze & 1st platform",
+        "text": "A band of planks all the way round, above it the 1st platform with an open centre. Iron bar railings, lanterns at the corners."
+      },
+      {
+        "name": "Middle section",
+        "text": "The four legs keep converging. Same building method as below."
+      },
+      {
+        "name": "2nd platform",
+        "text": "A closed platform. From here the legs merge into a single shaft."
+      },
+      {
+        "name": "Upper shaft",
+        "text": "A long, slim shaft: a hollow square that gets one block narrower every few layers. This is where scaffolding pays off most."
+      },
+      {
+        "name": "Observation deck",
+        "text": "Platform with railing, glazed room and roof."
+      },
+      {
+        "name": "Top & antenna",
+        "text": "Spire, lantern and an antenna of iron bars with a lightning rod."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "Centre first",
+        "text": "Place an eye-catching block on the centre (0 | 0) and enter its coordinates above. Every layer is symmetrical in four directions: build one quarter and count out the other three."
+      },
+      {
+        "titel": "Bamboo scaffolding",
+        "text": "Scaffolding (6 bamboo + 1 string make 6) can be stacked, stood on and climbed down by sneaking. Break the bottom one and the whole stack drops. Almost a must for the legs from layer 2."
+      },
+      {
+        "titel": "Reading the legs",
+        "text": "Each leg is a hollow square. Corners are planks, sides are fences. Every 4th layer (0, 4, 8 …) is a full ring of planks: those are the cross braces."
+      },
+      {
+        "titel": "Plan plenty of wood",
+        "text": "About 2,100 dark oak logs. A dark oak planted 2×2 usually gives 15 to 30 logs. Alternative: replace the fences with iron bars, then you need about 1,200 more iron ingots instead of wood."
+      },
+      {
+        "titel": "Wood burns",
+        "text": "Lightning can set the tower on fire. The lightning rod on top catches strikes nearby. On your own server you can also turn off fire spread with a game rule."
+      },
+      {
+        "titel": "Height fits",
+        "text": "With 112 layers the tower ends at Y 175 when built at spawn height 64. Build height goes up to Y 319 in Java and Bedrock."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak, plant 2×2)",
+        "hinweis": "gives 8,294 planks for planks, fences, slabs and sticks"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt 648× into stone, then 4 stone → 4 stone bricks"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "for iron bars (6 ingots → 16 bars) and lanterns"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "smelt into glass, 6 glass → 16 glass panes"
+      },
+      {
+        "name": "Copper ingots",
+        "quelle": "Drowned or a little copper ore",
+        "hinweis": "only for the lightning rod, optional"
+      },
+      {
+        "name": "Torches",
+        "quelle": "Charcoal from the tree farm",
+        "hinweis": "for the lanterns"
+      }
+    ]
+  }
 }

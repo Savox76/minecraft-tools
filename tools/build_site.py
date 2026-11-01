@@ -31,6 +31,11 @@ PLUGIN_KATEGORIEN = {
     'sicherheit': 'Sicherheit', 'wirtschaft': 'Wirtschaft', 'lager': 'Lager',
     'schutz': 'Schutz', 'verwaltung': 'Verwaltung',
 }
+KATEGORIEN_EN = {'tuerme': 'Towers & landmarks', 'villen': 'Villas', 'technik': 'Farms & technology'}
+PLUGIN_KATEGORIEN_EN = {'sicherheit': 'Security', 'wirtschaft': 'Economy', 'lager': 'Storage',
+                        'schutz': 'Protection', 'verwaltung': 'Administration'}
+# Englische Adress-Teile für Links in den Anleitungen (#/plugin/x -> en/plugin/x/)
+SEG_EN = {'bauplaene': 'builds', 'bau': 'build', 'anleitungen': 'guides', 'anleitung': 'guide', 'wuensche': 'wishes'}
 
 
 def lies_json(pfad):
@@ -236,7 +241,9 @@ def main():
     shutil.copytree(os.path.join(ROOT, 'site'), OUT)
 
     katalog = {'builds': [], 'plugins': [], 'fremd': [], 'docs': [], 'wuensche': [], 'kategorien': KATEGORIEN,
-               'plugin_kategorien': PLUGIN_KATEGORIEN}
+               'plugin_kategorien': PLUGIN_KATEGORIEN, 'kategorien_en': KATEGORIEN_EN,
+               'plugin_kategorien_en': PLUGIN_KATEGORIEN_EN}
+    bloecke_en = lies_json(os.path.join(ROOT, 'tools', 'i18n', 'bloecke_en.json'))
     cfg = lies_json(os.path.join(ROOT, 'tools', 'site_config.json'))
     if os.environ.get('SITE_URL'):
         cfg['site_url'] = os.environ['SITE_URL']
@@ -251,6 +258,10 @@ def main():
         build = lies_json(os.path.join(ordner, 'build.json'))
         model = lies_json(os.path.join(ordner, 'model.json'))
         assert build['id'] == bid, f'{bid}: id in build.json passt nicht zum Ordnernamen'
+        for p in model['palette']:
+            if p['name'] not in bloecke_en:
+                print(f'  Hinweis: keine englische Bezeichnung für „{p["name"]}“ (tools/i18n/bloecke_en.json)')
+            p['name_en'] = bloecke_en.get(p['name'], p['name'])
         liste = teileliste(model)
         schritte = lego_schritte(build, model)
         downloads = []
@@ -273,7 +284,8 @@ def main():
         katalog['builds'].append({
             k: build.get(k) for k in ('id', 'titel', 'beschreibung', 'kategorie', 'tags', 'edition',
                                       'schwierigkeit', 'bauzeit_stunden', 'grundflaeche', 'status')
-        } | {'bloecke': gesamt, 'schritte': len(schritte), 'hoehe': model['size']['y'],
+        } | {'en': {k: build.get('en', {}).get(k) for k in ('titel', 'beschreibung', 'grundflaeche')},
+             'bloecke': gesamt, 'schritte': len(schritte), 'hoehe': model['size']['y'],
              'blocksorten': len(liste)})
         print(f'Bauplan  {bid:22} {gesamt:6} Blöcke  {len(schritte):4} Schritte')
 
@@ -290,20 +302,39 @@ def main():
         katalog['fremd'] = lies_json(fremd)
         print(f'Fremde Plugins: {len(katalog["fremd"])}')
 
+    def link_de(m):
+        return 'href="%s%s/"' % (base, m.group(1).rstrip('/'))
+
+    def link_en(m):
+        teile = m.group(1).rstrip('/').split('/')
+        teile[0] = SEG_EN.get(teile[0], teile[0])
+        return 'href="%sen/%s/"' % (base, '/'.join(teile))
+
+    os.makedirs(os.path.join(OUT, 'data', 'seiten'), exist_ok=True)
     for name in sorted(os.listdir(os.path.join(ROOT, 'docs'))):
         if not name.endswith('.md'):
             continue
         did = name[:-3]
         with open(os.path.join(ROOT, 'docs', name), encoding='utf-8') as f:
             meta, text = front_matter(f.read())
-        os.makedirs(os.path.join(OUT, 'data', 'seiten'), exist_ok=True)
-        inhalt = re.sub(r'href="#/([^"]+)"', lambda m: 'href="%s%s/"' % (base, m.group(1).rstrip('/')), md_html(text))
-        docs_html[did] = inhalt
-        with open(os.path.join(OUT, 'data', 'seiten', f'doc-{did}.html'), 'w', encoding='utf-8') as f:
-            f.write(inhalt)
-        katalog['docs'].append({'id': did, 'titel': meta.get('titel', did), 'kurz': meta.get('kurz', ''),
-                                'reihenfolge': int(meta.get('reihenfolge', 99))})
-        print(f'Anleitung {did}')
+        eintrag = {'id': did, 'titel': meta.get('titel', did), 'kurz': meta.get('kurz', ''),
+                   'reihenfolge': int(meta.get('reihenfolge', 99))}
+        sprachen = [('de', meta, text, link_de, '')]
+        en_pfad = os.path.join(ROOT, 'docs', 'en', name)
+        if os.path.isfile(en_pfad):
+            with open(en_pfad, encoding='utf-8') as f:
+                meta_en, text_en = front_matter(f.read())
+            eintrag['en'] = {'titel': meta_en.get('titel', eintrag['titel']), 'kurz': meta_en.get('kurz', eintrag['kurz'])}
+            sprachen.append(('en', meta_en, text_en, link_en, '.en'))
+        else:
+            print(f'  Hinweis: keine englische Fassung docs/en/{name}')
+        for lang, _, txt, umschreiben, endung in sprachen:
+            inhalt = re.sub(r'href="#/([^"]+)"', umschreiben, md_html(txt))
+            docs_html[(did, lang)] = inhalt
+            with open(os.path.join(OUT, 'data', 'seiten', f'doc-{did}{endung}.html'), 'w', encoding='utf-8') as f:
+                f.write(inhalt)
+        katalog['docs'].append(eintrag)
+        print(f'Anleitung {did} ({", ".join(x[0] for x in sprachen)})')
     katalog['docs'].sort(key=lambda d: d['reihenfolge'])
 
     wpfad = os.path.join(ROOT, 'tools', 'cache', 'wuensche.json')
@@ -315,9 +346,9 @@ def main():
         f.write('')
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from seiten import Seiten
-    s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html)
+    s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html, bloecke_en)
     s.alles()
-    print(f'Seiten: {len(s.adressen)} Adressen in sitemap.xml · Basis {cfg["site_url"]}')
+    print(f'Seiten: {s.anzahl} Adressen (Deutsch und Englisch) in sitemap.xml · Basis {cfg["site_url"]}')
     print('Fertig:', OUT)
 
 

@@ -41,5 +41,27 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Help book in the inventory and a /hilfe menu with all commands.",
+    "beschreibung": "Every player has a fixed “Help & Commands” book in the inventory. One click opens a menu with all commands, sorted by topic. Admins also see the admin commands.",
+    "funktionen": [
+      "Fixed help book at the bottom right of the inventory, cannot be moved, dropped or lost on death",
+      "Menu by topic: shop, own shop, storage, workers, homes, farm bot, chat, server rules",
+      "Hover over a topic to see the commands, click to write them into the chat",
+      "Texts fully customisable in the config.yml"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Open the help menu",
+      "Turn the book in the inventory off or on",
+      "Reload the texts"
+    ],
+    "config": [],
+    "changelog": [
+      [
+        "First version"
+      ]
+    ]
+  }
 }

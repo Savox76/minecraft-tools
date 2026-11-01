@@ -71,5 +71,37 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Admins must enter their own password when joining.",
+    "beschreibung": "Every admin (OP) enters an admin password when joining the server, before getting into the world. Normal players notice nothing. A SuperOP (head admin) can have a separate password so no normal admin can log in as SuperOP.",
+    "funktionen": [
+      "Admin login window when joining, passwords are stored encrypted",
+      "Locked for 15 minutes after 3 wrong attempts (configurable)",
+      "Separate password per admin possible, e.g. for the SuperOP",
+      "Remember password: after a correct entry, no prompt for a configurable time, only from the same device or IP",
+      "Connections through a local tunnel (127.0.0.1, e.g. playit) are never remembered"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Reload config",
+      "Unlock a locked admin",
+      "Set a separate admin password",
+      "Show remembered logins",
+      "Delete remembered logins"
+    ],
+    "config": [
+      "How long a correctly entered password is remembered, 0 = ask every time",
+      "Same setting for admins with their own password, -1 = same as above"
+    ],
+    "changelog": [
+      [
+        "Remember admin password (per device/IP, configurable)",
+        "Commands sitzungen and abmelden"
+      ],
+      [
+        "First version: admin login, lock after failed attempts, separate SuperOP password"
+      ]
+    ]
+  }
 }

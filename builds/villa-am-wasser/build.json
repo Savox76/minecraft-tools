@@ -180,5 +180,139 @@
   ],
   "schmelzvorgaenge": 1076,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Villa by the Water",
+    "beschreibung": "A modern luxury villa on a 27 × 27 plot by the shore, built entirely on land. Glass front facing the water, cantilevered upper floor, raised pool with a glass edge, roof terrace with hot tub, penthouse and a water elevator (soul sand up, magma block down).",
+    "grundflaeche": "27 × 27 plot, house 24 × 16",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Plot & terrace",
+        "text": "The plot is 27 × 27 blocks and lies entirely on land. The grass, beach and sea around it already exist and are shown faded. You build the smooth stone floor under the house, the path to the front door and the dark oak terrace facing the water. Soul sand and a magma block for the water elevator go along the inside of the west wall."
+      },
+      {
+        "name": "Ground floor & pool",
+        "text": "Living area with a glass front facing the water, spruce cladding to the west, front door to the north. On the west wall the water elevator: two glass shafts, the northern one goes up, the southern one down, with doors to get in and out. On the terrace the raised pool with a glass edge towards the sea, the fire pit with benches and lanterns. A hedge around the land side."
+      },
+      {
+        "name": "Cantilevered ceiling",
+        "text": "The upper floor projects over the terrace to the south and east. Glowstone in the underside works as ceiling lights."
+      },
+      {
+        "name": "Upper floor",
+        "text": "Fully glazed south and east sides with a view of the water, wood with glass slits to the west."
+      },
+      {
+        "name": "Roof terrace & penthouse",
+        "text": "Roof terrace with glass railing, hot tub and lanterns. The elevator ends open on the roof terrace: get out of the up shaft at the top, jump into the neighbouring shaft to go down. On top, the penthouse with a glass front facing south."
+      },
+      {
+        "name": "Penthouse roof",
+        "text": "Flat roof with an overhang of smooth stone slabs."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "Finding a spot",
+        "text": "Ideal is a flat shore with the water to the south. The south edge of the plot is 2 blocks before the waterline, leaving a strip of beach so you build nothing in the water. Layer 0 is one block above sea level or level with it."
+      },
+      {
+        "titel": "Mark it out first",
+        "text": "Mark out the 27 × 27 blocks with fences or wool and level the ground. Then lay the house floor, terrace and pool area in layer 0."
+      },
+      {
+        "titel": "Pool with glass edge",
+        "text": "The pool stands one block high on the terrace. The side facing the sea is glass, so from the terrace the pool water looks like part of the sea. Two water buckets in one corner make an infinite source for filling it."
+      },
+      {
+        "titel": "Pre-produce glass",
+        "text": "Glass and white concrete are the biggest items. Run furnaces with hoppers and kelp as fuel, a kelp farm right by the water is a good fit."
+      },
+      {
+        "titel": "Light at night",
+        "text": "Glowstone under the overhang, in the pool and in the hot tub, plus lanterns on the terrace and the roof. Sea lanterns on the beach show off the shore."
+      },
+      {
+        "titel": "Palm trees",
+        "text": "You get jungle logs and leaves from the jungle or a jungle tree farm. Put a grass block under each palm instead of wood. Leaves you place yourself never decay."
+      },
+      {
+        "titel": "Filling the water elevator",
+        "text": "Both shafts need a water source in every block. The easiest way: pour water in at the top, plant kelp at the bottom and let it grow to the top, then break the kelp. You are left with source blocks only. Only then place the soul sand and magma block at the bottom."
+      },
+      {
+        "titel": "Using the elevator",
+        "text": "The northern shaft with soul sand goes up, the southern one with the magma block goes down. The doors keep the water in the shaft. Sneak briefly (Shift) when getting out at the bottom so the magma block does no damage."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and process further"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "for glass, concrete and sandstone"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "Piglin bartering or trader",
+        "hinweis": "for concrete powder"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak, 2×2)",
+        "hinweis": "for roof and slabs"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "for floors and doors"
+      },
+      {
+        "name": "Jungle logs",
+        "quelle": "Tree farm (jungle) or jungle",
+        "hinweis": "palm trunks"
+      },
+      {
+        "name": "Leaves (with shears)",
+        "quelle": "Harvest trees with shears",
+        "hinweis": "hedges, trees and cypresses"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and bars"
+      },
+      {
+        "name": "Soul sand",
+        "quelle": "Nether (soul sand valley)",
+        "hinweis": "elevator going up"
+      },
+      {
+        "name": "Magma block",
+        "quelle": "Nether or 4 magma cream",
+        "hinweis": "elevator going down"
+      },
+      {
+        "name": "Glowstone",
+        "quelle": "Nether (ceiling)",
+        "hinweis": "light at the pool"
+      }
+    ]
+  }
 }

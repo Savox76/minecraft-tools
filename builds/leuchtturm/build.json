@@ -183,5 +183,136 @@
   ],
   "schmelzvorgaenge": 1234,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Lighthouse",
+    "beschreibung": "Red and white striped lighthouse on an old stone base. Three tower sections, a gallery with railing, a glazed lantern room with a beacon light and a ladder inside all the way to the top.",
+    "grundflaeche": "Ø 17 blocks",
+    "massstab": "1 : 1 (1 block = 1 m, approx. 65 m tall)",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Foundation",
+        "text": "A full Ø 17 disc of stone bricks, mixed with mossy and cracked ones for an aged look."
+      },
+      {
+        "name": "Base room",
+        "text": "A Ø 17 ring with a door to the south and small windows. The pillar with the ladder starts in the middle."
+      },
+      {
+        "name": "Terrace",
+        "text": "The ceiling of the base is a terrace around the tower, with a parapet of stone brick wall."
+      },
+      {
+        "name": "Tower section 1 (Ø 13)",
+        "text": "White below, red above. Door to the terrace in the south, windows spread around."
+      },
+      {
+        "name": "Ledge & floor",
+        "text": "A full Ø 13 disc of stone bricks: a grey ring outside as a ledge, a floor inside. From here the tower gets narrower."
+      },
+      {
+        "name": "Tower section 2 (Ø 11)",
+        "text": "Same white/red pattern, one step narrower."
+      },
+      {
+        "name": "Ledge & floor",
+        "text": "A full Ø 11 disc."
+      },
+      {
+        "name": "Tower section 3 (Ø 9)",
+        "text": "The last section. In layer 51 a Ø 11 support ring as a corbel under the gallery."
+      },
+      {
+        "name": "Gallery",
+        "text": "A cantilevered Ø 15 platform with an iron bar railing."
+      },
+      {
+        "name": "Lantern room",
+        "text": "A Ø 7 glass ring, door to the gallery in the south, the beacon light in the middle."
+      },
+      {
+        "name": "Dome & top",
+        "text": "A stepped red dome, a spire of iron bars and a lightning rod."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "Counting circles",
+        "text": "Circles are the hardest part. Count outwards from the centre line in the grid: how many blocks per row, then offset. The sections are Ø 17, 13, 11, 9 and 7."
+      },
+      {
+        "titel": "Making concrete",
+        "text": "4 sand + 4 gravel + 1 dye make 8 concrete powder. Place the powder in water or let it fall in and it turns into concrete. The crafter block can automate the mixing."
+      },
+      {
+        "titel": "Light only at night",
+        "text": "Instead of glowstone: redstone lamps and an inverted daylight detector. The beacon then turns on automatically at sunset."
+      },
+      {
+        "titel": "Walk-in",
+        "text": "A stone brick pillar with a ladder runs up the middle from the bottom to the lantern room. The ledges at layers 22 and 38 are intermediate floors inside for small rooms."
+      },
+      {
+        "titel": "Location",
+        "text": "Looks best on a cliff or right by the water. A kelp farm nearby gives you the fuel for all the smelting."
+      },
+      {
+        "titel": "Build it bigger",
+        "text": "For an even bulkier tower, extend each section by 4 layers. Keep the stripes half white and half red."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone, then into stone bricks; smelt 39 of them again (cracked)"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "680 for concrete powder, 83 for glass"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "Gravel (piglin bartering or trader)",
+        "hinweis": "for concrete powder: 4 sand + 4 gravel + 1 dye → 8 powder"
+      },
+      {
+        "name": "Bone meal (white)",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye for the white concrete"
+      },
+      {
+        "name": "Poppy or beetroot (red)",
+        "quelle": "Flower farm with bone meal",
+        "hinweis": "red dye for the red concrete"
+      },
+      {
+        "name": "Vines or moss",
+        "quelle": "Bone meal on moss",
+        "hinweis": "for the mossy stone bricks"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "for the railing"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm",
+        "hinweis": "for ladders and doors"
+      },
+      {
+        "name": "Glowstone",
+        "quelle": "Nether (ceiling)",
+        "hinweis": "the beacon light, alternatively redstone lamps"
+      },
+      {
+        "name": "Copper ingots",
+        "quelle": "Drowned or a little copper ore",
+        "hinweis": "lightning rod, optional"
+      }
+    ]
+  }
 }

@@ -81,5 +81,43 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Coin shop with 181 items, player shops and daily limits.",
+    "beschreibung": "A server shop with coins as currency, plus player shops on your own chests. Prices are balanced so that buying, processing and selling never makes a profit: coins come only from real work or workers.",
+    "funktionen": [
+      "181 items in categories, including everything the workers deliver",
+      "Selling to the server pays 50 % of the buy price, calculated on the whole amount",
+      "Ore blocks and ancient debris cannot be bought",
+      "Player shops on chests you placed yourself, protected against others opening them, hoppers and explosions",
+      "Buy menu on other players’ shop chests: 1, 8, 16, 32, 64 or “as many as possible”",
+      "Daily limit of 10,000 coins per player (sales to the server and income from your own shop), max. 256 per item and day when buying",
+      "Traders (from the Arbeiter plugin) open the shop for their category"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Open the server shop",
+      "Balance and today’s selling limit",
+      "Set up your own shop chest (look at the chest, goods in hand)",
+      "Manage your shops",
+      "Reload config",
+      "Credit coins"
+    ],
+    "config": [
+      "Maximum selling income per player and day",
+      "false = income from your own shop is unlimited"
+    ],
+    "changelog": [
+      [
+        "Buy menu for player shops",
+        "Daily limit 10,000 coins, shop income counts"
+      ],
+      [
+        "50 % selling price on the whole amount",
+        "181 items, category “Animals, fish & food”",
+        "Prices checked against profit loops (48 recipes)",
+        "Trader integration"
+      ]
+    ]
+  }
 }

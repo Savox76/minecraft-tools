@@ -35,5 +35,25 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Creepers no longer explode, switchable in chat.",
+    "beschreibung": "Protects builds and players from creeper explosions. Admins switch the protection in chat and all players see the message.",
+    "funktionen": [
+      "Creepers do not explode (no block or player damage)",
+      "Protection can be switched on and off by chat command, with a message to everyone"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Switch or show mob protection",
+      "Switch only the creeper protection"
+    ],
+    "config": [],
+    "changelog": [
+      [
+        "Creeper protection",
+        "Switching in chat"
+      ]
+    ]
+  }
 }

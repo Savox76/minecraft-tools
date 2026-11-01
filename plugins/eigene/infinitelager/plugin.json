@@ -71,5 +71,37 @@
       ]
     }
   ],
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "kurz": "Unlimited shared and private storage with deposit chests.",
+    "beschreibung": "Unlimited storage by command: a shared storage for everyone and a private storage per player. Deposit chests empty themselves into the storage automatically.",
+    "funktionen": [
+      "Shared storage for all players",
+      "Private storage per player that nobody else can access",
+      "Deposit chests (shared or private), emptied automatically every 5 seconds",
+      "Only the owner can open or break private deposit chests",
+      "Search the storage",
+      "Log: who took what from the shared storage"
+    ],
+    "status_text": "Documentation available, source code and download coming soon.",
+    "befehle": [
+      "Open the shared storage",
+      "Deposit into the shared storage",
+      "Open your private storage",
+      "Deposit into your private storage",
+      "Chest in hand becomes a deposit chest (shared)",
+      "Chest in hand becomes a deposit chest (private)",
+      "Search the storage (also /lager privat suche <item>)",
+      "Latest withdrawals from the shared storage"
+    ],
+    "config": [],
+    "changelog": [
+      [
+        "Private storage per player",
+        "Private deposit chests",
+        "Automatic emptying every 5 seconds",
+        "Log for the shared storage"
+      ]
+    ]
+  }
 }

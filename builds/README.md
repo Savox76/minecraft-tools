@@ -30,13 +30,14 @@ builds/<id>/
 | `rohstoffe` | was die Farmen liefern müssen: `name`, `menge`, `quelle`, `hinweis` |
 | `schmelzvorgaenge` | Anzahl Ofen-Vorgänge |
 | `version`, `autor` | Versionsnummer und Name |
+| `en` | englische Texte: `titel`, `beschreibung`, `grundflaeche`, `massstab`, `hinweis`, `abschnitte` (nur `name` und `text`), `tipps`, `rohstoffe` (ohne `menge`). Listen in derselben Reihenfolge wie auf Deutsch |
 
 ### `model.json`
 
 - `size`: Breite `x` (Osten), Höhe `y`, Tiefe `z` (Süden)
 - `palette`: ein Eintrag pro Blocksorte
   - `key`: ein Buchstabe, der in den Ebenen benutzt wird
-  - `name`: deutscher Name auf der Website
+  - `name`: deutscher Name auf der Website. Die englische Bezeichnung steht in [`tools/i18n/bloecke_en.json`](../tools/i18n/bloecke_en.json), neue Blocknamen dort ergänzen
   - `block`: Minecraft-ID mit Zustand, z. B. `minecraft:oak_door[half=upper]`
   - `color`: Farbe in der Darstellung
   - `flags` (optional): `vorhanden` (Gelände, wird nicht gebaut), `kein-block` (z. B. Dorfbewohner), `zweiter-teil` (obere Türhälfte, Kopfteil vom Bett: zählt nicht in der Teileliste)
@@ -47,9 +48,10 @@ builds/<id>/
 - LEGO-Schritte mit höchstens 60 neuen Blöcken pro Schritt
 - Teileliste mit Stacks
 - Downloads: `.litematic` (Litematica), `.schem` (WorldEdit), `teileliste.csv`
+- Seiten auf Deutsch und Englisch, Vorschaubild und Link-Vorschaubilder
 
 ## Neuen Bauplan hinzufügen
 
-1. Ordner `builds/<id>/` mit `build.json` und `model.json` anlegen.
+1. Ordner `builds/<id>/` mit `build.json` (inklusive `en`) und `model.json` anlegen.
 2. Lokal prüfen: `pip install -r tools/requirements.txt` und dann `python tools/build_site.py`. Die Ausgabe nennt Blöcke und Schritte.
 3. Auf `main` pushen. Die Website wird automatisch neu gebaut.

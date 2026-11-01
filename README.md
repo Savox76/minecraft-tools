@@ -2,14 +2,14 @@
 
 Minecraft-Baupläne im LEGO-Stil und Plugins für Paper-Server, kostenlos und einzeln herunterladbar.
 
-**Website:** <https://savox76.github.io/minecraft-tools/>
+**Website:** <https://savox76.github.io/minecraft-tools/> · English: <https://savox76.github.io/minecraft-tools/en/>
 
 | Ordner | Inhalt |
 |---|---|
 | [`builds/`](builds/) | Baupläne: Beschreibung und Blöcke. Website, LEGO-Schritte und Downloads entstehen daraus automatisch |
 | [`plugins/eigene/`](plugins/eigene/) | Eigene Paper-Plugins mit Dokumentation |
 | [`plugins/fremd/`](plugins/fremd/) | Plugins anderer Entwickler, die auf dem Server laufen oder empfohlen werden |
-| [`docs/`](docs/) | Anleitungen (Farm-Bot, CoreProtect) |
+| [`docs/`](docs/) | Anleitungen (Farm-Bot, CoreProtect), englisch in `docs/en/` |
 | [`site/`](site/) | Die Website |
 | [`tools/`](tools/) | Erzeugt Website-Daten, LEGO-Schritte, `.litematic`, `.schem` und Teilelisten |
 

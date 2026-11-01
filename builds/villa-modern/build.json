@@ -135,5 +135,102 @@
   ],
   "schmelzvorgaenge": 1464,
   "version": "0.9.0",
-  "autor": "Savox"
+  "autor": "Savox",
+  "en": {
+    "titel": "Modern Villa",
+    "beschreibung": "A modern villa with a flat roof: glazed ground floor, an upper floor that projects 8 blocks over the terrace, a roof terrace with glass railing, a pool and birch trees.",
+    "grundflaeche": "29 × 23 with terrace and pool",
+    "massstab": "1 : 1",
+    "hinweis": "Block directions (stairs, doors, hoppers) have not been checked in a test world yet.",
+    "abschnitte": [
+      {
+        "name": "Platform & pool",
+        "text": "A smooth stone base slab, a pool with a white concrete rim and glowstone in the corners. Dig the pool 2 blocks deep; the plan only shows the water surface."
+      },
+      {
+        "name": "Ground floor",
+        "text": "Glass fronts to the south and east, closed concrete walls to the north and west. The stairs to the upper floor run along the inside of the north side. Birch leaf hedges as a privacy screen."
+      },
+      {
+        "name": "Intermediate floor",
+        "text": "Ceiling of the ground floor and floor of the upper floor in one. The upper floor projects 8 blocks over the terrace to the east."
+      },
+      {
+        "name": "Upper floor",
+        "text": "A band of windows all round, spruce cladding on the south side, the east side fully glazed. In layer 6 the glass railing of the roof terrace above the ground floor."
+      },
+      {
+        "name": "Flat roof",
+        "text": "Flat roof with an overhang of slabs and a glass railing on top."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "Pre-produce glass",
+        "text": "The glass fronts are the biggest item. Run a row of furnaces with hoppers while you place the foundation and concrete walls."
+      },
+      {
+        "titel": "Digging the pool",
+        "text": "Dig the basin 2 blocks deep. Glowstone under each corner or behind glass in the pool floor makes the water glow at night. Two water buckets in one corner make an infinite source for filling it."
+      },
+      {
+        "titel": "Building the cantilever",
+        "text": "The overhang to the east needs no supports in Minecraft. Put a few helper blocks underneath to place the ceiling and break them afterwards."
+      },
+      {
+        "titel": "Even better on a slope",
+        "text": "If the villa stands on an edge, let the pool and the east side project over the slope. The view from the glazed upper floor is at its best then."
+      },
+      {
+        "titel": "Quartz instead of concrete",
+        "text": "Quartz blocks look similar and need no gravel, but nether quartz instead. Concrete has the cleaner, smoother surface."
+      },
+      {
+        "titel": "Interior",
+        "text": "Light carpets, bookshelves and flower pots suit the style. Keep the light invisible: glowstone under carpets or lanterns behind glass."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and process further"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Sand (trader, desert or sand machine)",
+        "hinweis": "for glass, concrete and sandstone"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "Piglin bartering or trader",
+        "hinweis": "for concrete powder"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "for planks, doors, trapdoors and fences"
+      },
+      {
+        "name": "Birch logs",
+        "quelle": "Tree farm (birch)",
+        "hinweis": "for planks and logs"
+      },
+      {
+        "name": "Leaves (with shears)",
+        "quelle": "Harvest trees with shears",
+        "hinweis": "hedges, trees and cypresses"
+      },
+      {
+        "name": "Glowstone",
+        "quelle": "Nether (ceiling)",
+        "hinweis": "light at the pool"
+      }
+    ]
+  }
 }
