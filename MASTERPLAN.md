@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Ideen für neue Baupläne | 💡 59 Vorschläge (Farmen, Gebäude, Monumente) | Abschnitt 15 |
+| Ideen für neue Inhalte | 💡 91 Bauplan-Vorschläge (Farmen, Gebäude, Monumente, Produktionen, Funktionales) und 10 Anleitungen | Abschnitt 15 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
 **Entwurf** heißt: Die Richtung von Treppen, Türen und Trichtern ist in den Dateien noch nicht in einer Testwelt geprüft (siehe Phase 1).
@@ -354,6 +354,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 - **Zeitraffer-Animation:** jeder Bauplan als kurzes Video oder GIF, Schritt für Schritt
 - **Varianten:** Größen (1:1, 1:2) und Materialvarianten (Holz- oder Steinversion) per Klick
 - **Bauplan-Pakete:** zusammengehörige Pläne gebündelt, z. B. „Villa am Wasser + Kellerlager + Gewächshaus“
+- **Geplant-Seite:** die Ideen aus Abschnitt 15 auf der Website zeigen, damit Besucher sehen, was kommt, und mit abstimmen können
 - **Server-Setup-Assistent:** Paper, Plugins, Bot und Einstellungen in einem geführten Ablauf (Desktop-App)
 
 ---
@@ -495,3 +496,60 @@ Empfohlener Start: Nr. 1, 9 und 11 als Kreislauf (Bambus heizt die Öfen, Kaktus
 | 59 | Piratenschiff | mittel | Masten, Segel aus Wolle, Kanonendeck | 💡 |
 
 Für Nachbauten echter Wahrzeichen wird der Maßstab im Bauplan angegeben (wie beim Eiffelturm 1:3), damit Höhe und Blockzahl realistisch bleiben.
+
+### 15.3 Weitere Produktionen
+
+| Nr. | Vorschlag | Größe | Was es bringt | Status |
+|---|---|---|---|---|
+| 60 | Zuckerrohrfarm | klein | Papier für Bücher, Karten und Raketen | 💡 |
+| 61 | Kakaofarm | klein | Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm: Kekse, brauner Farbstoff | 💡 |
+| 62 | Blumenfarm | klein | Knochenmehl-Werfer auf Gras, alle Grundfarben für Wolle, Beton und Glas | 💡 |
+| 63 | Komposter-Kette | klein | Überschuss aus Bambus, Kaktus und Seetang wird zu Knochenmehl | 💡 |
+| 64 | Tonfarm | mittel | Werfer mit Wasserflaschen machen Erde zu Schlamm, Tropfstein darunter macht daraus Ton: Terrakotta, Ziegel | 💡 |
+| 65 | Froschlicht-Farm | groß | Frösche fressen kleine Magmawürfel: Leuchtblöcke in drei Farben | 💡 |
+| 66 | Amethyst-Farm | mittel | An einer gefundenen Geode, Beobachter und Kolben: Amethyst für Fernrohr und getöntes Glas | 💡 |
+| 67 | Chorusfrucht-Farm im End | mittel | Halbautomatisch: Purpurblöcke zum Bauen | 💡 |
+| 68 | Pilzfarm | klein | Dunkler Raum: Pilze für Suppen und Riesenpilz-Deko | 💡 |
+| 69 | Holzkohle-Station | klein | Stämme vom Holzfäller-Arbeiter werden zu Holzkohle | 💡 |
+| 70 | Erz-Schmelzstation | mittel | Einwurftruhe, viele Öfen gleichzeitig, sortierte Ausgabe | 💡 |
+| 71 | Automatische Werkbank (Crafter) | mittel | Seit 1.21: stellt z. B. Brot, Papier oder Eisenblöcke selbst her | 💡 |
+| 72 | Raketen-Fabrik | mittel | Papier und Schießpulver per Crafter: Raketen für Elytra-Flüge | 💡 |
+| 73 | Automatische Brauerei | mittel | Braustände mit Trichtern, Tränke in Serie | 💡 |
+| 74 | Automatische Küche | klein | Räucheröfen mit Trichtern, gefüttert aus Kuh- und Hühnerfarm | 💡 |
+| 75 | Buch-Station | mittel | Zuckerrohr und Leder werden zu Büchern und Bücherregalen | 💡 |
+
+### 15.4 Funktionale Bauten
+
+| Nr. | Vorschlag | Größe | Wozu | Status |
+|---|---|---|---|---|
+| 76 | Blasen-Aufzug | klein | Seelensand hoch, Magmablock runter, als eigener Bauplan zum Einbauen | 💡 |
+| 77 | Item-Aufzug | klein | Blasensäule hebt Gegenstände vom Keller ins Lager | 💡 |
+| 78 | Versteckte Kolbentür 2 × 2 | klein | Öffnet per Knopf oder Druckplatte, verschwindet in der Wand | 💡 |
+| 79 | Geheimgang hinter Bücherregal | klein | Klassischer Geheimeingang zum Lager | 💡 |
+| 80 | Tresor mit Zahlenschloss | mittel | Redstone-Kombinationsschloss mit Hebeln | 💡 |
+| 81 | Automatisches Licht | klein | Tageslichtsensor schaltet Redstone-Lampen ab Abend ein | 💡 |
+| 82 | Zugbrücke | mittel | Kolben fahren die Brücke ein, passt zur Burg | 💡 |
+| 83 | Leuchtfeuer-Pyramide | mittel | Eisenblöcke aus der Eisenfarm, Effekte wie Eile beim Abbauen | 💡 |
+| 84 | Aquisitor-Rahmen | klein | Atmen unter Wasser rund um die Glaskuppel | 💡 |
+| 85 | Nether-Knotenpunkt | groß | Portale zu allen Basen, Eisstraße für schnelle Bootsfahrten | 💡 |
+| 86 | Kartenraum | mittel | Karten in Rahmen ergeben eine Wandkarte der Welt | 💡 |
+| 87 | Farm-Bot-Zentrale | klein | Sicherer, beleuchteter Raum für den Bot mitten zwischen den Farmen | 💡 |
+| 88 | Lagerhalle mit Einlagern-Truhen | mittel | Für das InfiniteLager-Plugin, gemeinsam und privat getrennt | 💡 |
+| 89 | Werkstatt | klein | Amboss, Schleifstein, Schmiedetisch, Webstuhl und Steinsäge an einem Ort | 💡 |
+| 90 | Ausrüstungsraum | klein | Rüstungsständer, Waffen und Werkzeuge geordnet | 💡 |
+| 91 | Beleuchteter Spawn | mittel | Laternen-Raster, damit am Spawn keine Monster entstehen | 💡 |
+
+### 15.5 Ideen für Anleitungen
+
+| Nr. | Anleitung | Inhalt | Status |
+|---|---|---|---|
+| A1 | Redstone-Grundlagen | Beobachter, Komparator, Verstärker und Trichter-Richtungen einfach erklärt | 💡 |
+| A2 | Litematica einrichten | Mod installieren, Bauplan laden, Geisterblöcke ausrichten | 💡 |
+| A3 | WorldEdit-Dateien einfügen | `.schem` auf den Server laden und an der richtigen Stelle einsetzen | 💡 |
+| A4 | Paper-Server einrichten | Von der Installation bis zu den ersten Plugins | 💡 |
+| A5 | Bedrock-Spieler verbinden | Geyser und Floodgate, Whitelist ohne Passwort | 💡 |
+| A6 | Automatische Backups | Welt regelmäßig sichern und im Notfall zurückspielen | 💡 |
+| A7 | Lag finden mit spark | Messung starten, Bericht lesen, typische Ursachen | 💡 |
+| A8 | Rohstoff-Übersicht | Welche Farm liefert welches Baumaterial, und was sich nicht farmen lässt | 💡 |
+| A9 | Server von außen erreichbar machen | Tunnel statt Portfreigabe, worauf man achten muss | 💡 |
+| A10 | Spielerleitfaden | Regeln, wichtige Befehle und Hilfe-Buch für neue Spieler | 💡 |
