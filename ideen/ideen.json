@@ -1791,6 +1791,228 @@
     "titel": "Finding and using elytra",
     "text": "Find an End city, repair the elytra, rockets and safe landing spots."
    }
+  },
+  {
+   "nr": 118,
+   "kategorie": "xp",
+   "groesse": "groß",
+   "titel": "Große Handelshalle im Stil einer Zauberschule",
+   "text": "Eine hohe Halle mit Spitzbogen-Gewölbe, schwebenden Kerzen aus Lichtblöcken und langen Tafeln in der Mitte. Die Händler stehen in Nischen an den Seitenwänden, über ihnen Galerien mit Bücherregalen und Bannern.",
+   "status": "idee",
+   "plugins": [
+    {
+     "id": "arbeiter",
+     "stufe": "optional"
+    }
+   ],
+   "en": {
+    "titel": "Grand trading hall in a wizard school style",
+    "text": "A tall hall with a pointed vaulted ceiling, floating candles made of light blocks and long tables in the middle. The traders stand in niches along the side walls, with galleries of bookshelves and banners above them."
+   }
+  },
+  {
+   "nr": 119,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Notre-Dame de Paris",
+   "text": "Die gotische Kathedrale mit zwei Fassadentürmen, großer Fensterrose und Strebebögen an den Seiten.",
+   "status": "idee",
+   "en": {
+    "titel": "Notre-Dame de Paris",
+    "text": "The Gothic cathedral with two front towers, a large rose window and flying buttresses along the sides."
+   }
+  },
+  {
+   "nr": 120,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Hagia Sophia",
+   "text": "Riesige flache Kuppel über einem quadratischen Bau, ringsum Halbkuppeln und vier schlanke Minarette.",
+   "status": "idee",
+   "en": {
+    "titel": "Hagia Sophia",
+    "text": "A huge shallow dome over a square building, half-domes around it and four slender minarets."
+   }
+  },
+  {
+   "nr": 121,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Petersdom mit Petersplatz",
+   "text": "Die große Kuppel über der Basilika, davor der ovale Platz mit Säulengängen und einem Obelisken in der Mitte.",
+   "status": "idee",
+   "en": {
+    "titel": "St. Peter’s Basilica and Square",
+    "text": "The great dome above the basilica, in front the oval square with colonnades and an obelisk in the middle."
+   }
+  },
+  {
+   "nr": 122,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Angkor Wat",
+   "text": "Tempelanlage mit fünf Türmen in Form von Lotusknospen, umgeben von einem breiten Wassergraben.",
+   "status": "idee",
+   "en": {
+    "titel": "Angkor Wat",
+    "text": "Temple complex with five towers shaped like lotus buds, surrounded by a wide moat."
+   }
+  },
+  {
+   "nr": 123,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Mont-Saint-Michel",
+   "text": "Eine Klosterinsel im Meer: Häuser und Mauern ziehen sich spiralförmig den Felsen hoch, oben die Abtei mit Spitze.",
+   "status": "idee",
+   "en": {
+    "titel": "Mont-Saint-Michel",
+    "text": "A monastery island in the sea: houses and walls spiral up the rock, with the abbey and its spire on top."
+   }
+  },
+  {
+   "nr": 124,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Machu Picchu",
+   "text": "Steinterrassen und Ruinen auf einem Bergsattel, passt perfekt in Minecraft-Berge.",
+   "status": "idee",
+   "en": {
+    "titel": "Machu Picchu",
+    "text": "Stone terraces and ruins on a mountain ridge, a perfect fit for Minecraft mountains."
+   }
+  },
+  {
+   "nr": 125,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Golden Gate Bridge",
+   "text": "Hängebrücke mit zwei roten Pylonen und Tragseilen aus Ketten, über eine Meeresbucht gespannt.",
+   "status": "idee",
+   "en": {
+    "titel": "Golden Gate Bridge",
+    "text": "Suspension bridge with two red towers and main cables made of chains, spanning a bay."
+   }
+  },
+  {
+   "nr": 126,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Alhambra",
+   "text": "Palastanlage mit Innenhöfen, Wasserbecken, Bogengängen und fein gemusterten Wänden.",
+   "status": "idee",
+   "en": {
+    "titel": "Alhambra",
+    "text": "Palace complex with courtyards, reflecting pools, arcades and finely patterned walls."
+   }
+  },
+  {
+   "nr": 127,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Koloss von Rhodos",
+   "text": "Das antike Weltwunder als riesige Bronzestatue an einer Hafeneinfahrt, die Schiffe fahren darunter durch.",
+   "status": "idee",
+   "en": {
+    "titel": "Colossus of Rhodes",
+    "text": "The ancient wonder as a giant bronze statue at a harbour entrance, with ships sailing beneath it."
+   }
+  },
+  {
+   "nr": 128,
+   "kategorie": "monumente",
+   "groesse": "groß",
+   "titel": "Empire State Building",
+   "text": "Der Art-déco-Wolkenkratzer mit gestuften Absätzen und Spitze, gut im Maßstab 1:3.",
+   "status": "idee",
+   "en": {
+    "titel": "Empire State Building",
+    "text": "The Art Deco skyscraper with stepped setbacks and a spire, works well at 1:3 scale."
+   }
+  },
+  {
+   "nr": 129,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Schwebende Insel mit Wasserfällen",
+   "text": "Eine Insel hoch über dem Spawn mit Wurzeln an der Unterseite, Wasserfällen über den Rand und einem kleinen Tempel obendrauf.",
+   "status": "idee",
+   "en": {
+    "titel": "Floating island with waterfalls",
+    "text": "An island high above spawn with roots hanging underneath, waterfalls over the edge and a small temple on top."
+   }
+  },
+  {
+   "nr": 130,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Vulkanfestung",
+   "text": "Eine dunkle Festung aus Schwarzstein und Basalt in einem Vulkankrater, mit Lavafällen und einer Brücke über den Lavasee.",
+   "status": "idee",
+   "en": {
+    "titel": "Volcano fortress",
+    "text": "A dark fortress of blackstone and basalt inside a volcano crater, with lava falls and a bridge over the lava lake."
+   }
+  },
+  {
+   "nr": 131,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Elfenstadt in Riesenbäumen",
+   "text": "Häuser auf mehreren Ebenen in riesigen eigenen Bäumen, verbunden durch Brücken, Wendeltreppen und Laternen.",
+   "status": "idee",
+   "en": {
+    "titel": "Elven city in giant trees",
+    "text": "Houses on several levels in huge custom trees, connected by bridges, spiral stairs and lanterns."
+   }
+  },
+  {
+   "nr": 132,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Bergkloster an der Felswand",
+   "text": "Ein Kloster, das an einer steilen Felswand klebt, mit Treppen im Fels und Glockenturm über dem Abgrund.",
+   "status": "idee",
+   "en": {
+    "titel": "Cliffside monastery",
+    "text": "A monastery clinging to a steep cliff, with stairs cut into the rock and a bell tower above the drop."
+   }
+  },
+  {
+   "nr": 133,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Unterwasserstadt",
+   "text": "Mehrere Glaskuppeln am Meeresgrund, verbunden durch Tunnel, mit Gärten aus Korallen und Seetang.",
+   "status": "idee",
+   "en": {
+    "titel": "Underwater city",
+    "text": "Several glass domes on the sea floor connected by tunnels, with gardens of coral and kelp."
+   }
+  },
+  {
+   "nr": 134,
+   "kategorie": "gebaeude",
+   "groesse": "mittel",
+   "titel": "Riesenrad",
+   "text": "Ein großes Rad aus Ketten und Zäunen mit bunten Gondeln, als Blickfang für Marktplatz oder Hafen.",
+   "status": "idee",
+   "en": {
+    "titel": "Ferris wheel",
+    "text": "A big wheel of chains and fences with colourful gondolas, an eye-catcher for the market square or harbour."
+   }
+  },
+  {
+   "nr": 135,
+   "kategorie": "gebaeude",
+   "groesse": "groß",
+   "titel": "Staudamm",
+   "text": "Eine gewaltige Staumauer zwischen zwei Bergen, vorne Wasserfälle aus den Auslässen, oben eine Straße.",
+   "status": "idee",
+   "en": {
+    "titel": "Dam",
+    "text": "A massive dam wall between two mountains, waterfalls from the outlets at the front and a road on top."
+   }
   }
  ]
 }

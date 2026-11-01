@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 117 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 135 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -445,11 +445,11 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-131 Einträge: 131 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
+149 Einträge: 149 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
 
 **Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
 
-### Skillfarmen (XP) (9)
+### Skillfarmen (XP) (10)
 
 Erfahrung für Verzauberungen und Reparaturen.
 
@@ -464,6 +464,7 @@ Erfahrung für Verzauberungen und Reparaturen.
 | 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
 | 8 | Kleine Handelshalle | klein | Sechs Dorfbewohner in einer Reihe, jeder in einer eigenen Zelle hinter seinem Arbeitsblock. Gehandelt wird über den Block hinweg, so kann niemand weglaufen. Mit zwei Bibliothekaren für Verzauberungsbücher, etwa 15 × 9 Blöcke. Plugin: arbeiter (optional). | 💡 Idee |
 | 117 | Große Handelshalle | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
+| 118 | Große Handelshalle im Stil einer Zauberschule | groß | Eine hohe Halle mit Spitzbogen-Gewölbe, schwebenden Kerzen aus Lichtblöcken und langen Tafeln in der Mitte. Die Händler stehen in Nischen an den Seitenwänden, über ihnen Galerien mit Bücherregalen und Bannern. Plugin: arbeiter (optional). | 💡 Idee |
 
 ### Farmen für Baumaterial (20)
 
@@ -570,7 +571,7 @@ Für Events und gemeinsame Abende auf dem Server.
 | 101 | Elytra-Startturm | mittel | Ein hoher Turm mit Startplattform und gepolstertem Landeplatz. | 💡 Idee |
 | 102 | Bogenschießstand | klein | Zielblöcke geben ein Redstone-Signal, ein Lämpchen zeigt Treffer an. | 💡 Idee |
 
-### Monumente (19)
+### Monumente (29)
 
 Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.
 
@@ -595,8 +596,18 @@ Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.
 | 114 | Holstentor Lübeck | mittel | Das Backsteintor mit zwei runden Türmen und Spitzhelmen. | 💡 Idee |
 | 115 | Rialtobrücke | mittel | Steinbrücke mit Läden über einem Kanal, wie in Venedig. | 💡 Idee |
 | 116 | Moai-Köpfe | klein | Die steinernen Köpfe der Osterinsel, schnell gebaut und gut als Deko am Strand. | 💡 Idee |
+| 119 | Notre-Dame de Paris | groß | Die gotische Kathedrale mit zwei Fassadentürmen, großer Fensterrose und Strebebögen an den Seiten. | 💡 Idee |
+| 120 | Hagia Sophia | groß | Riesige flache Kuppel über einem quadratischen Bau, ringsum Halbkuppeln und vier schlanke Minarette. | 💡 Idee |
+| 121 | Petersdom mit Petersplatz | groß | Die große Kuppel über der Basilika, davor der ovale Platz mit Säulengängen und einem Obelisken in der Mitte. | 💡 Idee |
+| 122 | Angkor Wat | groß | Tempelanlage mit fünf Türmen in Form von Lotusknospen, umgeben von einem breiten Wassergraben. | 💡 Idee |
+| 123 | Mont-Saint-Michel | groß | Eine Klosterinsel im Meer: Häuser und Mauern ziehen sich spiralförmig den Felsen hoch, oben die Abtei mit Spitze. | 💡 Idee |
+| 124 | Machu Picchu | groß | Steinterrassen und Ruinen auf einem Bergsattel, passt perfekt in Minecraft-Berge. | 💡 Idee |
+| 125 | Golden Gate Bridge | groß | Hängebrücke mit zwei roten Pylonen und Tragseilen aus Ketten, über eine Meeresbucht gespannt. | 💡 Idee |
+| 126 | Alhambra | groß | Palastanlage mit Innenhöfen, Wasserbecken, Bogengängen und fein gemusterten Wänden. | 💡 Idee |
+| 127 | Koloss von Rhodos | groß | Das antike Weltwunder als riesige Bronzestatue an einer Hafeneinfahrt, die Schiffe fahren darunter durch. | 💡 Idee |
+| 128 | Empire State Building | groß | Der Art-déco-Wolkenkratzer mit gestuften Absätzen und Spitze, gut im Maßstab 1:3. | 💡 Idee |
 
-### Gebäude (26)
+### Gebäude (33)
 
 Eigene Entwürfe vom Wachturm bis zum Luftschiff.
 
@@ -628,6 +639,13 @@ Eigene Entwürfe vom Wachturm bis zum Luftschiff.
 | 108 | Wasserrad | klein | Ein Mühlrad am Bach als Deko, passt zu Fachwerkdorf und Bauernhof. | 💡 Idee |
 | 109 | Marktbrunnen | klein | Ein verzierter Brunnen als Mittelpunkt für Marktplatz oder Spawn. | 💡 Idee |
 | 110 | Sternwarte | mittel | Kuppel mit Fernrohr-Raum und Sternenkarte an der Wand. | 💡 Idee |
+| 129 | Schwebende Insel mit Wasserfällen | groß | Eine Insel hoch über dem Spawn mit Wurzeln an der Unterseite, Wasserfällen über den Rand und einem kleinen Tempel obendrauf. | 💡 Idee |
+| 130 | Vulkanfestung | groß | Eine dunkle Festung aus Schwarzstein und Basalt in einem Vulkankrater, mit Lavafällen und einer Brücke über den Lavasee. | 💡 Idee |
+| 131 | Elfenstadt in Riesenbäumen | groß | Häuser auf mehreren Ebenen in riesigen eigenen Bäumen, verbunden durch Brücken, Wendeltreppen und Laternen. | 💡 Idee |
+| 132 | Bergkloster an der Felswand | groß | Ein Kloster, das an einer steilen Felswand klebt, mit Treppen im Fels und Glockenturm über dem Abgrund. | 💡 Idee |
+| 133 | Unterwasserstadt | groß | Mehrere Glaskuppeln am Meeresgrund, verbunden durch Tunnel, mit Gärten aus Korallen und Seetang. | 💡 Idee |
+| 134 | Riesenrad | mittel | Ein großes Rad aus Ketten und Zäunen mit bunten Gondeln, als Blickfang für Marktplatz oder Hafen. | 💡 Idee |
+| 135 | Staudamm | groß | Eine gewaltige Staumauer zwischen zwei Bergen, vorne Wasserfälle aus den Auslässen, oben eine Straße. | 💡 Idee |
 
 ### Anleitungen (14)
 
@@ -721,7 +739,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 <!-- abhaengigkeiten:start -->
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
-| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle |
+| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle, Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
 | FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
