@@ -407,7 +407,7 @@ Entscheidungen aus Abschnitt 12 treffen (vor allem die Lizenz), dann den Plugin-
 
 ### Was nur du machen kannst (einmalig)
 
-- [ ] **Google Search Console:** <https://search.google.com/search-console> → Property hinzufügen → **URL-Präfix** `https://savox76.github.io/minecraft-tools/` → Bestätigung per **HTML-Tag**. Den Code aus `content="…"` in [`tools/site_config.json`](tools/site_config.json) bei `google_site_verification` eintragen (oder mir schicken), pushen, ein paar Minuten warten, dann „Bestätigen“ klicken.
+- [x] **Google Search Console:** <https://search.google.com/search-console> → Property hinzufügen → **URL-Präfix** `https://savox76.github.io/minecraft-tools/` → Bestätigung per **HTML-Tag**. Den Code aus `content="…"` in [`tools/site_config.json`](tools/site_config.json) bei `google_site_verification` eintragen (oder mir schicken), pushen, ein paar Minuten warten, dann „Bestätigen“ klicken. ✅ Code ist in `tools/site_config.json` eingetragen (01.11.2026); in der Search Console auf „Bestätigen“ klicken.
 - [ ] Danach in der Search Console unter **Sitemaps** `sitemap.xml` einreichen.
 - [ ] **Bing Webmaster Tools:** <https://www.bing.com/webmasters> → „Aus Google Search Console importieren“. Bing beliefert auch DuckDuckGo und Ecosia.
 - [ ] **GitHub-Repo:** Auf der Repo-Seite rechts bei „About“ das Zahnrad → Website `https://savox76.github.io/minecraft-tools/` eintragen, Topics: `minecraft`, `minecraft-schematics`, `litematica`, `worldedit`, `paper-plugin`, `minecraft-plugin`.
@@ -678,7 +678,7 @@ Im Browser läuft die Website ohne fremde Bibliotheken: eigenes JavaScript (ES-M
 | GitHub Issues und Labels (`bauwunsch`, `plugin-wunsch`, `fehler`, `angenommen`) | Wünsche und Abstimmung mit 👍 | Workflow legt die Labels an, `tools/fetch_wishes.py` liest die Wünsche täglich |
 | Google Fonts: Archivo, Atkinson Hyperlegible, JetBrains Mono | Schriften der Website | Werden vom Browser geladen; ohne Verbindung greift eine Systemschrift |
 | IndexNow (`api.indexnow.org`) | Meldet neue Seiten an Bing und weitere Suchmaschinen | Schlüssel in `tools/site_config.json` |
-| Google Search Console, Bing Webmaster Tools | Sichtbarkeit bei Google und Bing | Bestätigungscode fehlt noch (siehe 14.) |
+| Google Search Console, Bing Webmaster Tools | Sichtbarkeit bei Google und Bing | Google-Code eingetragen (`tools/site_config.json`); Bing per Import aus der Search Console (siehe 14.) |
 
 ### 16.3 Lokal ansehen und testen
 
