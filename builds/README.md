@@ -45,7 +45,7 @@ builds/<id>/
 
 ## Was automatisch entsteht
 
-- LEGO-Schritte mit höchstens 60 neuen Blöcken pro Schritt
+- LEGO-Schritte **Ebene für Ebene** von unten nach oben: jeder Schritt gehört zu genau einer Ebene, höchstens 60 neue Blöcke, große Ebenen in Teilen („Teil 2 von 4“). Pro Schritt drehbare 3D-Ansicht und Draufsicht der Ebene. Der vollständige Ablauf steht im [Masterplan, Abschnitt 4.1](../MASTERPLAN.md#41-fester-ablauf-jedes-bauplans-gilt-auch-für-alle-neuen)
 - Teileliste mit Stacks
 - Downloads: `.litematic` (Litematica), `.schem` (WorldEdit), `teileliste.csv`
 - Seiten auf Deutsch und Englisch, Vorschaubild und Link-Vorschaubilder

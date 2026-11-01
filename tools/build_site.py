@@ -81,55 +81,53 @@ def zellen(model):
 
 
 def lego_schritte(build, model):
-    """Teilt das Modell in LEGO-Schritte mit höchstens MAX_TEILE neuen Blöcken."""
+    """Teilt das Modell in LEGO-Schritte: Ebene für Ebene von unten nach oben.
+
+    Jeder Schritt gehört zu genau einer Ebene. Ebenen mit mehr als MAX_TEILE neuen Blöcken
+    werden in gleich große Teile zerlegt (Kacheln von 8 × 8 in Schlangenlinie), damit man
+    beim Bauen nicht kreuz und quer laufen muss. 't' = [Teil, Anzahl Teile] der Ebene.
+    """
     pal = model['palette']
-    pro_ebene = {}
+    pro_ebene, zweite = {}, []
     for x, y, z, i in zellen(model):
-        if 'vorhanden' in pal[i].get('flags', []):
+        flags = pal[i].get('flags', [])
+        if 'vorhanden' in flags:
+            continue
+        if 'zweiter-teil' in flags:      # obere Türhälfte, Kopfteil vom Bett: entsteht mit dem ersten Teil
+            zweite.append((x, y, z, i))
             continue
         pro_ebene.setdefault(y, []).append((x, y, z, i))
 
     abschnitte = build.get('abschnitte') or [{'name': 'Bau', 'von': 0, 'bis': model['size']['y'] - 1}]
+
+    def abschnitt(y):
+        for ai, ab in enumerate(abschnitte):
+            if ab['von'] <= y <= ab['bis']:
+                return ai
+        return len(abschnitte) - 1
+
+    def ordnung(c):
+        tz, tx = c[2] // 8, c[0] // 8
+        return (tz, tx if tz % 2 == 0 else -tx, c[2], c[0])
+
     schritte = []
-    vergeben = set()
-    for ai, ab in enumerate(abschnitte):
-        offen = []          # gesammelte kleine Ebenen
-        offen_y = []
-
-        def abschliessen():
-            if offen:
-                schritte.append({'a': ai, 'y': [offen_y[0], offen_y[-1]], 'c': list(offen)})
-                offen.clear(); offen_y.clear()
-
-        for y in range(ab['von'], ab['bis'] + 1):
-            if y in vergeben:
-                continue
-            vergeben.add(y)
-            neu = pro_ebene.get(y, [])
-            if not neu:
-                continue
-            if len(neu) <= MAX_TEILE:
-                if len(offen) + len(neu) > MAX_TEILE:
-                    abschliessen()
-                offen.extend(neu); offen_y.append(y)
-                continue
-            abschliessen()
-            # große Ebene: in Kacheln von 8 × 8 aufteilen, Schlangenlinie, gleich große Stücke
-            def ordnung(c):
-                tz, tx = c[2] // 8, c[0] // 8
-                return (tz, tx if tz % 2 == 0 else -tx, c[2], c[0])
-            neu.sort(key=ordnung)
-            n = math.ceil(len(neu) / MAX_TEILE)
-            groesse = math.ceil(len(neu) / n)
-            for k in range(0, len(neu), groesse):
-                schritte.append({'a': ai, 'y': [y, y], 'c': neu[k:k + groesse]})
-        abschliessen()
-    # Ebenen, die in keinem Abschnitt stehen
-    rest = sorted(y for y in pro_ebene if y not in vergeben)
-    for y in rest:
-        schritte.append({'a': len(abschnitte) - 1, 'y': [y, y], 'c': pro_ebene[y]})
-    for s in schritte:
-        s['c'] = [v for zelle in s['c'] for v in zelle]   # flach: x,y,z,i,x,y,z,i,...
+    for y in sorted(pro_ebene):
+        neu = sorted(pro_ebene[y], key=ordnung)
+        n = math.ceil(len(neu) / MAX_TEILE)
+        groesse = math.ceil(len(neu) / n)
+        for k in range(n):
+            teil = neu[k * groesse:(k + 1) * groesse]
+            if teil:
+                schritte.append({'a': abschnitt(y), 'y': [y, y], 't': [k + 1, n], 'c': list(teil)})
+    # zweite Teile in den Schritt ihres ersten Teils (darunter oder daneben)
+    wo = {(c[0], c[1], c[2]): k for k, st in enumerate(schritte) for c in st['c']}
+    for x, y, z, i in zweite:
+        k = next((wo[q] for q in ((x, y - 1, z), (x + 1, y, z), (x - 1, y, z), (x, y, z + 1), (x, y, z - 1)) if q in wo), None)
+        if k is None:
+            k = max((j for j, st in enumerate(schritte) if st['y'][0] <= y), default=0)
+        schritte[k]['c'].append((x, y, z, i))
+    for st in schritte:
+        st['c'] = [v for zelle in st['c'] for v in zelle]   # flach: x,y,z,i,x,y,z,i,...
     return schritte
 
 

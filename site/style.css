@@ -171,7 +171,15 @@ main:focus { outline: none; }
 .tafel { padding-block: 22px 40px; }
 
 /* LEGO-Schritt-Ansicht */
-.lego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 20px; align-items: start; }
+.lego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); grid-template-areas: "buehne seite" "plan seite"; gap: 20px; align-items: start; }
+.lego .buehne { grid-area: buehne; } .lego .seite { grid-area: seite; } .lego .plan-kasten { grid-area: plan; }
+.plan-kasten { background: var(--sheet); border: 1px solid var(--line); border-radius: 16px; padding: 14px; min-width: 0; }
+.plan-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.plan-kopf h3 { font-size: 1.05rem; }
+.plan-huelle { overflow-x: auto; }
+.plan-huelle canvas { display: block; margin: 0 auto; }
+.drehbar { cursor: grab; } .drehbar.zieht { cursor: grabbing; }
+.buehne .blick .dreh-hinweis::before { content: "·"; margin: 0 8px; }
 .buehne { background: var(--sheet); border: 1px solid var(--line); border-radius: 16px; position: relative; min-width: 0; overflow: hidden; }
 .buehne canvas { display: block; margin: 0 auto; touch-action: pan-y; }
 .buehne .nummer { position: absolute; top: 12px; left: 16px; font: 800 clamp(3rem, 8vw, 5.2rem)/.9 var(--f-display); font-variant-numeric: tabular-nums; pointer-events: none; }
@@ -200,7 +208,7 @@ main:focus { outline: none; }
 .fortschritt i { display: block; height: 100%; background: var(--ok); }
 .tipp { border-left: 4px solid var(--hl); background: var(--sheet); border-radius: 0 12px 12px 0; padding: 10px 14px; font-size: .93rem; }
 .tipp b { display: block; }
-@media (max-width: 900px) { .lego { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .lego { grid-template-columns: 1fr; grid-template-areas: "buehne" "seite" "plan"; } }
 
 /* Tabellen */
 .tabelle-huelle { overflow-x: auto; background: var(--sheet); border: 1px solid var(--line); border-radius: 14px; }
@@ -220,7 +228,7 @@ td code, .prosa code { font: .86em var(--f-mono); background: var(--sheet-2); bo
 .ebenen { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); gap: 20px; align-items: start; }
 .ebenen .raster-huelle { background: var(--sheet); border: 1px solid var(--line); border-radius: 14px; padding: 14px; overflow-x: auto; }
 .ebenen canvas { display: block; margin: 0 auto; }
-.ebenen .ablesen { font: .86rem var(--f-mono); margin-top: 10px; padding: 8px 10px; background: var(--sheet-2); border-left: 3px solid var(--hl); min-height: 2.4em; }
+.ablesen { font: .86rem var(--f-mono); margin-top: 10px; padding: 8px 10px; background: var(--sheet-2); border-left: 3px solid var(--hl); min-height: 2.4em; }
 .legende { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .legende li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: .92rem; }
 .legende img { width: 24px; height: 24px; }

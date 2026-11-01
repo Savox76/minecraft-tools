@@ -101,20 +101,48 @@ So sieht eine Bauanleitung aus:
 
 1. **Deckblatt:** Bild des fertigen Bauwerks, Name, Größe, Schwierigkeit, Bauzeit, Java/Bedrock.
 2. **Gesamt-Teileliste:** alle Blöcke mit Bild und Anzahl, zusätzlich in Stacks (z. B. „12 St. + 30“). Darunter die Rohstoffe aus Farmen, zum Beispiel „1.050 Sand = Glas und Beton“.
-3. **Bauschritte, nummeriert, einer pro Seite:**
-   - oben links die Schrittnummer, groß
-   - ein Kasten **„Neue Teile in diesem Schritt“** mit Block-Bildern und „× 12“, wie bei LEGO
-   - eine 3D-Ansicht: neue Blöcke kräftig, bereits gebaute blass, Nordpfeil
-   - bei Treppen, Stufen, Türen und Trichtern ein **Richtungs-Hinweis** (Pfeil), denn dort passieren die meisten Fehler
-   - optionale Tipp-Kästen („Erst Seetang wachsen lassen, dann abbauen“)
+3. **Bauschritte, nummeriert, einer pro Seite:** siehe den festen Ablauf in 4.1
 4. **Unterbaugruppen** wie bei LEGO: Teile, die mehrfach vorkommen (Palme, Fenster-Modul, Laternenpfahl), werden einmal gezeigt und mit **„2 ×“** markiert.
-5. **Schritt-Regeln:** höchstens etwa 60 neue Blöcke pro Schritt. Große Ebenen werden in Abschnitte geteilt (zuerst Ecken und Rahmen, dann Flächen, dann Details). Die Schritte entstehen automatisch, und von Hand lässt sich nachsteuern.
+5. **Schritt-Regeln:** Ebene für Ebene, höchstens 60 neue Blöcke pro Schritt (Einzelheiten in 4.1). Die Schritte entstehen automatisch.
 6. **Ausgaben pro Bauplan:**
    - Web-Ansicht zum Durchblättern, auf dem Handy wischbar
    - druckbares **PDF-Heft** im selben Look
    - Teileliste als **CSV**
    - Bauplan-Dateien zum direkten Einfügen ins Spiel (siehe 6.)
 7. **Baufortschritt:** Erledigte Schritte lassen sich abhaken. Der Stand wird im Browser gespeichert.
+
+### 4.1 Fester Ablauf jedes Bauplans (gilt auch für alle neuen)
+
+Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablauf entsteht automatisch aus `model.json` (`tools/build_site.py`, Funktion `lego_schritte`); für einen neuen Bauplan muss dafür nichts von Hand eingestellt werden.
+
+**So werden die Schritte gebildet**
+
+1. **Ein Schritt gehört immer zu genau einer Ebene.** Es werden nie mehrere Ebenen in einem Schritt zusammengefasst, auch wenn eine Ebene nur wenige Blöcke hat.
+2. **Höchstens 60 neue Blöcke pro Schritt.** Hat eine Ebene mehr, wird sie in gleich große Teile zerlegt: „Ebene 1 · Teil 3 von 5“. Die Teile folgen Kacheln von 8 × 8 Blöcken in Schlangenlinie, damit man im Spiel nicht kreuz und quer laufen muss.
+3. **Zweite Teile gehören zum ersten:** Die obere Türhälfte und das Kopfteil vom Bett erscheinen im selben Schritt wie der untere Teil, weil Minecraft sie automatisch mitsetzt. Sie zählen nicht in der Teileliste.
+4. **Gelände** (`vorhanden`) wird nie als Schritt gezeigt, sondern blass als Umgebung.
+5. **Bauabschnitte** (`abschnitte` in `build.json`) teilen die Ebenen in sinnvolle Bereiche („Fundament“, „Erdgeschoss & Pool“). Jeder Schritt zeigt seinen Abschnitt mit Beschreibung.
+
+**Das sieht man in jedem Schritt**
+
+| Bereich | Inhalt |
+|---|---|
+| Schrittnummer | groß oben links, „13 von 52“ |
+| 3D-Ansicht | neue Blöcke gelb umrandet, gebaute blass, spätere ausgeblendet. **Drehbar** in vier Richtungen (Südost, Nordost, Nordwest, Südwest): Knöpfe ⟲ ⟳, Ziehen mit der Maus, Wischen auf dem Handy oder Tasten Q und E. ◎ zeigt das ganze Bauwerk |
+| Draufsicht der Ebene | Raster der aktuellen Ebene, Norden oben, Koordinaten ab der Mitte. Neue Blöcke gelb umrandet, schon gebaute blass, die Ebene darunter als Schatten. Antippen zeigt Block, Position und Minecraft-ID |
+| Neue Teile | Kasten wie bei LEGO: Block-Bild, „× 12“, Name |
+| Abschnitt | „Ebene 1 · Teil 3 von 5“, Name und Text des Bauabschnitts |
+| Steuerung | Zurück/Weiter, Schieberegler, Pfeiltasten, „Schritt erledigt“ mit Fortschrittsbalken (im Browser gespeichert) |
+
+Dazu gibt es pro Bauplan die Reiter **Teileliste** (gesamt, mit Stacks und Rohstoffen), **Ebenen** (jede Ebene einzeln als Draufsicht) und **Downloads** (`.litematic`, `.schem`, CSV).
+
+**Checkliste für einen neuen Bauplan**
+
+- [ ] `builds/<id>/model.json`: Ebene 0 ist der Boden, jede weitere Ebene liegt genau einen Block höher. Gelände mit `vorhanden` markieren, obere Türhälften und Bett-Kopfteile mit `zweiter-teil`.
+- [ ] `builds/<id>/build.json`: `abschnitte` mit `von`/`bis` passend zu den Ebenen, dazu Tipps, Rohstoffe und die englische Fassung unter `en`.
+- [ ] Neue Blocknamen in `tools/i18n/bloecke_en.json` eintragen.
+- [ ] Lokal bauen (`python tools/build_site.py`) und in der Ausgabe Blöcke und Schritte prüfen. Danach im Browser einmal alle Schritte durchklicken und die Draufsicht ansehen.
+- [ ] Auf `main` pushen. Website, Schritte, Bilder und Downloads entstehen automatisch.
 
 **Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte LEGO-Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
 

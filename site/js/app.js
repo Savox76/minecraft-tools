@@ -317,6 +317,58 @@ function nichtGefunden() {
   main.innerHTML = `<section class="detail-kopf"><div class="wrap"><h1>${tr('Nicht gefunden', 'Not found')}</h1><p class="lede">${tr('Diese Seite gibt es nicht.', 'This page does not exist.')} <a href="${url()}">${tr('Zur Startseite', 'Go to the home page')}</a></p></div></section>`;
 }
 
+/* ---------- Draufsicht einer Ebene (Norden oben, 0 = Mitte) ---------- */
+// sicht(i, x, z) liefert 0 = nicht zeigen, 1 = schon gebaut (blass), 2 = normal, 3 = neu in diesem Schritt
+function ebenePlan(cv, P, y, { maxW = 720, sicht = () => 2, hover = null } = {}) {
+  const { X, Z, pal, grid, at } = P;
+  const avail = Math.min(cv.parentElement.clientWidth - 28, maxW);
+  const cs = Math.max(6, Math.floor((avail - 28) / X));
+  const pad = 26, W = pad + cs * X + 4, H = pad + cs * Z + 4, dpr = window.devicePixelRatio || 1;
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.fillStyle = cssv('--sheet-2'); g.fillRect(0, 0, W, H);
+  g.fillStyle = cssv('--sheet'); g.fillRect(pad, pad, cs * X, cs * Z);
+  if (y > 0) {   // Ebene darunter als Schatten, damit man weiß, worauf man baut
+    g.fillStyle = cssv('--ink'); g.globalAlpha = .1;
+    for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) if (grid[at(x, y - 1, z)] >= 0) g.fillRect(pad + x * cs, pad + z * cs, cs, cs);
+    g.globalAlpha = 1;
+  }
+  g.strokeStyle = cssv('--line'); g.lineWidth = 1;
+  for (let i = 0; i <= Math.max(X, Z); i++) {
+    if (i <= X) { g.beginPath(); g.moveTo(pad + i * cs + .5, pad); g.lineTo(pad + i * cs + .5, pad + Z * cs); g.stroke(); }
+    if (i <= Z) { g.beginPath(); g.moveTo(pad, pad + i * cs + .5); g.lineTo(pad + X * cs, pad + i * cs + .5); g.stroke(); }
+  }
+  const neu = [];
+  for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
+    const i = grid[at(x, y, z)]; if (i < 0) continue;
+    const st = sicht(i, x, z); if (!st) continue;
+    const p = pal[i]; const small = /thin|pane|panel|plate|mob/.test(p.shape);
+    const ins = small ? Math.max(1, Math.round(cs * .22)) : 1;
+    g.globalAlpha = p.context ? .3 : st === 1 ? .38 : 1; g.fillStyle = p.color;
+    g.fillRect(pad + x * cs + ins, pad + z * cs + ins, cs - ins * 2 + 1, cs - ins * 2 + 1);
+    g.globalAlpha = 1;
+    if (st === 3) neu.push([x, z]);
+  }
+  if (neu.length) {   // neue Blöcke gelb umrandet, wie in der 3D-Ansicht
+    g.strokeStyle = cssv('--hl'); g.lineWidth = Math.max(1.5, cs * .14);
+    for (const [x, z] of neu) g.strokeRect(pad + x * cs + 1.5, pad + z * cs + 1.5, cs - 3, cs - 3);
+  }
+  const cx = (X - 1) / 2, cz = (Z - 1) / 2;
+  g.fillStyle = cssv('--ink-mute'); g.font = `10px ${cssv('--f-mono')}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  for (let i = 0; i < X; i++) { const r = Math.round(i - cx); if (r % 5 === 0 && Math.abs(i - cx - r) < .01) g.fillText(r > 0 ? '+' + r : r, pad + (i + .5) * cs, 12); }
+  g.textAlign = 'right';
+  for (let i = 0; i < Z; i++) { const r = Math.round(i - cz); if (r % 5 === 0 && Math.abs(i - cz - r) < .01) g.fillText(r > 0 ? '+' + r : r, pad - 4, pad + (i + .5) * cs); }
+  g.textAlign = 'left'; g.fillStyle = cssv('--ink'); g.font = `bold 11px ${cssv('--f-mono')}`; g.fillText('N ↑', 2, 10);
+  if (hover) { g.strokeStyle = cssv('--ink'); g.lineWidth = 2; g.strokeRect(pad + hover.x * cs + 1, pad + hover.z * cs + 1, cs - 2, cs - 2); }
+  return { pad, cs };
+}
+// Name und Position des Blocks unter dem Zeiger
+function planAblesen(P, y, x, z) {
+  const { X, Z, pal, grid, at } = P;
+  const i = grid[at(x, y, z)]; const sg = (v) => (v > 0 ? '+' + v : v);
+  return `<b>${i < 0 ? tr('Luft (frei lassen)', 'Air (leave empty)') : esc(bn(pal[i]))}</b><br>X ${sg(Math.round(x - (X - 1) / 2))} · Y ${y} · Z ${sg(Math.round(z - (Z - 1) / 2))}${i >= 0 && pal[i].block ? ` · <code>${esc(pal[i].block)}</code>` : ''}`;
+}
+
 /* ---------- Bauplan-Detail ---------- */
 async function bauSeite(id, tab) {
   const k = await katalog();
@@ -373,12 +425,17 @@ async function bauSeite(id, tab) {
       <div class="buehne">
         <div class="nummer" id="nr" aria-live="polite"></div>
         <div class="werkzeug">
-          <button class="rund" id="rl" aria-label="${tr('Ansicht nach links drehen', 'Rotate view left')}">⟲</button>
-          <button class="rund" id="rr" aria-label="${tr('Ansicht nach rechts drehen', 'Rotate view right')}">⟳</button>
-          <button class="rund" id="all" aria-pressed="false" aria-label="${tr('Ganzes Bauwerk zeigen', 'Show the whole build')}">◎</button>
+          <button class="rund" id="rl" title="${tr('Nach links drehen', 'Rotate left')}" aria-label="${tr('Modell nach links drehen', 'Rotate model left')}">⟲</button>
+          <button class="rund" id="rr" title="${tr('Nach rechts drehen', 'Rotate right')}" aria-label="${tr('Modell nach rechts drehen', 'Rotate model right')}">⟳</button>
+          <button class="rund" id="all" aria-pressed="false" title="${tr('Ganzes Bauwerk', 'Whole build')}" aria-label="${tr('Ganzes Bauwerk zeigen', 'Show the whole build')}">◎</button>
         </div>
-        <canvas id="cv" aria-label="${tr('3D-Ansicht des aktuellen Bauschritts', '3D view of the current build step')}"></canvas>
-        <div class="blick" id="blick"></div>
+        <canvas id="cv" class="drehbar" aria-label="${tr('3D-Ansicht des aktuellen Bauschritts, zum Drehen ziehen', '3D view of the current build step, drag to rotate')}"></canvas>
+        <div class="blick"><span id="blick"></span><span class="dreh-hinweis">${matchMedia('(pointer: coarse)').matches ? tr('Wischen zum Drehen', 'Swipe to rotate') : tr('Ziehen zum Drehen', 'Drag to rotate')}</span></div>
+      </div>
+      <div class="plan-kasten">
+        <div class="plan-kopf"><h3 id="plan-titel"></h3><span class="eyebrow">${tr('Draufsicht · Norden oben · gelb = neu', 'Top view · north up · yellow = new')}</span></div>
+        <div class="plan-huelle"><canvas id="plan" aria-label="${tr('Draufsicht der Ebene dieses Schritts', 'Top view of this step’s layer')}"></canvas></div>
+        <div class="ablesen" id="plan-les">${tr('Zeige oder tippe auf ein Feld für Block und Position.', 'Point at or tap a square for block and position.')}</div>
       </div>
       <div class="seite">
         <div class="teile-kasten" id="teile"></div>
@@ -393,19 +450,48 @@ async function bauSeite(id, tab) {
       </div>
     </div>
     ${d.tipps?.length ? `<h2 style="margin:30px 0 12px">${tr('Tipps', 'Tips')}</h2><div class="raster">${lo(d, 'tipps').map((t) => `<div class="tipp"><b>${esc(t.titel)}</b>${esc(t.text)}</div>`).join('')}</div>` : ''}`;
-    const cv = el.querySelector('#cv');
+    const cv = el.querySelector('#cv'), pc = el.querySelector('#plan');
+    const RICHTUNG = [tr('Südost', 'south-east'), tr('Nordost', 'north-east'), tr('Nordwest', 'north-west'), tr('Südwest', 'south-west')];
+    let planGeo = null, planHover = null;
+    const zustand = (x, y, z) => {
+      if (alles) return 2;
+      const s = stepOf[P.at(x, y, z)];
+      if (s < 0) return 1;
+      return s < cur ? 1 : s === cur ? 3 : 0;
+    };
     const paint = () => {
       const w = cv.parentElement.clientWidth - 2;
-      const h = Math.max(320, Math.min(window.innerHeight * .66, 600));
-      draw(cv, P, { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), ground: null,
-        state: (i, x, y, z) => {
-          if (alles) return 2;
-          const s = stepOf[P.at(x, y, z)];
-          if (s < 0) return 1;
-          return s < cur ? 1 : s === cur ? 3 : 0;
-        } });
-      el.querySelector('#blick').textContent = tr(`Blick von ${VIEWS[rot]}`, `View from the ${['south-east', 'north-east', 'north-west', 'south-west'][rot]}`);
+      const h = Math.max(320, Math.min(window.innerHeight * .62, 560));
+      draw(cv, P, { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), ground: null, state: (i, x, y, z) => zustand(x, y, z) });
+      el.querySelector('#blick').textContent = tr(`Blick von ${RICHTUNG[rot]}`, `View from the ${RICHTUNG[rot]}`);
+      paintPlan();
     };
+    const paintPlan = () => {
+      const y = S[cur].y[0];
+      planGeo = ebenePlan(pc, P, y, { maxW: 760, hover: planHover, sicht: (i, x, z) => {
+        const st = stepOf[P.at(x, y, z)];
+        if (st < 0) return 2;               // Gelände, schon vorhanden
+        return st < cur ? 1 : st === cur ? 3 : 0;
+      } });
+    };
+    pc.addEventListener('pointermove', (e) => {
+      const r = pc.getBoundingClientRect();
+      const x = Math.floor((e.clientX - r.left - planGeo.pad) / planGeo.cs), z = Math.floor((e.clientY - r.top - planGeo.pad) / planGeo.cs);
+      planHover = x >= 0 && z >= 0 && x < P.X && z < P.Z ? { x, z } : null; paintPlan();
+      if (planHover) el.querySelector('#plan-les').innerHTML = planAblesen(P, S[cur].y[0], x, z);
+    });
+    pc.addEventListener('pointerleave', () => { planHover = null; paintPlan(); });
+    // Drehen: Knöpfe, Ziehen mit Maus oder Finger (alle 60 px eine Vierteldrehung), Tasten Q und E
+    const drehe = (r) => { rot = (rot + r + 4) % 4; paint(); };
+    let zieh = null;
+    cv.addEventListener('pointerdown', (e) => { zieh = { x: e.clientX, id: e.pointerId }; cv.setPointerCapture(e.pointerId); cv.classList.add('zieht'); });
+    cv.addEventListener('pointermove', (e) => {
+      if (!zieh || e.pointerId !== zieh.id) return;
+      const dx = e.clientX - zieh.x;
+      if (Math.abs(dx) >= 60) { drehe(dx > 0 ? 1 : -1); zieh.x = e.clientX; }
+    });
+    const loslassen = () => { zieh = null; cv.classList.remove('zieht'); };
+    cv.addEventListener('pointerup', loslassen); cv.addEventListener('pointercancel', loslassen);
     const update = () => {
       const s = S[cur];
       store.set('schritt.' + d.id, cur);
@@ -417,7 +503,9 @@ async function bauSeite(id, tab) {
       el.querySelector('#teile').innerHTML = `<h3>${tr('Neue Teile in diesem Schritt', 'New parts in this step')} <span>${summe} ${tr('Blöcke', 'blocks')}</span></h3>
         <div class="teile">${teile.map(([i, c]) => `<div class="teil" title="${esc(bn(pal[i]))}"><img src="${partIcon(pal[i])}" alt=""><b>×${c}</b><span>${esc(bn(pal[i]))}</span></div>`).join('')}</div>`;
       const ab = (lo(d, 'abschnitte') || [])[s.a] || {};
-      const ebene = ebeneText(s.y[0], s.y[1]);
+      const teil = s.t && s.t[1] > 1 ? tr(` · Teil ${s.t[0]} von ${s.t[1]}`, ` · part ${s.t[0]} of ${s.t[1]}`) : '';
+      const ebene = ebeneText(s.y[0], s.y[1]) + teil;
+      el.querySelector('#plan-titel').textContent = ebene;
       el.querySelector('#ab').innerHTML = `<span class="eyebrow">${ebene}</span><h3 style="margin-top:4px">${esc(ab.name || '')}</h3><p>${esc(ab.text || '')}</p>`;
       el.querySelector('#leiste').value = cur + 1;
       el.querySelector('#ok').checked = done.has(cur);
@@ -431,8 +519,8 @@ async function bauSeite(id, tab) {
     el.querySelector('#zurueck').onclick = () => go(cur - 1);
     el.querySelector('#weiter').onclick = () => go(cur + 1);
     el.querySelector('#leiste').oninput = (e) => go(+e.target.value - 1);
-    el.querySelector('#rl').onclick = () => { rot = (rot + 3) % 4; paint(); };
-    el.querySelector('#rr').onclick = () => { rot = (rot + 1) % 4; paint(); };
+    el.querySelector('#rl').onclick = () => drehe(-1);
+    el.querySelector('#rr').onclick = () => drehe(1);
     el.querySelector('#all').onclick = (e) => { alles = !alles; e.currentTarget.setAttribute('aria-pressed', alles); paint(); };
     el.querySelector('#ok').onchange = (e) => {
       e.target.checked ? done.add(cur) : done.delete(cur);
@@ -443,11 +531,9 @@ async function bauSeite(id, tab) {
       if (/input|textarea|select/i.test(document.activeElement?.tagName) && document.activeElement.type !== 'range') return;
       if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+      if (e.key === 'q' || e.key === 'Q') drehe(-1);
+      if (e.key === 'e' || e.key === 'E') drehe(1);
     };
-    // Wischen auf dem Handy
-    let sx = null;
-    cv.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
-    cv.addEventListener('touchend', (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1)); sx = null; });
     onRedraw(paint);
     update();
   }
@@ -486,41 +572,9 @@ async function bauSeite(id, tab) {
     const cv = el.querySelector('#gc');
     let geo = null;
     const paint = () => {
-      const avail = Math.min(cv.parentElement.clientWidth - 28, 720);
-      const cs = Math.max(6, Math.floor((avail - 28) / X));
-      const pad = 26, W = pad + cs * X + 4, H = pad + cs * Z + 4, dpr = window.devicePixelRatio || 1;
-      cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
-      const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
-      geo = { pad, cs };
-      g.fillStyle = cssv('--sheet-2'); g.fillRect(0, 0, W, H);
-      g.fillStyle = cssv('--sheet'); g.fillRect(pad, pad, cs * X, cs * Z);
-      if (y > 0) {
-        g.fillStyle = cssv('--ink'); g.globalAlpha = .1;
-        for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) if (grid[at(x, y - 1, z)] >= 0) g.fillRect(pad + x * cs, pad + z * cs, cs, cs);
-        g.globalAlpha = 1;
-      }
-      g.strokeStyle = cssv('--line'); g.lineWidth = 1;
-      for (let i = 0; i <= Math.max(X, Z); i++) {
-        if (i <= X) { g.beginPath(); g.moveTo(pad + i * cs + .5, pad); g.lineTo(pad + i * cs + .5, pad + Z * cs); g.stroke(); }
-        if (i <= Z) { g.beginPath(); g.moveTo(pad, pad + i * cs + .5); g.lineTo(pad + X * cs, pad + i * cs + .5); g.stroke(); }
-      }
+      geo = ebenePlan(cv, P, y, { hover });
       const counts = new Map();
-      for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
-        const i = grid[at(x, y, z)]; if (i < 0) continue;
-        const p = pal[i]; const small = /thin|pane|panel|plate|mob/.test(p.shape);
-        const ins = small ? Math.max(1, Math.round(cs * .22)) : 1;
-        g.globalAlpha = p.context ? .3 : 1; g.fillStyle = p.color;
-        g.fillRect(pad + x * cs + ins, pad + z * cs + ins, cs - ins * 2 + 1, cs - ins * 2 + 1);
-        g.globalAlpha = 1;
-        if (zaehlt(p)) counts.set(i, (counts.get(i) || 0) + 1);
-      }
-      const cx = (X - 1) / 2, cz = (Z - 1) / 2;
-      g.fillStyle = cssv('--ink-mute'); g.font = `10px ${cssv('--f-mono')}`; g.textAlign = 'center'; g.textBaseline = 'middle';
-      for (let i = 0; i < X; i++) { const r = Math.round(i - cx); if (r % 5 === 0 && Math.abs(i - cx - r) < .01) g.fillText(r > 0 ? '+' + r : r, pad + (i + .5) * cs, 12); }
-      g.textAlign = 'right';
-      for (let i = 0; i < Z; i++) { const r = Math.round(i - cz); if (r % 5 === 0 && Math.abs(i - cz - r) < .01) g.fillText(r > 0 ? '+' + r : r, pad - 4, pad + (i + .5) * cs); }
-      g.textAlign = 'left'; g.fillStyle = cssv('--ink'); g.font = `bold 11px ${cssv('--f-mono')}`; g.fillText('N ↑', 2, 10);
-      if (hover) { g.strokeStyle = cssv('--hl'); g.lineWidth = 2; g.strokeRect(pad + hover.x * cs + 1, pad + hover.z * cs + 1, cs - 2, cs - 2); }
+      for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) { const i = grid[at(x, y, z)]; if (i >= 0 && zaehlt(pal[i])) counts.set(i, (counts.get(i) || 0) + 1); }
       el.querySelector('#yl').textContent = tr(`Ebene ${y}`, `Layer ${y}`);
       el.querySelector('#ys').value = y;
       const items = [...counts].sort((a, b) => b[1] - a[1]);
@@ -534,10 +588,7 @@ async function bauSeite(id, tab) {
     cv.addEventListener('pointermove', (e) => {
       const r = cv.getBoundingClientRect(); const x = Math.floor((e.clientX - r.left - geo.pad) / geo.cs), z = Math.floor((e.clientY - r.top - geo.pad) / geo.cs);
       hover = x >= 0 && z >= 0 && x < X && z < Z ? { x, z } : null; paint();
-      const les = el.querySelector('#les');
-      if (!hover) return;
-      const i = grid[at(x, y, z)]; const sg = (v) => (v > 0 ? '+' + v : v);
-      les.innerHTML = `<b>${i < 0 ? tr('Luft (frei lassen)', 'Air (leave empty)') : esc(bn(pal[i]))}</b><br>X ${sg(Math.round(x - (X - 1) / 2))} · Y ${y} · Z ${sg(Math.round(z - (Z - 1) / 2))}${i >= 0 && pal[i].block ? ` · <code>${esc(pal[i].block)}</code>` : ''}`;
+      if (hover) el.querySelector('#les').innerHTML = planAblesen(P, y, x, z);
     });
     onRedraw(paint);
     paint();
