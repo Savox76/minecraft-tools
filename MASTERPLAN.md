@@ -131,6 +131,7 @@ Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablau
 | Schrittnummer | groß oben links, „13 von 52“ |
 | 3D-Ansicht | neue Blöcke gelb umrandet, gebaute blass, spätere ausgeblendet. **Drehbar** in vier Richtungen (Südost, Nordost, Nordwest, Südwest): Knöpfe ⟲ ⟳, Ziehen mit der Maus, Wischen auf dem Handy oder Tasten Q und E. ◎ zeigt das ganze Bauwerk |
 | Draufsicht der Ebene | Raster der aktuellen Ebene, Norden oben, Koordinaten ab der Mitte. Neue Blöcke gelb umrandet, schon gebaute blass, die Ebene darunter als Schatten. Antippen zeigt Block, Position und Minecraft-ID |
+| Plugins | Oben auf der Bauplan-Seite: „Kein Plugin nötig“ oder jedes Plugin mit Stufe (benötigt, empfohlen, optional), Grund und Link. Karten zeigen „Plugin nötig“, Plugin-Seiten listen umgekehrt alle Baupläne und Ideen, die sie verwenden |
 | Neue Teile | Kasten wie bei LEGO: Block-Bild, „× 12“, Name |
 | Abschnitt | „Ebene 1 · Teil 3 von 5“, Name und Text des Bauabschnitts |
 | Steuerung | Zurück/Weiter, Schieberegler, Pfeiltasten, „Schritt erledigt“ mit Fortschrittsbalken (im Browser gespeichert) |
@@ -141,6 +142,7 @@ Dazu gibt es pro Bauplan die Reiter **Teileliste** (gesamt, mit Stacks und Rohst
 
 - [ ] `builds/<id>/model.json`: Ebene 0 ist der Boden, jede weitere Ebene liegt genau einen Block höher. Gelände mit `vorhanden` markieren, obere Türhälften und Bett-Kopfteile mit `zweiter-teil`.
 - [ ] `builds/<id>/build.json`: `abschnitte` mit `von`/`bis` passend zu den Ebenen, dazu Tipps, Rohstoffe und die englische Fassung unter `en`.
+- [ ] `plugins` in `build.json` eintragen: welches Plugin benötigt, empfohlen oder optional ist und warum, oder `[]`, wenn er in reinem Minecraft läuft.
 - [ ] Neue Blocknamen in `tools/i18n/bloecke_en.json` eintragen.
 - [ ] Lokal bauen (`python tools/build_site.py`) und in der Ausgabe Blöcke und Schritte prüfen. Danach im Browser einmal alle Schritte durchklicken und die Draufsicht ansehen.
 - [ ] Auf `main` pushen. Website, Schritte, Bilder und Downloads entstehen automatisch.
@@ -424,6 +426,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Ablauf**
 - Neue Idee: Eintrag in `ideen/ideen.json` mit der nächsten freien Nummer, danach `python tools/ideen_masterplan.py` ausführen. Das schreibt die Tabellen unten neu.
 - Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. Die Geplant-Seite verlinkt dann direkt auf den Bauplan.
+- Plugins: Braucht eine Idee ein Plugin, steht es unter `plugins` mit `id` und `stufe` (`benoetigt`, `empfohlen`, `optional`). Die Geplant-Seite zeigt es auf der Karte.
 - Abstimmen: Auf der Geplant-Seite führt „Wünschen“ zu einem vorausgefüllten Bauwunsch („Idee #61: Kakaofarm“). Gibt es dazu schon einen offenen Wunsch, zeigt die Seite dessen 👍-Stimmen und verlinkt dorthin.
 - Größe: klein (bis etwa 15 × 15), mittel, groß. Für Nachbauten echter Wahrzeichen gibt der Bauplan einen Maßstab an (wie beim Eiffelturm 1:3).
 
@@ -440,14 +443,14 @@ Erfahrung für Verzauberungen und Reparaturen.
 
 | Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster. | 💡 Idee |
+| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 2 | Seetang-XP-Ofen | klein | Wie die Kaktus-Farm, nur mit Seetang. Gibt weniger Erfahrung, liefert dafür getrockneten Seetang, der als Block ein guter Brennstoff ist. | 💡 Idee |
-| 3 | Dunkelraum-Monsterfarm | mittel | Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden. | 💡 Idee |
-| 4 | Spawner-XP-Farm | klein | Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt. | 💡 Idee |
-| 5 | Lohenfarm | mittel | An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen. | 💡 Idee |
+| 3 | Dunkelraum-Monsterfarm | mittel | Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 4 | Spawner-XP-Farm | klein | Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 5 | Lohenfarm | mittel | An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 6 | Goldfarm auf dem Nether-Dach | groß | Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold. | 💡 Idee |
 | 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
-| 8 | Handelshalle mit Dorfbewohnern | mittel | Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin. | 💡 Idee |
+| 8 | Handelshalle mit Dorfbewohnern | mittel | Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin. Plugin: arbeiter (optional). | 💡 Idee |
 
 ### Farmen für Baumaterial (20)
 
@@ -455,20 +458,20 @@ Liefern die Blöcke und Rohstoffe für die Baupläne.
 
 | Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 9 | Kleine Bambusfarm | klein | Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke. | 💡 Idee |
-| 10 | Große Bambusfarm | groß | Zwei Reihen mit je 16 Pflanzen. Eine Trichterlore unter Glas sammelt in eine Fasskette. Genug für Bambusbretter und Mosaik in großen Mengen. | 💡 Idee |
-| 12 | Melonen- und Kürbisfarm | klein | Beobachter und Kolben ernten, sobald eine Frucht wächst. Kürbisse für Laternen und Golems, Melonen als Essen. | 💡 Idee |
+| 9 | Kleine Bambusfarm | klein | Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 10 | Große Bambusfarm | groß | Zwei Reihen mit je 16 Pflanzen. Eine Trichterlore unter Glas sammelt in eine Fasskette. Genug für Bambusbretter und Mosaik in großen Mengen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 12 | Melonen- und Kürbisfarm | klein | Beobachter und Kolben ernten, sobald eine Frucht wächst. Kürbisse für Laternen und Golems, Melonen als Essen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 13 | Wollfarm | klein | Schafe fressen Gras, ein Werfer mit Schere schert sie automatisch. Eine Farbe pro Kammer für bunte Bauten. | 💡 Idee |
 | 14 | Honig- und Waben-Farm | klein | Bienenstöcke mit Werfern für Flaschen und Scheren. Honigblöcke, Waben für Kerzen und gewachste Kupferblöcke. | 💡 Idee |
-| 15 | Eisenfarm | mittel | Dorfbewohner werden von einem Zombie erschreckt, dabei entstehen Eisengolems. Eisen für Trichter, Schienen und Laternen. | 💡 Idee |
+| 15 | Eisenfarm | mittel | Dorfbewohner werden von einem Zombie erschreckt, dabei entstehen Eisengolems. Eisen für Trichter, Schienen und Laternen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 16 | Schneefarm mit Schneegolems | klein | Schneegolems hinterlassen Schnee, der automatisch abgebaut wird. Schneeblöcke und Eis zum Bauen. | 💡 Idee |
 | 17 | Lava aus Tropfstein | klein | Spitzer Tropfstein unter einer Lavaquelle füllt einen Kessel. Unendlich Lava als Brennstoff, ohne in den Nether zu müssen. | 💡 Idee |
 | 18 | Basalt-Generator | klein | Lava, Blaueis und Seelenerde erzeugen immer neuen Basalt. Daraus wird polierter Basalt und glatter Basalt. | 💡 Idee |
 | 19 | Bruchstein-Generator | klein | Lava und Wasser erzeugen Bruchstein nach, du baust nur noch ab. Grundlage für Steinziegel, glatten Stein und Treppen. | 💡 Idee |
 | 20 | Moosfarm | klein | Werfer mit Knochenmehl lassen Moos wachsen. Moos, Azaleen und Material für den Komposter. | 💡 Idee |
 | 21 | Kuh- und Hühnerfarm | klein | Kleine Gehege mit Begrenzung, damit die Tiere nicht überhandnehmen. Leder für Bücher, Federn, Eier und Fleisch. | 💡 Idee |
-| 60 | Zuckerrohrfarm | klein | Eine Reihe Zuckerrohr mit Beobachtern und Kolben. Papier für Bücher, Karten und Raketen. | 💡 Idee |
-| 61 | Kakaofarm | klein | Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm. Für Kekse und braunen Farbstoff. | 💡 Idee |
+| 60 | Zuckerrohrfarm | klein | Eine Reihe Zuckerrohr mit Beobachtern und Kolben. Papier für Bücher, Karten und Raketen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 61 | Kakaofarm | klein | Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm. Für Kekse und braunen Farbstoff. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 62 | Blumenfarm | klein | Ein Werfer mit Knochenmehl auf Gras lässt Blumen wachsen. Alle Grundfarben für Wolle, Beton und Glas. | 💡 Idee |
 | 64 | Tonfarm | mittel | Werfer mit Wasserflaschen machen Erde zu Schlamm, Tropfstein darunter macht daraus Ton. Für Terrakotta und Ziegel. | 💡 Idee |
 | 65 | Froschlicht-Farm | groß | Frösche fressen kleine Magmawürfel und lassen dabei Froschlichter fallen. Leuchtblöcke in drei Farben. | 💡 Idee |
@@ -482,9 +485,9 @@ Material für Redstone und Raketen.
 
 | Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 22 | Schleimfarm | mittel | In einem Schleim-Chunk oder Sumpf. Schleimbälle für Klebekolben und Schleimblöcke. | 💡 Idee |
-| 23 | Hexenfarm | groß | An einer Sumpfhütte. Redstone, Leuchtsteinstaub, Zucker und Flaschen. | 💡 Idee |
-| 24 | Creeperfarm | mittel | Nur Creeper spawnen auf Spezialblöcken. Schießpulver für Raketen. | 💡 Idee |
+| 22 | Schleimfarm | mittel | In einem Schleim-Chunk oder Sumpf. Schleimbälle für Klebekolben und Schleimblöcke. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 23 | Hexenfarm | groß | An einer Sumpfhütte. Redstone, Leuchtsteinstaub, Zucker und Flaschen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 24 | Creeperfarm | mittel | Nur Creeper spawnen auf Spezialblöcken. Schießpulver für Raketen. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 
 ### Verarbeitung und Fabriken (9)
 
@@ -494,7 +497,7 @@ Machen aus Rohstoffen fertige Dinge, ganz von selbst.
 |---|---|---|---|---|
 | 11 | Bambus-Brennstoffstation | klein | Koppelt die Bambusfarm an die Ofenbatterie. Die Öfen laufen dann ohne Kohle. | 💡 Idee |
 | 63 | Komposter-Kette | klein | Überschuss aus Bambus, Kaktus und Seetang wird in Kompostern zu Knochenmehl. | 💡 Idee |
-| 69 | Holzkohle-Station | klein | Stämme vom Holzfäller-Arbeiter werden in Öfen zu Holzkohle. | 💡 Idee |
+| 69 | Holzkohle-Station | klein | Stämme vom Holzfäller-Arbeiter werden in Öfen zu Holzkohle. Plugin: arbeiter (benötigt). | 💡 Idee |
 | 70 | Erz-Schmelzstation | mittel | Eine Einwurftruhe verteilt auf viele Öfen gleichzeitig, die Ausgabe landet sortiert in Fässern. | 💡 Idee |
 | 71 | Automatische Werkbank (Crafter) | mittel | Der Crafter aus 1.21 stellt Dinge selbst her, zum Beispiel Brot, Papier oder Eisenblöcke. | 💡 Idee |
 | 72 | Raketen-Fabrik | mittel | Papier und Schießpulver werden per Crafter zu Raketen für Elytra-Flüge. | 💡 Idee |
@@ -509,7 +512,7 @@ Technik und Komfort für Basis und Server.
 | Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
 | 25 | Verzauberungsraum | klein | Zaubertisch mit 15 Bücherregalen, dazu Amboss und Schleifstein. Passt direkt zu den XP-Farmen. | 💡 Idee |
-| 26 | Marktplatz für Spieler-Shops | mittel | Stände für die Shop-Truhen aus dem ServerShop-Plugin, mit Schildern und Laternen. | 💡 Idee |
+| 26 | Marktplatz für Spieler-Shops | mittel | Stände für die Shop-Truhen aus dem ServerShop-Plugin, mit Schildern und Laternen. Plugin: servershop (benötigt). | 💡 Idee |
 | 27 | Lorenbahnhof | mittel | Gleise vom Spawn zu allen Farmen, mit Haltestellen und Fahrplan-Schildern. | 💡 Idee |
 | 76 | Blasen-Aufzug | klein | Seelensand fährt hoch, Magmablock runter. Als eigener Bauplan zum Einbauen in jedes Haus. | 💡 Idee |
 | 77 | Item-Aufzug | klein | Eine Blasensäule hebt Gegenstände vom Keller nach oben ins Lager. | 💡 Idee |
@@ -522,8 +525,8 @@ Technik und Komfort für Basis und Server.
 | 84 | Aquisitor-Rahmen | klein | Gibt Atmung unter Wasser, zum Beispiel rund um die Glaskuppel. | 💡 Idee |
 | 85 | Nether-Knotenpunkt | groß | Portale zu allen Basen und eine Eisstraße für schnelle Bootsfahrten. | 💡 Idee |
 | 86 | Kartenraum | mittel | Karten in Rahmen ergeben eine große Wandkarte der Welt. | 💡 Idee |
-| 87 | Farm-Bot-Zentrale | klein | Ein sicherer, beleuchteter Raum für den Farm-Bot, mitten zwischen den Farmen. | 💡 Idee |
-| 88 | Lagerhalle mit Einlagern-Truhen | mittel | Für das InfiniteLager-Plugin, gemeinsamer und privater Bereich getrennt. | 💡 Idee |
+| 87 | Farm-Bot-Zentrale | klein | Ein sicherer, beleuchteter Raum für den Farm-Bot, mitten zwischen den Farmen. Plugin: fakeplayerplugin (benötigt). | 💡 Idee |
+| 88 | Lagerhalle mit Einlagern-Truhen | mittel | Für das InfiniteLager-Plugin, gemeinsamer und privater Bereich getrennt. Plugin: infinitelager (benötigt). | 💡 Idee |
 | 89 | Werkstatt | klein | Amboss, Schleifstein, Schmiedetisch, Webstuhl und Steinsäge an einem Ort. | 💡 Idee |
 | 90 | Ausrüstungsraum | klein | Rüstungsständer, Waffen und Werkzeuge geordnet an der Wand. | 💡 Idee |
 | 91 | Beleuchteter Spawn | mittel | Ein Laternen-Raster, damit am Spawn keine Monster entstehen, und das sieht trotzdem gut aus. | 💡 Idee |
@@ -598,7 +601,7 @@ Eigene Entwürfe vom Wachturm bis zum Luftschiff.
 | 50 | Japanisches Teehaus mit Garten | klein | Kirschbaumholz, Teich und Steinlaternen. | 💡 Idee |
 | 51 | Zwergenhalle im Berg | groß | Eine große Halle mit Säulen, in den Berg gebaut statt in die Tiefe. | 💡 Idee |
 | 52 | Hochhaus | groß | Moderne Glasfassade, jede Etage als eigener Bauabschnitt. | 💡 Idee |
-| 53 | Rathaus mit Uhrturm am Spawn | mittel | Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln. | 💡 Idee |
+| 53 | Rathaus mit Uhrturm am Spawn | mittel | Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln. Plugin: serverhilfe (empfohlen). | 💡 Idee |
 | 54 | Hängebrücke | mittel | Über eine Schlucht oder einen Fluss, mit Seilen aus Ketten oder Zäunen. | 💡 Idee |
 | 55 | Gartenpavillon mit Brunnen | klein | Ein schneller Einstieg, passt zu den Villen. | 💡 Idee |
 | 56 | Große Bibliothek | mittel | Bücherregale über zwei Etagen, Lesesaal und Galerie. | 💡 Idee |
@@ -623,13 +626,13 @@ Wissen rund um Server, Farmen und Bauen.
 | A2 | Litematica einrichten | Mod installieren, Bauplan laden und die Geisterblöcke richtig ausrichten. | 💡 Idee |
 | A3 | WorldEdit-Dateien einfügen | Eine .schem-Datei auf den Server laden und an der richtigen Stelle einsetzen. | 💡 Idee |
 | A4 | Paper-Server einrichten | Von der Installation über die Einstellungen bis zu den ersten Plugins. | 💡 Idee |
-| A5 | Bedrock-Spieler verbinden | Geyser und Floodgate einrichten, Whitelist ohne Passwort. | 💡 Idee |
+| A5 | Bedrock-Spieler verbinden | Geyser und Floodgate einrichten, Whitelist ohne Passwort. Plugin: floodgate (benötigt). | 💡 Idee |
 | A6 | Automatische Backups | Die Welt regelmäßig sichern und im Notfall zurückspielen. | 💡 Idee |
-| A7 | Lag finden mit spark | Messung starten, Bericht lesen, typische Ursachen beheben. | 💡 Idee |
+| A7 | Lag finden mit spark | Messung starten, Bericht lesen, typische Ursachen beheben. Plugin: spark (benötigt). | 💡 Idee |
 | A8 | Rohstoff-Übersicht | Welche Farm liefert welches Baumaterial, und was sich nicht farmen lässt. | 💡 Idee |
 | A9 | Server von außen erreichbar machen | Tunnel statt Portfreigabe, und worauf man dabei achten muss. | 💡 Idee |
 | A10 | Spielerleitfaden | Regeln, wichtige Befehle und das Hilfe-Buch für neue Spieler. | 💡 Idee |
-| A11 | Farmen klein halten | Überlauf-Stopp mit Komparator: Die Farm hält an, wenn das Fass halb voll ist. | 💡 Idee |
+| A11 | Farmen klein halten | Überlauf-Stopp mit Komparator: Die Farm hält an, wenn das Fass halb voll ist. Plugin: fakeplayerplugin (optional). | 💡 Idee |
 | A12 | Dorfbewohner-Handel verbessern | Arbeitsblöcke, Heilen von Zombie-Dorfbewohnern und bessere Preise. | 💡 Idee |
 | A13 | Wahrzeichen in Blöcke umrechnen | Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt. | 💡 Idee |
 | A14 | Elytra finden und nutzen | Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze. | 💡 Idee |

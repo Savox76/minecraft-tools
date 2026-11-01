@@ -142,6 +142,7 @@
   "schmelzvorgaenge": 684,
   "version": "0.9.0",
   "autor": "Savox",
+  "plugins": [],
   "en": {
     "titel": "Eiffel Tower",
     "beschreibung": "The Eiffel Tower in Paris at 1 : 3 scale, built from dark oak: four curved legs with arches, two platforms, a glazed observation deck and an antenna. A landmark you can see from everywhere.",

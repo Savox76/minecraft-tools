@@ -30,6 +30,7 @@ builds/<id>/
 | `rohstoffe` | was die Farmen liefern müssen: `name`, `menge`, `quelle`, `hinweis` |
 | `schmelzvorgaenge` | Anzahl Ofen-Vorgänge |
 | `version`, `autor` | Versionsnummer und Name |
+| `plugins` | Plugins, die der Bauplan braucht: Liste aus `id` (eigenes Plugin aus `plugins/eigene/` oder fremdes aus `plugins/fremd/plugins.json`), `stufe` (`benoetigt`, `empfohlen` oder `optional`), `grund` und `en.grund`. Leere Liste `[]` heißt: läuft in reinem Minecraft. Unbekannte IDs brechen den Build ab |
 | `en` | englische Texte: `titel`, `beschreibung`, `grundflaeche`, `massstab`, `hinweis`, `abschnitte` (nur `name` und `text`), `tipps`, `rohstoffe` (ohne `menge`). Listen in derselben Reihenfolge wie auf Deutsch |
 
 ### `model.json`

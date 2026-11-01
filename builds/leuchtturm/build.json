@@ -184,6 +184,7 @@
   "schmelzvorgaenge": 1234,
   "version": "0.9.0",
   "autor": "Savox",
+  "plugins": [],
   "en": {
     "titel": "Lighthouse",
     "beschreibung": "Red and white striped lighthouse on an old stone base. Three tower sections, a gallery with railing, a glazed lantern room with a beacon light and a ladder inside all the way to the top.",

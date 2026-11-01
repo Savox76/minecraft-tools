@@ -123,6 +123,16 @@
   "schmelzvorgaenge": 465,
   "version": "0.9.0",
   "autor": "Savox",
+  "plugins": [
+    {
+      "id": "infinitelager",
+      "stufe": "optional",
+      "grund": "Nicht nötig. Wer statt Kisten ein unbegrenztes Lager möchte, kann die Einwurf-Truhe durch eine Einlagern-Truhe von InfiniteLager ersetzen.",
+      "en": {
+        "grund": "Not needed. If you want unlimited storage instead of chests, replace the input chest with an InfiniteLager deposit chest."
+      }
+    }
+  ],
   "en": {
     "titel": "Cellar Storage",
     "beschreibung": "Cellar room with an automatic item sorter for 12 item types, an input chest, an overflow barrel and a wall of barrels for manual storage. Fits under the Villa by the Water.",

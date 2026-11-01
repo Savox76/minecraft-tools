@@ -8,6 +8,7 @@ import json, os, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 START, ENDE = '<!-- ideen:start -->', '<!-- ideen:ende -->'
+STUFE_TXT = {'benoetigt': 'benötigt', 'empfohlen': 'empfohlen', 'optional': 'optional'}
 STATUS = {'idee': '💡 Idee', 'in-arbeit': '🔨 in Arbeit', 'verfuegbar': '✅ verfügbar'}
 
 
@@ -27,12 +28,13 @@ def tabellen(daten):
         zeilen += ['', '### %s (%d)' % (k['name'], len(liste)), '', k['text'], '']
         if k['id'] == 'anleitungen':
             zeilen += ['| Nr. | Anleitung | Inhalt | Status |', '|---|---|---|---|']
-            zeilen += ['| %s | %s | %s | %s |' % (i['nr'], i['titel'], i['text'].replace('|', '\\|'), STATUS[i['status']]) for i in liste]
+            zeilen += ['| %s | %s | %s | %s |' % (i['nr'], i['titel'], (i['text'] + ''.join(' Plugin: %s (%s).' % (x['id'], STUFE_TXT[x['stufe']]) for x in i.get('plugins', []))).replace('|', '\\|'), STATUS[i['status']]) for i in liste]
         else:
             zeilen += ['| Nr. | Vorschlag | Größe | Beschreibung | Status |', '|---|---|---|---|---|']
             for i in sorted(liste, key=lambda x: x['nr']):
                 st = STATUS[i['status']] + (' ([Bauplan](builds/%s/))' % i['bauplan'] if i.get('bauplan') else '')
-                zeilen.append('| %s | %s | %s | %s | %s |' % (i['nr'], i['titel'], i.get('groesse', ''), i['text'].replace('|', '\\|'), st))
+                plg = ''.join(' Plugin: %s (%s).' % (x['id'], STUFE_TXT[x['stufe']]) for x in i.get('plugins', []))
+                zeilen.append('| %s | %s | %s | %s | %s |' % (i['nr'], i['titel'], i.get('groesse', ''), (i['text'] + plg).replace('|', '\\|'), st))
     return '\n'.join(zeilen)
 
 

@@ -101,6 +101,12 @@
    "text": "Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster.",
    "status": "idee",
    "empfohlen": true,
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Cactus XP farm with furnace array",
     "text": "Cactus grows by itself and hoppers feed it into a row of furnaces. Every cactus becomes green dye and gives 1 XP, stored in the furnace until you empty it. No mobs needed."
@@ -125,6 +131,12 @@
    "titel": "Dunkelraum-Monsterfarm",
    "text": "Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Dark room mob farm",
     "text": "A dark tower where mobs spawn and drop into a chamber where one hit is enough. Bones, arrows, gunpowder and string on the side."
@@ -137,6 +149,12 @@
    "titel": "Spawner-XP-Farm",
    "text": "Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Spawner XP farm",
     "text": "Built around a zombie or skeleton spawner you found. Very productive and quick to build, but only possible where a spawner is."
@@ -149,6 +167,12 @@
    "titel": "Lohenfarm",
    "text": "An einem Lohen-Spawner in der Netherfestung. Viel XP und Lohenruten für Braustände und Enderaugen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Blaze farm",
     "text": "At a blaze spawner in a Nether fortress. Lots of XP and blaze rods for brewing stands and eyes of ender."
@@ -185,6 +209,12 @@
    "titel": "Handelshalle mit Dorfbewohnern",
    "text": "Dorfbewohner in Einzelzellen mit ihrem Arbeitsblock. Handeln gibt XP, Smaragde und Verzauberungsbücher. Passt zum Arbeiter-Plugin.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "arbeiter",
+     "stufe": "optional"
+    }
+   ],
    "en": {
     "titel": "Villager trading hall",
     "text": "Villagers in single cells with their job block. Trading gives XP, emeralds and enchanted books. Fits the Arbeiter plugin."
@@ -198,6 +228,12 @@
    "text": "Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke.",
    "status": "idee",
    "empfohlen": true,
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Small bamboo farm",
     "text": "One row of 8 bamboo plants. Observers detect growth, pistons break the bamboo and hoppers collect everything. About 8 × 4 blocks."
@@ -210,6 +246,12 @@
    "titel": "Große Bambusfarm",
    "text": "Zwei Reihen mit je 16 Pflanzen. Eine Trichterlore unter Glas sammelt in eine Fasskette. Genug für Bambusbretter und Mosaik in großen Mengen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Large bamboo farm",
     "text": "Two rows of 16 plants each. A hopper minecart under glass collects into a chain of barrels. Enough for bamboo planks and mosaic in large amounts."
@@ -222,6 +264,12 @@
    "titel": "Melonen- und Kürbisfarm",
    "text": "Beobachter und Kolben ernten, sobald eine Frucht wächst. Kürbisse für Laternen und Golems, Melonen als Essen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Melon and pumpkin farm",
     "text": "Observers and pistons harvest as soon as a fruit grows. Pumpkins for lanterns and golems, melons as food."
@@ -258,6 +306,12 @@
    "titel": "Eisenfarm",
    "text": "Dorfbewohner werden von einem Zombie erschreckt, dabei entstehen Eisengolems. Eisen für Trichter, Schienen und Laternen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Iron farm",
     "text": "Villagers are scared by a zombie and iron golems spawn. Iron for hoppers, rails and lanterns."
@@ -342,6 +396,12 @@
    "titel": "Zuckerrohrfarm",
    "text": "Eine Reihe Zuckerrohr mit Beobachtern und Kolben. Papier für Bücher, Karten und Raketen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Sugar cane farm",
     "text": "A row of sugar cane with observers and pistons. Paper for books, maps and rockets."
@@ -354,6 +414,12 @@
    "titel": "Kakaofarm",
    "text": "Beobachter und Kolben ernten Kakaobohnen am Tropenbaumstamm. Für Kekse und braunen Farbstoff.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Cocoa farm",
     "text": "Observers and pistons harvest cocoa beans on jungle logs. For cookies and brown dye."
@@ -438,6 +504,12 @@
    "titel": "Schleimfarm",
    "text": "In einem Schleim-Chunk oder Sumpf. Schleimbälle für Klebekolben und Schleimblöcke.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Slime farm",
     "text": "In a slime chunk or swamp. Slimeballs for sticky pistons and slime blocks."
@@ -450,6 +522,12 @@
    "titel": "Hexenfarm",
    "text": "An einer Sumpfhütte. Redstone, Leuchtsteinstaub, Zucker und Flaschen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Witch farm",
     "text": "At a swamp hut. Redstone, glowstone dust, sugar and bottles."
@@ -462,6 +540,12 @@
    "titel": "Creeperfarm",
    "text": "Nur Creeper spawnen auf Spezialblöcken. Schießpulver für Raketen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Creeper farm",
     "text": "Only creepers spawn on special blocks. Gunpowder for rockets."
@@ -499,6 +583,12 @@
    "titel": "Holzkohle-Station",
    "text": "Stämme vom Holzfäller-Arbeiter werden in Öfen zu Holzkohle.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "arbeiter",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Charcoal station",
     "text": "Logs from the lumberjack worker turn into charcoal in furnaces."
@@ -595,6 +685,12 @@
    "titel": "Marktplatz für Spieler-Shops",
    "text": "Stände für die Shop-Truhen aus dem ServerShop-Plugin, mit Schildern und Laternen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "servershop",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Market square for player shops",
     "text": "Stalls for the shop chests from the ServerShop plugin, with signs and lanterns."
@@ -751,6 +847,12 @@
    "titel": "Farm-Bot-Zentrale",
    "text": "Ein sicherer, beleuchteter Raum für den Farm-Bot, mitten zwischen den Farmen.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Farm bot base",
     "text": "A safe, lit room for the farm bot, right between the farms."
@@ -763,6 +865,12 @@
    "titel": "Lagerhalle mit Einlagern-Truhen",
    "text": "Für das InfiniteLager-Plugin, gemeinsamer und privater Bereich getrennt.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "infinitelager",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Warehouse with deposit chests",
     "text": "For the InfiniteLager plugin, with shared and private areas kept apart."
@@ -1327,6 +1435,12 @@
    "titel": "Rathaus mit Uhrturm am Spawn",
    "text": "Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "serverhilfe",
+     "stufe": "empfohlen"
+    }
+   ],
    "en": {
     "titel": "Town hall with clock tower at spawn",
     "text": "A meeting point for everyone, with help signs and notice boards."
@@ -1538,6 +1652,12 @@
    "titel": "Bedrock-Spieler verbinden",
    "text": "Geyser und Floodgate einrichten, Whitelist ohne Passwort.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "floodgate",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Connecting Bedrock players",
     "text": "Set up Geyser and Floodgate, whitelist without a password."
@@ -1560,6 +1680,12 @@
    "titel": "Lag finden mit spark",
    "text": "Messung starten, Bericht lesen, typische Ursachen beheben.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "spark",
+     "stufe": "benoetigt"
+    }
+   ],
    "en": {
     "titel": "Finding lag with spark",
     "text": "Start a profile, read the report, fix typical causes."
@@ -1604,6 +1730,12 @@
    "titel": "Farmen klein halten",
    "text": "Überlauf-Stopp mit Komparator: Die Farm hält an, wenn das Fass halb voll ist.",
    "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "optional"
+    }
+   ],
    "en": {
     "titel": "Keeping farms small",
     "text": "Overflow stop with a comparator: the farm stops when the barrel is half full."

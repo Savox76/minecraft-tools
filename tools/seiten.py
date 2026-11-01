@@ -375,6 +375,32 @@ class Seiten:
             {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': self.voll(pfad(self.lang, a, id))}
             for i, (n, a, id) in enumerate(teile)]}
 
+    def stufe(self, st):
+        return {'benoetigt': self.t('Benötigt', 'Required'), 'empfohlen': self.t('Empfohlen', 'Recommended'),
+                'optional': self.t('Optional', 'Optional')}[st]
+
+    def plugin_ref(self, pid):
+        e = next((p for p in self.k['plugins'] if p['id'] == pid), None)
+        if e:
+            return e['name'], self.link('plugin', pid), True
+        f = next((p for p in self.k.get('fremd', []) if p['id'] == pid), None)
+        return (f['name'], f.get('link'), False) if f else (pid, None, False)
+
+    def plugin_a(self, pid):
+        name, href, eigen = self.plugin_ref(pid)
+        return '<a href="%s"%s>%s</a>' % (H(href), '' if eigen else ' rel="noopener"', H(name)) if href else H(name)
+
+    def plugin_kasten(self, liste):
+        t = self.t
+        if not liste:
+            return '<div class="plugin-bedarf leer-plugin"><h3>Plugins</h3><p>%s</p></div>' % t(
+                'Kein Plugin nötig. Läuft in reinem Minecraft (Vanilla), im Einzelspieler und auf jedem Server.',
+                'No plugin needed. Works in plain Minecraft (vanilla), in singleplayer and on any server.')
+        return '<div class="plugin-bedarf"><h3>%s</h3>%s</div>' % (t('Plugins für diesen Bauplan', 'Plugins for this build'), ''.join(
+            '<div class="pb-eintrag"><div class="pb-kopf"><span class="marker stufe-%s">%s</span><b>%s</b></div>%s</div>' % (
+                x['stufe'], self.stufe(x['stufe']), self.plugin_a(x['id']),
+                '<p>%s</p>' % H(lok(x, 'grund', self.lang)) if x.get('grund') else '') for x in liste))
+
     def bau_karte(self, b):
         L = T[self.lang]
         titel = lok(b, 'titel', self.lang)
@@ -383,7 +409,8 @@ class Seiten:
                 '<div class="fakten">%s<span><b>%s</b> %s</span><span><b>%d</b> %s</span></div></div></a>') % (
             self.link("bau", b["id"]), self.base + 'bilder/%s.png?v=%s' % (b['id'], self.cfg.get('version', '1')),
             H(self.t('Minecraft-Bauplan %s, fertiges Bauwerk', 'Minecraft build %s, finished') % titel), edition(b['edition']),
-            '<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else '',
+            ('<span class="marker stufe-benoetigt">%s</span>' % self.t('Plugin nötig', 'Plugin needed') if any(x['stufe'] == 'benoetigt' for x in b.get('plugins', [])) else '') +
+            ('<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else ''),
             H(titel), H(lok(b, 'beschreibung', self.lang)), punkte(b['schwierigkeit'], self.lang),
             fmt(b['bloecke'], self.lang), L['bloecke'], b['schritte'], L['schritte'])
 
@@ -523,7 +550,9 @@ class Seiten:
                  (t('Schritte', 'Steps'), str(kb['schritte'])), (t('Grundfläche', 'Footprint'), H(lok(b, 'grundflaeche', lang) or '')),
                  (t('Höhe', 'Height'), t('%d Ebenen', '%d layers') % b['model']['size']['y']),
                  (t('Bauzeit', 'Build time'), t('%d–%d Std.', '%d–%d h') % tuple(std)),
-                 ('Edition', ' · '.join('Java' if e == 'java' else 'Bedrock' for e in b.get('edition', [])))]
+                 ('Edition', ' · '.join('Java' if e == 'java' else 'Bedrock' for e in b.get('edition', []))),
+                 ('Plugins', ', '.join('%s <small>(%s)</small>' % (H(self.plugin_ref(x['id'])[0]), self.stufe(x['stufe']).lower()) for x in b.get('plugins', []))
+                  or t('keine nötig', 'none needed'))]
         teile_rows = ''.join('<tr><td>%s<br><small>%s</small></td><td class="zahl">%s</td><td class="zahl">%s</td></tr>' % (
             H(self.blockname(pal[x['i']])), H((pal[x['i']].get('block') or '').split('[')[0]), fmt(x['n'], lang), stacks(x['n'], lang))
             for x in b['teileliste'])
@@ -549,7 +578,7 @@ class Seiten:
             '<h2 style="margin:26px 0 10px">Downloads</h2><ul class="vor-liste">%s</ul></div></div>%s</div></section>'
         ) % (self.link('liste'), t('Baupläne', 'Builds'), H(kats.get(b['kategorie'], '')), H(titel), H(lok(b, 'beschreibung', lang)),
              ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % s for s in specs),
-             '<div class="hinweis"><span><b>%s:</b> %s</span></div>' % (T[lang]['entwurf'], H(lok(b, 'hinweis', lang) or '')) if b.get('status') == 'entwurf' else '',
+             ('<div class="hinweis"><span><b>%s:</b> %s</span></div>' % (T[lang]['entwurf'], H(lok(b, 'hinweis', lang) or '')) if b.get('status') == 'entwurf' else '') + self.plugin_kasten(b.get('plugins', [])),
              self.base + 'bilder/%s.png' % b['id'], H(t('Minecraft %s, fertig gebaut', 'Minecraft %s, finished build') % titel),
              t('Bauabschnitte', 'Build sections'), ab_html,
              t('Die Anleitung führt dich in %d LEGO-Schritten Ebene für Ebene von unten nach oben durch den Bau, mit höchstens 60 neuen Blöcken pro Schritt. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
@@ -611,11 +640,11 @@ class Seiten:
             '<section class="tafel"><div class="wrap"><div class="zwei-spalten"><div class="feld"><h2>%s</h2><ul class="funktionen">%s</ul></div>'
             '<div class="feld"><h2>%s</h2>%s</div></div>'
             '<h2 style="margin:28px 0 12px">%s</h2><div class="tabelle-huelle"><table><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody>%s</tbody></table></div>'
-            '%s</div></section>') % (
+            '%s%s</div></section>') % (
             t('Funktionen', 'Features'), ''.join('<li>%s</li>' % H(f) for f in lok(p, 'funktionen', lang)),
             t('Änderungen', 'Changelog'), aend_html, t('Befehle', 'Commands'), t('Befehl', 'Command'), t('Was er macht', 'What it does'), t('Wer', 'Who'), befehle,
             ('<h2 style="margin:28px 0 12px">%s</h2><div class="tabelle-huelle"><table><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody>%s</tbody></table></div>' % (
-                t('Einstellungen in der config.yml', 'Settings in config.yml'), t('Schlüssel', 'Key'), t('Standard', 'Default'), t('Bedeutung', 'Meaning'), config)) if config else '')
+                t('Einstellungen in der config.yml', 'Settings in config.yml'), t('Schlüssel', 'Key'), t('Standard', 'Default'), t('Bedeutung', 'Meaning'), config)) if config else '', self.verwendet_in(p['id']))
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'SoftwareApplication', 'name': p['name'], 'softwareVersion': p['version'], 'description': lok(p, 'beschreibung', lang),
              'applicationCategory': 'GameApplication', 'operatingSystem': 'Paper (Minecraft Java Server)', 'inLanguage': lang,
@@ -625,6 +654,19 @@ class Seiten:
                       t('%s %s für Paper-Server: %s Mit allen Befehlen und Einstellungen.', '%s %s for Paper servers: %s With all commands and settings.') % (
                           p['name'], p['version'], lok(p, 'kurz', lang)),
                       inhalt, ld, bild=self.og('og-plugins'), og_titel=t('%s – Paper-Plugin', '%s – Paper plugin') % p['name'])
+
+    def verwendet_in(self, pid):
+        t = self.t
+        bs = [b for b in self.k['builds'] if any(x['id'] == pid for x in b.get('plugins', []))]
+        ids = [i for i in self.ideen['ideen'] if any(x['id'] == pid for x in i.get('plugins', []))]
+        if not bs and not ids:
+            return ''
+        st = lambda l: self.stufe(next(x for x in l if x['id'] == pid)['stufe']).lower()
+        zeilen = ['<li><a href="%s">%s</a> <span class="eyebrow">%s · %s</span></li>' % (
+            self.link('bau', b['id']), H(lok(b, 'titel', self.lang)), t('Bauplan', 'build'), st(b['plugins'])) for b in bs]
+        zeilen += ['<li><a href="%s#idee-%s">%s</a> <span class="eyebrow">%s · Nr. %s · %s</span></li>' % (
+            self.link('geplant'), i['nr'], H(lok(i, 'titel', self.lang)), t('geplant', 'planned'), i['nr'], st(i['plugins'])) for i in ids]
+        return '<h2 style="margin:28px 0 12px">%s</h2><ul class="verwendet">%s</ul>' % (t('Wird verwendet in', 'Used in'), ''.join(zeilen))
 
     def liste_anleitungen(self):
         t = self.t
@@ -683,10 +725,14 @@ class Seiten:
                 ziel = '%s/issues/new?template=bauwunsch.yml&title=%s&bauwerk=%s' % (
                     repo, quote('Bauwunsch: Idee #%s %s' % (i['nr'], i['titel'])), quote(i['titel']))
                 aktion = '<a class="btn zwei klein" href="%s" rel="noopener">👍 %s</a>' % (H(ziel), t('Wünschen', 'Vote'))
+            plg = ''
+            if i.get('plugins'):
+                plg = '<p class="idee-plugins">Plugin: %s</p>' % ', '.join(
+                    '%s <span>(%s)</span>' % (self.plugin_a(x['id']), self.stufe(x['stufe']).lower()) for x in i['plugins'])
             return ('<article class="idee" data-kat="%s"%s><div class="idee-kopf"><span class="idee-nr">Nr. %s</span>'
-                    '<span class="marker">%s</span><span class="marker status-%s">%s</span></div><h3>%s</h3><p>%s</p>'
+                    '<span class="marker">%s</span><span class="marker status-%s">%s</span></div><h3>%s</h3><p>%s</p>%s'
                     '<div class="idee-fuss">%s</div></article>') % (
-                i['kategorie'], (' id="idee-%s"' % i['nr']) if mit_id else '', i['nr'], H(gr), i['status'], ST[i['status']], H(titel), H(lok(i, 'text', lang)), aktion)
+                i['kategorie'], (' id="idee-%s"' % i['nr']) if mit_id else '', i['nr'], H(gr), i['status'], ST[i['status']], H(titel), H(lok(i, 'text', lang)), plg, aktion)
 
         teile = []
         empf = [i for i in IDS if i.get('empfohlen')]

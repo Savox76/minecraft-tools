@@ -292,7 +292,8 @@ def main():
         katalog['builds'].append({
             k: build.get(k) for k in ('id', 'titel', 'beschreibung', 'kategorie', 'tags', 'edition',
                                       'schwierigkeit', 'bauzeit_stunden', 'grundflaeche', 'status')
-        } | {'en': {k: build.get('en', {}).get(k) for k in ('titel', 'beschreibung', 'grundflaeche')},
+        } | {'plugins': [{'id': x['id'], 'stufe': x['stufe']} for x in build.get('plugins', [])],
+             'en': {k: build.get('en', {}).get(k) for k in ('titel', 'beschreibung', 'grundflaeche')},
              'bloecke': gesamt, 'schritte': len(schritte), 'hoehe': model['size']['y'],
              'blocksorten': len(liste)})
         print(f'Bauplan  {bid:22} {gesamt:6} Blöcke  {len(schritte):4} Schritte')
@@ -349,11 +350,26 @@ def main():
     if os.path.isfile(wpfad):
         katalog['wuensche'] = lies_json(wpfad)
 
+    # Plugin-Angaben in Bauplänen und Ideen prüfen: jede ID muss ein eigenes oder fremdes Plugin sein
+    bekannte = {x['id'] for x in katalog['plugins']} | {x['id'] for x in katalog['fremd']}
+    STUFEN = {'benoetigt', 'empfohlen', 'optional'}
+
+    def pruefe_plugins(wo, liste):
+        for x in liste or []:
+            if x.get('id') not in bekannte:
+                sys.exit(f'{wo}: unbekanntes Plugin „{x.get("id")}“ (erlaubt: {", ".join(sorted(bekannte))})')
+            if x.get('stufe') not in STUFEN:
+                sys.exit(f'{wo}: Stufe muss benoetigt, empfohlen oder optional sein, nicht „{x.get("stufe")}“')
+
+    for b in alle_builds:
+        pruefe_plugins(f'builds/{b["id"]}/build.json', b.get('plugins'))
+
     # Ideen für die Seite „Geplant“ (Quelle: ideen/ideen.json, siehe Masterplan Abschnitt 15)
     ideen = lies_json(os.path.join(ROOT, 'ideen', 'ideen.json'))
     ideen.pop('_hinweis', None)
     gebaut = {b['id'] for b in katalog['builds']}
     for i in ideen['ideen']:
+        pruefe_plugins(f'ideen/ideen.json Nr. {i["nr"]}', i.get('plugins'))
         if i.get('bauplan') and i['bauplan'] not in gebaut:
             print(f'  Hinweis: Idee {i["nr"]} verweist auf unbekannten Bauplan {i["bauplan"]}')
     schreib_json(os.path.join(OUT, 'data', 'ideen.json'), ideen)

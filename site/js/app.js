@@ -75,12 +75,34 @@ const initialen = (n) => (n.match(/[A-ZÄÖÜ]/g) || [n[0]]).slice(0, 2).join(''
 const pkat = (k, id) => (de ? k.plugin_kategorien : k.plugin_kategorien_en || k.plugin_kategorien)[id] || id;
 const kats = (k) => (de ? k.kategorien : k.kategorien_en || k.kategorien);
 
+// Plugin-Angaben bei Bauplänen und Ideen: benötigt, empfohlen oder optional
+const STUFE = { benoetigt: tr('Benötigt', 'Required'), empfohlen: tr('Empfohlen', 'Recommended'), optional: tr('Optional', 'Optional') };
+function pluginRef(k, id) {
+  const e = (k.plugins || []).find((p) => p.id === id);
+  if (e) return { name: e.name, href: url('plugin', id), eigen: true };
+  const f = (k.fremd || []).find((p) => p.id === id);
+  return f ? { name: f.name, href: f.link || null, eigen: false, autor: f.autor, anleitung: f.anleitung } : { name: id, href: null };
+}
+const pluginLink = (r) => (r.href ? `<a href="${esc(r.href)}"${r.eigen ? '' : ' target="_blank" rel="noopener"'}>${esc(r.name)}</a>` : esc(r.name));
+// Kasten „Plugins“ auf der Bauplan-Seite
+function pluginKasten(k, liste) {
+  if (!liste || !liste.length) {
+    return `<div class="plugin-bedarf leer-plugin"><h3>${tr('Plugins', 'Plugins')}</h3><p>${tr('Kein Plugin nötig. Läuft in reinem Minecraft (Vanilla), im Einzelspieler und auf jedem Server.', 'No plugin needed. Works in plain Minecraft (vanilla), in singleplayer and on any server.')}</p></div>`;
+  }
+  return `<div class="plugin-bedarf"><h3>${tr('Plugins für diesen Bauplan', 'Plugins for this build')}</h3>${liste.map((x) => {
+    const r = pluginRef(k, x.id);
+    const her = r.eigen ? tr('Eigenes Plugin', 'Our plugin') : (r.autor ? tr(`von ${r.autor}`, `by ${r.autor}`) : tr('Plugin eines anderen Entwicklers', 'Plugin by another developer'));
+    return `<div class="pb-eintrag"><div class="pb-kopf"><span class="marker stufe-${x.stufe}">${STUFE[x.stufe]}</span><b>${pluginLink(r)}</b><span class="eyebrow">${esc(her)}</span></div>
+      ${x.grund ? `<p>${esc(lo(x, 'grund'))}</p>` : ''}${r.anleitung ? `<a class="pb-mehr" href="${url('anleitung', r.anleitung)}">${tr('Anleitung dazu', 'Guide')} →</a>` : ''}</div>`;
+  }).join('')}</div>`;
+}
+
 function bauKarte(b) {
   const titel = lo(b, 'titel');
   return `<a class="karte" href="${url('bau', b.id)}" data-thumb="${b.id}">
     <div class="bild"><canvas role="img" aria-label="${esc(tr(`Minecraft-Bauplan ${titel}, fertiges Bauwerk`, `Minecraft build ${titel}, finished`))}"></canvas></div>
     <div class="text">
-      <div class="chips">${editionen(b.edition)}${b.status === 'entwurf' ? `<span class="marker entwurf">${tr('Entwurf', 'Draft')}</span>` : ''}</div>
+      <div class="chips">${editionen(b.edition)}${(b.plugins || []).some((x) => x.stufe === 'benoetigt') ? `<span class="marker stufe-benoetigt">${tr('Plugin nötig', 'Plugin needed')}</span>` : ''}${b.status === 'entwurf' ? `<span class="marker entwurf">${tr('Entwurf', 'Draft')}</span>` : ''}</div>
       <h3>${esc(titel)}</h3>
       <p>${esc(lo(b, 'beschreibung'))}</p>
       <div class="fakten">${punkte(b.schwierigkeit)}<span><b>${fmt(b.bloecke)}</b> ${tr('Blöcke', 'blocks')}</span><span><b>${b.schritte}</b> ${tr('Schritte', 'steps')}</span><span>${stunden(b.bauzeit_stunden)}</span></div>
@@ -212,6 +234,7 @@ function fremdKarte(p) {
         <div><h3>${esc(p.name)}</h3>${p.autor ? `<span class="eyebrow">${tr('von', 'by')} ${esc(p.autor)}</span>` : ''}</div></div>
       <p>${esc(lo(p, 'zweck'))}</p>
       ${p.einsatz ? `<p class="einsatz"><b>${tr('Auf dem Server:', 'On the server:')}</b> ${esc(lo(p, 'einsatz'))}</p>` : ''}
+      ${(() => { const bs = (KAT?.builds || []).filter((b) => (b.plugins || []).some((x) => x.id === p.id)); return bs.length ? `<p class="einsatz"><b>${tr('Für Baupläne:', 'For builds:')}</b> ${bs.map((b) => `<a href="${url('bau', b.id)}">${esc(lo(b, 'titel'))}</a>`).join(', ')}</p>` : ''; })()}
       <div class="fakten"><span class="marker ${p.status === 'empfohlen' ? '' : 'ok'}">${p.status === 'empfohlen' ? tr('Empfohlen', 'Recommended') : tr('Im Einsatz', 'In use')}</span>
         ${p.anleitung ? `<a class="marker" href="${url('anleitung', esc(p.anleitung))}">${tr('Anleitung', 'Guide')}</a>` : ''}
         ${p.link ? `<a class="marker" href="${esc(p.link)}" target="_blank" rel="noopener">${tr('Download-Seite', 'Download page')} ↗</a>` : ''}</div>
@@ -285,7 +308,9 @@ async function geplantSeite() {
     }
     return `<article class="idee" data-kat="${i.kategorie}"${mitId ? ` id="idee-${i.nr}"` : ''}>
       <div class="idee-kopf"><span class="idee-nr">Nr. ${i.nr}</span><span class="marker">${esc(GR[i.groesse] || tr('Anleitung', 'Guide'))}</span><span class="marker status-${i.status}">${ST[i.status]}</span></div>
-      <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p><div class="idee-fuss">${aktion}</div></article>`;
+      <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p>
+      ${(i.plugins || []).length ? `<p class="idee-plugins">${tr('Plugin', 'Plugin')}: ${i.plugins.map((x) => `${pluginLink(pluginRef(k, x.id))} <span>(${STUFE[x.stufe].toLowerCase()})</span>`).join(', ')}</p>` : ''}
+      <div class="idee-fuss">${aktion}</div></article>`;
   };
   const zahl = (st) => IDS.filter((i) => i.status === st).length;
   const filter = { kat: 'alle', gr: 'alle', q: '' };
@@ -335,6 +360,20 @@ async function geplantSeite() {
   if (location.hash.startsWith('#idee-')) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'center' });
 }
 
+// Wo wird ein Plugin gebraucht? Baupläne und geplante Ideen
+let IDEEN = null;
+async function verwendetIn(k, id) {
+  if (!IDEEN) IDEEN = fetch(`${BASE}data/ideen.json?v=${V}`).then((r) => r.json()).catch(() => ({ ideen: [] }));
+  const D = await IDEEN;
+  const bs = k.builds.filter((b) => (b.plugins || []).some((x) => x.id === id));
+  const is = D.ideen.filter((i) => (i.plugins || []).some((x) => x.id === id));
+  if (!bs.length && !is.length) return '';
+  const st = (l) => STUFE[l.find((x) => x.id === id).stufe].toLowerCase();
+  return `<h2 style="margin:28px 0 12px">${tr('Wird verwendet in', 'Used in')}</h2><ul class="verwendet">
+    ${bs.map((b) => `<li><a href="${url('bau', b.id)}">${esc(lo(b, 'titel'))}</a> <span class="eyebrow">${tr('Bauplan', 'build')} · ${st(b.plugins)}</span></li>`).join('')}
+    ${is.map((i) => `<li><a href="${url('geplant')}#idee-${i.nr}">${esc(lo(i, 'titel'))}</a> <span class="eyebrow">${tr('geplant', 'planned')} · Nr. ${i.nr} · ${st(i.plugins)}</span></li>`).join('')}</ul>`;
+}
+
 async function pluginSeite(id) {
   const k = await katalog();
   const p = k.plugins.find((x) => x.id === id);
@@ -369,6 +408,7 @@ async function pluginSeite(id) {
     <div class="tabelle-huelle"><table><thead><tr><th>${tr('Befehl', 'Command')}</th><th>${tr('Was er macht', 'What it does')}</th><th>${tr('Wer', 'Who')}</th></tr></thead><tbody>
       ${p.befehle.map((b, i) => `<tr><td><code>${esc(b.befehl)}</code></td><td>${esc(btext(b, i))}</td><td>${wer[b.wer] || b.wer}</td></tr>`).join('')}
     </tbody></table></div>
+    ${await verwendetIn(k, p.id)}
     ${p.config.length ? `<h2 style="margin:28px 0 12px">${tr('Einstellungen in der config.yml', 'Settings in config.yml')}</h2>
     <div class="tabelle-huelle"><table><thead><tr><th>${tr('Schlüssel', 'Key')}</th><th>${tr('Standard', 'Default')}</th><th>${tr('Bedeutung', 'Meaning')}</th></tr></thead><tbody>
       ${p.config.map((c, i) => `<tr><td><code>${esc(c.schluessel)}</code></td><td><code>${esc(c.standard)}</code></td><td>${esc(ctext(c, i))}</td></tr>`).join('')}
@@ -466,8 +506,10 @@ async function bauSeite(id, tab) {
       <div><dt>${tr('Höhe', 'Height')}</dt><dd>${d.model.size.y} ${tr('Ebenen', 'layers')}</dd></div>
       <div><dt>${tr('Bauzeit', 'Build time')}</dt><dd>${stunden(d.bauzeit_stunden)}</dd></div>
       <div><dt>Edition</dt><dd>${(d.edition || []).map((e) => (e === 'java' ? 'Java' : 'Bedrock')).join(' · ')}</dd></div>
+      <div><dt>Plugins</dt><dd>${(d.plugins || []).length ? (d.plugins || []).map((x) => `${esc(pluginRef(k, x.id).name)} <small>(${STUFE[x.stufe].toLowerCase()})</small>`).join(', ') : tr('keine nötig', 'none needed')}</dd></div>
     </dl>
     ${d.status === 'entwurf' ? `<div class="hinweis"><span aria-hidden="true">⚠️</span><span><b>${tr('Entwurf', 'Draft')}:</b> ${esc(lo(d, 'hinweis') || '')}</span></div>` : ''}
+    ${pluginKasten(k, d.plugins)}
     <div class="reiter" role="tablist">${tabs.map(([t, n]) => `<button role="tab" aria-selected="${t === tab}" data-tab="${t}">${n}</button>`).join('')}</div>
   </div></section>
   <section class="tafel"><div class="wrap" id="tafel"></div></section>`;
