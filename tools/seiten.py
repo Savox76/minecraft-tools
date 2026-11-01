@@ -338,10 +338,10 @@ class Seiten:
     def bau_karte(self, b):
         L = T[self.lang]
         titel = lok(b, 'titel', self.lang)
-        return ('<a class="karte" href="%s"><div class="bild" data-kat="%s"><img src="%s" alt="%s" width="800" height="600" loading="lazy"></div>'
+        return ('<a class="karte" href="%s"><div class="bild"><img src="%s" alt="%s" width="800" height="600" loading="lazy"></div>'
                 '<div class="text"><div class="chips">%s%s</div><h3>%s</h3><p>%s</p>'
                 '<div class="fakten">%s<span><b>%s</b> %s</span><span><b>%d</b> %s</span></div></div></a>') % (
-            self.link('bau', b['id']), b['kategorie'], self.base + 'bilder/%s.png' % b['id'],
+            self.link("bau", b["id"]), self.base + 'bilder/%s.png' % b['id'],
             H(self.t('Minecraft-Bauplan %s, fertiges Bauwerk', 'Minecraft build %s, finished') % titel), edition(b['edition']),
             '<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else '',
             H(titel), H(lok(b, 'beschreibung', self.lang)), punkte(b['schwierigkeit'], self.lang),

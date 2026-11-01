@@ -76,8 +76,8 @@ const kats = (k) => (de ? k.kategorien : k.kategorien_en || k.kategorien);
 
 function bauKarte(b) {
   const titel = lo(b, 'titel');
-  return `<a class="karte" href="${url('bau', b.id)}">
-    <div class="bild" data-kat="${esc(b.kategorie)}"><img src="${BASE}bilder/${b.id}.png" alt="${esc(tr(`Minecraft-Bauplan ${titel}, fertiges Bauwerk`, `Minecraft build ${titel}, finished`))}" width="800" height="600" loading="lazy" decoding="async"></div>
+  return `<a class="karte" href="${url('bau', b.id)}" data-thumb="${b.id}">
+    <div class="bild"><canvas role="img" aria-label="${esc(tr(`Minecraft-Bauplan ${titel}, fertiges Bauwerk`, `Minecraft build ${titel}, finished`))}"></canvas></div>
     <div class="text">
       <div class="chips">${editionen(b.edition)}${b.status === 'entwurf' ? `<span class="marker entwurf">${tr('Entwurf', 'Draft')}</span>` : ''}</div>
       <h3>${esc(titel)}</h3>
@@ -95,6 +95,22 @@ function pluginKarte(p) {
     </div></a>`;
 }
 const docLink = (d) => `<a class="liste-link" href="${url('anleitung', d.id)}"><div><h3>${esc(lo(d, 'titel'))}</h3><p>${esc(lo(d, 'kurz'))}</p></div><span class="pfeil" aria-hidden="true">→</span></a>`;
+
+// Vorschaubilder erst zeichnen, wenn sie sichtbar werden
+const thumbObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    thumbObs.unobserve(e.target);
+    const el = e.target, id = el.dataset.thumb;
+    ladeBau(id).then((d) => {
+      const P = prepare(d.model, { schnitt: d.ansicht?.schnitt });
+      const cv = el.querySelector('canvas');
+      const paint = () => { if (!cv.isConnected) return; const box = el.querySelector('.bild'); draw(cv, P, { width: box.clientWidth * .92, maxHeight: box.clientHeight * .92, rot: 0, ...farben(), ground: null }); };
+      paint(); onRedraw(paint);
+    });
+  });
+}, { rootMargin: '200px' });
+function watchThumbs(root) { root.querySelectorAll('[data-thumb]').forEach((el) => thumbObs.observe(el)); }
 
 /* ---------- Seiten ---------- */
 async function startSeite() {
@@ -134,6 +150,7 @@ async function startSeite() {
     <div><div class="abschnitt-kopf"><div><h2>${tr('Was soll als Nächstes kommen?', 'What should come next?')}</h2><p>${tr('Wünsch dir ein Bauwerk. Die meistgewünschten werden zuerst gebaut.', 'Request a build. The most requested ones are made first.')}</p></div></div>
       ${wunschListe(k, 4)}<div style="margin-top:12px"><a class="btn" href="${url('wuensche')}">${tr('Bauplan wünschen', 'Request a build')}</a></div></div>
   </div></section>`;
+  watchThumbs(main);
   heldAnimation();
 }
 
@@ -180,6 +197,7 @@ async function bauplaeneSeite() {
   const liste = main.querySelector('#liste');
   const zeige = (f) => {
     liste.innerHTML = k.builds.filter((b) => f === 'alle' || b.kategorie === f).map(bauKarte).join('');
+    watchThumbs(liste);
     main.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', c.dataset.f === f));
     store.set('filter', f);
   };
