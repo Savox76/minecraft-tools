@@ -1,6 +1,6 @@
 # Masterplan: minecraft-tools
 
-Arbeitstitel: **Savox Bauwerkstatt**. Eine Sammlung von Minecraft-Bauanleitungen und Server-Plugins für Kreative, kostenlos und einzeln herunterladbar.
+Name: **Bauwerkstatt** (Zusatz: „Baupläne und Plugins für Minecraft“). „Minecraft“ darf nach den Minecraft-Nutzungsrichtlinien nicht der Hauptname sein, nur ein Zusatz. Eine Sammlung von Minecraft-Bauanleitungen und Server-Plugins für Kreative, kostenlos und einzeln herunterladbar.
 
 Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
@@ -364,7 +364,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 
 | # | Frage | Mein Vorschlag |
 |---|---|---|
-| 1 | Name des Projekts | „Savox Bauwerkstatt“ |
+| 1 | Name des Projekts | ✅ „Bauwerkstatt“ mit Zusatz „Baupläne und Plugins für Minecraft“ (vorher „Savox Bauwerkstatt“) |
 | 2 | Lizenz Baupläne | CC BY-NC 4.0 |
 | 3 | Lizenz Code und Plugins | MIT |
 | 4 | Sprachen | ✅ Deutsch und Englisch, seit Phase 2 umgesetzt |

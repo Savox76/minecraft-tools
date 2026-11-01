@@ -726,7 +726,7 @@ async function bauSeite(id, tab) {
 /* ---------- Router ---------- */
 let keyHandler = null;
 document.addEventListener('keydown', (e) => keyHandler && keyHandler(e));
-const TITEL = 'Savox Bauwerkstatt';
+const TITEL = 'Bauwerkstatt';
 const ART = {};   // Adress-Teil -> Seitenart, für beide Sprachen
 for (const lang of ['de', 'en']) for (const [art, seg] of Object.entries(SEG[lang])) ART[seg] = art;
 let aktuell = { art: 'start', id: null };

@@ -203,7 +203,7 @@ def schrift(groesse, fett=True):
     return None
 
 
-def og_bild(ziel, titel, unterzeile, modell_bild=None):
+def og_bild(ziel, titel, unterzeile, modell_bild=None, zusatz='Baupläne und Plugins für Minecraft'):
     """Link-Vorschau 1200 × 630: Verlauf, Marke, Titel links, Bauwerk rechts."""
     from PIL import Image, ImageDraw
     img = Image.new('RGB', (1200, 630))
@@ -219,7 +219,8 @@ def og_bild(ziel, titel, unterzeile, modell_bild=None):
     f1, f3 = schrift(30), schrift(28, False)
     if not f1:
         img.save(ziel, optimize=True); return
-    g.text((118, 78), 'Savox Bauwerkstatt', font=f1, fill=(27, 35, 44))
+    g.text((118, 70), 'Bauwerkstatt', font=f1, fill=(27, 35, 44))
+    g.text((118, 106), zusatz, font=schrift(18, False), fill=(74, 88, 102))
     # Titel umbrechen und so weit verkleinern, dass er links vom Bauwerk bleibt (höchstens 520 px breit)
     for groesse in (64, 58, 52, 46, 42):
         f2 = schrift(groesse)
@@ -247,13 +248,13 @@ def og_bild(ziel, titel, unterzeile, modell_bild=None):
 
 T = {
  'de': dict(
-  skip='Zum Inhalt', start='Savox Bauwerkstatt, Startseite', bauplaene='Baupläne', plugins='Plugins',
+  skip='Zum Inhalt', start='Bauwerkstatt, Startseite', zusatz='Baupläne und Plugins für Minecraft', bauplaene='Baupläne', plugins='Plugins',
   anleitungen='Anleitungen', wuensche='Wünsche', geplant='Geplant', sprache='Sprache', thema='Darstellung',
   auto='Automatisch', hell='Hell', dunkel='Dunkel', fuss='Minecraft-Baupläne und Plugins kostenlos für alle Kreativen.',
   github='Quellcode auf GitHub', disclaimer='Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden. Blöcke werden mit eigenen Farben dargestellt, nicht mit Minecraft-Texturen.',
   bloecke='Blöcke', schritte='Schritte', entwurf='Entwurf', alle_seiten='Alle Seiten'),
  'en': dict(
-  skip='Skip to content', start='Savox Bauwerkstatt, home', bauplaene='Builds', plugins='Plugins',
+  skip='Skip to content', start='Bauwerkstatt, home', zusatz='Build plans and plugins for Minecraft', bauplaene='Builds', plugins='Plugins',
   anleitungen='Guides', wuensche='Wishes', geplant='Planned', sprache='Language', thema='Appearance',
   auto='Automatic', hell='Light', dunkel='Dark', fuss='Minecraft build plans and plugins, free for all creators.',
   github='Source code on GitHub', disclaimer='Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Blocks are shown in our own colours, not with Minecraft textures.',
@@ -354,7 +355,7 @@ class Seiten:
             'BILD': self.voll(bild or self.og('og-start')), 'BILD_ALT': H(bild_alt or titel),
             'VERIFIKATION': '\n'.join(verif), 'JSONLD': json.dumps(jsonld, ensure_ascii=False).replace('</', '<\\/'),
             'INHALT': inhalt, 'FUSS_LINKS': self.fuss_links(), 'NAV': nav, 'SPRACHE': sprache, 'THEMA': thema,
-            'TXT_SKIP': L['skip'], 'TXT_START': L['start'], 'TXT_FUSS': L['fuss'], 'TXT_GITHUB': L['github'],
+            'TXT_SKIP': L['skip'], 'TXT_ZUSATZ': L['zusatz'], 'TXT_START': L['start'], 'TXT_FUSS': L['fuss'], 'TXT_GITHUB': L['github'],
             'TXT_DISCLAIMER': L['disclaimer'], 'V': self.cfg.get('version', '1'), 'TXT_ALLE_SEITEN': L['alle_seiten'], 'START': self.link(),
         }
         text = self.vorlage
@@ -462,17 +463,18 @@ class Seiten:
             self.modellbilder[b['id']] = zeichne_modell(b['model'], 590, 590, schnitt=schnitt, fuellung=.9, schatten=True)
 
     def og_bilder(self):
+        z = T[self.lang]['zusatz']
         for b in self.builds:
             kb = next(x for x in self.k['builds'] if x['id'] == b['id'])
             og_bild(os.path.join(self.out, self.og(b['id'] + '-og')), lok(b, 'titel', self.lang),
                     self.t('Minecraft-Bauplan · %d Schritte\n%s Blöcke · Litematica & WorldEdit',
                            'Minecraft build · %d steps\n%s blocks · Litematica & WorldEdit') % (kb['schritte'], fmt(kb['bloecke'], self.lang)),
-                    self.modellbilder[b['id']])
+                    self.modellbilder[b['id']], zusatz=z)
         og_bild(os.path.join(self.out, self.og('og-start')), self.t('Bauen wie mit LEGO', 'Build like LEGO'),
                 self.t('Minecraft-Baupläne Schritt für Schritt\nund Plugins für Paper-Server',
-                       'Minecraft build plans step by step\nand plugins for Paper servers'), self.modellbilder.get('villa-am-wasser'))
+                       'Minecraft build plans step by step\nand plugins for Paper servers'), self.modellbilder.get('villa-am-wasser'), zusatz=z)
         og_bild(os.path.join(self.out, self.og('og-plugins')), self.t('Paper-Plugins', 'Paper plugins'),
-                self.t('Shop, Lager, Arbeiter und mehr\nfür deinen Minecraft-Server', 'Shop, storage, workers and more\nfor your Minecraft server'))
+                self.t('Shop, Lager, Arbeiter und mehr\nfür deinen Minecraft-Server', 'Shop, storage, workers and more\nfor your Minecraft server'), zusatz=z)
 
     # ---------- Seiten
     def start(self):
@@ -503,7 +505,7 @@ class Seiten:
              t('Eigene Plugins für Paper', 'Our plugins for Paper'), ''.join(self.plugin_karte(p) for p in k['plugins']),
              t('Anleitungen', 'Guides'), ''.join(self.doc_link(d) for d in k['docs']))
         ld = {'@context': 'https://schema.org', '@graph': [
-            {'@type': 'WebSite', 'name': 'Savox Bauwerkstatt', 'url': self.voll(pfad(self.lang)), 'inLanguage': self.lang,
+            {'@type': 'WebSite', 'name': 'Bauwerkstatt', 'alternateName': t('Bauwerkstatt – Baupläne und Plugins für Minecraft', 'Bauwerkstatt – build plans and plugins for Minecraft'), 'url': self.voll(pfad(self.lang)), 'inLanguage': self.lang,
              'description': t('Minecraft-Baupläne im LEGO-Stil und Plugins für Paper-Server, kostenlos.',
                               'LEGO-style Minecraft build plans and plugins for Paper servers, free.'),
              'publisher': {'@type': 'Person', 'name': 'Savox'}},
@@ -511,11 +513,11 @@ class Seiten:
                 {'@type': 'ListItem', 'position': i + 1, 'url': self.voll(pfad(self.lang, 'bau', b['id'])), 'name': lok(b, 'titel', self.lang)}
                 for i, b in enumerate(k['builds'])]}]}
         self.schreibe('start', None,
-                      t('Savox Bauwerkstatt – Minecraft-Baupläne im LEGO-Stil & Paper-Plugins',
-                        'Savox Bauwerkstatt – LEGO-style Minecraft build plans & Paper plugins'),
+                      t('Bauwerkstatt – Minecraft-Baupläne im LEGO-Stil & Paper-Plugins',
+                        'Bauwerkstatt – LEGO-style Minecraft build plans & Paper plugins'),
                       t('Kostenlose Minecraft-Baupläne Schritt für Schritt wie bei LEGO: Villen, Leuchtturm, Eiffelturm und Farmen mit Teileliste und Download für Litematica und WorldEdit. Dazu Plugins für Paper-Server.',
                         'Free step-by-step Minecraft build plans like LEGO instructions: villas, lighthouse, Eiffel Tower and farms with parts list and downloads for Litematica and WorldEdit. Plus plugins for Paper servers.'),
-                      inhalt, ld, og_titel=t('Savox Bauwerkstatt: Minecraft-Baupläne wie mit LEGO', 'Savox Bauwerkstatt: Minecraft builds like LEGO'))
+                      inhalt, ld, og_titel=t('Bauwerkstatt: Minecraft-Baupläne wie mit LEGO', 'Bauwerkstatt: Minecraft builds like LEGO'))
 
     def liste_bauplaene(self):
         k, t = self.k, self.t
@@ -533,8 +535,8 @@ class Seiten:
             {'@type': 'CollectionPage', 'name': t('Minecraft-Baupläne', 'Minecraft build plans'), 'url': self.voll(pfad(self.lang, 'liste')), 'inLanguage': self.lang},
             self.krumen_ld([('Start', 'start', None), (t('Baupläne', 'Builds'), 'liste', None)])]}
         self.schreibe('liste', None,
-                      t('Minecraft-Baupläne: Villen, Türme und Farmen Schritt für Schritt | Savox Bauwerkstatt',
-                        'Minecraft build plans: villas, towers and farms step by step | Savox Bauwerkstatt'),
+                      t('Minecraft-Baupläne: Villen, Türme und Farmen Schritt für Schritt | Bauwerkstatt',
+                        'Minecraft build plans: villas, towers and farms step by step | Bauwerkstatt'),
                       t('Alle Minecraft-Baupläne: Villa am Wasser, moderne, mediterrane und Gründerzeit-Villa, Leuchtturm, Eiffelturm, Gewächshaus-Farm und Kellerlager mit Sortieranlage. Mit LEGO-Schritten und Downloads.',
                         'All Minecraft build plans: villa by the water, modern, Mediterranean and Victorian-era villa, lighthouse, Eiffel Tower, greenhouse farm and cellar storage with item sorter. With LEGO-style steps and downloads.'),
                       inhalt, ld)
@@ -596,8 +598,8 @@ class Seiten:
              'author': {'@type': 'Person', 'name': b.get('autor', 'Savox')}},
             self.krumen_ld([('Start', 'start', None), (t('Baupläne', 'Builds'), 'liste', None), (titel, 'bau', b['id'])])]}
         self.schreibe('bau', b['id'],
-                      t('%s in Minecraft bauen – Bauplan in %d Schritten | Savox Bauwerkstatt',
-                        'Build the %s in Minecraft – %d-step build plan | Savox Bauwerkstatt') % (titel, kb['schritte']),
+                      t('%s in Minecraft bauen – Bauplan in %d Schritten | Bauwerkstatt',
+                        'Build the %s in Minecraft – %d-step build plan | Bauwerkstatt') % (titel, kb['schritte']),
                       t('%s: Minecraft-Bauplan mit %d LEGO-Schritten, Teileliste (%s Blöcke) und Download für Litematica und WorldEdit. %s',
                         '%s: Minecraft build plan with %d LEGO-style steps, parts list (%s blocks) and downloads for Litematica and WorldEdit. %s') % (
                           titel, kb['schritte'], fmt(kb['bloecke'], lang), lok(b, 'beschreibung', lang)),
@@ -621,7 +623,7 @@ class Seiten:
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'CollectionPage', 'name': t('Plugins für Minecraft-Server', 'Plugins for Minecraft servers'), 'url': self.voll(pfad(self.lang, 'plugins')), 'inLanguage': self.lang},
             self.krumen_ld([('Start', 'start', None), ('Plugins', 'plugins', None)])]}
-        self.schreibe('plugins', None, t('Paper-Plugins für deinen Minecraft-Server | Savox Bauwerkstatt', 'Paper plugins for your Minecraft server | Savox Bauwerkstatt'),
+        self.schreibe('plugins', None, t('Paper-Plugins für deinen Minecraft-Server | Bauwerkstatt', 'Paper plugins for your Minecraft server | Bauwerkstatt'),
                       t('Plugins für Paper-Server: Coin-Shop, unbegrenztes Lager, Dorfbewohner-Arbeiter, Admin-Login, Creeper-Schutz, Server-Einstellungen per Chat und ein Hilfe-Buch. Dazu empfohlene Plugins anderer Entwickler.',
                         'Plugins for Paper servers: coin shop, unlimited storage, villager workers, admin login, creeper protection, server settings by chat and a help book. Plus recommended plugins by other developers.'),
                       inhalt, ld, bild=self.og('og-plugins'))
@@ -650,7 +652,7 @@ class Seiten:
              'applicationCategory': 'GameApplication', 'operatingSystem': 'Paper (Minecraft Java Server)', 'inLanguage': lang,
              'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR'}, 'author': {'@type': 'Person', 'name': p.get('autor', 'Savox')}},
             self.krumen_ld([('Start', 'start', None), ('Plugins', 'plugins', None), (p['name'], 'plugin', p['id'])])]}
-        self.schreibe('plugin', p['id'], t('%s – Minecraft-Plugin für Paper | Savox Bauwerkstatt', '%s – Minecraft plugin for Paper | Savox Bauwerkstatt') % p['name'],
+        self.schreibe('plugin', p['id'], t('%s – Minecraft-Plugin für Paper | Bauwerkstatt', '%s – Minecraft plugin for Paper | Bauwerkstatt') % p['name'],
                       t('%s %s für Paper-Server: %s Mit allen Befehlen und Einstellungen.', '%s %s for Paper servers: %s With all commands and settings.') % (
                           p['name'], p['version'], lok(p, 'kurz', lang)),
                       inhalt, ld, bild=self.og('og-plugins'), og_titel=t('%s – Paper-Plugin', '%s – Paper plugin') % p['name'])
@@ -677,7 +679,7 @@ class Seiten:
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'CollectionPage', 'name': t('Anleitungen', 'Guides'), 'url': self.voll(pfad(self.lang, 'anleitungen')), 'inLanguage': self.lang},
             self.krumen_ld([('Start', 'start', None), (t('Anleitungen', 'Guides'), 'anleitungen', None)])]}
-        self.schreibe('anleitungen', None, t('Anleitungen für Minecraft-Server | Savox Bauwerkstatt', 'Guides for Minecraft servers | Savox Bauwerkstatt'),
+        self.schreibe('anleitungen', None, t('Anleitungen für Minecraft-Server | Bauwerkstatt', 'Guides for Minecraft servers | Bauwerkstatt'),
                       t('Anleitungen für Paper-Server: Farm-Bot, damit Farmen ohne Spieler weiterlaufen, und Spieler-Aktionen mit CoreProtect protokollieren.',
                         'Guides for Paper servers: a farm bot to keep farms running without players, and logging player actions with CoreProtect.'), inhalt, ld)
 
@@ -691,7 +693,7 @@ class Seiten:
             {'@type': 'TechArticle', 'headline': titel, 'description': kurztext, 'inLanguage': lang,
              'url': self.voll(pfad(lang, 'anleitung', d['id'])), 'author': {'@type': 'Person', 'name': 'Savox'}},
             self.krumen_ld([('Start', 'start', None), (t('Anleitungen', 'Guides'), 'anleitungen', None), (titel, 'anleitung', d['id'])])]}
-        self.schreibe('anleitung', d['id'], t('%s – Minecraft-Server-Anleitung | Savox Bauwerkstatt', '%s – Minecraft server guide | Savox Bauwerkstatt') % titel,
+        self.schreibe('anleitung', d['id'], t('%s – Minecraft-Server-Anleitung | Bauwerkstatt', '%s – Minecraft server guide | Bauwerkstatt') % titel,
                       '%s %s' % (kurztext, re.sub(r'<[^>]+>', ' ', html_text)), inhalt, ld, og_typ='article')
 
     def wuensche(self):
@@ -704,7 +706,7 @@ class Seiten:
              '<a class="btn zwei" href="%s/issues/new?template=plugin-wunsch.yml">%s</a></div></section>') % (
                 repo, t('Bauplan wünschen', 'Request a build'), repo, t('Plugin wünschen', 'Request a plugin'))
         ld = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': t('Bauplan wünschen', 'Request a build'), 'url': self.voll(pfad(self.lang, 'wuensche')), 'inLanguage': self.lang}
-        self.schreibe('wuensche', None, t('Minecraft-Bauplan wünschen | Savox Bauwerkstatt', 'Request a Minecraft build | Savox Bauwerkstatt'),
+        self.schreibe('wuensche', None, t('Minecraft-Bauplan wünschen | Bauwerkstatt', 'Request a Minecraft build | Bauwerkstatt'),
                       t('Wünsch dir einen Minecraft-Bauplan oder ein Plugin. Die meistgewünschten Bauwerke werden zuerst als LEGO-Anleitung gebaut.',
                         'Request a Minecraft build plan or a plugin. The most requested builds are made into LEGO-style instructions first.'), inhalt, ld)
 
@@ -762,15 +764,15 @@ class Seiten:
                 {'@type': 'ListItem', 'position': n + 1, 'name': lok(i, 'titel', lang)} for n, i in enumerate(IDS)]},
             self.krumen_ld([('Start', 'start', None), (t('Geplant', 'Planned'), 'geplant', None)])]}
         self.schreibe('geplant', None,
-                      t('Geplante Minecraft-Baupläne: %d Ideen für Farmen, Gebäude und Monumente | Savox Bauwerkstatt',
-                        'Planned Minecraft builds: %d ideas for farms, buildings and monuments | Savox Bauwerkstatt') % len(IDS),
+                      t('Geplante Minecraft-Baupläne: %d Ideen für Farmen, Gebäude und Monumente | Bauwerkstatt',
+                        'Planned Minecraft builds: %d ideas for farms, buildings and monuments | Bauwerkstatt') % len(IDS),
                       t('Was als Nächstes kommt: XP-Farmen, Bambusfarm, Fabriken mit dem Crafter, Burg, Kölner Dom, Taj Mahal und mehr. Stimm ab, welcher Minecraft-Bauplan zuerst entsteht.',
                         'What comes next: XP farms, bamboo farm, Crafter factories, castle, Cologne Cathedral, Taj Mahal and more. Vote on which Minecraft build is made first.'),
                       inhalt, ld)
 
     def fehlerseite(self):
         inhalt = self.kopf(None, 'Seite nicht gefunden · Page not found', 'Diese Seite gibt es nicht (mehr). · This page does not exist.')
-        self.schreibe('start', None, 'Seite nicht gefunden | Savox Bauwerkstatt', 'Diese Seite gibt es nicht.', inhalt,
+        self.schreibe('start', None, 'Seite nicht gefunden | Bauwerkstatt', 'Diese Seite gibt es nicht.', inhalt,
                       {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'Seite nicht gefunden'}, index=False, datei='404.html')
 
     def sitemap(self):

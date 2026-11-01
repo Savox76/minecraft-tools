@@ -1,4 +1,4 @@
-# Savox Bauwerkstatt · minecraft-tools
+# Bauwerkstatt · minecraft-tools
 
 Minecraft-Baupläne im LEGO-Stil und Plugins für Paper-Server, kostenlos und einzeln herunterladbar.
 

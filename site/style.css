@@ -1,4 +1,4 @@
-/* Savox Bauwerkstatt
+/* Bauwerkstatt
    Leitidee: Bauanleitungs-Heft. Weiße Seiten auf kühlem Grau, große Schrittnummern,
    blaugraue Teile-Kästen wie bei LEGO, Signalgelb nur für "neu" und aktive Zustände. */
 :root {
@@ -65,6 +65,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .kopf-innen { display: flex; align-items: center; gap: 18px; min-height: 60px; flex-wrap: wrap; }
 .marke { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-size: 1.15rem; font-weight: 500; white-space: nowrap; }
 .marke b { font-weight: 800; }
+.marke-text { display: flex; flex-direction: column; line-height: 1.05; }
+.marke-text small { font: 500 .68rem var(--f-mono); letter-spacing: .04em; color: var(--ink-mute); margin-top: 3px; }
+@media (max-width: 640px) { .marke-text small { display: none; } }
 .nav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
 .nav a { text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; color: var(--ink-soft); }
 .nav a:hover { color: var(--ink); background: var(--sheet); }
