@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 149 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 150 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -446,7 +446,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-163 Einträge: 163 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
+164 Einträge: 164 💡 Idee, 0 🔨 in Arbeit, 0 ✅ verfügbar.
 
 **Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
 
@@ -467,7 +467,7 @@ Erfahrung für Verzauberungen und Reparaturen.
 | 117 | Große Handelshalle | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
 | 118 | Große Handelshalle im Stil einer Zauberschule | groß | Eine hohe Halle mit Spitzbogen-Gewölbe, schwebenden Kerzen aus Lichtblöcken und langen Tafeln in der Mitte. Die Händler stehen in Nischen an den Seitenwänden, über ihnen Galerien mit Bücherregalen und Bannern. Plugin: arbeiter (optional). | 💡 Idee |
 
-### Farmen für Baumaterial (20)
+### Farmen für Baumaterial (21)
 
 Liefern die Blöcke und Rohstoffe für die Baupläne.
 
@@ -493,6 +493,7 @@ Liefern die Blöcke und Rohstoffe für die Baupläne.
 | 66 | Amethyst-Farm | mittel | An einer gefundenen Geode: Beobachter merken reife Kristalle, Kolben brechen sie ab. Für Fernrohr und getöntes Glas. | 💡 Idee |
 | 67 | Chorusfrucht-Farm im End | mittel | Halbautomatisch: Chorusblumen wachsen nach, du erntest. Chorusfrüchte werden zu Purpurblöcken. | 💡 Idee |
 | 68 | Pilzfarm | klein | Ein dunkler Raum, in dem sich Pilze von selbst ausbreiten. Für Suppen und Riesenpilz-Deko. | 💡 Idee |
+| 150 | Große Kaktusfarm | groß | Mehrere Etagen mit Kaktus auf Sand. Wächst ein Kaktus an einen Zaun heran, bricht er ab und fällt in Wasserrinnen, die alles zu Trichtern und Fässern führen. Zusammen mit einer großen Ofenbatterie eine starke XP-Quelle und viel grüner Farbstoff. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 
 ### Monsterfarmen (3)
 
@@ -762,7 +763,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
 | Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle, Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
-| FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
+| FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 150 Große Kaktusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
 | ServerHilfe (eigenes) | – | Idee Nr. 53 Rathaus mit Uhrturm am Spawn | – |

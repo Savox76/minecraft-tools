@@ -285,6 +285,24 @@
    }
   },
   {
+   "nr": 150,
+   "kategorie": "farmen",
+   "groesse": "groß",
+   "titel": "Große Kaktusfarm",
+   "text": "Mehrere Etagen mit Kaktus auf Sand. Wächst ein Kaktus an einen Zaun heran, bricht er ab und fällt in Wasserrinnen, die alles zu Trichtern und Fässern führen. Zusammen mit einer großen Ofenbatterie eine starke XP-Quelle und viel grüner Farbstoff.",
+   "status": "idee",
+   "plugins": [
+    {
+     "id": "fakeplayerplugin",
+     "stufe": "empfohlen"
+    }
+   ],
+   "en": {
+    "titel": "Large cactus farm",
+    "text": "Several floors of cactus on sand. When a cactus grows next to a fence it breaks off and drops into water channels that carry everything to hoppers and barrels. Combined with a large furnace array it is a strong XP source and makes lots of green dye."
+   }
+  },
+  {
    "nr": 12,
    "kategorie": "farmen",
    "groesse": "klein",
