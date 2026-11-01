@@ -1,6 +1,6 @@
 # Baupläne
 
-Jeder Ordner hier ist ein Bauplan. Die Website, die LEGO-Schritte und alle Downloads entstehen automatisch daraus, sobald ein Ordner auf `main` landet.
+Jeder Ordner hier ist ein Bauplan. Die Website, die Bauschritte und alle Downloads entstehen automatisch daraus, sobald ein Ordner auf `main` landet.
 
 ## Aufbau eines Bauplans
 
@@ -25,7 +25,7 @@ builds/<id>/
 | `status` | `entwurf` (Blockrichtungen ungeprüft) oder `geprueft` |
 | `hinweis` | wird bei Entwürfen angezeigt |
 | `ansicht.schnitt` | `true` blendet in der 3D-Ansicht Decke und vordere Wände aus (für Keller) |
-| `abschnitte` | Bauabschnitte mit `name`, `von`, `bis` (Ebenen) und `text`. Die LEGO-Schritte werden innerhalb der Abschnitte gebildet |
+| `abschnitte` | Bauabschnitte mit `name`, `von`, `bis` (Ebenen) und `text`. Die Bauschritte werden innerhalb der Abschnitte gebildet |
 | `tipps` | Liste aus `titel` und `text` |
 | `rohstoffe` | was die Farmen liefern müssen: `name`, `menge`, `quelle`, `hinweis` |
 | `schmelzvorgaenge` | Anzahl Ofen-Vorgänge |
@@ -46,7 +46,7 @@ builds/<id>/
 
 ## Was automatisch entsteht
 
-- LEGO-Schritte **Ebene für Ebene** von unten nach oben: jeder Schritt gehört zu genau einer Ebene, höchstens 60 neue Blöcke, große Ebenen in Teilen („Teil 2 von 4“). Pro Schritt drehbare 3D-Ansicht und Draufsicht der Ebene. Der vollständige Ablauf steht im [Masterplan, Abschnitt 4.1](../MASTERPLAN.md#41-fester-ablauf-jedes-bauplans-gilt-auch-für-alle-neuen)
+- Bauschritte **Ebene für Ebene** von unten nach oben: jeder Schritt gehört zu genau einer Ebene, höchstens 60 neue Blöcke, große Ebenen in Teilen („Teil 2 von 4“). Pro Schritt drehbare 3D-Ansicht und Draufsicht der Ebene. Der vollständige Ablauf steht im [Masterplan, Abschnitt 4.1](../MASTERPLAN.md#41-fester-ablauf-jedes-bauplans-gilt-auch-für-alle-neuen)
 - Teileliste mit Stacks
 - Downloads: `.litematic` (Litematica), `.schem` (WorldEdit), `teileliste.csv`
 - Seiten auf Deutsch und Englisch, Vorschaubild und Link-Vorschaubilder

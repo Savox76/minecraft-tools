@@ -143,7 +143,7 @@ async function startSeite() {
   main.innerHTML = `
   <section class="held"><div class="wrap">
     <div>
-      <h1>${tr('Bauen wie mit LEGO. Schritt für Schritt.', 'Build like LEGO. Step by step.')}</h1>
+      <h1>${tr('Block für Block. Schritt für Schritt.', 'Block by block. Step by step.')}</h1>
       <p class="lede">${tr('Jeder Bauplan zeigt pro Schritt genau, welche Blöcke du brauchst und wo sie hinkommen. Dazu Plugins für deinen eigenen Server. Alles kostenlos und einzeln zum Herunterladen.',
         'Every build plan shows for each step exactly which blocks you need and where they go. Plus plugins for your own server. All free and downloadable one by one.')}</p>
       <div class="knoepfe"><a class="btn" href="${url('liste')}">${tr('Baupläne ansehen', 'Browse builds')}</a><a class="btn zwei" href="${url('geplant')}">${tr('Was als Nächstes kommt', 'What comes next')}</a></div>
@@ -158,7 +158,7 @@ async function startSeite() {
     </figure>
   </div></section>
   <section class="abschnitt"><div class="wrap">
-    <div class="abschnitt-kopf"><div><h2>${tr('Baupläne', 'Builds')}</h2><p>${tr('Türme, Villen und Farmen. Jeder Plan mit LEGO-Schritten, Teileliste und Dateien für Litematica und WorldEdit.', 'Towers, villas and farms. Every plan with LEGO-style steps, a parts list and files for Litematica and WorldEdit.')}</p></div><a class="btn zwei klein" href="${url('liste')}">${tr('Alle Baupläne', 'All builds')}</a></div>
+    <div class="abschnitt-kopf"><div><h2>${tr('Baupläne', 'Builds')}</h2><p>${tr('Türme, Villen und Farmen. Jeder Plan mit Bauschritten, Teileliste und Dateien für Litematica und WorldEdit.', 'Towers, villas and farms. Every plan with build steps, a parts list and files for Litematica and WorldEdit.')}</p></div><a class="btn zwei klein" href="${url('liste')}">${tr('Alle Baupläne', 'All builds')}</a></div>
     <div class="raster">${k.builds.map(bauKarte).join('')}</div>
   </div></section>
   <section class="abschnitt"><div class="wrap">
@@ -224,7 +224,7 @@ async function bauplaeneSeite() {
   const aktiv = store.get('filter', 'alle');
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
     <h1>${tr('Baupläne', 'Builds')}</h1>
-    <p class="lede">${tr('Jeden Bauplan gibt es als LEGO-Anleitung im Browser, als Litematica- und WorldEdit-Datei und als Teileliste.', 'Every build comes as LEGO-style instructions in the browser, as a Litematica and WorldEdit file and as a parts list.')}</p>
+    <p class="lede">${tr('Jeden Bauplan gibt es als Schritt-für-Schritt-Anleitung im Browser, als Litematica- und WorldEdit-Datei und als Teileliste.', 'Every build comes as step-by-step instructions in the browser, as a Litematica and WorldEdit file and as a parts list.')}</p>
     <div class="chips" style="margin-top:18px" role="group" aria-label="${tr('Kategorie filtern', 'Filter by category')}">
       ${[['alle', tr('Alle', 'All')], ...Object.entries(K)].map(([id, n]) => `<button class="chip" data-f="${id}" aria-pressed="${id === aktiv}">${esc(n)}</button>`).join('')}
     </div></div></section>
@@ -550,7 +550,7 @@ async function bauSeite(id, tab) {
     const keyDone = 'erledigt.' + d.id;
     const done = new Set(store.get(keyDone, []));
     let cur = Math.min(store.get('schritt.' + d.id, 0), n - 1), rot = 0, alles = false;
-    el.innerHTML = `<div class="lego">
+    el.innerHTML = `<div class="schritt-raster">
       <div class="buehne bauplan">
         <div class="nummer" id="nr" aria-live="polite"></div>
         <div class="werkzeug">

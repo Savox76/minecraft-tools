@@ -185,7 +185,7 @@ export function draw(canvas, P, o) {
   return { cw, ch };
 }
 
-// Kleines Bauteil-Bild für Teilelisten (wie die Teile-Kästen bei LEGO)
+// Kleines Bauteil-Bild für Teilelisten (wie die Teile-Kästen in einem Bauheft)
 const iconCache = new Map();
 export function partIcon(p, size = 44) {
   const key = p.color + p.shape + size;

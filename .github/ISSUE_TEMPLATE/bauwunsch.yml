@@ -1,5 +1,5 @@
 name: Bauplan wünschen
-description: Wünsch dir ein Bauwerk als LEGO-Bauanleitung.
+description: Wünsch dir ein Bauwerk als Schritt-für-Schritt-Bauanleitung.
 title: "Bauwunsch: "
 labels: [bauwunsch]
 body:

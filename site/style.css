@@ -1,7 +1,7 @@
 /* Bauwerkstatt
-   Leitidee: Ein Bauplan ist eine Blaupause. Überall, wo gebaut wird (Startseite, LEGO-Ansicht),
+   Leitidee: Ein Bauplan ist eine Blaupause. Überall, wo gebaut wird (Startseite, Schritt-Ansicht),
    steht das Modell auf bauplanblauem Raster. Rundherum ruhig: Bauplatte-Grau, weiße Seiten,
-   hellblaue Teile-Kästen wie im LEGO-Heft, Signalgelb nur für „neu“.
+   hellblaue Teile-Kästen wie in einem Bauheft, Signalgelb nur für „neu“.
    Schrift: Archivo breit für Überschriften und Zahlen, Atkinson Hyperlegible für Text,
    JetBrains Mono nur für Minecraft-IDs, Befehle und Koordinaten. */
 :root {
@@ -226,9 +226,9 @@ a.karte:hover h3 { text-decoration: underline; text-decoration-color: var(--hl);
 .reiter button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--hl); }
 .tafel { padding-block: 22px 40px; }
 
-/* LEGO-Schritt-Ansicht */
-.lego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); grid-template-areas: "buehne seite" "plan seite"; gap: 20px; align-items: start; }
-.lego .buehne { grid-area: buehne; } .lego .seite { grid-area: seite; } .lego .plan-kasten { grid-area: plan; }
+/* Schritt-Ansicht der Anleitung */
+.schritt-raster { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); grid-template-areas: "buehne seite" "plan seite"; gap: 20px; align-items: start; }
+.schritt-raster .buehne { grid-area: buehne; } .schritt-raster .seite { grid-area: seite; } .schritt-raster .plan-kasten { grid-area: plan; }
 .plan-kasten { background: var(--sheet); border: 1px solid var(--line); border-radius: 16px; padding: 14px; min-width: 0; }
 .plan-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; margin-bottom: 10px; }
 .plan-kopf h3 { font-size: 1.05rem; }
@@ -276,7 +276,7 @@ a.karte:hover h3 { text-decoration: underline; text-decoration-color: var(--hl);
 .fortschritt i { display: block; height: 100%; background: var(--ok); }
 .tipp { border-left: 4px solid var(--hl); background: var(--sheet); border-radius: 0 12px 12px 0; padding: 10px 14px; font-size: .93rem; }
 .tipp b { display: block; }
-@media (max-width: 900px) { .lego { grid-template-columns: 1fr; grid-template-areas: "buehne" "seite" "plan"; } }
+@media (max-width: 900px) { .schritt-raster { grid-template-columns: 1fr; grid-template-areas: "buehne" "seite" "plan"; } }
 
 /* Tabellen */
 .tabelle-huelle { overflow-x: auto; background: var(--sheet); border: 1px solid var(--line); border-radius: 14px; }

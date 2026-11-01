@@ -10,7 +10,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 | Bereich | Status | Wo |
 |---|---|---|
-| 8 Baupläne | ✅ **verfügbar** als Entwurf: LEGO-Schritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
+| 8 Baupläne | ✅ **verfügbar** als Entwurf: Bauschritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
 | 7 eigene Plugins | 🟡 **Doku verfügbar**, Quellcode und `.jar` integrierbar, sobald der Quellcode vorliegt | [`plugins/eigene/`](plugins/eigene/) |
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
@@ -23,18 +23,19 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 ### Feste Regeln
 
-- **Jeder neue Bauplan kommt ins Repo** als Ordner `builds/<id>/` (Format in [`builds/README.md`](builds/README.md)). Website, LEGO-Schritte, Teileliste und Downloads entstehen daraus automatisch. Er erscheint also überall, ohne dass sonst etwas angepasst werden muss.
+- **Jeder neue Bauplan kommt ins Repo** als Ordner `builds/<id>/` (Format in [`builds/README.md`](builds/README.md)). Website, Bauschritte, Teileliste und Downloads entstehen daraus automatisch. Er erscheint also überall, ohne dass sonst etwas angepasst werden muss.
 - **Eigene und fremde Plugins bleiben getrennt.** Eigene Plugins bekommen `plugins/eigene/<id>/plugin.json` und `README.md`, fremde einen Eintrag in `plugins/fremd/plugins.json` (nur Beschreibung, Einsatz und Link zur offiziellen Seite, keine Dateien). Die Website zeigt beides automatisch in getrennten Bereichen.
 - **Änderungen gehen direkt auf `main`.**
 - **Alles zweisprachig:** Neue Baupläne, Plugins und Anleitungen bekommen eine englische Fassung (`"en"` in `build.json` und `plugin.json`, `docs/en/<id>.md`, neue Blocknamen in `tools/i18n/bloecke_en.json`). Fehlt sie, zeigt die englische Seite den deutschen Text und der Build gibt einen Hinweis aus.
 - **Abhängigkeiten aktuell halten:** Kommt ein Werkzeug, Dienst oder Plugin dazu oder ändert sich eine Version, wird Abschnitt 16 angepasst. Welche Baupläne und Ideen welche Plugins brauchen, erzeugt `python tools/ideen_masterplan.py`.
+- **Kein Bezug zu LEGO:** LEGO ist die Marke eines anderen Unternehmens. Auf der Website und im Repo heißt es Bauschritte, Bauheft und Schritt-für-Schritt-Anleitung.
 - **Keine erzeugten Dateien im Repo:** Website, `.litematic`, `.schem`, `.jar` und PDFs baut GitHub Actions bei jedem Push neu.
 
 ---
 
 ## 1. Ziel
 
-- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als Schritt-für-Schritt-Anleitungen im **LEGO-Stil**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden.
+- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als **Schritt-für-Schritt-Anleitungen**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden.
 - **Alle eigenen Plugins** mit Quellcode, Doku und Download.
 - **Jeder Bauplan und jedes Plugin einzeln** verfügbar, ohne Gesamtpaket.
 - **Gleiche Oberfläche** auf Windows, Linux und macOS.
@@ -98,14 +99,14 @@ FakePlayerPlugin, ChunkLoader, EasyCommandBlocker, Simple Voice Chat, Floodgate,
 
 ---
 
-## 4. Das LEGO-Prinzip
+## 4. Das Bauheft-Prinzip
 
 So sieht eine Bauanleitung aus:
 
 1. **Deckblatt:** Bild des fertigen Bauwerks, Name, Größe, Schwierigkeit, Bauzeit, Java/Bedrock.
 2. **Gesamt-Teileliste:** alle Blöcke mit Bild und Anzahl, zusätzlich in Stacks (z. B. „12 St. + 30“). Darunter die Rohstoffe aus Farmen, zum Beispiel „1.050 Sand = Glas und Beton“.
 3. **Bauschritte, nummeriert, einer pro Seite:** siehe den festen Ablauf in 4.1
-4. **Unterbaugruppen** wie bei LEGO: Teile, die mehrfach vorkommen (Palme, Fenster-Modul, Laternenpfahl), werden einmal gezeigt und mit **„2 ×“** markiert.
+4. **Unterbaugruppen** wie in einem Bauheft: Teile, die mehrfach vorkommen (Palme, Fenster-Modul, Laternenpfahl), werden einmal gezeigt und mit **„2 ×“** markiert.
 5. **Schritt-Regeln:** Ebene für Ebene, höchstens 60 neue Blöcke pro Schritt (Einzelheiten in 4.1). Die Schritte entstehen automatisch.
 6. **Ausgaben pro Bauplan:**
    - Web-Ansicht zum Durchblättern, auf dem Handy wischbar
@@ -116,7 +117,7 @@ So sieht eine Bauanleitung aus:
 
 ### 4.1 Fester Ablauf jedes Bauplans (gilt auch für alle neuen)
 
-Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablauf entsteht automatisch aus `model.json` (`tools/build_site.py`, Funktion `lego_schritte`); für einen neuen Bauplan muss dafür nichts von Hand eingestellt werden.
+Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablauf entsteht automatisch aus `model.json` (`tools/build_site.py`, Funktion `bau_schritte`); für einen neuen Bauplan muss dafür nichts von Hand eingestellt werden.
 
 **So werden die Schritte gebildet**
 
@@ -134,7 +135,7 @@ Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablau
 | 3D-Ansicht | neue Blöcke gelb umrandet, gebaute blass, spätere ausgeblendet. **Drehbar** in vier Richtungen (Südost, Nordost, Nordwest, Südwest): Knöpfe ⟲ ⟳, Ziehen mit der Maus, Wischen auf dem Handy oder Tasten Q und E. ◎ zeigt das ganze Bauwerk |
 | Draufsicht der Ebene | Raster der aktuellen Ebene, Norden oben, Koordinaten ab der Mitte. Neue Blöcke gelb umrandet, schon gebaute blass, die Ebene darunter als Schatten. Antippen zeigt Block, Position und Minecraft-ID |
 | Plugins | Oben auf der Bauplan-Seite: „Kein Plugin nötig“ oder jedes Plugin mit Stufe (benötigt, empfohlen, optional), Grund und Link. Karten zeigen „Plugin nötig“, Plugin-Seiten listen umgekehrt alle Baupläne und Ideen, die sie verwenden |
-| Neue Teile | Kasten wie bei LEGO: Block-Bild, „× 12“, Name |
+| Neue Teile | Kasten wie in einem Bauheft: Block-Bild, „× 12“, Name |
 | Abschnitt | „Ebene 1 · Teil 3 von 5“, Name und Text des Bauabschnitts |
 | Steuerung | Zurück/Weiter, Schieberegler, Pfeiltasten, „Schritt erledigt“ mit Fortschrittsbalken (im Browser gespeichert) |
 
@@ -149,7 +150,7 @@ Dazu gibt es pro Bauplan die Reiter **Teileliste** (gesamt, mit Stacks und Rohst
 - [ ] Lokal bauen (`python tools/build_site.py`) und in der Ausgabe Blöcke und Schritte prüfen. Danach im Browser einmal alle Schritte durchklicken und die Draufsicht ansehen.
 - [ ] Auf `main` pushen. Website, Schritte, Bilder und Downloads entstehen automatisch.
 
-**Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte LEGO-Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
+**Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
 
 ---
 
@@ -196,8 +197,8 @@ flowchart LR
 
 ### 5.1 Gestaltung
 
-- **Leitidee:** Ein Bauplan ist eine Blaupause. Überall, wo gebaut wird (Startseite, LEGO-Ansicht), steht das Modell auf einer bauplanblauen Fläche mit Raster. Der Fußbereich nimmt das Blau wieder auf. Alles andere bleibt ruhig.
-- **Farben:** Bauplatte-Grau als Seite, Weiß für Inhalte, Bauplan-Blau für Bühnen, hellblaue Teile-Kästen wie im LEGO-Heft, Signalgelb nur für „neu“. Hell, Dunkel und Automatisch über Farbvariablen in `site/style.css`.
+- **Leitidee:** Ein Bauplan ist eine Blaupause. Überall, wo gebaut wird (Startseite, Schritt-Ansicht), steht das Modell auf einer bauplanblauen Fläche mit Raster. Der Fußbereich nimmt das Blau wieder auf. Alles andere bleibt ruhig.
+- **Farben:** Bauplatte-Grau als Seite, Weiß für Inhalte, Bauplan-Blau für Bühnen, hellblaue Teile-Kästen wie in einem Bauheft, Signalgelb nur für „neu“. Hell, Dunkel und Automatisch über Farbvariablen in `site/style.css`.
 - **Schrift:** Archivo breit für Überschriften, Schrittnummern und Stückzahlen, Atkinson Hyperlegible für Text, JetBrains Mono nur für Minecraft-IDs, Befehle und Koordinaten.
 - **Kopfbereich:** Banner mit einer Minecraft-Landschaft aus Blöcken (Meer, Strand mit Leuchtturm, Wiese mit Haus und Feld, Wald, Berge mit Schnee). Tagsüber hell, im Dunkelmodus Nacht mit Sternen, Mond und leuchtendem Leuchtturm. Das Bild zeichnet `tools/seiten.py` (Funktion `landschaft`) bei jedem Bauen selbst, mit eigenen Farben statt Minecraft-Texturen. Darunter eine dunkle Menüleiste, die beim Scrollen stehen bleibt.
 - **Startseite:** eine lebende Seite aus dem Bauheft: Schrittnummer, Teile-Kasten mit den Blöcken des Schritts und das wachsende Modell.
@@ -278,7 +279,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 ### Phase 1 · Bauplan-Pipeline (2–3 Sitzungen)
 - [ ] `.litematic` einlesen, inklusive Blockrichtungen
 - [x] Teileliste und Rohstoffe (aus den bisherigen Modellen übernommen)
-- [x] Automatische Schritt-Aufteilung nach den LEGO-Regeln aus 4.
+- [x] Automatische Schritt-Aufteilung nach den Schritt-Regeln aus 4.
 - [x] Exporte: `.litematic`, `.schem`, `teileliste.csv`
 - [ ] Exporte: `.nbt`, `.mcstructure`
 - [x] Vorschaubilder (werden im Browser gezeichnet)
@@ -291,7 +292,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 ### Phase 2 · Website (3–4 Sitzungen)
 - [x] Katalog: Kacheln mit Vorschaubild, Filter nach Kategorie
 - [ ] Filter nach Größe, Schwierigkeit, Edition
-- [x] Bauplan-Seite: Kenndaten, Teileliste, Schritt-Ansicht im LEGO-Stil, 3D drehbar, Ebenen-Ansicht, Download-Knöpfe
+- [x] Bauplan-Seite: Kenndaten, Teileliste, Schritt-Ansicht wie in einem Bauheft, 3D drehbar, Ebenen-Ansicht, Download-Knöpfe
 - [x] Baufortschritt abhaken, gespeichert im Browser
 - [ ] Koordinaten-Helfer (wie bisher): Mitte eintragen, echte X/Y/Z pro Block
 - [x] Plugin-Seiten: Beschreibung, Befehle, Rechte, Config, Änderungen
@@ -305,7 +306,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 
 **Fertig, wenn:** Alle Baupläne, Plugins und Anleitungen online sind und jede Seite einen eigenen Link hat. Stand: erledigt bis auf die offenen Punkte oben.
 
-### Phase 3 · LEGO-PDF-Hefte (1 Sitzung)
+### Phase 3 · PDF-Bauhefte (1 Sitzung)
 - [ ] Druck-Layout für Deckblatt, Teileliste, Schritte (2 pro Seite bei kleinen Schritten)
 - [ ] Automatisch bei jeder Änderung neu erzeugen und zum Download anbieten
 
@@ -416,7 +417,7 @@ Entscheidungen aus Abschnitt 12 treffen (vor allem die Lizenz), dann den Plugin-
 
 Suchmaschinen bewerten eine Seite auch danach, wer auf sie verlinkt.
 
-- **Planet Minecraft** (planetminecraft.com): die größte Seite für Baupläne. Jeden Bauplan mit Bild und `.litematic` hochladen und auf die LEGO-Anleitung verlinken.
+- **Planet Minecraft** (planetminecraft.com): die größte Seite für Baupläne. Jeden Bauplan mit Bild und `.litematic` hochladen und auf die Schritt-für-Schritt-Anleitung verlinken.
 - **Modrinth und Hangar:** sobald die Plugins als `.jar` fertig sind (Phase 4), dort veröffentlichen und die Website als Homepage angeben.
 - **Reddit:** r/Minecraft, r/MinecraftBuilds, r/admincraft (für die Plugins), deutschsprachig r/minecraftDE. Am besten mit einem Bild oder GIF der Schritt-Animation.
 - **Savox-Kanäle:** Zeitraffer eines Baus als Short oder TikTok mit Link zum Bauplan.
@@ -660,7 +661,7 @@ Alles, wovon das Projekt abhängt. Bei Updates (neue Minecraft-Version, neue Plu
 
 | Was | Version | Wofür | Wo festgelegt |
 |---|---|---|---|
-| Python | 3.12 | Erzeugt Website, LEGO-Schritte, Bilder und Downloads | `.github/workflows/website.yml` |
+| Python | 3.12 | Erzeugt Website, Bauschritte, Bilder und Downloads | `.github/workflows/website.yml` |
 | litemapy | 0.11.0b0 (fest) | Schreibt `.litematic`-Dateien | `tools/requirements.txt` |
 | nbtlib | ≥ 2.0, < 3 | Schreibt `.schem`-Dateien (NBT) | `tools/requirements.txt` |
 | Markdown | ≥ 3.5, < 4 | Anleitungen aus `docs/` in HTML umwandeln | `tools/requirements.txt` |

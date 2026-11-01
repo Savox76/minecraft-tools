@@ -722,7 +722,7 @@ class Seiten:
                     self.t('Minecraft-Bauplan · %d Schritte\n%s Blöcke · Litematica & WorldEdit',
                            'Minecraft build · %d steps\n%s blocks · Litematica & WorldEdit') % (kb['schritte'], fmt(kb['bloecke'], self.lang)),
                     self.modellbilder[b['id']], zusatz=z)
-        og_bild(os.path.join(self.out, self.og('og-start')), self.t('Bauen wie mit LEGO', 'Build like LEGO'),
+        og_bild(os.path.join(self.out, self.og('og-start')), self.t('Block für Block', 'Block by block'),
                 self.t('Minecraft-Baupläne Schritt für Schritt\nund Plugins für Paper-Server',
                        'Minecraft build plans step by step\nand plugins for Paper servers'), self.modellbilder.get('villa-am-wasser'), zusatz=z)
         og_bild(os.path.join(self.out, self.og('og-plugins')), self.t('Paper-Plugins', 'Paper plugins'),
@@ -746,7 +746,7 @@ class Seiten:
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div class="raster" style="margin-top:18px">%s</div></div></section>'
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div class="raster" style="margin-top:18px">%s</div></div></section>'
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div style="margin-top:18px">%s</div></div></section>'
-        ) % (t('Bauen wie mit LEGO. Schritt für Schritt.', 'Build like LEGO. Step by step.'),
+        ) % (t('Block für Block. Schritt für Schritt.', 'Block by block. Step by step.'),
              t('Minecraft-Baupläne, die pro Schritt genau zeigen, welche Blöcke du brauchst und wo sie hinkommen. Dazu Plugins für deinen eigenen Paper-Server. Alles kostenlos und einzeln zum Herunterladen.',
                'Minecraft build plans that show for every step exactly which blocks you need and where they go. Plus plugins for your own Paper server. All free and downloadable one by one.'),
              self.link('liste'), t('Baupläne ansehen', 'Browse builds'), self.link('geplant'), t('Was als Nächstes kommt', 'What comes next'),
@@ -758,18 +758,18 @@ class Seiten:
              t('Anleitungen', 'Guides'), ''.join(self.doc_link(d) for d in k['docs']))
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'WebSite', 'name': 'Bauwerkstatt', 'alternateName': t('Bauwerkstatt – Baupläne und Plugins für Minecraft', 'Bauwerkstatt – build plans and plugins for Minecraft'), 'url': self.voll(pfad(self.lang)), 'inLanguage': self.lang,
-             'description': t('Minecraft-Baupläne im LEGO-Stil und Plugins für Paper-Server, kostenlos.',
-                              'LEGO-style Minecraft build plans and plugins for Paper servers, free.'),
+             'description': t('Minecraft-Baupläne Schritt für Schritt und Plugins für Paper-Server, kostenlos.',
+                              'Step-by-step Minecraft build plans and plugins for Paper servers, free.'),
              'publisher': {'@type': 'Person', 'name': 'Savox'}},
             {'@type': 'ItemList', 'name': t('Minecraft-Baupläne', 'Minecraft build plans'), 'itemListElement': [
                 {'@type': 'ListItem', 'position': i + 1, 'url': self.voll(pfad(self.lang, 'bau', b['id'])), 'name': lok(b, 'titel', self.lang)}
                 for i, b in enumerate(k['builds'])]}]}
         self.schreibe('start', None,
-                      t('Bauwerkstatt – Minecraft-Baupläne im LEGO-Stil & Paper-Plugins',
-                        'Bauwerkstatt – LEGO-style Minecraft build plans & Paper plugins'),
-                      t('Kostenlose Minecraft-Baupläne Schritt für Schritt wie bei LEGO: Villen, Leuchtturm, Eiffelturm und Farmen mit Teileliste und Download für Litematica und WorldEdit. Dazu Plugins für Paper-Server.',
-                        'Free step-by-step Minecraft build plans like LEGO instructions: villas, lighthouse, Eiffel Tower and farms with parts list and downloads for Litematica and WorldEdit. Plus plugins for Paper servers.'),
-                      inhalt, ld, og_titel=t('Bauwerkstatt: Minecraft-Baupläne wie mit LEGO', 'Bauwerkstatt: Minecraft builds like LEGO'))
+                      t('Bauwerkstatt – Minecraft-Baupläne Schritt für Schritt & Paper-Plugins',
+                        'Bauwerkstatt – step-by-step Minecraft build plans & Paper plugins'),
+                      t('Kostenlose Minecraft-Baupläne Schritt für Schritt, mit den Blöcken für jeden Schritt: Villen, Leuchtturm, Eiffelturm und Farmen mit Teileliste und Download für Litematica und WorldEdit. Dazu Plugins für Paper-Server.',
+                        'Free step-by-step Minecraft build plans showing the blocks for every step: villas, lighthouse, Eiffel Tower and farms with parts list and downloads for Litematica and WorldEdit. Plus plugins for Paper servers.'),
+                      inhalt, ld, og_titel=t('Bauwerkstatt: Minecraft-Baupläne Schritt für Schritt', 'Bauwerkstatt: step-by-step Minecraft builds'))
 
     def liste_bauplaene(self):
         k, t = self.k, self.t
@@ -780,8 +780,8 @@ class Seiten:
             if bs:
                 teile.append('<h2 style="margin:26px 0 14px">%s</h2><div class="raster">%s</div>' % (H(name), ''.join(self.bau_karte(b) for b in bs)))
         inhalt = self.kopf(t('Sammlung', 'Collection'), t('Minecraft-Baupläne', 'Minecraft build plans'),
-                           t('Jeden Bauplan gibt es als LEGO-Anleitung im Browser, als Litematica- und WorldEdit-Datei und als Teileliste.',
-                             'Every build comes as LEGO-style instructions in the browser, as a Litematica and WorldEdit file and as a parts list.')) + \
+                           t('Jeden Bauplan gibt es als Schritt-für-Schritt-Anleitung im Browser, als Litematica- und WorldEdit-Datei und als Teileliste.',
+                             'Every build comes as step-by-step instructions in the browser, as a Litematica and WorldEdit file and as a parts list.')) + \
             '<section class="abschnitt" style="padding-top:8px"><div class="wrap">%s</div></section>' % ''.join(teile)
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'CollectionPage', 'name': t('Minecraft-Baupläne', 'Minecraft build plans'), 'url': self.voll(pfad(self.lang, 'liste')), 'inLanguage': self.lang},
@@ -789,8 +789,8 @@ class Seiten:
         self.schreibe('liste', None,
                       t('Minecraft-Baupläne: Villen, Türme und Farmen Schritt für Schritt | Bauwerkstatt',
                         'Minecraft build plans: villas, towers and farms step by step | Bauwerkstatt'),
-                      t('Alle Minecraft-Baupläne: Villa am Wasser, moderne, mediterrane und Gründerzeit-Villa, Leuchtturm, Eiffelturm, Gewächshaus-Farm und Kellerlager mit Sortieranlage. Mit LEGO-Schritten und Downloads.',
-                        'All Minecraft build plans: villa by the water, modern, Mediterranean and Victorian-era villa, lighthouse, Eiffel Tower, greenhouse farm and cellar storage with item sorter. With LEGO-style steps and downloads.'),
+                      t('Alle Minecraft-Baupläne: Villa am Wasser, moderne, mediterrane und Gründerzeit-Villa, Leuchtturm, Eiffelturm, Gewächshaus-Farm und Kellerlager mit Sortieranlage. Mit Bauschritten und Downloads.',
+                        'All Minecraft build plans: villa by the water, modern, Mediterranean and Victorian-era villa, lighthouse, Eiffel Tower, greenhouse farm and cellar storage with item sorter. With build steps and downloads.'),
                       inhalt, ld)
 
     def bau(self, b):
@@ -835,8 +835,8 @@ class Seiten:
              ('<div class="hinweis"><span><b>%s:</b> %s</span></div>' % (T[lang]['entwurf'], H(lok(b, 'hinweis', lang) or '')) if b.get('status') == 'entwurf' else '') + self.plugin_kasten(b.get('plugins', [])),
              self.base + 'bilder/%s.png' % b['id'], H(t('Minecraft %s, fertig gebaut', 'Minecraft %s, finished build') % titel),
              t('Bauabschnitte', 'Build sections'), ab_html,
-             t('Die Anleitung führt dich in %d LEGO-Schritten Ebene für Ebene von unten nach oben durch den Bau, mit höchstens 60 neuen Blöcken pro Schritt. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
-               'The instructions guide you through the build in %d LEGO-style steps, layer by layer from the bottom up, with at most 60 new blocks per step. Every step shows a rotatable 3D view and a top view of the layer.') % kb['schritte'],
+             t('Die Anleitung führt dich in %d Bauschritten Ebene für Ebene von unten nach oben durch den Bau, mit höchstens 60 neuen Blöcken pro Schritt. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
+               'The instructions guide you through the build in %d build steps, layer by layer from the bottom up, with at most 60 new blocks per step. Every step shows a rotatable 3D view and a top view of the layer.') % kb['schritte'],
              t('Teileliste', 'Parts list'), 'Block', t('Anzahl', 'Count'), teile_rows,
              t('Rohstoffe aus Farmen', 'Raw materials from farms'), t('Rohstoff', 'Material'), t('Menge', 'Amount'), roh_rows, dl,
              '<h2 style="margin:30px 0 12px">%s</h2><div class="raster">%s</div>' % (t('Tipps', 'Tips'), tipps) if tipps else '')
@@ -852,8 +852,8 @@ class Seiten:
         self.schreibe('bau', b['id'],
                       t('%s in Minecraft bauen – Bauplan in %d Schritten | Bauwerkstatt',
                         'Build the %s in Minecraft – %d-step build plan | Bauwerkstatt') % (titel, kb['schritte']),
-                      t('%s: Minecraft-Bauplan mit %d LEGO-Schritten, Teileliste (%s Blöcke) und Download für Litematica und WorldEdit. %s',
-                        '%s: Minecraft build plan with %d LEGO-style steps, parts list (%s blocks) and downloads for Litematica and WorldEdit. %s') % (
+                      t('%s: Minecraft-Bauplan mit %d Bauschritten, Teileliste (%s Blöcke) und Download für Litematica und WorldEdit. %s',
+                        '%s: Minecraft build plan with %d build steps, parts list (%s blocks) and downloads for Litematica and WorldEdit. %s') % (
                           titel, kb['schritte'], fmt(kb['bloecke'], lang), lok(b, 'beschreibung', lang)),
                       inhalt, ld, bild=self.og(b['id'] + '-og'), bild_alt=t('Minecraft-Bauplan %s', 'Minecraft build %s') % titel,
                       og_typ='article', og_titel=t('%s – Minecraft-Bauplan', '%s – Minecraft build plan') % titel)
@@ -959,8 +959,8 @@ class Seiten:
                 repo, t('Bauplan wünschen', 'Request a build'), repo, t('Plugin wünschen', 'Request a plugin'))
         ld = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': t('Bauplan wünschen', 'Request a build'), 'url': self.voll(pfad(self.lang, 'wuensche')), 'inLanguage': self.lang}
         self.schreibe('wuensche', None, t('Minecraft-Bauplan wünschen | Bauwerkstatt', 'Request a Minecraft build | Bauwerkstatt'),
-                      t('Wünsch dir einen Minecraft-Bauplan oder ein Plugin. Die meistgewünschten Bauwerke werden zuerst als LEGO-Anleitung gebaut.',
-                        'Request a Minecraft build plan or a plugin. The most requested builds are made into LEGO-style instructions first.'), inhalt, ld)
+                      t('Wünsch dir einen Minecraft-Bauplan oder ein Plugin. Die meistgewünschten Bauwerke werden zuerst als Schritt-für-Schritt-Anleitung gebaut.',
+                        'Request a Minecraft build plan or a plugin. The most requested builds are made into step-by-step instructions first.'), inhalt, ld)
 
     def geplant(self):
         t, lang = self.t, self.lang

@@ -7,7 +7,7 @@ und optional tools/cache/wuensche.json (wird vom Workflow aus GitHub-Issues erze
 Schreibt nach  _site/ :
   index.html, Styles, Skripte (aus site/)
   data/katalog.json            Übersicht aller Einträge
-  data/builds/<id>.json        Modell, LEGO-Schritte, Teileliste
+  data/builds/<id>.json        Modell, Bauschritte, Teileliste
   data/seiten/<id>.html        Anleitungs-Texte als HTML
   <pfad>/index.html            vorgerenderte Seiten mit Meta-Daten (tools/seiten.py)
   bilder/, sitemap.xml, robots.txt, 404.html
@@ -19,7 +19,7 @@ import csv, gzip, io, json, math, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, '_site')
-MAX_TEILE = 60          # höchstens so viele neue Blöcke pro LEGO-Schritt
+MAX_TEILE = 60          # höchstens so viele neue Blöcke pro Bauschritt
 DATA_VERSION = 3953     # Minecraft Java 1.21, ältere Versionen werden beim Laden automatisch umgewandelt
 
 KATEGORIEN = {
@@ -80,8 +80,8 @@ def zellen(model):
                     yield x, y, z, idx[ch]
 
 
-def lego_schritte(build, model):
-    """Teilt das Modell in LEGO-Schritte: Ebene für Ebene von unten nach oben.
+def bau_schritte(build, model):
+    """Teilt das Modell in Bauschritte: Ebene für Ebene von unten nach oben.
 
     Jeder Schritt gehört zu genau einer Ebene. Ebenen mit mehr als MAX_TEILE neuen Blöcken
     werden in gleich große Teile zerlegt (Kacheln von 8 × 8 in Schlangenlinie), damit man
@@ -276,7 +276,7 @@ def main():
                 print(f'  Hinweis: keine englische Bezeichnung für „{p["name"]}“ (tools/i18n/bloecke_en.json)')
             p['name_en'] = bloecke_en.get(p['name'], p['name'])
         liste = teileliste(model)
-        schritte = lego_schritte(build, model)
+        schritte = bau_schritte(build, model)
         downloads = []
         if exporte:
             ziel = os.path.join(OUT, 'downloads', bid)
