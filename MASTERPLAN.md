@@ -15,6 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
+| Ideen für neue Baupläne | 💡 59 Vorschläge (Farmen, Gebäude, Monumente) | Abschnitt 15 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
 **Entwurf** heißt: Die Richtung von Treppen, Türen und Trichtern ist in den Dateien noch nicht in einer Testwelt geprüft (siehe Phase 1).
@@ -414,3 +415,83 @@ Suchmaschinen bewerten eine Seite auch danach, wer auf sie verlinkt.
 - `robots.txt` wird von Suchmaschinen nur direkt auf `savox76.github.io/` gelesen, nicht im Unterordner. Deshalb ist das Einreichen der Sitemap in der Search Console der wichtige Weg.
 - Mit einer eigenen Domain (Masterplan 12., Punkt 8) wäre die Seite unabhängig von GitHub und leichter zu merken. Dann nur `site_url` in `tools/site_config.json` ändern.
 
+---
+
+## 15. Ideen-Speicher: mögliche neue Baupläne
+
+Vorschläge für künftige Baupläne. Wird einer umgesetzt, bekommt er einen Ordner `builds/<id>/` und folgt dem Ablauf aus 4.1. Status: 💡 Idee · 🔨 in Arbeit · ✅ als Bauplan verfügbar. Größe: klein (bis etwa 15 × 15), mittel, groß.
+
+**Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
+
+### 15.1 Farmen und Technik
+
+| Nr. | Vorschlag | Größe | Was es bringt | Status |
+|---|---|---|---|---|
+| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus → grüner Farbstoff, 1 XP pro Stück, XP sammelt sich im Ofen. Ohne Monster | 💡 |
+| 2 | Seetang-XP-Ofen | klein | Weniger XP, dafür getrockneter Seetang als Brennstoff | 💡 |
+| 3 | Dunkelraum-Monsterfarm | mittel | XP, Knochen, Pfeile, Schießpulver, Fäden | 💡 |
+| 4 | Spawner-XP-Farm (Zombie/Skelett) | klein | Viel XP, nur an einem gefundenen Spawner | 💡 |
+| 5 | Lohenfarm | mittel | XP und Lohenruten, an einer Netherfestung | 💡 |
+| 6 | Goldfarm auf dem Nether-Dach | groß | Sehr viel XP und Gold | 💡 |
+| 7 | Endermanfarm im End | groß | Schnellste XP-Quelle, Drache muss besiegt sein | 💡 |
+| 8 | Handelshalle mit Dorfbewohnern | mittel | XP, Smaragde, Verzauberungsbücher; passt zum Arbeiter-Plugin | 💡 |
+| 9 | Kleine Bambusfarm | klein | 8 Pflanzen, Beobachter und Kolben, Trichter; etwa 8 × 4 | 💡 |
+| 10 | Große Bambusfarm | groß | 2 × 16 Pflanzen, Trichterlore unter Glas, Fasskette | 💡 |
+| 11 | Bambus-Brennstoffstation | klein | Bambus heizt die Ofenbatterie aus Nr. 1 ohne Kohle | 💡 |
+| 12 | Melonen- und Kürbisfarm | klein | Beobachter und Kolben ernten automatisch | 💡 |
+| 13 | Wollfarm | klein | Schafe, Werfer mit Schere; eine Farbe pro Kammer | 💡 |
+| 14 | Honig- und Waben-Farm | klein | Honigblöcke, Waben für Kerzen | 💡 |
+| 15 | Eisenfarm | mittel | Eisen für Trichter, Schienen, Laternen | 💡 |
+| 16 | Schneefarm mit Schneegolems | klein | Schneeblöcke und Eis | 💡 |
+| 17 | Lava aus Tropfstein | klein | Unendlich Lava im Kessel als Brennstoff | 💡 |
+| 18 | Basalt-Generator | klein | Lava, Blaueis, Seelenerde → Basalt | 💡 |
+| 19 | Bruchstein-Generator | klein | Lava und Wasser, nur noch abbauen | 💡 |
+| 20 | Moosfarm | klein | Moos, Azaleen, Kompost per Knochenmehl-Werfer | 💡 |
+| 21 | Kuh- und Hühnerfarm | klein | Leder für Bücher, Federn, Eier, Fleisch | 💡 |
+| 22 | Schleimfarm | mittel | Schleimbälle für Klebekolben | 💡 |
+| 23 | Hexenfarm | groß | Redstone, Leuchtsteinstaub, Zucker | 💡 |
+| 24 | Creeperfarm | mittel | Schießpulver für Raketen | 💡 |
+| 25 | Verzauberungsraum | klein | Zaubertisch mit 15 Bücherregalen, Amboss, Schleifstein | 💡 |
+| 26 | Marktplatz für Spieler-Shops | mittel | Stände für die Shop-Truhen aus ServerShop | 💡 |
+| 27 | Lorenbahnhof | mittel | Gleise vom Spawn zu allen Farmen | 💡 |
+| 28 | Windmühle | klein | Deko-Hülle für eine Bambus- oder Melonenfarm | 💡 |
+| 29 | Hafen mit Steg und Bootshaus | mittel | Passt zu Villa am Wasser und Leuchtturm | 💡 |
+
+Empfohlener Start: Nr. 1, 9 und 11 als Kreislauf (Bambus heizt die Öfen, Kaktus liefert XP und Farbstoff).
+
+### 15.2 Gebäude und Monumente
+
+| Nr. | Vorschlag | Größe | Besonderheit | Status |
+|---|---|---|---|---|
+| 30 | Brandenburger Tor | mittel | Säulen, Quadriga aus Kupfer und Stein | 💡 |
+| 31 | Big Ben (Elizabeth Tower) | groß | Uhrturm mit vier Zifferblättern, gut im Maßstab 1:2 | 💡 |
+| 32 | Kölner Dom | groß | Zwei Türme, Spitzbögen, bunte Glasfenster | 💡 |
+| 33 | Frauenkirche Dresden | groß | Steinerne Glockenkuppel aus Sandstein | 💡 |
+| 34 | Freiheitsstatue | groß | Aus Kupfer, das von selbst grün wird | 💡 |
+| 35 | Schiefer Turm von Pisa | mittel | Schräge durch versetzte Ringe, Säulengänge | 💡 |
+| 36 | Kolosseum | groß | Ovale Arena mit Bögen, teilweise eingestürzt | 💡 |
+| 37 | Schloss Neuschwanstein | groß | Türme, Spitzdächer, auf einem Felsen | 💡 |
+| 38 | Tower Bridge | groß | Zwei Türme mit Klappbrücke (Kolben möglich) | 💡 |
+| 39 | Pyramide mit Grabkammer | groß | Viel Sandstein; Sand ist auf Paper nicht farmbar | 💡 |
+| 40 | Japanische Pagode | mittel | Fünf Stockwerke, geschwungene Dächer | 💡 |
+| 41 | Maya-Tempel | mittel | Stufenpyramide mit Treppe, Dschungel-Deko | 💡 |
+| 42 | Stonehenge | klein | Steinkreis, gut als erstes Monument | 💡 |
+| 43 | Mittelalterliche Burg | groß | Ringmauer, Torhaus, Bergfried, Burghof | 💡 |
+| 44 | Wachturm | klein | Steinturm mit Holzdach und Leiter | 💡 |
+| 45 | Fachwerkdorf | mittel | Bäckerei, Schmiede und Gasthaus | 💡 |
+| 46 | Bauernhof mit Scheune und Silo | mittel | Farmen aus 15.1 lassen sich darin verstecken | 💡 |
+| 47 | Blockhütte am See | klein | Rundholz, Kamin, Steg | 💡 |
+| 48 | Baumhaus im Riesen-Dschungelbaum | mittel | Mehrere Plattformen mit Hängebrücken | 💡 |
+| 49 | Unterwasser-Glaskuppel | mittel | Wohnkuppel am Meeresgrund, viel Glas | 💡 |
+| 50 | Japanisches Teehaus mit Garten | klein | Kirschbaumholz, Teich, Steinlaternen | 💡 |
+| 51 | Zwergenhalle im Berg | groß | Große Halle mit Säulen, in den Berg gebaut statt in die Tiefe | 💡 |
+| 52 | Hochhaus | groß | Moderne Glasfassade, Etagen einzeln baubar | 💡 |
+| 53 | Rathaus mit Uhrturm am Spawn | mittel | Hilfe-Schilder, Treffpunkt für alle | 💡 |
+| 54 | Hängebrücke | mittel | Über eine Schlucht oder einen Fluss | 💡 |
+| 55 | Gartenpavillon mit Brunnen | klein | Schneller Einstieg, passt zu den Villen | 💡 |
+| 56 | Große Bibliothek | mittel | Bücherregale über zwei Etagen, Lesesaal | 💡 |
+| 57 | Dorfkapelle | klein | Glockenturm, Buntglas | 💡 |
+| 58 | Luftschiff | mittel | Hülle aus Wolle, Gondel aus Holz | 💡 |
+| 59 | Piratenschiff | mittel | Masten, Segel aus Wolle, Kanonendeck | 💡 |
+
+Für Nachbauten echter Wahrzeichen wird der Maßstab im Bauplan angegeben (wie beim Eiffelturm 1:3), damit Höhe und Blockzahl realistisch bleiben.
