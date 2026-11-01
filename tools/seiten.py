@@ -45,8 +45,8 @@ def stacks(n, lang='de'):
 def form(n):
     """Gleiche Formen wie shapeOf() in site/js/render.js."""
     for f, rx in (('mob', r'Dorfbewohner'), ('flat', r'Redstonestaub|Seerosenblatt'), ('low', r'Komparator|Verstärker'),
-                  ('crop', r'Karotten|Kartoffeln'), ('bed', r'Bett'), ('plate', r'Falltür'), ('panel', r'Zauntor|Tür'),
-                  ('thin', r'Zaun|Mauer|Eisengitter|Blitzableiter|Laterne|Leiter|fackel'), ('pane', r'Glasscheibe'),
+                  ('crop', r'Karotten|Kartoffeln'), ('bed', r'Bett'), ('plate', r'Falltür'), ('panel', r'(?i)zauntor|tür'),
+                  ('thin', r'(?i)zaun|mauer|eisengitter|blitzableiter|laterne|leiter|fackel'), ('pane', r'Glasscheibe'),
                   ('slab', r'Stufe'), ('glass', r'^Glas$'), ('water', r'Wasser|Meer')):
         if re.search(rx, n):
             return f

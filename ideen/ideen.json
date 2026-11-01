@@ -108,7 +108,7 @@
    "groesse": "klein",
    "titel": "Kaktus-XP-Farm mit Ofenbatterie",
    "text": "Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster.",
-   "status": "idee",
+   "status": "verfuegbar",
    "empfohlen": true,
    "plugins": [
     {
@@ -116,6 +116,7 @@
      "stufe": "empfohlen"
     }
    ],
+   "bauplan": "kaktus-xp-farm",
    "en": {
     "titel": "Cactus XP farm with furnace array",
     "text": "Cactus grows by itself and hoppers feed it into a row of furnaces. Every cactus becomes green dye and gives 1 XP, stored in the furnace until you empty it. No mobs needed."

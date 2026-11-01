@@ -8,8 +8,8 @@ export const shapeOf = (n) =>
   /Karotten|Kartoffeln/.test(n) ? 'crop' :
   /Bett/.test(n) ? 'bed' :
   /Falltür/.test(n) ? 'plate' :
-  /Zauntor|Tür/.test(n) ? 'panel' :
-  /Zaun|Mauer|Eisengitter|Blitzableiter|Laterne|Leiter|fackel/.test(n) ? 'thin' :
+  /zauntor|tür/i.test(n) ? 'panel' :
+  /zaun|mauer|eisengitter|blitzableiter|laterne|leiter|fackel/i.test(n) ? 'thin' :
   /Glasscheibe/.test(n) ? 'pane' :
   /Stufe/.test(n) ? 'slab' :
   /^Glas$/.test(n) ? 'glass' :

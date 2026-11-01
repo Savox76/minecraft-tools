@@ -357,7 +357,7 @@ async function geplantSeite() {
     if (ohneFilter && empf.length) teile.push(`<section class="ideen-gruppe empfohlen"><h2>${tr('Als Nächstes', 'Up next')}</h2><p>${tr('Diese drei ergeben zusammen einen kleinen Kreislauf: Bambus heizt die Öfen, der Kaktus liefert dabei XP und Farbstoff.', 'Together these three form a small loop: bamboo heats the furnaces while the cactus delivers XP and dye.')}</p><div class="ideen-raster">${empf.map((i) => karte(i, false)).join('')}</div></section>`);
     for (const c of D.kategorien) {
       const liste = IDS.filter((i) => i.kategorie === c.id && passt(i));
-      if (liste.length) teile.push(`<section class="ideen-gruppe" id="kat-${c.id}"><h2>${esc(lo(c, 'name'))} <span class="anzahl">${liste.length}</span></h2><p>${esc(lo(c, 'text'))}</p><div class="ideen-raster">${liste.map(karte).join('')}</div></section>`);
+      if (liste.length) teile.push(`<section class="ideen-gruppe" id="kat-${c.id}"><h2>${esc(lo(c, 'name'))} <span class="anzahl">${liste.length}</span></h2><p>${esc(lo(c, 'text'))}</p><div class="ideen-raster">${liste.map((i) => karte(i)).join('')}</div></section>`);
     }
     box.innerHTML = teile.join('') || `<div class="leer">${tr('Nichts gefunden. Wünsch dir die Idee doch einfach!', 'Nothing found. Why not request it?')} <a href="${url('wuensche')}">${tr('Zu den Wünschen', 'Go to wishes')}</a></div>`;
   };

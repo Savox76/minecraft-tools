@@ -1,0 +1,229 @@
+{
+  "id": "kaktus-xp-farm",
+  "titel": "Kaktus-XP-Farm",
+  "beschreibung": "Kleine Farm, die Erfahrung sammelt: Neun Kakteen wachsen über einem Wasserbecken, brechen an Zäunen ab und schwimmen zu einer Trichterreihe. Ein Ofen macht daraus grünen Farbstoff und speichert dabei 1 Erfahrung pro Kaktus, bis du sie abholst.",
+  "kategorie": "technik",
+  "tags": [
+    "farm",
+    "xp",
+    "kaktus",
+    "ofen",
+    "automatisch"
+  ],
+  "edition": [
+    "java"
+  ],
+  "schwierigkeit": 2,
+  "bauzeit_stunden": [
+    1,
+    2
+  ],
+  "grundflaeche": "9 × 10",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Achte besonders auf die Richtung der Trichter und darauf, dass nur die nördliche Wasserreihe aus Quellen besteht.",
+  "abschnitte": [
+    {
+      "name": "Fundament mit Ofen",
+      "von": 0,
+      "bis": 0,
+      "text": "Grundplatte 9 × 10 aus Steinziegeln. In der Südost-Ecke steht der Ofen mit der Vorderseite nach Osten, direkt südlich davon ein Trichter, der nach Norden in die Seite des Ofens zeigt. Über ihn kommt der Brennstoff."
+    },
+    {
+      "name": "Boden und Trichterreihe",
+      "von": 1,
+      "bis": 1,
+      "text": "Zweite Bodenschicht. An der Südseite liegt eine Reihe aus 7 Trichtern, die alle nach Osten zeigen. Der letzte Trichter über dem Ofen zeigt nach unten in den Ofen. Über den Brennstoff-Trichter kommt ein Fass."
+    },
+    {
+      "name": "Wasserbecken und Sandsäulen",
+      "von": 2,
+      "bis": 2,
+      "text": "Ringsum eine Wand aus Steinziegeln. Innen stehen neun Sandblöcke im Abstand von zwei Blöcken. Wasserquellen kommen nur in die Reihe direkt an der Nordwand. Der Rest füllt sich von selbst mit fließendem Wasser, das alles nach Süden zu den Trichtern schiebt."
+    },
+    {
+      "name": "Kakteen",
+      "von": 3,
+      "bis": 3,
+      "text": "Auf jede Sandsäule kommt ein Kaktus. Ringsum Glas als Wand, das hält die Kakteen in der Farm, ohne sie zu berühren."
+    },
+    {
+      "name": "Zäune, Glas und Laternen",
+      "von": 4,
+      "bis": 5,
+      "text": "Neben jede Stelle, an der ein Kaktus nach oben wächst, kommt ein Zaun. Wächst der Kaktus dorthin, bricht das neue Stück sofort ab. Noch eine Reihe Glas und Laternen auf die vier Ecken."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "So funktioniert die Farm",
+      "text": "Der Kaktus wächst auf seiner Sandsäule nach oben. Das zweite Stück entsteht direkt neben einem Zaun und bricht sofort ab. Es fällt ins Wasser, das Wasser schiebt es zur Trichterreihe, und die Trichter bringen es in den Ofen. Aus jedem Kaktus wird grüner Farbstoff, der Ofen merkt sich dabei 1 Erfahrung."
+    },
+    {
+      "titel": "Erfahrung abholen",
+      "text": "Nimm den grünen Farbstoff aus dem Ofen. Dabei bekommst du auf einen Schlag die gesamte gespeicherte Erfahrung. Bei 64 Farbstoff hält der Ofen an. Das ist gewollt: Die Farm läuft nicht über, überzählige Kakteen verschwinden nach 5 Minuten im Wasser."
+    },
+    {
+      "titel": "Nur die Nordreihe sind Quellen",
+      "text": "Setze Wasserquellen nur in die Reihe direkt an der Nordwand. Der Rest des Beckens füllt sich von selbst. Nur so entsteht die Strömung zu den Trichtern. In den Dateien für Litematica und WorldEdit sind deshalb nur diese Quellen enthalten."
+    },
+    {
+      "titel": "Reihenfolge beim Bauen",
+      "text": "Erst die Sandsäulen, dann das Wasser, dann die Kakteen, zum Schluss die Zäune. Ein Kaktus lässt sich nicht neben einen festen Block setzen. Wasser und Luft daneben sind in Ordnung."
+    },
+    {
+      "titel": "Sparsamer Brennstoff",
+      "text": "Die Kakteen kommen einzeln an. Ein großes Brennstück wie Kohle brennt dann meist nur für einen Kaktus und verglüht. Am sparsamsten ist Bambus: 4 Stück pro Kaktus, nichts geht verloren. Holzstufen und Stöcke gehen auch. Später kann die Bambus-Brennstoffstation (Idee Nr. 11) das Fass automatisch füllen."
+    },
+    {
+      "titel": "Was sie liefert",
+      "text": "Neun Kakteen wachsen zusammen etwa 30 Stücke pro Stunde. Ein Teil fällt beim Abbrechen auf den Kaktus darunter und wird zerstört. Das ist bei einfachen Kaktusfarmen normal. Rechne mit etwa 15 bis 25 Kakteen, grünem Farbstoff und Erfahrungspunkten pro Stunde."
+    },
+    {
+      "titel": "Läuft nur in der Nähe",
+      "text": "Kakteen wachsen nur, wenn ein Spieler oder der Farm-Bot höchstens 128 Blöcke entfernt ist. Bau die Farm deshalb nahe an deine Basis oder an die Farm-Bot-Zentrale."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 211,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und zu Steinziegeln verarbeiten, 8 für den Ofen"
+    },
+    {
+      "name": "Sand",
+      "menge": 77,
+      "quelle": "Wüste oder Strand",
+      "hinweis": "9 für die Säulen, 68 zu Glas schmelzen"
+    },
+    {
+      "name": "Kaktus",
+      "menge": 9,
+      "quelle": "Wüste",
+      "hinweis": "zum Anpflanzen, danach vermehrt sich der Kaktus selbst"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 49,
+      "quelle": "Eisenfarm",
+      "hinweis": "Trichter und Laternen"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 24,
+      "quelle": "Baumfarm (Fichte) oder Holzfäller-Arbeiter",
+      "hinweis": "Truhen für die Trichter, Fass und Zäune"
+    },
+    {
+      "name": "Wassereimer",
+      "menge": 2,
+      "quelle": "unendliche Wasserquelle",
+      "hinweis": "zwei Quellen nebeneinander, dann die ganze Nordreihe füllen"
+    }
+  ],
+  "schmelzvorgaenge": 271,
+  "version": "0.9.0",
+  "autor": "Savox",
+  "plugins": [
+    {
+      "id": "fakeplayerplugin",
+      "stufe": "empfohlen",
+      "grund": "Kakteen wachsen nur, wenn ein Spieler höchstens 128 Blöcke entfernt ist. Ein Farm-Bot hält die Farm am Laufen, wenn niemand online ist.",
+      "en": {
+        "grund": "Cactus only grows when a player is within 128 blocks. A farm bot keeps the farm running when nobody is online."
+      }
+    }
+  ],
+  "en": {
+    "titel": "Cactus XP Farm",
+    "beschreibung": "A small farm that collects experience: nine cacti grow above a water pool, break off at fences and float to a row of hoppers. A furnace turns them into green dye and stores 1 XP per cactus until you collect it.",
+    "grundflaeche": "9 × 10",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. Pay special attention to the hopper directions and make sure only the northern water row consists of source blocks.",
+    "abschnitte": [
+      {
+        "name": "Foundation with furnace",
+        "text": "A 9 × 10 base of stone bricks. The furnace sits in the south-east corner facing east, with a hopper directly south of it pointing north into the side of the furnace. Fuel goes in through this hopper."
+      },
+      {
+        "name": "Floor and hopper row",
+        "text": "Second floor layer. Along the south side lies a row of 7 hoppers, all facing east. The last hopper above the furnace points down into the furnace. A barrel goes on top of the fuel hopper."
+      },
+      {
+        "name": "Water pool and sand pillars",
+        "text": "A stone brick wall all around. Inside, nine sand blocks stand two blocks apart. Water source blocks only go into the row right next to the north wall. The rest fills with flowing water by itself, which pushes everything south to the hoppers."
+      },
+      {
+        "name": "Cacti",
+        "text": "A cactus goes on each sand pillar. Glass all around as a wall keeps the cacti inside the farm without touching them."
+      },
+      {
+        "name": "Fences, glass and lanterns",
+        "text": "Next to every spot where a cactus grows upwards goes a fence. When the cactus grows there, the new piece breaks off immediately. One more row of glass and lanterns on the four corners."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "How the farm works",
+        "text": "The cactus grows upwards on its sand pillar. The second piece appears right next to a fence and breaks off immediately. It drops into the water, the water pushes it to the hopper row, and the hoppers carry it into the furnace. Every cactus becomes green dye, and the furnace stores 1 XP."
+      },
+      {
+        "titel": "Collecting the XP",
+        "text": "Take the green dye out of the furnace. You get all the stored experience at once. At 64 dye the furnace stops. That is intended: the farm does not overflow, extra cacti despawn in the water after 5 minutes."
+      },
+      {
+        "titel": "Only the north row are sources",
+        "text": "Place water source blocks only in the row right next to the north wall. The rest of the pool fills by itself. Only this creates the current towards the hoppers. That is why the Litematica and WorldEdit files contain only these sources."
+      },
+      {
+        "titel": "Build order",
+        "text": "First the sand pillars, then the water, then the cacti, the fences last. A cactus cannot be placed next to a solid block. Water and air next to it are fine."
+      },
+      {
+        "titel": "Saving fuel",
+        "text": "The cacti arrive one at a time. A big fuel item like coal then usually burns for a single cactus and goes to waste. Bamboo is the most economical: 4 per cactus, nothing is lost. Wooden slabs and sticks work too. Later the bamboo fuel station (idea no. 11) can fill the barrel automatically."
+      },
+      {
+        "titel": "What it delivers",
+        "text": "Together the nine cacti grow about 30 pieces per hour. Some pieces fall onto the cactus below when they break off and are destroyed. That is normal for simple cactus farms. Expect about 15 to 25 cacti, green dye and experience points per hour."
+      },
+      {
+        "titel": "Only works nearby",
+        "text": "Cactus only grows when a player or the farm bot is within 128 blocks. So build the farm close to your base or to the farm bot base."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt into stone and craft stone bricks, 8 for the furnace"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Desert or beach",
+        "hinweis": "9 for the pillars, smelt 68 into glass"
+      },
+      {
+        "name": "Cactus",
+        "quelle": "Desert",
+        "hinweis": "for planting, then the cactus multiplies by itself"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "hoppers and lanterns"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce) or lumberjack worker",
+        "hinweis": "chests for the hoppers, barrel and fences"
+      },
+      {
+        "name": "Water buckets",
+        "quelle": "Infinite water source",
+        "hinweis": "two sources side by side, then fill the whole north row"
+      }
+    ]
+  }
+}
