@@ -1,0 +1,12 @@
+{
+  "name": "Savox Bauwerkstatt",
+  "short_name": "Bauwerkstatt",
+  "description": "Minecraft-Baupläne im LEGO-Stil und Paper-Plugins",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f4f6",
+  "theme_color": "#1b232c",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

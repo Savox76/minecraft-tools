@@ -1,0 +1,32 @@
+name: Plugin wünschen
+description: Wünsch dir ein neues Plugin oder eine Funktion für ein bestehendes.
+title: "Plugin-Wunsch: "
+labels: [plugin-wunsch]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Betrifft
+      options:
+        - Neues Plugin
+        - AdminLogin
+        - Arbeiter
+        - InfiniteLager
+        - ProvokedMobs
+        - ServerEinstellungen
+        - ServerHilfe
+        - ServerShop
+    validations:
+      required: true
+  - type: textarea
+    id: wunsch
+    attributes:
+      label: Was soll es können?
+      description: Beschreib, was im Spiel passieren soll und für wen (Spieler, Admins).
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Server-Version
+      placeholder: z. B. Paper 1.21.4

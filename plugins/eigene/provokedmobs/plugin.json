@@ -1,0 +1,39 @@
+{
+  "id": "provokedmobs",
+  "name": "ProvokedMobs",
+  "version": "1.2.0",
+  "kategorie": "schutz",
+  "kurz": "Creeper explodieren nicht mehr, umschaltbar per Chat.",
+  "beschreibung": "Schützt Bauwerke und Spieler vor Creeper-Explosionen. Admins schalten den Schutz im Chat um, alle Spieler sehen die Meldung.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "Creeper explodieren nicht (kein Block- und kein Spielerschaden)",
+    "Schutz per Chatbefehl an- und ausschaltbar, mit Meldung an alle"
+  ],
+  "befehle": [
+    {
+      "befehl": "/mobschutz an | aus | status",
+      "text": "Mob-Schutz schalten oder anzeigen",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/mobschutz creeper an | aus",
+      "text": "Nur den Creeper-Schutz schalten",
+      "wer": "admin"
+    }
+  ],
+  "config": [],
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "Creeper-Schutz",
+        "Umschalten per Chat"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

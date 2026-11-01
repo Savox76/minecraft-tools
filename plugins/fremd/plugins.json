@@ -1,0 +1,59 @@
+[
+  {
+    "id": "fakeplayerplugin",
+    "name": "FakePlayerPlugin",
+    "autor": "Janky-Development",
+    "zweck": "Farm-Bot: ein Bot-Spieler hält Farmen am Laufen, wenn niemand online ist.",
+    "einsatz": "Jeder Spieler darf 1 Bot haben. Fremde Bots kann man nicht schubsen oder verletzen, Bots heben keine Items auf.",
+    "link": "https://hangar.papermc.io/Janky-Development/FakePlayerPlugin",
+    "anleitung": "farm-bot",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "chunkloader",
+    "name": "ChunkLoader",
+    "zweck": "Hält Chunks geladen, damit Farmen und Arbeiter weiterlaufen.",
+    "einsatz": "Jeder kann Chunk-Loader selbst herstellen (max. 5 pro Spieler): Obsidian, Enderperlen und ein Diamant in der Mitte.",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "easycommandblocker",
+    "name": "EasyCommandBlocker",
+    "zweck": "Legt fest, welche Befehle Spieler sehen und mit der Tab-Taste vervollständigen können.",
+    "einsatz": "Spieler sehen /home, /sethome, /delhome, /listhomes, /lager, /shop, /coins, /playershop, /arbeiter, /hilfe, /fpp, /voicechat, /msg, /tell, /w.",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "simple-voice-chat",
+    "name": "Simple Voice Chat",
+    "zweck": "Sprachchat im Spiel, je nach Entfernung lauter oder leiser.",
+    "einsatz": "Aufnehmen der Stimmen anderer ist ausgeschaltet.",
+    "link": "https://modrinth.com/plugin/simple-voice-chat",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "floodgate",
+    "name": "Floodgate",
+    "autor": "GeyserMC",
+    "zweck": "Bedrock-Spieler können ohne Java-Konto beitreten.",
+    "einsatz": "Bedrock-Spieler kommen über die Whitelist ohne Server-Passwort rein: fwhitelist add <Name>. Die normale Whitelist bleibt aus.",
+    "link": "https://geysermc.org/download",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "spark",
+    "name": "spark",
+    "autor": "lucko",
+    "zweck": "Misst die Server-Leistung und findet, was Lag verursacht.",
+    "link": "https://spark.lucko.me",
+    "status": "im-einsatz"
+  },
+  {
+    "id": "coreprotect",
+    "name": "CoreProtect",
+    "zweck": "Protokolliert, wer was gebaut, abgebaut oder aus Kisten genommen hat, und kann Änderungen zurücksetzen.",
+    "link": "https://modrinth.com/plugin/coreprotect",
+    "anleitung": "coreprotect",
+    "status": "empfohlen"
+  }
+]

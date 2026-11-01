@@ -1,0 +1,139 @@
+{
+  "id": "villa-modern",
+  "titel": "Moderne Villa",
+  "beschreibung": "Moderne Villa mit Flachdach: verglastes Erdgeschoss, Obergeschoss, das 8 Blöcke über die Terrasse hinausragt, Dachterrasse mit Glasgeländer, Pool und Birken.",
+  "kategorie": "villen",
+  "tags": [
+    "modern",
+    "pool",
+    "glas",
+    "beton"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 3,
+  "bauzeit_stunden": [
+    4,
+    6
+  ],
+  "grundflaeche": "29 × 23 mit Terrasse und Pool",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Plattform & Pool",
+      "von": 0,
+      "bis": 0,
+      "text": "Bodenplatte aus glattem Stein, Pool mit Rand aus weißem Beton und Leuchtstein in den Ecken. Den Pool 2 Blöcke tief ausheben; im Plan ist nur die Wasseroberfläche eingezeichnet."
+    },
+    {
+      "name": "Erdgeschoss",
+      "von": 1,
+      "bis": 4,
+      "text": "Glasfronten nach Süden und Osten, geschlossene Betonwände nach Norden und Westen. Die Treppe ins Obergeschoss läuft innen an der Nordseite. Hecken aus Birkenlaub als Sichtschutz."
+    },
+    {
+      "name": "Zwischendecke",
+      "von": 5,
+      "bis": 5,
+      "text": "Decke des Erdgeschosses und Boden des Obergeschosses in einem. Das Obergeschoss ragt nach Osten 8 Blöcke über die Terrasse hinaus."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 9,
+      "text": "Fensterband rundum, Fichtenholz-Verkleidung auf der Südseite, Ostseite komplett verglast. In Ebene 6 das Glasgeländer der Dachterrasse über dem Erdgeschoss."
+    },
+    {
+      "name": "Flachdach",
+      "von": 10,
+      "bis": 11,
+      "text": "Flachdach mit einem Überstand aus Stufen und Glasgeländer obendrauf."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Glas vorproduzieren",
+      "text": "Die Glasfronten sind der größte Posten. Lass eine Reihe Öfen mit Trichtern laufen, während du das Fundament und die Betonwände setzt."
+    },
+    {
+      "titel": "Pool ausheben",
+      "text": "Grab das Becken 2 Blöcke tief. Ein Leuchtstein unter jeder Ecke oder hinter Glas am Beckenboden lässt das Wasser nachts leuchten. Zwei Wassereimer in eine Ecke ergeben eine unendliche Quelle zum Füllen."
+    },
+    {
+      "titel": "Auskragung bauen",
+      "text": "Der Überhang nach Osten braucht in Minecraft keine Stützen. Zum Setzen der Decke ein paar Hilfsblöcke darunter stellen und danach wieder abbauen."
+    },
+    {
+      "titel": "Am Hang noch besser",
+      "text": "Steht die Villa an einer Kante, lass den Pool und die Ostseite über den Abhang ragen. Der Blick aus dem verglasten Obergeschoss wirkt dann am stärksten."
+    },
+    {
+      "titel": "Quarz statt Beton",
+      "text": "Quarzblöcke sehen ähnlich aus und brauchen keinen Kies, dafür Netherquarz. Beton hat die sauberere, glattere Fläche."
+    },
+    {
+      "titel": "Einrichtung",
+      "text": "Helle Teppiche, Bücherregale und Blumentöpfe passen zum Stil. Licht lieber unsichtbar: Leuchtstein unter Teppichen oder Laternen hinter Glas."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 631,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und weiterverarbeiten"
+    },
+    {
+      "name": "Sand",
+      "menge": 623,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "für Glas, Beton und Sandstein"
+    },
+    {
+      "name": "Kies",
+      "menge": 413,
+      "quelle": "Piglin-Tausch oder Händler",
+      "hinweis": "für Betonpulver"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 104,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 6,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Birkenstamm",
+      "menge": 10,
+      "quelle": "Baumfarm (Birke)",
+      "hinweis": "für Bretter und Stämme"
+    },
+    {
+      "name": "Laub (mit Schere)",
+      "menge": 194,
+      "quelle": "Bäume mit der Schere ernten",
+      "hinweis": "Hecken, Bäume und Zypressen"
+    },
+    {
+      "name": "Leuchtstein",
+      "menge": 4,
+      "quelle": "Nether (Decke)",
+      "hinweis": "Licht am Pool"
+    }
+  ],
+  "schmelzvorgaenge": 1464,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

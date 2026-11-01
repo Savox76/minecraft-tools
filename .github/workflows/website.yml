@@ -1,0 +1,60 @@
+name: Website
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 4 * * *'   # täglich: Wunschliste aktualisieren
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python-Pakete
+        run: pip install -r tools/requirements.txt
+      - name: Labels für Wünsche anlegen
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create bauwunsch --color f4b400 --description "Wunsch nach einem neuen Bauplan" 2>/dev/null || true
+          gh label create plugin-wunsch --color 4a5866 --description "Wunsch nach einem Plugin oder einer Funktion" 2>/dev/null || true
+          gh label create fehler --color d73a4a --description "Etwas funktioniert nicht" 2>/dev/null || true
+          gh label create angenommen --color 2f8f4e --description "Wird umgesetzt" 2>/dev/null || true
+      - name: Wünsche holen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/fetch_wishes.py
+      - name: Website und Downloads erzeugen
+        run: python tools/build_site.py
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  veroeffentlichen:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

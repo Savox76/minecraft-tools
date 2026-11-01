@@ -1,0 +1,144 @@
+{
+  "id": "gewaechshaus-farm",
+  "titel": "Gewächshaus-Farm",
+  "beschreibung": "Gläsernes Gewächshaus, das eine automatische Farm ist: Ein Bauer erntet Karotten und Kartoffeln und wirft den Überschuss einem zweiten Dorfbewohner hinter Glas zu. Die Ware fällt in Trichter und landet in einer Truhe.",
+  "kategorie": "technik",
+  "tags": [
+    "farm",
+    "dorfbewohner",
+    "glas",
+    "automatisch"
+  ],
+  "edition": [
+    "java"
+  ],
+  "schwierigkeit": 2,
+  "bauzeit_stunden": [
+    2,
+    3
+  ],
+  "grundflaeche": "15 × 15 plus Nische",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Boden, Acker & Trichter",
+      "von": 0,
+      "bis": 0,
+      "text": "Grundfläche 15 × 15 aus Steinziegeln, in der Mitte 9 × 9 Ackerboden mit einer Wasserquelle genau in der Mitte, die das ganze Feld bewässert. Vor der Nordwand liegen 5 Trichter bündig im Boden und führen in die Truhe. Nördlich außen eine kleine Nische für den zweiten Dorfbewohner."
+    },
+    {
+      "name": "Pflanzen, Wände & Technik",
+      "von": 1,
+      "bis": 4,
+      "text": "Karotten links, Kartoffeln rechts, ein Seerosenblatt über dem Wasser. Glaswände mit Pfosten aus Dunkler Eiche, Eingang durch ein Zauntor (Dorfbewohner können Zauntore nicht öffnen). Komposter als Arbeitsplatz für den Bauern, Bett und Laternen. In der Nische hinter Glas sitzt der zweite Dorfbewohner."
+    },
+    {
+      "name": "Glasdach",
+      "von": 5,
+      "bis": 12,
+      "text": "Satteldach aus Glas mit Sparren aus Dunkle-Eichen-Treppen, First in Ebene 12. Die Giebelseiten werden ebenfalls verglast."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "So funktioniert die Farm",
+      "text": "Ein Bauer erntet reife Karotten und Kartoffeln selbst und pflanzt sie neu. Hat er genug davon, wirft er den Überschuss dem zweiten Dorfbewohner zu. Der sitzt hinter Glas, die Ware prallt ab und fällt in die Trichter vor der Scheibe."
+    },
+    {
+      "titel": "Zwei Dorfbewohner",
+      "text": "Du brauchst einen Bauern und einen zweiten Dorfbewohner ohne Bauernberuf. Bring sie per Boot oder Lore aus einem Dorf, oder heile Zombie-Dorfbewohner mit Schwächetrank und goldenem Apfel. Den Bauern bekommst du, indem ein Dorfbewohner ohne Beruf den Komposter beansprucht."
+    },
+    {
+      "titel": "Nur Karotten und Kartoffeln",
+      "text": "Diese beiden wirft der Bauer direkt weiter. Weizen und Rote Bete eignen sich für diesen Aufbau schlechter. Am Anfang das ganze Feld selbst bepflanzen, danach läuft es allein."
+    },
+    {
+      "titel": "Nische bauen",
+      "text": "Der zweite Dorfbewohner steht in einer 1 × 1-Nische direkt hinter der Glasscheibe in der Nordwand. Der Bauer muss ihn sehen können, darf aber nicht zu ihm. Die Trichter liegen genau vor der Scheibe."
+    },
+    {
+      "titel": "Läuft nur in der Nähe",
+      "text": "Wie jede Farm arbeitet sie nur, wenn ein Spieler in der Nähe ist. Bau sie deshalb nahe an der Villa oder an deinem Lager."
+    },
+    {
+      "titel": "Anschluss ans Lager",
+      "text": "Statt in die Truhe kann die Trichterleitung auch direkt in die Einwurf-Truhe deines Kellerlagers führen. Dann landen Karotten und Kartoffeln automatisch im richtigen Fass."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 144,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und weiterverarbeiten"
+    },
+    {
+      "name": "Sand",
+      "menge": 465,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "für Glas, Beton und Sandstein"
+    },
+    {
+      "name": "Dunkle-Eichen-Stamm",
+      "menge": 49,
+      "quelle": "Baumfarm (Dunkle Eiche, 2×2)",
+      "hinweis": "für Dach und Stufen"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 1,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 14,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "für Böden und Türen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 29,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Gitter"
+    },
+    {
+      "name": "Erde",
+      "menge": 80,
+      "quelle": "Oberfläche abtragen",
+      "hinweis": "wird mit der Hacke zu Ackerboden"
+    },
+    {
+      "name": "Karotten",
+      "menge": 39,
+      "quelle": "Dorf oder Zombies",
+      "hinweis": "einmal pflanzen, danach erntet der Bauer selbst"
+    },
+    {
+      "name": "Kartoffeln",
+      "menge": 40,
+      "quelle": "Dorf oder Zombies",
+      "hinweis": "einmal pflanzen, danach erntet der Bauer selbst"
+    },
+    {
+      "name": "Seerosenblatt",
+      "menge": 1,
+      "quelle": "Sumpf",
+      "hinweis": "Abdeckung über der Wasserquelle"
+    },
+    {
+      "name": "Wolle",
+      "menge": 3,
+      "quelle": "Schafe scheren",
+      "hinweis": "für das Bett"
+    }
+  ],
+  "schmelzvorgaenge": 609,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

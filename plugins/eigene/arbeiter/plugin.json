@@ -1,0 +1,81 @@
+{
+  "id": "arbeiter",
+  "name": "Arbeiter",
+  "version": "2.0.1",
+  "kategorie": "wirtschaft",
+  "kurz": "Dorfbewohner arbeiten für dich: 11 Berufe, bezahlt mit Coins.",
+  "beschreibung": "Kaufbare Dorfbewohner, die für ihren Besitzer arbeiten: ernten, Holz fällen, graben, angeln, schmelzen und mehr. Jeder Spieler darf 25 Arbeiter haben. Arbeiter nutzen nur, was ihrem Besitzer gehört, und sind unverwundbar.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "11 Berufe plus kostenlose Dorfbewohner ohne Beruf (Preise in Coins): Bauer 500, Holzfäller 750, Bergarbeiter 1000, Gräber 400, Wächter 600, Hirte 600, Fischer 400, Sammler 300, Schmelzer 500, Imker 400, Lichtwart 200",
+    "Menü per Rechtsklick: Pause, Truhe festlegen, Lieferung ins private Lager, Arbeitsbereich ändern und anzeigen, Arbeitsplatz verlegen, Beruf wechseln, entlassen (50 % zurück)",
+    "Faire Regeln: nur eigene Felder, Öfen, Bienenstöcke und Truhen; fremde Bäume, Tiere mit Namen, zahme oder angeleinte Tiere sind tabu",
+    "Arbeitsbereiche verschiedener Spieler überschneiden sich nicht; mindestens 32 Blöcke Abstand zu fremden Homes; Sperrzonen einstellbar (z. B. Spawn)",
+    "Holzfäller pflanzt 2×2-Bäume wieder als 2×2 nach (Dunkle Eiche, Blasse Eiche, Riesen-Fichte, großer Tropenbaum)",
+    "Händler für Admins: öffnen den Shop für eine Kategorie",
+    "Arbeiter arbeiten nur in geladenen Chunks (Spieler, Farm-Bot oder Chunk-Loader in der Nähe)"
+  ],
+  "befehle": [
+    {
+      "befehl": "/arbeiter preise",
+      "text": "Alle Berufe, Preise und Bereiche",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/arbeiter kaufen <beruf>",
+      "text": "Arbeiter kaufen: ohne | bauer | holzfaeller | bergarbeiter | graeber | waechter | hirte | fischer | sammler | schmelzer | imker | lichtwart",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/arbeiter liste",
+      "text": "Eigene Arbeiter und was sie gerade tun",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/arbeiter menue <Nr>",
+      "text": "Menü öffnen (oder Arbeiter rechtsklicken)",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/arbeiter ersetzen <Nr>",
+      "text": "Verschwundenen Arbeiter ersetzen",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/arbeiter admin liste | entfernen <Nr> | reload",
+      "text": "Verwaltung",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/arbeiter admin haendler <all|wood|stone|ores|tiere|resources|entfernen>",
+      "text": "Händler aufstellen oder entfernen",
+      "wer": "admin"
+    }
+  ],
+  "config": [
+    {
+      "schluessel": "arbeitsbereich.sperrzonen",
+      "standard": "- \"world,0,0,100\"",
+      "text": "Bereiche, in denen keine Arbeiter arbeiten (Welt, X, Z, Radius)"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "2.0.1",
+      "datum": "31.10.2026",
+      "punkte": [
+        "Holzfäller pflanzt 2×2-Bäume als 2×2 nach"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "Erste Version mit 11 Berufen, Menü, Händlern und fairen Regeln"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

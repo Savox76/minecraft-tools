@@ -1,0 +1,75 @@
+{
+  "id": "adminlogin",
+  "name": "AdminLogin",
+  "version": "1.2.0",
+  "kategorie": "sicherheit",
+  "kurz": "Admins müssen beim Betreten ein eigenes Passwort eingeben.",
+  "beschreibung": "Jeder Admin (OP) gibt beim Betreten des Servers ein Admin-Passwort ein, bevor er in die Welt kommt. Normale Spieler merken davon nichts. Ein SuperOP (Chef-Admin) kann ein eigenes Passwort haben, damit sich kein normaler Admin als SuperOP anmelden kann.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "Admin-Anmeldung per Fenster beim Betreten, Passwörter werden verschlüsselt gespeichert",
+    "Nach 3 falschen Versuchen 15 Minuten gesperrt (einstellbar)",
+    "Eigenes Passwort pro Admin möglich, z. B. für den SuperOP",
+    "Passwort merken: nach richtiger Eingabe für eine einstellbare Zeit nicht mehr fragen, nur vom selben Gerät bzw. derselben IP",
+    "Verbindungen über einen lokalen Tunnel (127.0.0.1, z. B. playit) werden nie gemerkt"
+  ],
+  "befehle": [
+    {
+      "befehl": "adminlogin reload",
+      "text": "Config neu laden",
+      "wer": "konsole"
+    },
+    {
+      "befehl": "adminlogin entsperren <Name>",
+      "text": "Gesperrten Admin freigeben",
+      "wer": "konsole"
+    },
+    {
+      "befehl": "adminlogin passwort <Name> <Passwort>",
+      "text": "Eigenes Admin-Passwort setzen",
+      "wer": "konsole"
+    },
+    {
+      "befehl": "adminlogin sitzungen",
+      "text": "Gemerkte Anmeldungen anzeigen",
+      "wer": "konsole"
+    },
+    {
+      "befehl": "adminlogin abmelden <Name|alle>",
+      "text": "Gemerkte Anmeldungen löschen",
+      "wer": "konsole"
+    }
+  ],
+  "config": [
+    {
+      "schluessel": "merken-stunden",
+      "standard": "12",
+      "text": "Wie lange ein richtig eingegebenes Passwort gemerkt wird, 0 = jedes Mal fragen"
+    },
+    {
+      "schluessel": "merken-stunden-eigenes-passwort",
+      "standard": "-1",
+      "text": "Gleiche Einstellung für Admins mit eigenem Passwort, -1 = wie oben"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "datum": "27.10.2026",
+      "punkte": [
+        "Admin-Passwort merken (pro Gerät/IP, einstellbar)",
+        "Befehle sitzungen und abmelden"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "Erste Version: Admin-Anmeldung, Sperre nach Fehlversuchen, eigenes SuperOP-Passwort"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

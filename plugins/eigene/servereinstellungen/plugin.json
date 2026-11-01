@@ -1,0 +1,69 @@
+{
+  "id": "servereinstellungen",
+  "name": "ServerEinstellungen",
+  "version": "1.2.0",
+  "kategorie": "verwaltung",
+  "kurz": "Die wichtigsten Server-Einstellungen per Chatbefehl, mit SuperOP-Rechten.",
+  "beschreibung": "Admins ändern die wichtigsten Server-Einstellungen im Chat. Jede Änderung wird sofort gespeichert und gilt auch nach einem Neustart. Bestimmte Einstellungen, etwa Kreativ- und Zuschauermodus, darf nur der SuperOP ändern.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "Einstellungen: kreativ, zuschauer, abenteuer, schwierigkeit, pvp, inventar-behalten, feuer-ausbreitung, explosions-schaden, mob-griefing, monster-spawnen, phantome, wetterwechsel, zeit, reichweite, ein-spieler-schlaf, nether, end",
+    "Kreativ- und Zuschauermodus ab Start gesperrt, auch für Admins; nur der SuperOP schaltet frei",
+    "Reichweite 2 bis 16 Chunks um Spieler und Farm-Bots, in denen Farmen laufen",
+    "Ein schlafender Spieler beendet die Nacht (wichtig, weil Farm-Bots nie schlafen)",
+    "Änderungen werden im Chat angekündigt (abschaltbar)"
+  ],
+  "befehle": [
+    {
+      "befehl": "/einstellungen",
+      "text": "Alle Einstellungen anzeigen",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/einstellungen <name>",
+      "text": "Erklärung und aktueller Wert",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/einstellungen <name> <wert>",
+      "text": "Einstellung ändern, z. B. /einstellungen zeit tag",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/einstellungen neu-laden",
+      "text": "Nach Änderungen direkt in der config.yml",
+      "wer": "admin"
+    },
+    {
+      "befehl": "/einstellungen superop liste",
+      "text": "SuperOPs anzeigen",
+      "wer": "admin"
+    },
+    {
+      "befehl": "einstellungen superop hinzufuegen | entfernen <Name>",
+      "text": "SuperOP verwalten",
+      "wer": "konsole"
+    }
+  ],
+  "config": [
+    {
+      "schluessel": "nur-superop",
+      "standard": "Liste",
+      "text": "Welche Einstellungen nur der SuperOP ändern darf"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "SuperOP-Rechte",
+        "Reichweite für Farmen und Farm-Bots",
+        "Ein-Spieler-Schlaf"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

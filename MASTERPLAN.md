@@ -2,7 +2,29 @@
 
 Arbeitstitel: **Savox Bauwerkstatt**. Eine Sammlung von Minecraft-Bauanleitungen und Server-Plugins für Kreative, kostenlos und einzeln herunterladbar.
 
-Stand: 01.11.2026 · Status: Entwurf zur Abstimmung
+Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
+
+---
+
+## 0. Aktueller Stand
+
+| Bereich | Status | Wo |
+|---|---|---|
+| 8 Baupläne | ✅ **verfügbar** als Entwurf: LEGO-Schritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
+| 7 eigene Plugins | 🟡 **Doku verfügbar**, Quellcode und `.jar` integrierbar, sobald der Quellcode vorliegt | [`plugins/eigene/`](plugins/eigene/) |
+| Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
+| 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
+| Website | ✅ automatisch per GitHub Actions auf GitHub Pages | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py) |
+| Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
+
+**Entwurf** heißt: Die Richtung von Treppen, Türen und Trichtern ist in den Dateien noch nicht in einer Testwelt geprüft (siehe Phase 1).
+
+### Feste Regeln
+
+- **Jeder neue Bauplan kommt ins Repo** als Ordner `builds/<id>/` (Format in [`builds/README.md`](builds/README.md)). Website, LEGO-Schritte, Teileliste und Downloads entstehen daraus automatisch. Er erscheint also überall, ohne dass sonst etwas angepasst werden muss.
+- **Eigene und fremde Plugins bleiben getrennt.** Eigene Plugins bekommen `plugins/eigene/<id>/plugin.json` und `README.md`, fremde einen Eintrag in `plugins/fremd/plugins.json` (nur Beschreibung, Einsatz und Link zur offiziellen Seite, keine Dateien). Die Website zeigt beides automatisch in getrennten Bereichen.
+- **Änderungen gehen direkt auf `main`.**
+- **Keine erzeugten Dateien im Repo:** Website, `.litematic`, `.schem`, `.jar` und PDFs baut GitHub Actions bei jedem Push neu.
 
 ---
 
@@ -61,11 +83,14 @@ Quelle: die bisherige Bauplan-Seite (Claude-Artifact „Spawn-Baupläne“).
 
 Quelle: der Ordner „Quellcode“ aus dem Server-Update-Paket.
 
+### Fremde Plugins (vorläufig)
+
+FakePlayerPlugin, ChunkLoader, EasyCommandBlocker, Simple Voice Chat, Floodgate, spark (im Einsatz) und CoreProtect (empfohlen). Die vollständige Liste folgt.
+
 ### Anleitungen ohne Bauplan
 
 - Farm-Bot mit FakePlayerPlugin (Paper)
 - Spieler-Aktionen protokollieren mit CoreProtect
-- Server-Update installieren
 
 ---
 
@@ -124,9 +149,9 @@ flowchart LR
 
 | Teil | Wahl | Warum |
 |---|---|---|
-| Website | Vite + TypeScript + Svelte | klein, schnell, eine Oberfläche für Web und Desktop |
-| 3D-Ansicht | Three.js mit Instancing | Zehntausende Blöcke flüssig, drehbar, Schritte ein- und ausblenden |
-| Bauplan-Pipeline | Python (`litemapy`, `nbtlib`) | liest und schreibt `.litematic`, `.schem`, `.nbt` und Bedrock-`.mcstructure` |
+| Website | HTML, CSS und JavaScript-Module ohne Build-Schritt | läuft sofort auf GitHub Pages, kein Node nötig, eine Oberfläche für Web und Desktop. Ein Umstieg auf Vite und Svelte bleibt möglich, falls die Seite stark wächst |
+| 3D-Ansicht | eigene isometrische Canvas-Darstellung | leicht, zoomt pro Schritt auf das Gebaute, hebt neue Blöcke hervor. Three.js kommt erst dazu, wenn freies Drehen und Zoomen gebraucht wird |
+| Bauplan-Pipeline | Python (`litemapy`, `nbtlib`, `Markdown`) | liest und schreibt `.litematic`, `.schem`, später auch `.nbt` und Bedrock-`.mcstructure` |
 | PDF-Heft | Playwright druckt die Schritt-Seiten | PDF sieht genau aus wie die Website |
 | Desktop | Tauri 2 | kleine Installer (etwa 10 MB statt 100 MB bei Electron), gleiche Oberfläche |
 | Plugins | Gradle-Multiprojekt, Paper-API, Java 21 | ein Befehl baut alle 7, jedes einzeln versioniert |
@@ -172,42 +197,24 @@ minecraft-tools/
 │     ├─ leuchtturm.litematic Quelle der Wahrheit
 │     └─ README.md            optional: Hintergrund, Varianten
 ├─ plugins/
-│  ├─ settings.gradle.kts
-│  ├─ arbeiter/               src/, README.md, CHANGELOG.md, build.gradle.kts
-│  └─ …
-├─ docs/                      Anleitungen (Farm-Bot, CoreProtect, Server-Update)
-├─ tools/                     Python-Pipeline: Import, Teileliste, Schritte, Exporte, PDF
-├─ app/                       Website (Vite + Svelte + Three.js)
-├─ desktop/                   Tauri-Hülle um app/
+│  ├─ eigene/
+│  │  ├─ arbeiter/            plugin.json, README.md, später src/ und build.gradle.kts
+│  │  └─ …
+│  └─ fremd/plugins.json      Plugins anderer Entwickler: Zweck, Einsatz, Link
+├─ docs/                      Anleitungen (Farm-Bot, CoreProtect)
+├─ tools/                     build_site.py (Schritte, Teileliste, Exporte, Website-Daten), fetch_wishes.py
+├─ site/                      Website: index.html, style.css, js/app.js, js/render.js
+├─ desktop/                   später: Tauri-Hülle um site/
 └─ .github/
-   ├─ workflows/              pages.yml, plugins.yml, desktop.yml, check.yml
+   ├─ workflows/              website.yml (heute), später plugins.yml, desktop.yml
    └─ ISSUE_TEMPLATE/         bauwunsch.yml, plugin-wunsch.yml, fehler.yml
 ```
 
-### Beispiel `build.yml`
+### Format eines Bauplans
 
-```yaml
-id: leuchtturm
-titel: { de: Leuchtturm, en: Lighthouse }
-beschreibung: { de: "Rot-weißer Leuchtturm mit Umgang und Leuchtfeuer, innen begehbar." }
-kategorie: tuerme
-tags: [wasser, spawn, wahrzeichen]
-edition: [java, bedrock]
-schwierigkeit: 2          # 1 = leicht … 5 = Profi
-bauzeit_stunden: [5, 8]
-quelle: leuchtturm.litematic
-schritte:
-  max_neue_bloecke: 60
-  gruppen:                 # optional: Ebenen von Hand zusammenfassen
-    - { name: Fundament, ebenen: [0, 0] }
-    - { name: Sockelraum, ebenen: [1, 4] }
-unterbaugruppen: []
-tipps:
-  - schritt: 12
-    text: { de: "Beton: 4 Sand + 4 Kies + 1 Farbstoff = 8 Pulver, dann ins Wasser." }
-autor: Savox
-version: 1.0.0
-```
+Heute besteht jeder Bauplan aus `build.json` (Beschreibung, Abschnitte, Tipps, Rohstoffe) und `model.json` (Blöcke mit Minecraft-ID, Ebene für Ebene). Alle Felder stehen in [`builds/README.md`](builds/README.md).
+
+Ab Phase 1 kommt eine `.litematic`-Datei aus der Testwelt als Quelle dazu. `model.json` wird dann daraus erzeugt, inklusive Blockrichtungen.
 
 ---
 
@@ -217,36 +224,40 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 
 ### Phase 0 · Fundament (1 Sitzung)
 - [ ] Lizenzen festlegen und Dateien anlegen (siehe 10.)
-- [ ] README mit Disclaimer: „Kein offizielles Minecraft-Produkt …“
-- [ ] Repo-Ordner wie in 7. anlegen
-- [ ] Issue-Formulare: Bauwunsch, Plugin-Wunsch, Fehler melden
-- [ ] GitHub Pages aktivieren (Quelle: GitHub Actions)
+- [x] README mit Disclaimer: „Kein offizielles Minecraft-Produkt …“
+- [x] Repo-Ordner wie in 7. anlegen
+- [x] Issue-Formulare: Bauwunsch, Plugin-Wunsch, Fehler melden
+- [x] Workflow für GitHub Pages (Quelle: GitHub Actions)
 
 **Fertig, wenn:** Eine leere Seite unter `savox76.github.io/minecraft-tools` erreichbar ist und ein Bauwunsch als Issue eingereicht werden kann.
 
 ### Phase 1 · Bauplan-Pipeline (2–3 Sitzungen)
-- [ ] `tools/import`: `.litematic` einlesen, inklusive Blockrichtungen
-- [ ] Teileliste und Rohstoff-Rechner (Rezepte aus den bisherigen Modellen übernehmen)
-- [ ] Automatische Schritt-Aufteilung nach den LEGO-Regeln aus 4.
-- [ ] Exporte: `.schem`, `.nbt`, `.mcstructure`, `teileliste.csv`
-- [ ] Vorschaubilder (Deckblatt, Schritt-Bilder) als PNG
-- [ ] Check-Workflow: Jeder Bauplan muss fehlerfrei durchlaufen
-- [ ] **Migration:** die 8 bisherigen Modelle als Rohfassung exportieren, in der Kreativ-Testwelt richten (Treppen, Türen) und als `.litematic` zurück ins Repo
+- [ ] `.litematic` einlesen, inklusive Blockrichtungen
+- [x] Teileliste und Rohstoffe (aus den bisherigen Modellen übernommen)
+- [x] Automatische Schritt-Aufteilung nach den LEGO-Regeln aus 4.
+- [x] Exporte: `.litematic`, `.schem`, `teileliste.csv`
+- [ ] Exporte: `.nbt`, `.mcstructure`
+- [x] Vorschaubilder (werden im Browser gezeichnet)
+- [x] Check: Jeder Bauplan muss im Workflow fehlerfrei durchlaufen, auch bei Pull Requests
+- [x] **Migration:** die 8 bisherigen Modelle sind als Entwurf im Repo
+- [ ] In der Kreativ-Testwelt richten (Treppen, Türen) und als `.litematic` zurück ins Repo, Status dann `geprueft`
 
 **Fertig, wenn:** Der Leuchtturm vollständig mit allen Exporten durchläuft und im Spiel per Litematica korrekt erscheint.
 
 ### Phase 2 · Website (3–4 Sitzungen)
-- [ ] Katalog: Kacheln mit Vorschaubild, Filter nach Kategorie, Größe, Schwierigkeit, Edition
-- [ ] Bauplan-Seite: Deckblatt, Teileliste, Schritt-Ansicht im LEGO-Stil, 3D drehbar, Ebenen-Ansicht wie bisher, Download-Knöpfe
-- [ ] Baufortschritt abhaken, gespeichert im Browser
+- [x] Katalog: Kacheln mit Vorschaubild, Filter nach Kategorie
+- [ ] Filter nach Größe, Schwierigkeit, Edition
+- [x] Bauplan-Seite: Kenndaten, Teileliste, Schritt-Ansicht im LEGO-Stil, 3D drehbar, Ebenen-Ansicht, Download-Knöpfe
+- [x] Baufortschritt abhaken, gespeichert im Browser
 - [ ] Koordinaten-Helfer (wie bisher): Mitte eintragen, echte X/Y/Z pro Block
-- [ ] Plugin-Seiten: Beschreibung, Befehle, Rechte, Config, Download der neuesten Version
-- [ ] Anleitungs-Seiten aus `docs/`
-- [ ] Wunschliste: offene Bauwünsche, sortiert nach 👍
-- [ ] PWA: installierbar und offline nutzbar
-- [ ] Hell- und Dunkelmodus, Handy-tauglich
+- [x] Plugin-Seiten: Beschreibung, Befehle, Rechte, Config, Änderungen
+- [ ] Download der neuesten Version (nach Phase 4)
+- [x] Anleitungs-Seiten aus `docs/`
+- [x] Wunschliste: offene Bauwünsche, sortiert nach 👍
+- [ ] PWA: installierbar und offline nutzbar (Manifest steht, Offline-Speicher fehlt noch)
+- [x] Hell- und Dunkelmodus, Handy-tauglich, Wischen zwischen Schritten
 
-**Fertig, wenn:** Alle 8 Baupläne, 7 Plugins und 3 Anleitungen online sind und jede Seite einen eigenen Link hat.
+**Fertig, wenn:** Alle Baupläne, Plugins und Anleitungen online sind und jede Seite einen eigenen Link hat. Stand: erledigt bis auf die offenen Punkte oben.
 
 ### Phase 3 · LEGO-PDF-Hefte (1 Sitzung)
 - [ ] Druck-Layout für Deckblatt, Teileliste, Schritte (2 pro Seite bei kleinen Schritten)
@@ -256,7 +267,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 - [ ] Quellcode der 7 Plugins übernehmen, Gradle-Multiprojekt
 - [ ] **Sicherheits-Check vor dem Hochladen:** keine Passwörter, Server-IPs, playit-Adressen oder persönlichen Spielernamen im Code oder in Standard-Configs
 - [ ] Texte auslagern, damit sie übersetzbar sind (Deutsch und Englisch)
-- [ ] Pro Plugin: README (Befehle, Rechte, Config), CHANGELOG
+- [x] Pro Plugin: README (Befehle, Rechte, Config, Änderungen)
 - [ ] Workflow: Ein Tag `<plugin>-v<version>` baut die `.jar` und hängt sie an ein Release
 - [ ] Optional: zusätzlich auf Modrinth und Hangar veröffentlichen
 
@@ -331,4 +342,4 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 
 ## 13. Nächster Schritt
 
-Entscheidungen aus Abschnitt 12 treffen, danach **Phase 0** umsetzen. Parallel kannst du schon einmal den Leuchtturm in einer Kreativ-Testwelt bauen und als `.litematic` exportieren. Er wird der erste vollständige Bauplan in der Pipeline.
+Entscheidungen aus Abschnitt 12 treffen (vor allem die Lizenz), dann den Plugin-Quellcode übernehmen (Phase 4). Parallel kannst du schon einmal den Leuchtturm in einer Kreativ-Testwelt bauen und als `.litematic` exportieren. Er wird der erste vollständige Bauplan in der Pipeline.

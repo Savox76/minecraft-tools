@@ -1,0 +1,51 @@
+name: Bauplan wünschen
+description: Wünsch dir ein Bauwerk als LEGO-Bauanleitung.
+title: "Bauwunsch: "
+labels: [bauwunsch]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für deinen Wunsch! Andere können mit 👍 abstimmen, die beliebtesten Wünsche werden zuerst gebaut.
+  - type: input
+    id: bauwerk
+    attributes:
+      label: Was soll gebaut werden?
+      placeholder: z. B. Burg mit Zugbrücke, Bahnhof, Windmühle
+    validations:
+      required: true
+  - type: dropdown
+    id: art
+    attributes:
+      label: Art
+      options:
+        - Haus oder Villa
+        - Turm oder Wahrzeichen
+        - Farm oder Technik
+        - Deko oder Garten
+        - Etwas anderes
+    validations:
+      required: true
+  - type: dropdown
+    id: groesse
+    attributes:
+      label: Ungefähre Größe
+      options:
+        - Klein (bis 15 × 15)
+        - Mittel (bis 30 × 30)
+        - Groß (über 30 × 30)
+        - Egal
+  - type: checkboxes
+    id: edition
+    attributes:
+      label: Für welche Edition?
+      options:
+        - label: Java
+        - label: Bedrock
+  - type: textarea
+    id: beschreibung
+    attributes:
+      label: Beschreibung
+      description: Stil, Materialien, besondere Wünsche. Bilder oder Links als Vorlage helfen sehr.
+    validations:
+      required: true

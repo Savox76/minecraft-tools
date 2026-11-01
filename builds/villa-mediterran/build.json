@@ -1,0 +1,133 @@
+{
+  "id": "villa-mediterran",
+  "titel": "Mediterrane Villa",
+  "beschreibung": "Mediterrane Villa im Toskana-Stil: vier Flügel um einen Innenhof mit Brunnen und Säulengang, Fensterläden, Walmdach aus Ziegeln und Zypressen am Eingang.",
+  "kategorie": "villen",
+  "tags": [
+    "mediterran",
+    "innenhof",
+    "brunnen",
+    "ziegel"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 4,
+  "bauzeit_stunden": [
+    6,
+    9
+  ],
+  "grundflaeche": "27 × 27, Innenhof 9 × 9",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Fundament & Innenhof",
+      "von": 0,
+      "bis": 0,
+      "text": "Quadrat 27 × 27 aus glattem Sandstein, in der Mitte der Innenhof aus Terrakotta. Vor dem Eingang im Süden ein kleines Podest."
+    },
+    {
+      "name": "Erdgeschoss & Säulengang",
+      "von": 1,
+      "bis": 4,
+      "text": "Außenmauer mit Sandstein-Sockel, innen ein zweiter Mauerring mit Türen zum Hof. Dazwischen liegen die Räume. Rund um den Hof der Säulengang mit Bögen aus Sandsteintreppen, in der Mitte der Brunnen."
+    },
+    {
+      "name": "Zwischendecke",
+      "von": 5,
+      "bis": 5,
+      "text": "Boden des Obergeschosses aus Eichenbrettern, außen ein umlaufendes Gesims aus glattem Sandstein."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 9,
+      "text": "Das Obergeschoss steht auf dem Säulengang und ist dadurch innen größer als unten. Fenster mit Fensterläden. In Ebene 9 beginnt der Dachüberstand."
+    },
+    {
+      "name": "Walmdach",
+      "von": 10,
+      "bis": 14,
+      "text": "Das Dach steigt von außen und vom Hof her zur Mitte des Flügels an. Jeder Ring liegt einen Block höher, der First ist aus Ziegelblöcken."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Viertel bauen",
+      "text": "Der Grundriss ist in beide Richtungen symmetrisch. Bau ein Viertel fertig und übertrag es dann auf die anderen drei, der Brunnen ist der Mittelpunkt."
+    },
+    {
+      "titel": "Walmdach",
+      "text": "Jeder Dachring liegt einen Block höher als der äußere, zur Hofseite genauso. Die Ecken formen die Treppen in Minecraft automatisch, wenn du sie der Reihe nach setzt."
+    },
+    {
+      "titel": "Viele Ziegel",
+      "text": "Das Dach braucht die meisten Rohstoffe. Ziegel entstehen aus Tonklumpen im Ofen. Eine Ofenreihe mit Trichtern und Seetang als Brennstoff ist hier Pflicht."
+    },
+    {
+      "titel": "Fensterläden",
+      "text": "Fichten-Falltüren links und rechts neben das Fenster an die Außenwand setzen und hochklappen. Das gibt den typischen Süden-Look."
+    },
+    {
+      "titel": "Zypressen bleiben grün",
+      "text": "Selbst gesetztes Laub zerfällt nicht. Die Zypressen kannst du deshalb ganz aus Fichtenlaub stapeln, das du mit der Schere erntest."
+    },
+    {
+      "titel": "Säulengang",
+      "text": "Die Bögen entstehen durch umgedrehte Sandsteintreppen in Ebene 3 direkt neben den Säulen. Beim Setzen auf die obere Hälfte des Nachbarblocks zielen."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Sand",
+      "menge": 1915,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "für Glas, Beton und Sandstein"
+    },
+    {
+      "name": "Tonblöcke",
+      "menge": 2300,
+      "quelle": "Schlamm auf Tropfstein (Tonfarm)",
+      "hinweis": "für Terrakotta direkt, für Ziegel in 4 Tonklumpen zerlegen"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 123,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 142,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 243,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "für Böden und Türen"
+    },
+    {
+      "name": "Laub (mit Schere)",
+      "menge": 68,
+      "quelle": "Bäume mit der Schere ernten",
+      "hinweis": "Hecken, Bäume und Zypressen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 2,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Gitter"
+    }
+  ],
+  "schmelzvorgaenge": 6130,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

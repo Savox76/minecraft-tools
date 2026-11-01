@@ -1,0 +1,187 @@
+{
+  "id": "leuchtturm",
+  "titel": "Leuchtturm",
+  "beschreibung": "Rot-weiß gestreifter Leuchtturm auf altem Steinsockel. Drei Turmabschnitte, Umgang mit Geländer, verglaster Laternenraum mit Leuchtfeuer und eine Leiter innen bis ganz nach oben.",
+  "kategorie": "tuerme",
+  "tags": [
+    "wasser",
+    "spawn",
+    "wahrzeichen",
+    "beton"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 2,
+  "bauzeit_stunden": [
+    5,
+    8
+  ],
+  "grundflaeche": "Ø 17 Blöcke",
+  "massstab": "1 : 1 (1 Block = 1 m, ca. 65 m hoch)",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Fundament",
+      "von": 0,
+      "bis": 0,
+      "text": "Volle Kreisscheibe Ø 17 aus Steinziegeln, gemischt mit bemoosten und rissigen für einen alten Look."
+    },
+    {
+      "name": "Sockelraum",
+      "von": 1,
+      "bis": 4,
+      "text": "Ring Ø 17 mit Tür im Süden und kleinen Fenstern. In der Mitte startet die Säule mit der Leiter."
+    },
+    {
+      "name": "Terrasse",
+      "von": 5,
+      "bis": 6,
+      "text": "Decke des Sockels = Terrasse rund um den Turm, mit Brüstung aus Steinziegelmauer."
+    },
+    {
+      "name": "Turm Abschnitt 1 (Ø 13)",
+      "von": 7,
+      "bis": 21,
+      "text": "Unten weiß, oben rot. Tür zur Terrasse im Süden, Fenster verteilt."
+    },
+    {
+      "name": "Sims & Zwischenboden",
+      "von": 22,
+      "bis": 22,
+      "text": "Volle Scheibe Ø 13 aus Steinziegeln: außen ein grauer Ring als Sims, innen ein Boden. Ab hier wird der Turm schmaler."
+    },
+    {
+      "name": "Turm Abschnitt 2 (Ø 11)",
+      "von": 23,
+      "bis": 37,
+      "text": "Gleiches Muster weiß/rot, eine Stufe schmaler."
+    },
+    {
+      "name": "Sims & Zwischenboden",
+      "von": 38,
+      "bis": 38,
+      "text": "Volle Scheibe Ø 11."
+    },
+    {
+      "name": "Turm Abschnitt 3 (Ø 9)",
+      "von": 39,
+      "bis": 51,
+      "text": "Letzter Abschnitt. In Ebene 51 ein Stützring Ø 11 als Konsole unter dem Umgang."
+    },
+    {
+      "name": "Umgang (Galerie)",
+      "von": 52,
+      "bis": 53,
+      "text": "Auskragende Plattform Ø 15 mit Geländer aus Eisengittern."
+    },
+    {
+      "name": "Laternenraum",
+      "von": 53,
+      "bis": 56,
+      "text": "Glasring Ø 7, Tür zum Umgang im Süden, in der Mitte das Leuchtfeuer."
+    },
+    {
+      "name": "Kuppel & Spitze",
+      "von": 57,
+      "bis": 64,
+      "text": "Gestufte rote Kuppel, Spitze aus Eisengittern und Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Kreise abzählen",
+      "text": "Kreise sind der schwierigste Teil. Zähl im Raster von der Mittellinie nach außen: Wie viele Blöcke pro Reihe, dann versetzen. Die Abschnitte sind Ø 17, 13, 11, 9 und 7."
+    },
+    {
+      "titel": "Beton herstellen",
+      "text": "4 Sand + 4 Kies + 1 Farbstoff ergeben 8 Betonpulver. Pulver ins Wasser setzen oder hineinfallen lassen, dann wird es zu Beton. Mit dem Crafter-Block lässt sich das Mischen automatisieren."
+    },
+    {
+      "titel": "Licht nur nachts",
+      "text": "Statt Leuchtstein: Redstone-Lampen und ein invertierter Tageslichtsensor. Dann geht das Leuchtfeuer bei Sonnenuntergang automatisch an."
+    },
+    {
+      "titel": "Innen begehbar",
+      "text": "In der Mitte läuft eine Steinziegel-Säule mit Leiter von unten bis zum Laternenraum. Die Simse in Ebene 22 und 38 sind innen Zwischenböden für kleine Räume."
+    },
+    {
+      "titel": "Standort",
+      "text": "Am schönsten auf einer Klippe oder direkt am Wasser. Mit einer Seetangfarm in der Nähe hast du gleich den Brennstoff für die vielen Schmelzvorgänge."
+    },
+    {
+      "titel": "Größer bauen",
+      "text": "Für einen noch wuchtigeren Turm jeden Abschnitt um 4 Ebenen verlängern. Die Streifen bleiben dabei je zur Hälfte weiß und rot."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 1112,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen, dann zu Steinziegeln; 39 davon nochmal schmelzen (rissig)"
+    },
+    {
+      "name": "Sand",
+      "menge": 763,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "680 für Betonpulver, 83 für Glas"
+    },
+    {
+      "name": "Kies",
+      "menge": 680,
+      "quelle": "Kies (Piglin-Tausch oder Händler)",
+      "hinweis": "für Betonpulver: 4 Sand + 4 Kies + 1 Farbstoff → 8 Pulver"
+    },
+    {
+      "name": "Knochenmehl (weiß)",
+      "menge": 80,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff für den weißen Beton"
+    },
+    {
+      "name": "Mohn oder Rote Bete (rot)",
+      "menge": 90,
+      "quelle": "Blumenfarm mit Knochenmehl",
+      "hinweis": "roter Farbstoff für den roten Beton"
+    },
+    {
+      "name": "Ranken oder Moos",
+      "menge": 68,
+      "quelle": "Knochenmehl auf Moos",
+      "hinweis": "für die bemoosten Steinziegel"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 18,
+      "quelle": "Eisenfarm",
+      "hinweis": "für das Geländer"
+    },
+    {
+      "name": "Eichenholz-Stämme",
+      "menge": 18,
+      "quelle": "Baumfarm",
+      "hinweis": "für Leitern und Türen"
+    },
+    {
+      "name": "Leuchtstein",
+      "menge": 3,
+      "quelle": "Nether (Decke)",
+      "hinweis": "das Leuchtfeuer, alternativ Redstone-Lampen"
+    },
+    {
+      "name": "Kupferbarren",
+      "menge": 3,
+      "quelle": "Ertrunkene oder etwas Kupfererz",
+      "hinweis": "Blitzableiter, optional"
+    }
+  ],
+  "schmelzvorgaenge": 1234,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

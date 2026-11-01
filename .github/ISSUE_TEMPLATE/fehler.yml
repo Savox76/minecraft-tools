@@ -1,0 +1,23 @@
+name: Fehler melden
+description: Ein Bauplan, eine Datei oder ein Plugin funktioniert nicht richtig.
+title: "Fehler: "
+labels: [fehler]
+body:
+  - type: input
+    id: was
+    attributes:
+      label: Welcher Bauplan oder welches Plugin?
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du gemacht, was hast du erwartet, was ist stattdessen passiert? Screenshots helfen.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Minecraft- bzw. Server-Version
+      placeholder: z. B. Java 1.21.4, Paper 1.21.4, Litematica 0.19

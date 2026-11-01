@@ -1,0 +1,34 @@
+{
+ "format": 1,
+ "size": {"x": 17, "y": 8, "z": 17},
+ "palette": [
+  {"key": "A", "name": "Steinziegel", "block": "minecraft:stone_bricks", "color": "#8f8f8f"},
+  {"key": "B", "name": "Fichtenholzbretter", "block": "minecraft:spruce_planks", "color": "#7a5a36"},
+  {"key": "C", "name": "Steinziegel (Wand)", "block": "minecraft:stone_bricks", "color": "#8f8f8f"},
+  {"key": "D", "name": "Fichtenholzbretter (Decke)", "block": "minecraft:spruce_planks", "color": "#7a5a36"},
+  {"key": "E", "name": "Redstonefackel (an der Südseite des Blocks)", "block": "minecraft:redstone_wall_torch[facing=south]", "color": "#e03a2a"},
+  {"key": "F", "name": "Verstärker (zeigt nach Süden)", "block": "minecraft:repeater[facing=north]", "color": "#9a9a9a"},
+  {"key": "G", "name": "Fass", "block": "minecraft:barrel[facing=up]", "color": "#8d6a3f"},
+  {"key": "H", "name": "Trichter (unten, zeigt ins Fass)", "block": "minecraft:hopper[facing=south]", "color": "#4a4a4f"},
+  {"key": "I", "name": "Redstonestaub", "block": "minecraft:redstone_wire", "color": "#b01e1e"},
+  {"key": "J", "name": "Trichter (Filter, zeigt nach Norden)", "block": "minecraft:hopper[facing=north]", "color": "#55555c"},
+  {"key": "K", "name": "Komparator (zeigt nach Norden)", "block": "minecraft:comparator[facing=south]", "color": "#a8a8a8"},
+  {"key": "L", "name": "Trichter (Transport, zeigt nach Osten)", "block": "minecraft:hopper[facing=east]", "color": "#3d3d42"},
+  {"key": "M", "name": "Fass (Überlauf)", "block": "minecraft:barrel[facing=up]", "color": "#8d6a3f"},
+  {"key": "N", "name": "Truhe", "block": "minecraft:chest", "color": "#a0712e"},
+  {"key": "O", "name": "Werkbank", "block": "minecraft:crafting_table", "color": "#9b6b3b"},
+  {"key": "P", "name": "Ofen", "block": "minecraft:furnace", "color": "#6f6f6f"},
+  {"key": "Q", "name": "Laterne", "block": "minecraft:lantern", "color": "#f2b33d"},
+  {"key": "R", "name": "Steinziegeltreppe", "block": "minecraft:stone_brick_stairs", "color": "#858585"}
+ ],
+ "layers": [
+  ["AAAAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAAAA", "AAFFFFFFFFFFFFAAA", "AAAAAAAAAAAAAAAAA", "AAEEEEEEEEEEEEAAA", "ABBBBBBBBBBBBBBBA", "ABBBBBBBBBBBBBBBA", "ABBBBBBBBBBBBBBBA", "ABBBBBBBBBBBBBBBA", "ABBBBBBBBBBBBBBBA", "ABBBBBBBBBBBBBBBA", "AAAAAAAAAAAAAAAAA", ".................", ".................", ".................", ".................", "................."],
+  ["CCCCCCCCCCCCCCCCC", "C.IIIIIIIIIIII..C", "C.AAAAAAAAAAAA..C", "C.AAAAAAAAAAAA..C", "C.HHHHHHHHHHHH..C", "CGGGGGGGGGGGGG..C", "CG..............C", "CG..............C", "CG..............C", "CG..............C", "CG.....OPP.....RC", "CCCCCCCCCCCCCCCCC", ".................", ".................", ".................", ".................", "................."],
+  ["CCCCCCCCCCCCCCCCC", "C...............C", "C.IIIIIIIIIIII..C", "C.KKKKKKKKKKKK..C", "C.JJJJJJJJJJJJ..C", "CG..............C", "CG..............C", "CG..............C", "CG..............C", "CG.............RC", "CG..............C", "CCCCCCCCCCCCCCCCC", ".................", ".................", ".................", ".................", "................."],
+  ["CCCCCCCCCCCCCCCCC", "C...............C", "C...............C", "C...............C", "C.LLLLLLLLLLLLM.C", "CG..............C", "CG..............C", "CG..............C", "CG.............RC", "CG..............C", "CG..............C", "CCCCCCCCCCCCCCCCC", ".................", ".................", ".................", ".................", "................."],
+  ["CCCCCCCCCCCCCCCCC", "C...............C", "C...............C", "C...............C", "C.N.............C", "C...............C", "C...............C", "C..............RC", "C...............C", "C...............C", "C...............C", "CCCCCCCCCCCCCCCCC", ".................", ".................", ".................", ".................", "................."],
+  ["CCCCCCCCCCCCCCCCC", "C...............C", "C...............C", "C...............C", "C...............C", "C...............C", "C..............RC", "C...............C", "C...Q...Q...Q...C", "C...............C", "C...............C", "CCCCCCCCCCCCCCCCC", ".................", ".................", ".................", ".................", "................."],
+  ["DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDRD", "DDDDDDDDDDDDDDD.D", "DDDDDDDDDDDDDDD.D", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDD", ".................", ".................", ".................", ".................", "................."],
+  [".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", ".................", "................."]
+ ]
+}

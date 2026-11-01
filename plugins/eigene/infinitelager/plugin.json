@@ -1,0 +1,75 @@
+{
+  "id": "infinitelager",
+  "name": "InfiniteLager",
+  "version": "3.2.0",
+  "kategorie": "lager",
+  "kurz": "Unbegrenztes gemeinsames und privates Lager mit Einlagern-Truhen.",
+  "beschreibung": "Ein unbegrenztes Lager per Befehl: ein gemeinsames Lager für alle und ein privates Lager pro Spieler. Einlagern-Truhen leeren sich automatisch ins Lager.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "Gemeinsames Lager für alle Spieler",
+    "Privates Lager pro Spieler, auf das niemand sonst zugreifen kann",
+    "Einlagern-Truhen (gemeinsam oder privat), werden alle 5 Sekunden automatisch geleert",
+    "Private Einlagern-Truhen kann nur der Besitzer öffnen oder abbauen",
+    "Suche im Lager",
+    "Protokoll: wer was aus dem gemeinsamen Lager genommen hat"
+  ],
+  "befehle": [
+    {
+      "befehl": "/lager",
+      "text": "Gemeinsames Lager öffnen",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager in",
+      "text": "Ins gemeinsame Lager einlagern",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager privat",
+      "text": "Privates Lager öffnen",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager privat in",
+      "text": "Ins private Lager einlagern",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager truhe",
+      "text": "Truhe in der Hand wird zur Einlagern-Truhe (gemeinsam)",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager privat truhe",
+      "text": "Truhe in der Hand wird zur Einlagern-Truhe (privat)",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager suche <item>",
+      "text": "Im Lager suchen (auch /lager privat suche <item>)",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/lager protokoll",
+      "text": "Letzte Entnahmen aus dem gemeinsamen Lager",
+      "wer": "spieler"
+    }
+  ],
+  "config": [],
+  "changelog": [
+    {
+      "version": "3.2.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "Privates Lager pro Spieler",
+        "Private Einlagern-Truhen",
+        "Automatisches Leeren alle 5 Sekunden",
+        "Protokoll für das gemeinsame Lager"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

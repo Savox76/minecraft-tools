@@ -1,0 +1,145 @@
+{
+  "id": "eiffelturm",
+  "titel": "Eiffelturm",
+  "beschreibung": "Der Pariser Eiffelturm im Maßstab 1 : 3 aus Dunkler Eiche: vier geschwungene Beine mit Bögen, zwei Plattformen, verglaste Aussichtsetage und Antenne. Ein Blickfang, der von überall zu sehen ist.",
+  "kategorie": "tuerme",
+  "tags": [
+    "wahrzeichen",
+    "spawn",
+    "holz",
+    "hoch"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 5,
+  "bauzeit_stunden": [
+    15,
+    25
+  ],
+  "grundflaeche": "43 × 43 (45 × 45 mit Plattform)",
+  "massstab": "ca. 1 : 3 (1 Block ≈ 3 m)",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Fundament & Sockel",
+      "von": 0,
+      "bis": 1,
+      "text": "Die vier Beinsockel aus Steinziegeln. Zuerst den Mittelpunkt markieren, dann die vier Quadrate abstecken."
+    },
+    {
+      "name": "Beine bis zu den Bögen",
+      "von": 2,
+      "bis": 16,
+      "text": "Jedes Bein ist ein hohles Quadrat: Ecken = Bretter, Seiten = Zäune, jede 4. Ebene ein voller Bretter-Ring als Querstrebe. Die Beine wandern nach oben nach innen. Ab Ebene 6 die Bögen zwischen den Beinen."
+    },
+    {
+      "name": "Fries & 1. Plattform",
+      "von": 17,
+      "bis": 20,
+      "text": "Umlaufendes Band aus Brettern, darüber die 1. Plattform mit offener Mitte. Geländer aus Eisengittern, Laternen an den Ecken."
+    },
+    {
+      "name": "Mittelteil",
+      "von": 21,
+      "bis": 37,
+      "text": "Die vier Beine laufen weiter zusammen. Gleiche Bauweise wie unten."
+    },
+    {
+      "name": "2. Plattform",
+      "von": 38,
+      "bis": 39,
+      "text": "Geschlossene Plattform, ab hier verschmelzen die Beine zu einem Schaft."
+    },
+    {
+      "name": "Oberer Schaft",
+      "von": 40,
+      "bis": 91,
+      "text": "Langer, schlanker Schaft. Ein hohles Quadrat, das alle paar Ebenen um einen Block schmaler wird. Hier lohnt sich ein Gerüst am meisten."
+    },
+    {
+      "name": "Aussichtsplattform",
+      "von": 92,
+      "bis": 96,
+      "text": "Plattform mit Geländer, verglaster Raum und Dach."
+    },
+    {
+      "name": "Spitze & Antenne",
+      "von": 97,
+      "bis": 111,
+      "text": "Turmspitze, Laterne und Antenne aus Eisengittern mit Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Mittelpunkt zuerst",
+      "text": "Setz einen auffälligen Block auf den Mittelpunkt (0 | 0) und trag seine Koordinaten oben ein. Jede Ebene ist vierfach symmetrisch: Ein Viertel bauen, die anderen drei abzählen."
+    },
+    {
+      "titel": "Gerüst aus Bambus",
+      "text": "Gerüste (6 Bambus + 1 Faden ergeben 6 Stück) kannst du hochstapeln, darauf stehen und mit Schleichen runterklettern. Unten abbauen, und der ganze Stapel fällt. Für die Beine ab Ebene 2 fast Pflicht."
+    },
+    {
+      "titel": "So liest du die Beine",
+      "text": "Jedes Bein ist ein hohles Quadrat. Ecken sind Bretter, die Seiten Zäune. In jeder 4. Ebene (0, 4, 8 …) ist der ganze Ring aus Brettern, das sind die Querstreben."
+    },
+    {
+      "titel": "Viel Holz einplanen",
+      "text": "Rund 2.100 Dunkle-Eichen-Stämme. Eine 2×2 gepflanzte Dunkle Eiche gibt meist 15 bis 30 Stämme. Alternative: Zäune durch Eisengitter ersetzen, dann brauchst du statt Holz rund 1.200 Eisenbarren mehr."
+    },
+    {
+      "titel": "Holz brennt",
+      "text": "Ein Blitz kann den Turm anzünden. Der Blitzableiter auf der Spitze fängt Blitze in der Umgebung ab. Auf deinem eigenen Server kannst du zusätzlich die Feuerausbreitung per Gamerule abschalten."
+    },
+    {
+      "titel": "Bauhöhe passt",
+      "text": "Mit 112 Ebenen endet der Turm bei Spawn-Höhe 64 auf Y 175. Die Bauhöhe reicht in Java und Bedrock bis Y 319."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Dunkle-Eichen-Stämme",
+      "menge": 2074,
+      "quelle": "Baumfarm (Dunkle Eiche, 2×2 pflanzen)",
+      "hinweis": "ergibt 8294 Bretter für Bretter, Zäune, Stufen und Stöcke"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 648,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "648× im Ofen zu Stein schmelzen, dann 4 Stein → 4 Steinziegel"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 110,
+      "quelle": "Eisenfarm",
+      "hinweis": "für Eisengitter (6 Barren → 16 Gitter) und Laternen"
+    },
+    {
+      "name": "Sand",
+      "menge": 36,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "zu Glas schmelzen, 6 Glas → 16 Glasscheiben"
+    },
+    {
+      "name": "Kupferbarren",
+      "menge": 3,
+      "quelle": "Ertrunkene oder etwas Kupfererz",
+      "hinweis": "nur für den Blitzableiter, optional"
+    },
+    {
+      "name": "Fackeln",
+      "menge": 9,
+      "quelle": "Holzkohle aus der Baumfarm",
+      "hinweis": "für die Laternen"
+    }
+  ],
+  "schmelzvorgaenge": 684,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

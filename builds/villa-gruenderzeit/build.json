@@ -1,0 +1,151 @@
+{
+  "id": "villa-gruenderzeit",
+  "titel": "Gründerzeit-Villa",
+  "beschreibung": "Deutsche Stadtvilla um 1900: Backstein mit weißen Gesimsen, steiles Dach mit Gauben und Kaminen, Veranda und ein achteckiger Eckturm mit spitzem Helm.",
+  "kategorie": "villen",
+  "tags": [
+    "klassisch",
+    "turm",
+    "ziegel",
+    "veranda"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 4,
+  "bauzeit_stunden": [
+    6,
+    10
+  ],
+  "grundflaeche": "21 × 15 plus Turm Ø 7 und Veranda",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Sockel & Veranda",
+      "von": 0,
+      "bis": 0,
+      "text": "Haupthaus 21 × 15 auf einem Sockel aus Steinziegeln, Turm-Achteck an der Südostecke. Davor die Veranda aus Fichte, Stufen und eine Hecke."
+    },
+    {
+      "name": "Erdgeschoss",
+      "von": 1,
+      "bis": 5,
+      "text": "Steinziegel-Sockel, darüber Ziegelwände mit hohen Fenstern. Über jedem Fenster ein weißer Sturz aus poliertem Diorit. Veranda mit Zaunpfosten, Laternen und flachem Dach."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 11,
+      "text": "Ebene 6 ist das weiße Gesims rund um Haus und Turm. Dann Obergeschoss mit Fenstern und in Ebene 11 das Kranzgesims aus Steinziegeln."
+    },
+    {
+      "name": "Dach, Gauben & Turm",
+      "von": 12,
+      "bis": 24,
+      "text": "Steiles Satteldach aus Dunkle-Eichen-Treppen, jede Reihe einen Block höher, First in Ebene 19. Ziegelgiebel mit Rundfenster, zwei Gauben mit kleinem Satteldach, Kamine mit Mauerkappe. Der Turm wächst mit drei weiteren Fensterreihen deutlich über das Dach hinaus."
+    },
+    {
+      "name": "Turmhelm",
+      "von": 25,
+      "bis": 37,
+      "text": "Der Helm beginnt mit einem Überstand und verjüngt sich in Ringen aus Treppen zur Spitze mit Eisengitter und Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Dach mit 45 Grad",
+      "text": "Jede Reihe Dunkle-Eichen-Treppen liegt einen Block höher und einen Block weiter innen. Am First trifft sich alles in einer Reihe Stufen."
+    },
+    {
+      "titel": "Weiße Rahmen",
+      "text": "Polierter Diorit braucht Netherquarz. Ohne Nether gehen auch glatter Sandstein oder Birkenholz für Gesimse und Fensterstürze."
+    },
+    {
+      "titel": "Turm abzählen",
+      "text": "Der Turm ist ein Achteck mit 7 Blöcken Durchmesser. Im Raster siehst du die Form, und sie wiederholt sich von unten bis Ebene 16."
+    },
+    {
+      "titel": "Gauben",
+      "text": "Die zwei Gauben unterbrechen die Dachfläche nach Süden. Erst das ganze Dach setzen, dann die Gauben einschneiden und mit Ziegeln schließen."
+    },
+    {
+      "titel": "Rauch im Kamin",
+      "text": "Ein Lagerfeuer oben im Kamin lässt Rauch aufsteigen. Mit einem Heuballen darunter steigt er höher."
+    },
+    {
+      "titel": "Garten",
+      "text": "Die Hecke aus Eichenlaub rahmt das Grundstück. Ein Weg aus Kies oder Steinziegeln von der Veranda zur Öffnung in der Hecke rundet es ab."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 662,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und weiterverarbeiten"
+    },
+    {
+      "name": "Sand",
+      "menge": 50,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "für Glas, Beton und Sandstein"
+    },
+    {
+      "name": "Tonblöcke",
+      "menge": 751,
+      "quelle": "Schlamm auf Tropfstein (Tonfarm)",
+      "hinweis": "für Terrakotta direkt, für Ziegel in 4 Tonklumpen zerlegen"
+    },
+    {
+      "name": "Dunkle-Eichen-Stamm",
+      "menge": 184,
+      "quelle": "Baumfarm (Dunkle Eiche, 2×2)",
+      "hinweis": "für Dach und Stufen"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 164,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 1,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "für Böden und Türen"
+    },
+    {
+      "name": "Laub (mit Schere)",
+      "menge": 42,
+      "quelle": "Bäume mit der Schere ernten",
+      "hinweis": "Hecken, Bäume und Zypressen"
+    },
+    {
+      "name": "Netherquarz",
+      "menge": 153,
+      "quelle": "Nether",
+      "hinweis": "für den polierten Diorit"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 3,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Gitter"
+    },
+    {
+      "name": "Kupferbarren",
+      "menge": 3,
+      "quelle": "Ertrunkene oder etwas Kupfererz",
+      "hinweis": "Blitzableiter, optional"
+    }
+  ],
+  "schmelzvorgaenge": 3562,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

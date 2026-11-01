@@ -1,0 +1,45 @@
+{
+  "id": "serverhilfe",
+  "name": "ServerHilfe",
+  "version": "1.0.0",
+  "kategorie": "verwaltung",
+  "kurz": "Hilfe-Buch im Inventar und /hilfe-Menü mit allen Befehlen.",
+  "beschreibung": "Jeder Spieler hat ein festes Buch „Hilfe & Befehle“ im Inventar. Ein Klick öffnet ein Menü mit allen Befehlen, sortiert nach Themen. Admins sehen zusätzlich die Admin-Befehle.",
+  "plattform": "Paper",
+  "status": "doku",
+  "status_text": "Dokumentation verfügbar, Quellcode und Download folgen.",
+  "funktionen": [
+    "Festes Hilfe-Buch unten rechts im Inventar, nicht verschiebbar, nicht wegwerfbar, geht beim Tod nicht verloren",
+    "Menü nach Themen: Shop, eigener Shop, Lager, Arbeiter, Homes, Farm-Bot, Chat, Server-Regeln",
+    "Maus auf ein Thema zeigt die Befehle, Klick schreibt sie in den Chat",
+    "Texte frei anpassbar in der config.yml"
+  ],
+  "befehle": [
+    {
+      "befehl": "/hilfe",
+      "text": "Hilfe-Menü öffnen",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/hilfe buch aus | an",
+      "text": "Buch im Inventar aus- oder einschalten",
+      "wer": "spieler"
+    },
+    {
+      "befehl": "/hilfe neu-laden",
+      "text": "Texte neu laden",
+      "wer": "admin"
+    }
+  ],
+  "config": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "datum": "18.10.2026",
+      "punkte": [
+        "Erste Version"
+      ]
+    }
+  ],
+  "autor": "Savox"
+}

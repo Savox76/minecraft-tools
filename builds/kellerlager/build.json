@@ -1,0 +1,126 @@
+{
+  "id": "kellerlager",
+  "titel": "Kellerlager",
+  "beschreibung": "Kellerraum mit automatischer Sortieranlage für 12 Item-Sorten, Einwurf-Truhe, Überlauf-Fass und Fass-Wand zum Selbsteinräumen. Passt unter die Villa am Wasser.",
+  "kategorie": "technik",
+  "tags": [
+    "lager",
+    "redstone",
+    "sortieranlage",
+    "keller"
+  ],
+  "edition": [
+    "java"
+  ],
+  "schwierigkeit": 4,
+  "bauzeit_stunden": [
+    2,
+    3
+  ],
+  "grundflaeche": "17 × 12, passt unter die Villa am Wasser",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": true
+  },
+  "abschnitte": [
+    {
+      "name": "Boden mit Redstone",
+      "von": 0,
+      "bis": 0,
+      "text": "Raum 17 × 12 mit Steinziegel-Wänden. In den Boden unter der Sortieranlage kommen pro Spalte von vorne nach hinten: Redstonefackel (direkt unter dem unteren Trichter, an der Südseite des nächsten Blocks), Steinziegel, Verstärker Richtung Süden, Steinziegel. 12 Spalten nebeneinander, eine pro Item-Sorte."
+    },
+    {
+      "name": "Fässer & untere Trichter",
+      "von": 1,
+      "bis": 1,
+      "text": "Vorne die Fässer, dahinter je ein Trichter, der ins Fass zeigt. Dahinter zwei Steinziegel als Plattform und ganz hinten Redstonestaub eine Stufe tiefer. Fässer statt Truhen, weil nebeneinanderstehende Truhen zu Doppeltruhen verschmelzen. An der Westwand Fässer für Sachen, die du selbst einsortierst."
+    },
+    {
+      "name": "Filter & Komparator",
+      "von": 2,
+      "bis": 2,
+      "text": "Über jedem unteren Trichter ein Filter-Trichter, der nach hinten zum Komparator zeigt (nicht nach unten). Der Komparator zeigt vom Trichter weg, dahinter Redstonestaub."
+    },
+    {
+      "name": "Transportleitung",
+      "von": 3,
+      "bis": 4,
+      "text": "Oben eine durchgehende Reihe Trichter, alle nach Osten. Am Anfang in Ebene 4 die Einwurf-Truhe, am Ende ein Überlauf-Fass für alles, was nicht sortiert wird."
+    },
+    {
+      "name": "Decke & Treppe",
+      "von": 5,
+      "bis": 6,
+      "text": "Hängende Laternen, Decke aus Fichtenholz, Treppe an der Ostseite nach oben."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "So funktioniert der Filter",
+      "text": "In jeden Filter-Trichter kommen 41 Stück der Item-Sorte in das erste Feld und je 1 Platzhalter-Item in die anderen vier Felder. Der Komparator gibt dann Stärke 2. Kommt ein weiteres passendes Item an, steigt sie auf 3, die Fackel geht aus und der untere Trichter zieht genau ein Item ins Fass."
+    },
+    {
+      "titel": "Platzhalter umbenennen",
+      "text": "Nimm für die Platzhalter einen billigen Block, zum Beispiel Erde, und benenne ihn am Amboss um, etwa in „Filter“. So kann er sich nie mit echten Items vermischen. Pro Spalte brauchst du 4 Stück."
+    },
+    {
+      "titel": "16er-Stapel",
+      "text": "Für Items, die nur bis 16 stapeln (Eier, Enderperlen, Schilder), kommen statt 41 nur 10 Stück ins erste Feld. Nicht stapelbare Sachen wie Werkzeuge kann der Filter nicht sortieren, die landen im Überlauf-Fass."
+    },
+    {
+      "titel": "Testen",
+      "text": "Bevor du das Lager füllst: Redstone-Lampe an die Stelle des Verstärkers halten oder einfach ein paar passende und unpassende Items einwerfen. Passende landen im Fass, alles andere wandert ins Überlauf-Fass am Ende."
+    },
+    {
+      "titel": "Beschriften",
+      "text": "Ein Rahmen mit dem jeweiligen Item auf jedem Fass zeigt dir auf einen Blick, was wo liegt."
+    },
+    {
+      "titel": "Erweitern",
+      "text": "Die Spalten lassen sich beliebig verlängern: einfach weitere Spalten nach Osten anhängen und das Überlauf-Fass mitwandern lassen. Unter die Villa am Wasser passt dieser Raum mit 12 Spalten."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 481,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und weiterverarbeiten"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 73,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 130,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "für Böden und Türen"
+    },
+    {
+      "name": "Netherquarz",
+      "menge": 12,
+      "quelle": "Nether",
+      "hinweis": "für den polierten Diorit"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 183,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Gitter"
+    },
+    {
+      "name": "Redstone",
+      "menge": 108,
+      "quelle": "Kleriker-Dorfbewohner (Handel) oder Hexenfarm",
+      "hinweis": "Fackeln, Staub, Verstärker, Komparatoren"
+    }
+  ],
+  "schmelzvorgaenge": 465,
+  "version": "0.9.0",
+  "autor": "Savox"
+}

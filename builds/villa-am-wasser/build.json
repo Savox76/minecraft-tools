@@ -1,0 +1,184 @@
+{
+  "id": "villa-am-wasser",
+  "titel": "Villa am Wasser",
+  "beschreibung": "Moderne Luxusvilla auf einem 27 × 27-Grundstück am Ufer, komplett an Land gebaut. Glasfront zum Wasser, auskragendes Obergeschoss, erhöhter Pool mit Glaskante, Dachterrasse mit Whirlpool, Penthouse und ein Wasser-Aufzug (Seelensand hoch, Magmablock runter).",
+  "kategorie": "villen",
+  "tags": [
+    "wasser",
+    "pool",
+    "modern",
+    "glas",
+    "aufzug"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 3,
+  "bauzeit_stunden": [
+    6,
+    9
+  ],
+  "grundflaeche": "27 × 27 Grundstück, Haus 24 × 16",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Blockrichtungen (Treppen, Türen, Trichter) sind noch nicht in einer Testwelt geprüft.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Grundstück & Terrasse",
+      "von": 0,
+      "bis": 0,
+      "text": "Das Grundstück ist 27 × 27 Blöcke groß und liegt komplett an Land. Gras, Strand und Meer drumherum sind schon da und blass dargestellt. Du baust den Boden aus glattem Stein unter dem Haus, den Weg zur Haustür und die Terrasse aus Dunkler Eiche zur Wasserseite. Innen an der Westwand liegen Seelensand und Magmablock für den Wasser-Aufzug."
+    },
+    {
+      "name": "Erdgeschoss & Pool",
+      "von": 1,
+      "bis": 4,
+      "text": "Wohnbereich mit Glasfront zum Wasser, Fichtenholz-Verkleidung im Westen, Haustür im Norden. An der Westwand der Wasser-Aufzug: zwei Glasschächte, der nördliche fährt hoch, der südliche runter, mit Türen als Ein- und Ausstieg. Auf der Terrasse der erhöhte Pool mit Glaskante zum Meer, die Feuerstelle mit Sitzbänken und Laternen. Hecke rund um die Landseite."
+    },
+    {
+      "name": "Auskragende Decke",
+      "von": 5,
+      "bis": 5,
+      "text": "Das Obergeschoss ragt nach Süden und Osten über die Terrasse hinaus. Leuchtstein in der Unterseite dient als Deckenlicht."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 9,
+      "text": "Komplett verglaste Süd- und Ostseite mit Blick aufs Wasser, nach Westen Holz mit Glasschlitzen."
+    },
+    {
+      "name": "Dachterrasse & Penthouse",
+      "von": 10,
+      "bis": 13,
+      "text": "Dachterrasse mit Glasgeländer, Whirlpool und Laternen. Der Aufzug endet oben offen in der Dachterrasse: aus dem Schacht nach oben aussteigen, zum Runterfahren in den Nachbarschacht springen. Darauf das Penthouse mit Glasfront nach Süden."
+    },
+    {
+      "name": "Penthouse-Dach",
+      "von": 14,
+      "bis": 14,
+      "text": "Flachdach mit Überstand aus glatten Steinstufen."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Ort finden",
+      "text": "Ideal ist ein flaches Ufer mit dem Wasser im Süden. Die Südkante des Grundstücks liegt 2 Blöcke vor der Wasserlinie, so bleibt ein Strandstreifen frei und du baust nichts ins Wasser. Ebene 0 liegt einen Block über dem Wasserspiegel oder gleich hoch."
+    },
+    {
+      "titel": "Erst abstecken",
+      "text": "Steck die 27 × 27 Blöcke mit Zäunen oder Wolle ab und ebne das Gelände ein. Danach Haus-Boden, Terrasse und Pool-Fläche in Ebene 0 legen."
+    },
+    {
+      "titel": "Pool mit Glaskante",
+      "text": "Der Pool steht einen Block hoch auf der Terrasse. Die Seite zum Meer ist aus Glas, dadurch wirkt das Poolwasser von der Terrasse aus wie ein Teil des Meeres. Zwei Wassereimer in eine Ecke ergeben eine unendliche Quelle zum Füllen."
+    },
+    {
+      "titel": "Glas vorproduzieren",
+      "text": "Glas und weißer Beton sind die größten Posten. Lass Öfen mit Trichtern und Seetang als Brennstoff laufen, eine Seetangfarm direkt am Wasser bietet sich an."
+    },
+    {
+      "titel": "Licht nachts",
+      "text": "Leuchtstein unter dem Überhang, im Pool und im Whirlpool, dazu Laternen an der Terrasse und auf dem Dach. Seelaternen am Strand setzen das Ufer in Szene."
+    },
+    {
+      "titel": "Palmen",
+      "text": "Tropenbaumstämme und -laub bekommst du aus dem Dschungel oder einer Tropenbaum-Farm. Unter jede Palme kommt ein Grasblock statt Holz. Selbst gesetztes Laub zerfällt nicht."
+    },
+    {
+      "titel": "Wasser-Aufzug füllen",
+      "text": "Beide Schächte brauchen in jedem Block eine Wasserquelle. Am einfachsten: oben Wasser hineinkippen, unten Seetang pflanzen und bis oben wachsen lassen, dann den Seetang abbauen. Übrig bleiben lauter Quellblöcke. Erst danach Seelensand und Magmablock unten einsetzen."
+    },
+    {
+      "titel": "Aufzug benutzen",
+      "text": "Nördlicher Schacht mit Seelensand fährt hoch, südlicher mit Magmablock runter. Die Türen halten das Wasser im Schacht. Unten beim Aussteigen kurz schleichen (Shift), dann macht der Magmablock keinen Schaden."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 327,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zu Stein schmelzen und weiterverarbeiten"
+    },
+    {
+      "name": "Sand",
+      "menge": 1053,
+      "quelle": "Sand (Händler, Wüste oder Sand-Maschine)",
+      "hinweis": "für Glas, Beton und Sandstein"
+    },
+    {
+      "name": "Kies",
+      "menge": 602,
+      "quelle": "Piglin-Tausch oder Händler",
+      "hinweis": "für Betonpulver"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 151,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff"
+    },
+    {
+      "name": "Dunkle-Eichen-Stamm",
+      "menge": 60,
+      "quelle": "Baumfarm (Dunkle Eiche, 2×2)",
+      "hinweis": "für Dach und Stufen"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 28,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "für Bretter, Türen, Falltüren und Zäune"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 4,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "für Böden und Türen"
+    },
+    {
+      "name": "Tropenbaumstamm",
+      "menge": 13,
+      "quelle": "Baumfarm (Tropenbaum) oder Dschungel",
+      "hinweis": "Palmenstämme"
+    },
+    {
+      "name": "Laub (mit Schere)",
+      "menge": 143,
+      "quelle": "Bäume mit der Schere ernten",
+      "hinweis": "Hecken, Bäume und Zypressen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 6,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Gitter"
+    },
+    {
+      "name": "Seelensand",
+      "menge": 1,
+      "quelle": "Nether (Seelensandtal)",
+      "hinweis": "Aufzug nach oben"
+    },
+    {
+      "name": "Magmablock",
+      "menge": 1,
+      "quelle": "Nether oder 4 Magmacreme",
+      "hinweis": "Aufzug nach unten"
+    },
+    {
+      "name": "Leuchtstein",
+      "menge": 8,
+      "quelle": "Nether (Decke)",
+      "hinweis": "Licht am Pool"
+    }
+  ],
+  "schmelzvorgaenge": 1076,
+  "version": "0.9.0",
+  "autor": "Savox"
+}
