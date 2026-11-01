@@ -428,7 +428,7 @@ class Seiten:
         if krumen:
             kr = '<div class="krumen">%s</div>' % ' / '.join(
                 '<a href="%s">%s</a>' % (self.link(a), H(n)) if a else H(n) for n, a in krumen)
-        eb = '<span class="eyebrow">%s</span>' % H(eyebrow) if eyebrow else ''
+        eb = ''   # keine Etiketten über Überschriften
         return '<section class="detail-kopf"><div class="wrap">%s%s<h1>%s</h1><p class="lede">%s</p></div></section>' % (
             kr, eb, H(titel), H(lede))
 
@@ -481,26 +481,26 @@ class Seiten:
         k = self.k
         summe = sum(b['bloecke'] for b in k['builds'])
         t = self.t
+        bestand = t('Schon da: <b>%d Baupläne</b> mit %s Blöcken, <b>%d Plugins</b> und <b>%d Anleitungen</b>. In Planung: %d weitere Ideen.',
+                    'Available now: <b>%d builds</b> with %s blocks, <b>%d plugins</b> and <b>%d guides</b>. Planned: %d more ideas.') % (
+            len(k['builds']), fmt(summe, self.lang), len(k['plugins']), len(k['docs']), len(self.ideen['ideen']))
         inhalt = (
-            '<section class="held"><div class="wrap"><div><span class="eyebrow">%s</span>'
+            '<section class="held"><div class="wrap"><div>'
             '<h1>%s</h1><p class="lede">%s</p>'
             '<div class="knoepfe"><a class="btn" href="%s">%s</a><a class="btn zwei" href="%s">%s</a></div>'
-            '<div class="zahlen"><div><b>%d</b><span>%s</span></div><div><b>%s</b><span>%s</span></div>'
-            '<div><b>%d</b><span>Plugins</span></div><div><b>%d</b><span>%s</span></div></div></div>'
-            '<figure class="held-bild" style="margin:0"><img src="%s" alt="%s" width="800" height="600">'
-            '<figcaption class="unter"><span>%s</span><a href="%s">%s →</a></figcaption></figure></div></section>'
+            '<p class="bestand">%s</p></div>'
+            '<figure class="heft bauplan" style="margin:0"><img src="%s" alt="%s" width="800" height="600">'
+            '<figcaption class="heft-fuss"><span>%s</span><a href="%s">%s</a></figcaption></figure></div></section>'
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div class="raster" style="margin-top:18px">%s</div></div></section>'
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div class="raster" style="margin-top:18px">%s</div></div></section>'
             '<section class="abschnitt"><div class="wrap"><h2>%s</h2><div style="margin-top:18px">%s</div></div></section>'
-        ) % (t('Minecraft-Baupläne · Paper-Plugins', 'Minecraft builds · Paper plugins'),
-             t('Bauen wie mit LEGO. Schritt für Schritt.', 'Build like LEGO. Step by step.'),
+        ) % (t('Bauen wie mit LEGO. Schritt für Schritt.', 'Build like LEGO. Step by step.'),
              t('Minecraft-Baupläne, die pro Schritt genau zeigen, welche Blöcke du brauchst und wo sie hinkommen. Dazu Plugins für deinen eigenen Paper-Server. Alles kostenlos und einzeln zum Herunterladen.',
                'Minecraft build plans that show for every step exactly which blocks you need and where they go. Plus plugins for your own Paper server. All free and downloadable one by one.'),
-             self.link('liste'), t('Baupläne ansehen', 'Browse builds'), self.link('wuensche'), t('Bauplan wünschen', 'Request a build'),
-             len(k['builds']), t('Baupläne', 'Builds'), fmt(summe, self.lang), t('Blöcke geplant', 'Blocks planned'),
-             len(k['plugins']), len(k['docs']), t('Anleitungen', 'Guides'),
+             self.link('liste'), t('Baupläne ansehen', 'Browse builds'), self.link('geplant'), t('Was als Nächstes kommt', 'What comes next'),
+             bestand,
              self.base + 'bilder/villa-am-wasser.png', t('Minecraft-Bauplan Villa am Wasser', 'Minecraft build Villa by the Water'),
-             t('Villa am Wasser', 'Villa by the Water'), self.link('bau', 'villa-am-wasser'), t('Zum Bauplan', 'View build'),
+             t('Villa am Wasser', 'Villa by the Water'), self.link('bau', 'villa-am-wasser'), t('Diesen Bauplan öffnen', 'Open this build'),
              t('Minecraft-Baupläne', 'Minecraft build plans'), ''.join(self.bau_karte(b) for b in k['builds']),
              t('Eigene Plugins für Paper', 'Our plugins for Paper'), ''.join(self.plugin_karte(p) for p in k['plugins']),
              t('Anleitungen', 'Guides'), ''.join(self.doc_link(d) for d in k['docs']))
@@ -722,7 +722,7 @@ class Seiten:
             titel = lok(i, 'titel', lang)
             gr = GR.get(i.get('groesse'), t('Anleitung', 'Guide'))
             if i['status'] == 'verfuegbar' and i.get('bauplan'):
-                aktion = '<a class="btn klein" href="%s">%s →</a>' % (self.link('bau', i['bauplan']), t('Zum Bauplan', 'View build'))
+                aktion = '<a class="btn klein" href="%s">%s</a>' % (self.link('bau', i['bauplan']), t('Zum Bauplan', 'View build'))
             else:
                 ziel = '%s/issues/new?template=bauwunsch.yml&title=%s&bauwerk=%s' % (
                     repo, quote('Bauwunsch: Idee #%s %s' % (i['nr'], i['titel'])), quote(i['titel']))

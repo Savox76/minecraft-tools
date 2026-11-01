@@ -29,7 +29,7 @@
 <link rel="sitemap" type="application/xml" href="{{BASE}}sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="{{BASE}}style.css?v={{V}}">
 <script>try{var t=localStorage.getItem('bw.thema');if(t==='hell'||t==='dunkel')document.documentElement.dataset.theme=t==='hell'?'light':'dark'}catch(e){}</script>
 <script type="application/ld+json">{{JSONLD}}</script>
@@ -47,9 +47,9 @@
   </div>
 </header>
 <main id="inhalt" tabindex="-1">{{INHALT}}</main>
-<footer class="fuss">
+<footer class="fuss bauplan">
   <div class="fuss-innen">
-    <p><b>Bauwerkstatt</b> · {{TXT_FUSS}} <a href="https://github.com/Savox76/minecraft-tools">{{TXT_GITHUB}}</a></p>
+    <div class="fuss-marke"><b>Bauwerkstatt</b><span>{{TXT_FUSS}}</span><a href="https://github.com/Savox76/minecraft-tools">{{TXT_GITHUB}}</a></div>
     <nav class="fuss-links" aria-label="{{TXT_ALLE_SEITEN}}">{{FUSS_LINKS}}</nav>
     <p class="klein">{{TXT_DISCLAIMER}}</p>
   </div>

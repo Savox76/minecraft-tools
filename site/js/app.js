@@ -93,7 +93,7 @@ function pluginKasten(k, liste) {
     const r = pluginRef(k, x.id);
     const her = r.eigen ? tr('Eigenes Plugin', 'Our plugin') : (r.autor ? tr(`von ${r.autor}`, `by ${r.autor}`) : tr('Plugin eines anderen Entwicklers', 'Plugin by another developer'));
     return `<div class="pb-eintrag"><div class="pb-kopf"><span class="marker stufe-${x.stufe}">${STUFE[x.stufe]}</span><b>${pluginLink(r)}</b><span class="eyebrow">${esc(her)}</span></div>
-      ${x.grund ? `<p>${esc(lo(x, 'grund'))}</p>` : ''}${r.anleitung ? `<a class="pb-mehr" href="${url('anleitung', r.anleitung)}">${tr('Anleitung dazu', 'Guide')} →</a>` : ''}</div>`;
+      ${x.grund ? `<p>${esc(lo(x, 'grund'))}</p>` : ''}${r.anleitung ? `<a class="pb-mehr" href="${url('anleitung', r.anleitung)}">${tr('Anleitung dazu', 'Guide')}</a>` : ''}</div>`;
   }).join('')}</div>`;
 }
 
@@ -143,21 +143,18 @@ async function startSeite() {
   main.innerHTML = `
   <section class="held"><div class="wrap">
     <div>
-      <span class="eyebrow">${tr('Minecraft-Baupläne · Paper-Plugins', 'Minecraft builds · Paper plugins')}</span>
       <h1>${tr('Bauen wie mit LEGO. Schritt für Schritt.', 'Build like LEGO. Step by step.')}</h1>
       <p class="lede">${tr('Jeder Bauplan zeigt pro Schritt genau, welche Blöcke du brauchst und wo sie hinkommen. Dazu Plugins für deinen eigenen Server. Alles kostenlos und einzeln zum Herunterladen.',
         'Every build plan shows for each step exactly which blocks you need and where they go. Plus plugins for your own server. All free and downloadable one by one.')}</p>
-      <div class="knoepfe"><a class="btn" href="${url('liste')}">${tr('Baupläne ansehen', 'Browse builds')}</a><a class="btn zwei" href="${url('wuensche')}">${tr('Bauplan wünschen', 'Request a build')}</a></div>
-      <div class="zahlen">
-        <div><b>${k.builds.length}</b><span>${tr('Baupläne', 'Builds')}</span></div>
-        <div><b>${fmt(sum)}</b><span>${tr('Blöcke geplant', 'Blocks planned')}</span></div>
-        <div><b>${k.plugins.length}</b><span>Plugins</span></div>
-        <div><b>${k.docs.length}</b><span>${tr('Anleitungen', 'Guides')}</span></div>
-      </div>
+      <div class="knoepfe"><a class="btn" href="${url('liste')}">${tr('Baupläne ansehen', 'Browse builds')}</a><a class="btn zwei" href="${url('geplant')}">${tr('Was als Nächstes kommt', 'What comes next')}</a></div>
+      <p class="bestand">${tr(`Schon da: <b>${k.builds.length} Baupläne</b> mit ${fmt(sum)} Blöcken, <b>${k.plugins.length} Plugins</b> und <b>${k.docs.length} Anleitungen</b>. In Planung: ${k.ideen_anzahl || ''} weitere Ideen.`,
+        `Available now: <b>${k.builds.length} builds</b> with ${fmt(sum)} blocks, <b>${k.plugins.length} plugins</b> and <b>${k.docs.length} guides</b>. Planned: ${k.ideen_anzahl || ''} more ideas.`)}</p>
     </div>
-    <figure class="held-bild" style="margin:0">
-      <canvas id="held-cv" aria-label="${tr(`Animation: ${villa} wird Schritt für Schritt gebaut`, `Animation: ${villa} being built step by step`)}"></canvas>
-      <figcaption class="unter"><span id="held-text">${villa}</span><a href="${url('bau', 'villa-am-wasser')}">${tr('Zum Bauplan', 'View build')} →</a></figcaption>
+    <figure class="heft bauplan" style="margin:0">
+      <div class="heft-kopf"><div class="heft-nr" id="held-nr" aria-live="off">1<small></small></div><div class="heft-teile" id="held-teile" aria-label="${tr('Teile in diesem Schritt', 'Parts in this step')}"></div></div>
+      <div class="heft-buehne"><canvas id="held-cv" aria-label="${tr(`Animation: ${villa} wird Schritt für Schritt gebaut`, `Animation: ${villa} being built step by step`)}"></canvas></div>
+      <figcaption class="heft-fuss"><span id="held-text">${villa}</span><a href="${url('bau', 'villa-am-wasser')}">${tr('Diesen Bauplan öffnen', 'Open this build')}</a></figcaption>
+      <div class="heft-balken" aria-hidden="true"><i id="held-balken"></i></div>
     </figure>
   </div></section>
   <section class="abschnitt"><div class="wrap">
@@ -182,22 +179,37 @@ async function heldAnimation() {
   const cv = document.getElementById('held-cv'); if (!cv) return;
   const P = prepare(d.model);
   const stepOf = schrittKarte(P, d.schritte);
-  let cur = reduced ? d.schritte.length : 0, timer = null;
-  const txt = document.getElementById('held-text');
+  const n = d.schritte.length;
+  let cur = reduced ? n : 0, timer = null;
+  const zaehlt = (p) => !(p.flags || []).some((f) => ['vorhanden', 'kein-block', 'zweiter-teil'].includes(f));
+  const nr = document.getElementById('held-nr'), teile = document.getElementById('held-teile');
+  const balken = document.getElementById('held-balken'), txt = document.getElementById('held-text');
   const name = lo(d, 'titel');
   const paint = () => {
     if (!cv.isConnected) { clearTimeout(timer); return; }
-    const w = cv.parentElement.clientWidth - 28;
-    draw(cv, P, { width: w, maxHeight: Math.min(460, w * .8), rot: 0, ...farben(),
+    const w = cv.parentElement.clientWidth;
+    draw(cv, P, { width: w, maxHeight: Math.min(440, w * .78), rot: 0, ...farben(), fadeTo: cssv('--plan'), ground: null,
       state: (i, x, y, z) => { const s = stepOf[P.at(x, y, z)]; if (s < 0) return 2; return s < cur ? 2 : s === cur ? 3 : 0; } });
-    txt.textContent = cur < d.schritte.length ? `${name} · ${tr('Schritt', 'Step')} ${cur + 1} ${tr('von', 'of')} ${d.schritte.length}` : `${name} · ${tr('fertig', 'done')}`;
+  };
+  const anzeigen = () => {
+    const fertig = cur >= n;
+    nr.innerHTML = fertig ? `${n}<small>${tr('Schritte, fertig', 'steps, done')}</small>` : `${cur + 1}<small>${tr('von', 'of')} ${n}</small>`;
+    balken.style.width = `${Math.min(100, (cur + (fertig ? 0 : 1)) / n * 100)}%`;
+    txt.textContent = name;
+    if (fertig) { teile.innerHTML = ''; teile.hidden = true; return; }
+    teile.hidden = false;
+    const s = d.schritte[cur], zahl = new Map();
+    for (let j = 3; j < s.c.length; j += 4) if (zaehlt(P.pal[s.c[j]])) zahl.set(s.c[j], (zahl.get(s.c[j]) || 0) + 1);
+    teile.innerHTML = [...zahl].sort((a, b) => b[1] - a[1]).slice(0, 4)
+      .map(([i, c]) => `<div title="${esc(bn(P.pal[i]))}"><img src="${partIcon(P.pal[i], 30)}" alt="${esc(bn(P.pal[i]))}"><b>×${c}</b></div>`).join('');
   };
   const tick = () => {
-    cur++; if (cur > d.schritte.length + 12) cur = 0;
-    paint(); timer = setTimeout(tick, cur === 0 ? 600 : 140);
+    cur++; if (cur > n + 12) cur = 0;
+    paint(); if (cur <= n) anzeigen();
+    timer = setTimeout(tick, cur === 0 ? 700 : cur >= n ? 180 : 420);
   };
-  paint(); onRedraw(paint);
-  if (!reduced) timer = setTimeout(tick, 600);
+  paint(); anzeigen(); onRedraw(paint);
+  if (!reduced) timer = setTimeout(tick, 900);
 }
 
 function schrittKarte(P, schritte) {
@@ -211,7 +223,7 @@ async function bauplaeneSeite() {
   const K = kats(k);
   const aktiv = store.get('filter', 'alle');
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <span class="eyebrow">${tr('Sammlung', 'Collection')}</span><h1>${tr('Baupläne', 'Builds')}</h1>
+    <h1>${tr('Baupläne', 'Builds')}</h1>
     <p class="lede">${tr('Jeden Bauplan gibt es als LEGO-Anleitung im Browser, als Litematica- und WorldEdit-Datei und als Teileliste.', 'Every build comes as LEGO-style instructions in the browser, as a Litematica and WorldEdit file and as a parts list.')}</p>
     <div class="chips" style="margin-top:18px" role="group" aria-label="${tr('Kategorie filtern', 'Filter by category')}">
       ${[['alle', tr('Alle', 'All')], ...Object.entries(K)].map(([id, n]) => `<button class="chip" data-f="${id}" aria-pressed="${id === aktiv}">${esc(n)}</button>`).join('')}
@@ -237,14 +249,14 @@ function fremdKarte(p) {
       ${(() => { const bs = (KAT?.builds || []).filter((b) => (b.plugins || []).some((x) => x.id === p.id)); return bs.length ? `<p class="einsatz"><b>${tr('Für Baupläne:', 'For builds:')}</b> ${bs.map((b) => `<a href="${url('bau', b.id)}">${esc(lo(b, 'titel'))}</a>`).join(', ')}</p>` : ''; })()}
       <div class="fakten"><span class="marker ${p.status === 'empfohlen' ? '' : 'ok'}">${p.status === 'empfohlen' ? tr('Empfohlen', 'Recommended') : tr('Im Einsatz', 'In use')}</span>
         ${p.anleitung ? `<a class="marker" href="${url('anleitung', esc(p.anleitung))}">${tr('Anleitung', 'Guide')}</a>` : ''}
-        ${p.link ? `<a class="marker" href="${esc(p.link)}" target="_blank" rel="noopener">${tr('Download-Seite', 'Download page')} ↗</a>` : ''}</div>
+        ${p.link ? `<a class="marker" href="${esc(p.link)}" target="_blank" rel="noopener">${tr('Download-Seite', 'Download page')}</a>` : ''}</div>
     </div></div>`;
 }
 
 async function pluginsSeite() {
   const k = await katalog();
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <span class="eyebrow">${tr('Für Paper-Server', 'For Paper servers')}</span><h1>Plugins</h1>
+    <h1>Plugins</h1>
     <p class="lede">${tr('Eigene Plugins für einen fairen Server mit Coins, Lager und Arbeitern, dazu die bewährten Plugins anderer Entwickler, die auf dem Server laufen.', 'Our own plugins for a fair server with coins, storage and workers, plus the proven plugins by other developers that run on the server.')}</p></div></section>
     <section class="abschnitt" style="padding-top:8px"><div class="wrap">
       <div class="abschnitt-kopf"><div><h2>${tr('Eigene Plugins', 'Our plugins')}</h2><p>${tr('Von Savox entwickelt. Die Dokumentation ist komplett, Quellcode und Downloads folgen.', 'Developed by Savox. The documentation is complete, source code and downloads will follow.')}</p></div></div>
@@ -257,7 +269,7 @@ async function pluginsSeite() {
 async function anleitungenSeite() {
   const k = await katalog();
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <span class="eyebrow">${tr('Wissen', 'Knowledge')}</span><h1>${tr('Anleitungen', 'Guides')}</h1>
+    <h1>${tr('Anleitungen', 'Guides')}</h1>
     <p class="lede">${tr('Hilfen rund um deinen Server: Farmen ohne Spieler laufen lassen, Aktionen nachvollziehen und mehr.', 'Help for your server: keep farms running without players, trace player actions and more.')}</p></div></section>
     <section class="abschnitt" style="padding-top:8px"><div class="wrap" style="max-width:820px">${k.docs.map(docLink).join('')}</div></section>`;
 }
@@ -271,7 +283,7 @@ function wunschListe(k, max = 99) {
 async function wuenscheSeite() {
   const k = await katalog();
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <span class="eyebrow">${tr('Mitmachen', 'Get involved')}</span><h1>${tr('Wünsche', 'Wishes')}</h1>
+    <h1>${tr('Wünsche', 'Wishes')}</h1>
     <p class="lede">${tr('Welches Bauwerk oder Plugin fehlt dir? Reich deinen Wunsch ein und stimm mit 👍 für die Wünsche anderer ab. Die meistgewünschten kommen zuerst dran.', 'Which build or plugin are you missing? Submit your wish and vote for others’ wishes with 👍. The most requested come first.')}</p>
     <div class="knoepfe" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
       <a class="btn" href="${REPO}/issues/new?template=bauwunsch.yml">${tr('Bauplan wünschen', 'Request a build')}</a>
@@ -300,7 +312,7 @@ async function geplantSeite() {
   const karte = (i, mitId = true) => {
     const w = stimmen.get(String(i.nr).toUpperCase());
     let aktion;
-    if (i.status === 'verfuegbar' && i.bauplan) aktion = `<a class="btn klein" href="${url('bau', i.bauplan)}">${tr('Zum Bauplan', 'View build')} →</a>`;
+    if (i.status === 'verfuegbar' && i.bauplan) aktion = `<a class="btn klein" href="${url('bau', i.bauplan)}">${tr('Zum Bauplan', 'View build')}</a>`;
     else if (w) aktion = `<a class="btn zwei klein" href="${esc(w.url)}" target="_blank" rel="noopener">👍 ${w.stimmen} · ${tr('Mitstimmen', 'Vote too')}</a>`;
     else {
       const ziel = `${REPO}/issues/new?template=bauwunsch.yml&title=${encodeURIComponent(`Bauwunsch: Idee #${i.nr} ${i.titel}`)}&bauwerk=${encodeURIComponent(i.titel)}`;
@@ -315,7 +327,7 @@ async function geplantSeite() {
   const zahl = (st) => IDS.filter((i) => i.status === st).length;
   const filter = { kat: 'alle', gr: 'alle', q: '' };
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
-    <span class="eyebrow">${tr('Was kommt', 'What is coming')}</span><h1>${tr('Geplant', 'Planned')}</h1>
+    <h1>${tr('Geplant', 'Planned')}</h1>
     <p class="lede">${tr('Alle Ideen für neue Baupläne und Anleitungen: Farmen, Fabriken, Gebäude und Monumente. Stimm mit „Wünschen“ ab, was zuerst gebaut wird.', 'All ideas for new builds and guides: farms, factories, buildings and monuments. Vote with “Vote” for what gets built first.')}</p>
     <div class="ideen-zahlen">
       <div><b>${IDS.filter((i) => i.kategorie !== 'anleitungen').length}</b><span>${tr('Bauplan-Ideen', 'build ideas')}</span></div>
@@ -539,7 +551,7 @@ async function bauSeite(id, tab) {
     const done = new Set(store.get(keyDone, []));
     let cur = Math.min(store.get('schritt.' + d.id, 0), n - 1), rot = 0, alles = false;
     el.innerHTML = `<div class="lego">
-      <div class="buehne">
+      <div class="buehne bauplan">
         <div class="nummer" id="nr" aria-live="polite"></div>
         <div class="werkzeug">
           <button class="rund" id="rl" title="${tr('Nach links drehen', 'Rotate left')}" aria-label="${tr('Modell nach links drehen', 'Rotate model left')}">⟲</button>
@@ -550,7 +562,7 @@ async function bauSeite(id, tab) {
         <div class="blick"><span id="blick"></span><span class="dreh-hinweis">${matchMedia('(pointer: coarse)').matches ? tr('Wischen zum Drehen', 'Swipe to rotate') : tr('Ziehen zum Drehen', 'Drag to rotate')}</span></div>
       </div>
       <div class="plan-kasten">
-        <div class="plan-kopf"><h3 id="plan-titel"></h3><span class="eyebrow">${tr('Draufsicht · Norden oben · gelb = neu', 'Top view · north up · yellow = new')}</span></div>
+        <div class="plan-kopf"><h3 id="plan-titel"></h3><span class="eyebrow">${tr('Draufsicht, Norden oben, gelb umrandet ist neu', 'Top view, north up, yellow outline is new')}</span></div>
         <div class="plan-huelle"><canvas id="plan" aria-label="${tr('Draufsicht der Ebene dieses Schritts', 'Top view of this step’s layer')}"></canvas></div>
         <div class="ablesen" id="plan-les">${tr('Zeige oder tippe auf ein Feld für Block und Position.', 'Point at or tap a square for block and position.')}</div>
       </div>
@@ -579,7 +591,7 @@ async function bauSeite(id, tab) {
     const paint = () => {
       const w = cv.parentElement.clientWidth - 2;
       const h = Math.max(320, Math.min(window.innerHeight * .62, 560));
-      draw(cv, P, { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), ground: null, state: (i, x, y, z) => zustand(x, y, z) });
+      draw(cv, P, { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), fadeTo: cssv('--plan'), ground: null, state: (i, x, y, z) => zustand(x, y, z) });
       el.querySelector('#blick').textContent = tr(`Blick von ${RICHTUNG[rot]}`, `View from the ${RICHTUNG[rot]}`);
       paintPlan();
     };

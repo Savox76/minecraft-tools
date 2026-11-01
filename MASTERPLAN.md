@@ -194,6 +194,14 @@ flowchart LR
 
 ---
 
+### 5.1 Gestaltung
+
+- **Leitidee:** Ein Bauplan ist eine Blaupause. Überall, wo gebaut wird (Startseite, LEGO-Ansicht), steht das Modell auf einer bauplanblauen Fläche mit Raster. Der Fußbereich nimmt das Blau wieder auf. Alles andere bleibt ruhig.
+- **Farben:** Bauplatte-Grau als Seite, Weiß für Inhalte, Bauplan-Blau für Bühnen, hellblaue Teile-Kästen wie im LEGO-Heft, Signalgelb nur für „neu“. Hell, Dunkel und Automatisch über Farbvariablen in `site/style.css`.
+- **Schrift:** Archivo breit für Überschriften, Schrittnummern und Stückzahlen, Atkinson Hyperlegible für Text, JetBrains Mono nur für Minecraft-IDs, Befehle und Koordinaten.
+- **Startseite:** eine lebende Seite aus dem Bauheft: Schrittnummer, Teile-Kasten mit den Blöcken des Schritts und das wachsende Modell.
+- **Regeln:** keine Großbuchstaben-Etiketten über Überschriften, keine Hüpf-Effekte auf Karten, Bewegung nur in der Startseiten-Animation (und nicht bei „weniger Bewegung“).
+
 ## 6. Downloads pro Eintrag
 
 **Pro Bauplan**
