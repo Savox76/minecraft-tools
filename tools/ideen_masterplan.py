@@ -16,9 +16,12 @@ STATUS = {'idee': '💡 Idee', 'in-arbeit': '🔨 in Arbeit', 'verfuegbar': '✅
 
 def tabellen(daten):
     zeilen = []
-    ideen = daten['ideen']
+    alle = daten['ideen']
+    fertig = [i for i in alle if i['status'] == 'verfuegbar']
+    ideen = [i for i in alle if i['status'] != 'verfuegbar']
     zaehl = {s: sum(1 for i in ideen if i['status'] == s) for s in STATUS}
-    zeilen.append('%d Einträge: %s.' % (len(ideen), ', '.join('%d %s' % (zaehl[s], STATUS[s]) for s in STATUS)))
+    zeilen.append('%d offene Ideen (%d 💡 Idee, %d 🔨 in Arbeit), %d schon umgesetzt (siehe „Umgesetzt“ am Ende).' % (
+        len(ideen), zaehl['idee'], zaehl['in-arbeit'], len(fertig)))
     empf = [i for i in ideen if i.get('empfohlen')]
     if empf:
         zeilen.append('')
@@ -37,6 +40,13 @@ def tabellen(daten):
                 st = STATUS[i['status']] + (' ([Bauplan](builds/%s/))' % i['bauplan'] if i.get('bauplan') else '')
                 plg = ''.join(' Plugin: %s (%s).' % (x['id'], STUFE_TXT[x['stufe']]) for x in i.get('plugins', []))
                 zeilen.append('| %s | %s | %s | %s | %s |' % (i['nr'], i['titel'], i.get('groesse', ''), (i['text'] + plg).replace('|', '\\|'), st))
+    zeilen += ['', '### ✅ Umgesetzt (%d)' % len(fertig), '',
+               'Diese Ideen sind fertige Baupläne. Sie stehen nicht mehr auf der Geplant-Seite, sondern bei den Bauplänen.', '']
+    if fertig:
+        zeilen += ['| Nr. | Idee | Bauplan |', '|---|---|---|']
+        zeilen += ['| %s | %s | [`builds/%s`](builds/%s/) |' % (i['nr'], i['titel'], i.get('bauplan', ''), i.get('bauplan', '')) for i in sorted(fertig, key=lambda x: str(x['nr']))]
+    else:
+        zeilen.append('Noch keine.')
     return '\n'.join(zeilen)
 
 
@@ -62,6 +72,8 @@ def abhaengigkeiten(daten):
         for x in b.get('plugins', []):
             nutzung.setdefault(x['id'], []).append((x['stufe'], 'Bauplan %s' % b['titel']))
     for i in daten['ideen']:
+        if i['status'] == 'verfuegbar':      # steht schon als Bauplan in der Liste
+            continue
         for x in i.get('plugins', []):
             nutzung.setdefault(x['id'], []).append((x['stufe'], 'Idee Nr. %s %s' % (i['nr'], i['titel'])))
     ohne = [b['titel'] for b in builds if not b.get('plugins')]

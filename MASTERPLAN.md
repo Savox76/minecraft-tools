@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 150 Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“ | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 149 offene Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“; 1 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -439,7 +439,8 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 
 **Ablauf**
 - Neue Idee: Eintrag in `ideen/ideen.json` mit der nächsten freien Nummer, danach `python tools/ideen_masterplan.py` ausführen. Das schreibt die Tabellen unten neu.
-- Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. Die Geplant-Seite verlinkt dann direkt auf den Bauplan.
+- Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. **Fertige Ideen verschwinden dann automatisch von der Geplant-Seite** und stehen hier unten unter „Umgesetzt“ zur Erinnerung. In `ideen/ideen.json` bleiben sie erhalten (Nummern werden nie neu vergeben).
+- Der Text über „Als Nächstes“ auf der Geplant-Seite steht in `ideen/ideen.json` unter `empfohlen_text` und wird angepasst, wenn sich die Empfehlung ändert (`"empfohlen": true` an der Idee).
 - Plugins: Braucht eine Idee ein Plugin, steht es unter `plugins` mit `id` und `stufe` (`benoetigt`, `empfohlen`, `optional`). Die Geplant-Seite zeigt es auf der Karte.
 - Abstimmen: Auf der Geplant-Seite führt „Wünschen“ zu einem vorausgefüllten Bauwunsch („Idee #61: Kakaofarm“). Gibt es dazu schon einen offenen Wunsch, zeigt die Seite dessen 👍-Stimmen und verlinkt dorthin.
 - Größe: klein (bis etwa 15 × 15), mittel, groß. Für Nachbauten echter Wahrzeichen gibt der Bauplan einen Maßstab an (wie beim Eiffelturm 1:3).
@@ -447,17 +448,16 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-164 Einträge: 163 💡 Idee, 0 🔨 in Arbeit, 1 ✅ verfügbar.
+163 offene Ideen (163 💡 Idee, 0 🔨 in Arbeit), 1 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
-**Als Nächstes empfohlen:** Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
+**Als Nächstes empfohlen:** Nr. 9 Kleine Bambusfarm, Nr. 11 Bambus-Brennstoffstation.
 
-### Skillfarmen (XP) (10)
+### Skillfarmen (XP) (9)
 
 Erfahrung für Verzauberungen und Reparaturen.
 
 | Nr. | Vorschlag | Größe | Beschreibung | Status |
 |---|---|---|---|---|
-| 1 | Kaktus-XP-Farm mit Ofenbatterie | klein | Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster. Plugin: fakeplayerplugin (empfohlen). | ✅ verfügbar ([Bauplan](builds/kaktus-xp-farm/)) |
 | 2 | Seetang-XP-Ofen | klein | Wie die Kaktus-Farm, nur mit Seetang. Gibt weniger Erfahrung, liefert dafür getrockneten Seetang, der als Block ein guter Brennstoff ist. | 💡 Idee |
 | 3 | Dunkelraum-Monsterfarm | mittel | Ein dunkler Turm, in dem Monster spawnen und in eine Kammer fallen, wo ein Schlag reicht. Nebenbei Knochen, Pfeile, Schießpulver und Fäden. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
 | 4 | Spawner-XP-Farm | klein | Rund um einen gefundenen Zombie- oder Skelett-Spawner. Sehr ergiebig und schnell gebaut, aber nur dort möglich, wo ein Spawner liegt. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
@@ -691,6 +691,14 @@ Wissen rund um Server, Farmen und Bauen.
 | A12 | Dorfbewohner-Handel verbessern | Arbeitsblöcke, Heilen von Zombie-Dorfbewohnern und bessere Preise. | 💡 Idee |
 | A13 | Wahrzeichen in Blöcke umrechnen | Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt. | 💡 Idee |
 | A14 | Elytra finden und nutzen | Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze. | 💡 Idee |
+
+### ✅ Umgesetzt (1)
+
+Diese Ideen sind fertige Baupläne. Sie stehen nicht mehr auf der Geplant-Seite, sondern bei den Bauplänen.
+
+| Nr. | Idee | Bauplan |
+|---|---|---|
+| 1 | Kaktus-XP-Farm mit Ofenbatterie | [`builds/kaktus-xp-farm`](builds/kaktus-xp-farm/) |
 <!-- ideen:ende -->
 
 ---
@@ -764,7 +772,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
 | Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle, Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
-| FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Bauplan Kaktus-XP-Farm, Idee Nr. 1 Kaktus-XP-Farm mit Ofenbatterie, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 150 Große Kaktusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
+| FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Gewächshaus-Farm, Bauplan Kaktus-XP-Farm, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 9 Kleine Bambusfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 150 Große Kaktusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
 | ServerHilfe (eigenes) | – | Idee Nr. 53 Rathaus mit Uhrturm am Spawn | – |

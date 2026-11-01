@@ -1,5 +1,9 @@
 {
- "_hinweis": "Ideen für neue Baupläne und Anleitungen. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py).",
+ "_hinweis": "Ideen für neue Baupläne und Anleitungen. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py). Ideen mit status \"verfuegbar\" erscheinen nicht mehr auf der Website, sondern im Masterplan unter „Umgesetzt“.",
+ "empfohlen_text": {
+  "de": "Passt zur fertigen Kaktus-XP-Farm: Die Bambusfarm liefert den Brennstoff, die Brennstoffstation bringt ihn automatisch in den Ofen.",
+  "en": "Goes with the finished cactus XP farm: the bamboo farm supplies the fuel, and the fuel station carries it into the furnace automatically."
+ },
  "kategorien": [
   {
    "id": "xp",

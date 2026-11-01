@@ -377,9 +377,14 @@ def main():
         pruefe_plugins(f'ideen/ideen.json Nr. {i["nr"]}', i.get('plugins'))
         if i.get('bauplan') and i['bauplan'] not in gebaut:
             print(f'  Hinweis: Idee {i["nr"]} verweist auf unbekannten Bauplan {i["bauplan"]}')
+    # Fertige Ideen (status verfuegbar) sind jetzt Baupläne: sie stehen nur noch im Masterplan unter „Umgesetzt“
+    umgesetzt = [i for i in ideen['ideen'] if i['status'] == 'verfuegbar']
+    ideen['ideen'] = [i for i in ideen['ideen'] if i['status'] != 'verfuegbar']
+    ideen['umgesetzt'] = len(umgesetzt)
     schreib_json(os.path.join(OUT, 'data', 'ideen.json'), ideen)
     katalog['ideen_anzahl'] = len(ideen['ideen'])
-    print(f'Ideen    {len(ideen["ideen"])}')
+    katalog['ideen_umgesetzt'] = len(umgesetzt)
+    print(f'Ideen    {len(ideen["ideen"])} offen, {len(umgesetzt)} umgesetzt')
     import subprocess
     subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'ideen_masterplan.py'), '--pruefen'])
 

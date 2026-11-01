@@ -992,8 +992,7 @@ class Seiten:
         empf = [i for i in IDS if i.get('empfohlen')]
         if empf:
             teile.append('<section class="ideen-gruppe empfohlen"><h2>%s</h2><p>%s</p><div class="ideen-raster">%s</div></section>' % (
-                t('Als Nächstes', 'Up next'), t('Diese drei ergeben zusammen einen kleinen Kreislauf: Bambus heizt die Öfen, der Kaktus liefert dabei XP und Farbstoff.',
-                                              'Together these three form a small loop: bamboo heats the furnaces while the cactus delivers XP and dye.'),
+                t('Als Nächstes', 'Up next'), H(self.ideen.get('empfohlen_text', {}).get(lang, '')),
                 ''.join(karte(i, False) for i in empf)))
         for k in self.ideen['kategorien']:
             liste = [i for i in IDS if i['kategorie'] == k['id']]
@@ -1008,7 +1007,7 @@ class Seiten:
                 ''.join('<div><b>%d</b><span>%s</span></div>' % (n, l) for n, l in (
                     (sum(1 for i in IDS if i['kategorie'] != 'anleitungen'), t('Bauplan-Ideen', 'build ideas')),
                     (sum(1 for i in IDS if i['kategorie'] == 'anleitungen'), t('Anleitungen', 'guides')),
-                    (zahl['in-arbeit'], ST['in-arbeit']), (zahl['verfuegbar'], ST['verfuegbar']))),
+                    (zahl['in-arbeit'], ST['in-arbeit']), (self.ideen.get('umgesetzt', 0), t('schon als Bauplan fertig', 'already finished as builds')))),
                 ''.join(teile))
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'CollectionPage', 'name': t('Geplante Minecraft-Baupläne', 'Planned Minecraft builds'), 'url': self.voll(pfad(lang, 'geplant')), 'inLanguage': lang},
