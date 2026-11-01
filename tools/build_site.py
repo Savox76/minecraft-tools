@@ -239,6 +239,15 @@ def main():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     shutil.copytree(os.path.join(ROOT, 'site'), OUT)
+    # Versionsnummer gegen veraltete Dateien im Browser-Zwischenspeicher (GitHub Pages speichert 10 Minuten)
+    import time
+    version = (os.environ.get('GITHUB_SHA') or '')[:8] or time.strftime('%Y%m%d%H%M%S')
+    pfad_js = os.path.join(OUT, 'js', 'app.js')
+    with open(pfad_js, encoding='utf-8') as f:
+        js = f.read()
+    js = js.replace('__VERSION__', version).replace("from './render.js'", "from './render.js?v=%s'" % version)
+    with open(pfad_js, 'w', encoding='utf-8') as f:
+        f.write(js)
 
     katalog = {'builds': [], 'plugins': [], 'fremd': [], 'docs': [], 'wuensche': [], 'kategorien': KATEGORIEN,
                'plugin_kategorien': PLUGIN_KATEGORIEN, 'kategorien_en': KATEGORIEN_EN,
@@ -247,6 +256,7 @@ def main():
     cfg = lies_json(os.path.join(ROOT, 'tools', 'site_config.json'))
     if os.environ.get('SITE_URL'):
         cfg['site_url'] = os.environ['SITE_URL']
+    cfg['version'] = version
     from urllib.parse import urlparse
     base = urlparse(cfg['site_url']).path or '/'
     alle_builds, docs_html = [], {}

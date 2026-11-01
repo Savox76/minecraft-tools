@@ -2,6 +2,7 @@ import { prepare, draw, partIcon, shapeOf, VIEWS } from './render.js';
 
 const REPO = 'https://github.com/Savox76/minecraft-tools';
 const BASE = document.querySelector('meta[name="site-base"]')?.content || '/';
+const V = '__VERSION__';   // beim Bauen ersetzt, damit nach einem Update keine alten Daten aus dem Zwischenspeicher kommen
 const main = document.getElementById('inhalt');
 const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const cssv = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -51,11 +52,11 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => redr
 let KAT = null;
 const builds = new Map();
 async function katalog() {
-  if (!KAT) KAT = await (await fetch(`${BASE}data/katalog.json`)).json();
+  if (!KAT) KAT = await (await fetch(`${BASE}data/katalog.json?v=${V}`)).json();
   return KAT;
 }
 async function ladeBau(id) {
-  if (!builds.has(id)) builds.set(id, fetch(`${BASE}data/builds/${id}.json`).then((r) => r.json()));
+  if (!builds.has(id)) builds.set(id, fetch(`${BASE}data/builds/${id}.json?v=${V}`).then((r) => r.json()));
   return builds.get(id);
 }
 const farben = () => ({ fadeTo: cssv('--sheet'), highlight: cssv('--hl'), ground: cssv('--sheet-2'), gridLine: cssv('--line') });
@@ -304,7 +305,7 @@ async function anleitungSeite(id) {
   const k = await katalog();
   const d = k.docs.find((x) => x.id === id);
   if (!d) return nichtGefunden();
-  const html = await (await fetch(`${BASE}data/seiten/doc-${id}${!de && d.en ? '.en' : ''}.html`)).text();
+  const html = await (await fetch(`${BASE}data/seiten/doc-${id}${!de && d.en ? '.en' : ''}.html?v=${V}`)).text();
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
     <div class="krumen"><a href="${url('anleitungen')}">${tr('Anleitungen', 'Guides')}</a> / ${esc(lo(d, 'titel'))}</div>
     <h1>${esc(lo(d, 'titel'))}</h1><p class="lede">${esc(lo(d, 'kurz'))}</p></div></section>

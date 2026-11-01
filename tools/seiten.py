@@ -42,17 +42,13 @@ def stacks(n, lang='de'):
 
 # ---------------------------------------------------------------- Bilder
 
-FORM = [
-    ('mob', r'Dorfbewohner'), ('flat', r'Redstonestaub|Seerosenblatt'), ('low', r'Komparator|Verstärker'),
-    ('crop', r'Karotten|Kartoffeln'), ('slab', r'Bett'),
-    ('thin', r'Falltür|Zauntor|Tür|Zaun|Mauer|Eisengitter|Blitzableiter|Laterne|Leiter|fackel|Glasscheibe'),
-    ('slab', r'Stufe'), ('glass', r'^Glas$'), ('water', r'Wasser|Meer'),
-]
-
-
-def form(name):
-    for f, rx in FORM:
-        if re.search(rx, name):
+def form(n):
+    """Gleiche Formen wie shapeOf() in site/js/render.js."""
+    for f, rx in (('mob', r'Dorfbewohner'), ('flat', r'Redstonestaub|Seerosenblatt'), ('low', r'Komparator|Verstärker'),
+                  ('crop', r'Karotten|Kartoffeln'), ('bed', r'Bett'), ('plate', r'Falltür'), ('panel', r'Zauntor|Tür'),
+                  ('thin', r'Zaun|Mauer|Eisengitter|Blitzableiter|Laterne|Leiter|fackel'), ('pane', r'Glasscheibe'),
+                  ('slab', r'Stufe'), ('glass', r'^Glas$'), ('water', r'Wasser|Meer')):
+        if re.search(rx, n):
             return f
     return 'full'
 
@@ -62,17 +58,19 @@ def hexrgb(h):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
 
-def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.88):
-    """Isometrisches Bild des fertigen Bauwerks: transparenter Hintergrund, weicher Bodenschatten,
-    feine Kanten. Dreifache Auflösung für saubere Kanten."""
+def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.92, schatten=False):
+    """Isometrisches Bild des fertigen Bauwerks mit transparentem Hintergrund.
+    Zeichnet genau wie site/js/render.js (durchscheinendes Glas und Wasser, gleiche Schattierung),
+    damit das vorgerenderte Bild und die Ansicht im Browser gleich aussehen. Vierfache Auflösung für saubere Kanten."""
     from PIL import Image, ImageDraw, ImageFilter
-    S = 3
+    S = 4
     W, Hh = breite * S, hoehe * S
     X, Y, Z = model['size']['x'], model['size']['y'], model['size']['z']
     pal = model['palette']
     idx = {p['key']: i for i, p in enumerate(pal)}
     formen = [form(p['name']) for p in pal]
     farben = [hexrgb(p['color']) for p in pal]
+    kontext = ['vorhanden' in (p.get('flags') or []) for p in pal]
     grid = {}
     for y, ebene in enumerate(model['layers']):
         for z, reihe in enumerate(ebene):
@@ -89,7 +87,7 @@ def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.88):
     K = 1.15
     xs = [x - z for (x, y, z) in grid]
     ys = [(x + z) / 2 - (y + 1) * K for (x, y, z) in grid] + [(x + z) / 2 + 1 for (x, y, z) in grid]
-    x0, x1, y0, y1 = min(xs) - 1, max(xs) + 1, min(ys), max(ys) + .6
+    x0, x1, y0, y1 = min(xs) - 1, max(xs) + 1, min(ys), max(ys)
     a = min(W * fuellung / (x1 - x0), Hh * fuellung / (y1 - y0))
     ox = W / 2 - (x0 + x1) / 2 * a
     oy = Hh / 2 - (y0 + y1) / 2 * a
@@ -98,65 +96,101 @@ def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.88):
     def P(u, v, y):
         return (ox + (u - v) * a, oy + (u + v) * a / 2 - y * c)
 
-    # Bodenschatten
-    boden = [P(x + du, z + dv, 0) for (x, y, z) in grid if y <= 1 for du in (0, 1) for dv in (0, 1)]
-    schatten = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
-    if boden:
+    if schatten:
+        boden = [P(x + du, z + dv, 0) for (x, y, z) in grid if y <= 1 for du in (0, 1) for dv in (0, 1)]
+        sch = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
         bx0, bx1 = min(p[0] for p in boden), max(p[0] for p in boden)
         by0, by1 = min(p[1] for p in boden), max(p[1] for p in boden)
-        sg = ImageDraw.Draw(schatten)
         mx, my = (bx0 + bx1) / 2, by1 - (by1 - by0) * .35
         rx, ry = (bx1 - bx0) * .5, max((by1 - by0) * .4, a * 1.5)
-        sg.ellipse([mx - rx, my - ry, mx + rx, my + ry], fill=(20, 30, 40, 70))
-        schatten = schatten.filter(ImageFilter.GaussianBlur(max(6, a * 1.2)))
-    bild.alpha_composite(schatten)
+        ImageDraw.Draw(sch).ellipse([mx - rx, my - ry, mx + rx, my + ry], fill=(20, 30, 40, 60))
+        bild.alpha_composite(sch.filter(ImageFilter.GaussianBlur(max(6, a * 1.2))))
 
     g = ImageDraw.Draw(bild)
-    kanten = a >= 4 * S
-    kb = max(1, int(a * .05))
+    hg = (255, 255, 255)
+    kante = max(1, round(.6 * S))
 
-    def ton(col, f, misch=0.0, gegen=(225, 236, 244)):
-        col = tuple(int(col[i] + (gegen[i] - col[i]) * misch) for i in range(3))
-        return tuple(max(0, min(255, int(v * f))) for v in col) + (255,)
+    def farbe(col, f, al):
+        return (min(255, round(col[0] * f)), min(255, round(col[1] * f)), min(255, round(col[2] * f)), round(255 * al))
 
-    voll = lambda k: k is not None and formen[k] == 'full'
-    for (x, y, z) in sorted(grid, key=lambda p: (p[0] + p[1] + p[2], p[1])):
+    def flaeche(pts, fuell):
+        # Deckende Flächen direkt zeichnen; durchscheinende (Glas, Wasser) wirklich überblenden,
+        # denn ImageDraw ersetzt auf RGBA-Bildern sonst die Pixel samt Transparenz.
+        if fuell[3] == 255:
+            g.polygon(pts, fill=fuell)
+            return
+        bx0, by0 = int(min(q[0] for q in pts)), int(min(q[1] for q in pts))
+        bx1, by1 = int(max(q[0] for q in pts)) + 2, int(max(q[1] for q in pts)) + 2
+        if bx1 <= bx0 or by1 <= by0:
+            return
+        stueck = Image.new('RGBA', (bx1 - bx0, by1 - by0), (0, 0, 0, 0))
+        ImageDraw.Draw(stueck).polygon([(q[0] - bx0, q[1] - by0) for q in pts], fill=fuell)
+        bild.alpha_composite(stueck, dest=(bx0, by0))
+
+    def nachbar(x, y, z):
+        k = grid.get((x, y, z))
+        return None if k is None else formen[k]
+
+    for (x, y, z) in sorted(grid, key=lambda q: (q[0] + q[1] + q[2], q[1])):
         k = grid[(x, y, z)]
-        f, col = formen[k], farben[k]
-        u0, u1, v0, v1, y0_, y1_ = x, x + 1, z, z + 1, y, y + 1
-        misch = 0.0
-        if f == 'thin':
+        shp, col = formen[k], farben[k]
+        u0, u1, v0, v1, y0_, y1_, al = x, x + 1, z, z + 1, y, y + 1, 1.0
+        if shp == 'thin':
             u0 += .32; u1 -= .32; v0 += .32; v1 -= .32
-        elif f == 'slab':
+        elif shp == 'slab':
             y1_ = y + .5
-        elif f == 'flat':
+        elif shp == 'bed':
+            y1_ = y + .56
+        elif shp == 'flat':
             y1_ = y + .07
-        elif f == 'low':
+        elif shp == 'low':
             y1_ = y + .14
-        elif f == 'crop':
+        elif shp == 'crop':
             y1_ = y + .45; u0 += .12; u1 -= .12; v0 += .12; v1 -= .12
-        elif f == 'mob':
+        elif shp == 'mob':
             y1_ = y + 1.85; u0 += .26; u1 -= .26; v0 += .26; v1 -= .26
-        elif f == 'glass':
-            misch = .5
-        elif f == 'water':
-            misch = .2; y1_ = y + .88
-        oben = not (f == 'full' and voll(grid.get((x, y + 1, z))))
-        rechts = not (f in ('full', 'glass') and voll(grid.get((x + 1, y, z))))
-        links = not (f in ('full', 'glass') and voll(grid.get((x, y, z + 1))))
-        flaechen = []
-        if links:
-            flaechen.append(([P(u0, v1, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u0, v1, y0_)], .66))
-        if rechts:
-            flaechen.append(([P(u1, v0, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u1, v0, y0_)], .82))
-        if oben:
-            flaechen.append(([P(u0, v0, y1_), P(u1, v0, y1_), P(u1, v1, y1_), P(u0, v1, y1_)], 1.04))
-        for pts, licht in flaechen:
-            fuell = ton(col, licht, misch)
-            if kanten and f in ('full', 'glass', 'slab'):
-                g.polygon(pts, fill=fuell, outline=ton(col, licht * .8, misch), width=kb)
+        elif shp == 'glass':
+            al = .42
+        elif shp == 'water':
+            al = .7; y1_ = y + .88
+        if shp in ('pane', 'panel'):
+            wand = lambda n: n is not None and n != 'water'
+            au = wand(nachbar(x - 1, y, z)) or wand(nachbar(x + 1, y, z))
+            av = wand(nachbar(x, y, z - 1)) or wand(nachbar(x, y, z + 1))
+            t = .44 if shp == 'pane' else .4
+            if au and not av:
+                v0 += t; v1 -= t
+            elif av and not au:
+                u0 += t; u1 -= t
             else:
-                g.polygon(pts, fill=fuell)
+                u0 += t; u1 -= t; v0 += t; v1 -= t
+            if shp == 'pane':
+                al = .6
+        if shp == 'plate':
+            voll_ = lambda n: n == 'full'
+            if voll_(nachbar(x - 1, y, z)): u1 = x + .18
+            elif voll_(nachbar(x + 1, y, z)): u0 = x + .82
+            elif voll_(nachbar(x, y, z - 1)): v1 = z + .18
+            elif voll_(nachbar(x, y, z + 1)): v0 = z + .82
+            else: u0 += .4; u1 -= .4; v0 += .4; v1 -= .4
+        ist_voll = shp in ('full', 'glass', 'water')
+        verdeckt = lambda n: n is not None and (n == 'full' or (n == shp and shp in ('glass', 'water')))
+        oben = not (ist_voll and shp != 'water' and verdeckt(nachbar(x, y + 1, z)))
+        rechts = not (ist_voll and verdeckt(nachbar(x + 1, y, z)))
+        links = not (ist_voll and verdeckt(nachbar(x, y, z + 1)))
+        if kontext[k]:
+            col = tuple(round(col[i] + (hg[i] - col[i]) * .62) for i in range(3))
+            if al < 1:
+                al *= .6
+        if links:
+            flaeche([P(u0, v1, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u0, v1, y0_)], farbe(col, .64, al))
+        if rechts:
+            flaeche([P(u1, v0, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u1, v0, y0_)], farbe(col, .8, al))
+        if oben:
+            deckel = [P(u0, v0, y1_), P(u1, v0, y1_), P(u1, v1, y1_), P(u0, v1, y1_)]
+            flaeche(deckel, farbe(col, 1, al))
+            if shp == 'full' and a >= 5 * S:
+                g.line(deckel + [deckel[0]], fill=(0, 0, 0, 36), width=kante)
     return bild.resize((breite, hoehe), Image.LANCZOS)
 
 
@@ -178,22 +212,27 @@ def og_bild(ziel, titel, unterzeile, modell_bild=None):
         t = yy / 629
         g.line([(0, yy), (1200, yy)], fill=tuple(int(a + (b - a) * t) for a, b in zip((246, 248, 250), (222, 230, 238))))
     if modell_bild is not None:
-        img.paste(modell_bild, (520, 10), modell_bild)
+        img.paste(modell_bild, (590, 20), modell_bild)
     g.polygon([(70, 66), (100, 83), (100, 109), (70, 126), (40, 109), (40, 83)], fill=(27, 35, 44))
     g.polygon([(70, 66), (100, 83), (70, 100), (40, 83)], fill=(244, 180, 0))
     g.polygon([(70, 100), (70, 126), (40, 109), (40, 83)], fill=(74, 88, 102))
-    f1, f2, f3 = schrift(30), schrift(64 if len(titel) < 18 else 52), schrift(28, False)
+    f1, f3 = schrift(30), schrift(28, False)
     if not f1:
         img.save(ziel, optimize=True); return
     g.text((118, 78), 'Savox Bauwerkstatt', font=f1, fill=(27, 35, 44))
-    zeilen, zeile = [], ''
-    for wort in titel.split():
-        probe = (zeile + ' ' + wort).strip()
-        if g.textlength(probe, font=f2) > 500 and zeile:
-            zeilen.append(zeile); zeile = wort
-        else:
-            zeile = probe
-    zeilen.append(zeile)
+    # Titel umbrechen und so weit verkleinern, dass er links vom Bauwerk bleibt (höchstens 520 px breit)
+    for groesse in (64, 58, 52, 46, 42):
+        f2 = schrift(groesse)
+        zeilen, zeile = [], ''
+        for wort in titel.split():
+            probe = (zeile + ' ' + wort).strip()
+            if g.textlength(probe, font=f2) > 520 and zeile:
+                zeilen.append(zeile); zeile = wort
+            else:
+                zeile = probe
+        zeilen.append(zeile)
+        if max(g.textlength(z, font=f2) for z in zeilen) <= 520 and len(zeilen) <= 3:
+            break
     yy = 250 - 36 * (len(zeilen) - 1)
     for z in zeilen[:3]:
         g.text((40, yy), z, font=f2, fill=(27, 35, 44)); yy += f2.size + 10
@@ -315,7 +354,7 @@ class Seiten:
             'VERIFIKATION': '\n'.join(verif), 'JSONLD': json.dumps(jsonld, ensure_ascii=False).replace('</', '<\\/'),
             'INHALT': inhalt, 'FUSS_LINKS': self.fuss_links(), 'NAV': nav, 'SPRACHE': sprache, 'THEMA': thema,
             'TXT_SKIP': L['skip'], 'TXT_START': L['start'], 'TXT_FUSS': L['fuss'], 'TXT_GITHUB': L['github'],
-            'TXT_DISCLAIMER': L['disclaimer'], 'TXT_ALLE_SEITEN': L['alle_seiten'], 'START': self.link(),
+            'TXT_DISCLAIMER': L['disclaimer'], 'V': self.cfg.get('version', '1'), 'TXT_ALLE_SEITEN': L['alle_seiten'], 'START': self.link(),
         }
         text = self.vorlage
         for k, v in felder.items():
@@ -341,7 +380,7 @@ class Seiten:
         return ('<a class="karte" href="%s"><div class="bild"><img src="%s" alt="%s" width="800" height="600" loading="lazy"></div>'
                 '<div class="text"><div class="chips">%s%s</div><h3>%s</h3><p>%s</p>'
                 '<div class="fakten">%s<span><b>%s</b> %s</span><span><b>%d</b> %s</span></div></div></a>') % (
-            self.link("bau", b["id"]), self.base + 'bilder/%s.png' % b['id'],
+            self.link("bau", b["id"]), self.base + 'bilder/%s.png?v=%s' % (b['id'], self.cfg.get('version', '1')),
             H(self.t('Minecraft-Bauplan %s, fertiges Bauwerk', 'Minecraft build %s, finished') % titel), edition(b['edition']),
             '<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else '',
             H(titel), H(lok(b, 'beschreibung', self.lang)), punkte(b['schwierigkeit'], self.lang),
@@ -391,7 +430,7 @@ class Seiten:
             schnitt = bool(b.get('ansicht', {}).get('schnitt'))
             img = zeichne_modell(b['model'], 800, 600, schnitt=schnitt)
             img.save(os.path.join(self.out, 'bilder', '%s.png' % b['id']), optimize=True)
-            self.modellbilder[b['id']] = zeichne_modell(b['model'], 660, 610, schnitt=schnitt, fuellung=.9)
+            self.modellbilder[b['id']] = zeichne_modell(b['model'], 590, 590, schnitt=schnitt, fuellung=.9, schatten=True)
 
     def og_bilder(self):
         for b in self.builds:
