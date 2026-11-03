@@ -1,0 +1,262 @@
+{
+  "id": "bambusfarm-klein",
+  "titel": "Kleine Bambusfarm",
+  "beschreibung": "Kompakte, vollautomatische Bambusfarm: Acht Bambusstangen wachsen in einer Reihe. Zwei Beobachter merken, wenn eine Stange hoch genug ist, dann schieben acht Kolben die Stangen ab. Eine Wasserrinne bringt den Bambus in ein Fass. Liefert Brennstoff für Öfen und Holz für Bambusbretter.",
+  "kategorie": "technik",
+  "tags": [
+    "farm",
+    "bambus",
+    "brennstoff",
+    "redstone",
+    "automatisch"
+  ],
+  "edition": [
+    "java"
+  ],
+  "schwierigkeit": 2,
+  "bauzeit_stunden": [
+    1,
+    2
+  ],
+  "grundflaeche": "10 × 5",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Achte besonders darauf, dass Kolben und Beobachter nach Süden zum Bambus zeigen und dass das Wasser erst kommt, wenn der Bambus aus dem Setzling herausgewachsen ist.",
+  "abschnitte": [
+    {
+      "name": "Fundament mit Fass",
+      "von": 0,
+      "bis": 0,
+      "text": "Grundplatte 10 × 5 aus Steinziegeln, am besten einen Block tief in den Boden gesetzt. In der mittleren Reihe liegen acht Erdblöcke für den Bambus. Davor, an der Ostseite, ein Trichter, der nach Osten in ein Fass zeigt."
+    },
+    {
+      "name": "Bambus und Wasserrinne",
+      "von": 1,
+      "bis": 1,
+      "text": "Pflanze auf jede Erde einen Bambus. Hinten (Norden) kommen zwei Reihen Steinziegel, vorne eine Wasserrinne und eine Glaswand. In die Rinne kommt nur eine Wasserquelle ganz im Westen. Das Wasser fließt von selbst nach Osten bis über den Trichter."
+    },
+    {
+      "name": "Kolben",
+      "von": 2,
+      "bis": 2,
+      "text": "Hinter jede Bambusstange kommt in Höhe der zweiten Stange ein Kolben, der nach Süden zum Bambus zeigt. Dahinter eine Reihe Steinziegel als Träger für den Redstonestaub. An den Seiten und vorne Glas."
+    },
+    {
+      "name": "Beobachter und Redstone",
+      "von": 3,
+      "bis": 3,
+      "text": "Auf den zweiten und den sechsten Kolben kommt je ein Beobachter, dessen Gesicht nach Süden auf den Bambus schaut. Auf die Steinziegel dahinter kommt eine Reihe Redstonestaub. Über den übrigen Kolben, an den Seiten und vorne Glas."
+    },
+    {
+      "name": "Laternen",
+      "von": 4,
+      "bis": 4,
+      "text": "Vier Laternen auf die Ecken der Glaswände. Sie halten Monster fern, der Bambus wächst trotzdem nur bei offenem Himmel."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "So funktioniert die Farm",
+      "text": "Der Bambus wächst nach oben. Erreicht eine der beiden beobachteten Stangen die dritte Höhe, gibt der Beobachter einen kurzen Redstone-Impuls nach hinten in den Staub. Der Staub schaltet alle acht Kolben. Sie stoßen in die zweite Höhe des Bambus, das Stück bricht samt allem darüber ab. Die unterste Stange bleibt stehen und wächst nach."
+    },
+    {
+      "titel": "Richtung von Beobachter und Kolben",
+      "text": "Das Gesicht des Beobachters muss zum Bambus schauen, der rote Punkt nach hinten zum Staub. Am einfachsten: Stell dich auf die Staub-Seite, schau nach Süden zum Bambus und setze den Beobachter. Den Kolben setzt du genauso, mit Blick zum Bambus."
+    },
+    {
+      "titel": "Reihenfolge beim Bauen",
+      "text": "Erst Erde und Bambus, dann warten, bis jede Stange mindestens zwei Blöcke hoch ist. Ein frisch gepflanzter Bambus ist ein Setzling, und den zerstört fließendes Wasser. Erst danach die Wasserquelle setzen, zum Schluss Kolben, Beobachter und Staub."
+    },
+    {
+      "titel": "Was sie liefert",
+      "text": "Jede Stange wächst bei offenem Himmel etwa 15 bis 20 Blöcke pro Stunde, zusammen rund 140. Einzelne Stücke bleiben neben den Stümpfen liegen oder fliegen daneben. Rechne mit etwa 100 bis 130 Bambus pro Stunde im Fass."
+    },
+    {
+      "titel": "Wofür der Bambus gut ist",
+      "text": "Ein Bambus schmilzt im Ofen ein Viertel Gegenstand. Für die Kaktus-XP-Farm reichen 4 Bambus pro Kaktus, und dabei verglüht nichts. Neun Bambus ergeben einen Bambusblock, daraus werden Bambusbretter. Aus zwei Bambus entsteht ein Stock, aus sechs Bambus und einer Schnur ein Gerüst."
+    },
+    {
+      "titel": "Größer bauen",
+      "text": "Die Reihe lässt sich nach Osten verlängern. Pro weiterer Stange: ein Erdblock, ein Kolben, ein Staub. Ab 15 Stangen braucht der Staub einen Verstärker, und das Wasser braucht eine zweite Quelle, weil es nur 7 Blöcke weit fließt."
+    },
+    {
+      "titel": "Läuft nur in der Nähe",
+      "text": "Bambus wächst nur, wenn ein Spieler oder der Farm-Bot höchstens 128 Blöcke entfernt ist. Bau die Farm deshalb nahe an deine Basis oder an die Farm-Bot-Zentrale."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Bruchstein",
+      "menge": 122,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "78 zu Stein schmelzen und zu Steinziegeln verarbeiten, der Rest für Kolben und Beobachter"
+    },
+    {
+      "name": "Redstone",
+      "menge": 20,
+      "quelle": "Höhlen oder Hexenfarm",
+      "hinweis": "Kolben, Beobachter und Staub"
+    },
+    {
+      "name": "Netherquarz",
+      "menge": 2,
+      "quelle": "Nether",
+      "hinweis": "je einer pro Beobachter"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 17,
+      "quelle": "Eisenfarm",
+      "hinweis": "Kolben, Trichter und Laternen"
+    },
+    {
+      "name": "Sand",
+      "menge": 44,
+      "quelle": "Wüste oder Strand",
+      "hinweis": "zu Glas schmelzen"
+    },
+    {
+      "name": "Bambus",
+      "menge": 8,
+      "quelle": "Dschungel oder Bambusdschungel",
+      "hinweis": "zum Anpflanzen, danach wächst er von selbst"
+    },
+    {
+      "name": "Erde",
+      "menge": 8,
+      "quelle": "überall",
+      "hinweis": "auch Gras, Sand, Kies oder Moos gehen"
+    },
+    {
+      "name": "Holzstamm",
+      "menge": 10,
+      "quelle": "Baumfarm oder Holzfäller-Arbeiter",
+      "hinweis": "Kolben, Truhe für den Trichter und Fass"
+    },
+    {
+      "name": "Wassereimer",
+      "menge": 1,
+      "quelle": "unendliche Wasserquelle",
+      "hinweis": "eine Quelle ganz im Westen der Rinne"
+    }
+  ],
+  "schmelzvorgaenge": 122,
+  "version": "0.9.0",
+  "autor": "Savox",
+  "plugins": [
+    {
+      "id": "fakeplayerplugin",
+      "stufe": "empfohlen",
+      "grund": "Bambus wächst nur, wenn ein Spieler höchstens 128 Blöcke entfernt ist. Ein Farm-Bot hält die Farm am Laufen, wenn niemand online ist.",
+      "en": {
+        "grund": "Bamboo only grows when a player is within 128 blocks. A farm bot keeps the farm running when nobody is online."
+      }
+    }
+  ],
+  "en": {
+    "titel": "Small Bamboo Farm",
+    "beschreibung": "A compact, fully automatic bamboo farm: eight bamboo stalks grow in a row. Two observers notice when a stalk is tall enough, then eight pistons push the stalks off. A water channel carries the bamboo into a barrel. Provides fuel for furnaces and wood for bamboo planks.",
+    "grundflaeche": "10 × 5",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. Pay special attention that pistons and observers face south towards the bamboo, and that the water only comes once the bamboo has grown out of the shoot stage.",
+    "abschnitte": [
+      {
+        "name": "Foundation with barrel",
+        "text": "A 10 × 5 base of stone bricks, ideally set one block into the ground. The middle row holds eight dirt blocks for the bamboo. In front of it, on the east side, a hopper pointing east into a barrel."
+      },
+      {
+        "name": "Bamboo and water channel",
+        "text": "Plant a bamboo on each dirt block. At the back (north) go two rows of stone bricks, at the front a water channel and a glass wall. Only one water source goes into the channel, at the far west end. The water flows east by itself until it is above the hopper."
+      },
+      {
+        "name": "Pistons",
+        "text": "Behind every bamboo stalk, at the height of the second stalk block, goes a piston facing south towards the bamboo. Behind them a row of stone bricks to carry the redstone dust. Glass on the sides and at the front."
+      },
+      {
+        "name": "Observers and redstone",
+        "text": "On top of the second and the sixth piston goes an observer whose face looks south at the bamboo. A row of redstone dust goes on the stone bricks behind. Glass above the other pistons, on the sides and at the front."
+      },
+      {
+        "name": "Lanterns",
+        "text": "Four lanterns on the corners of the glass walls. They keep monsters away; the bamboo still only grows under open sky."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "How the farm works",
+        "text": "The bamboo grows upwards. When one of the two watched stalks reaches the third block, the observer sends a short redstone pulse backwards into the dust. The dust fires all eight pistons. They push into the second block of the bamboo, which breaks off together with everything above it. The bottom block stays and grows back."
+      },
+      {
+        "titel": "Observer and piston direction",
+        "text": "The observer's face must look at the bamboo, the red dot points back to the dust. Easiest way: stand on the dust side, look south at the bamboo and place the observer. Place the piston the same way, looking at the bamboo."
+      },
+      {
+        "titel": "Build order",
+        "text": "First dirt and bamboo, then wait until every stalk is at least two blocks tall. Freshly planted bamboo is a shoot, and flowing water destroys it. Only then place the water source, and finally the pistons, observers and dust."
+      },
+      {
+        "titel": "What it delivers",
+        "text": "Under open sky each stalk grows about 15 to 20 blocks per hour, about 140 in total. A few pieces stay next to the stumps or fly past the channel. Expect about 100 to 130 bamboo per hour in the barrel."
+      },
+      {
+        "titel": "What the bamboo is good for",
+        "text": "One bamboo smelts a quarter of an item in a furnace. The cactus XP farm needs 4 bamboo per cactus, and nothing burns away unused. Nine bamboo make a block of bamboo, which turns into bamboo planks. Two bamboo make a stick, six bamboo and a string make scaffolding."
+      },
+      {
+        "titel": "Building it bigger",
+        "text": "The row can be extended to the east. Per extra stalk: one dirt block, one piston, one dust. From 15 stalks on the dust needs a repeater, and the water needs a second source, because it only flows 7 blocks."
+      },
+      {
+        "titel": "Only works nearby",
+        "text": "Bamboo only grows when a player or the farm bot is within 128 blocks. So build the farm close to your base or to the farm bot base."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt 78 into stone and craft stone bricks, the rest for pistons and observers"
+      },
+      {
+        "name": "Redstone",
+        "quelle": "Caves or witch farm",
+        "hinweis": "pistons, observers and dust"
+      },
+      {
+        "name": "Nether quartz",
+        "quelle": "Nether",
+        "hinweis": "one per observer"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "pistons, hopper and lanterns"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Desert or beach",
+        "hinweis": "smelt into glass"
+      },
+      {
+        "name": "Bamboo",
+        "quelle": "Jungle or bamboo jungle",
+        "hinweis": "for planting, then it grows by itself"
+      },
+      {
+        "name": "Dirt",
+        "quelle": "everywhere",
+        "hinweis": "grass, sand, gravel or moss work too"
+      },
+      {
+        "name": "Logs",
+        "quelle": "Tree farm or lumberjack worker",
+        "hinweis": "pistons, chest for the hopper and barrel"
+      },
+      {
+        "name": "Water bucket",
+        "quelle": "Infinite water source",
+        "hinweis": "one source at the far west end of the channel"
+      }
+    ]
+  }
+}

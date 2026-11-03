@@ -1,10 +1,9 @@
 {
  "_hinweis": "Ideen für neue Baupläne und Anleitungen. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py). Ideen mit status \"verfuegbar\" erscheinen nicht mehr auf der Website, sondern im Masterplan unter „Umgesetzt“.",
  "empfohlen_text": {
-  "de": "Passt zur fertigen Kaktus-XP-Farm: Die Bambusfarm liefert den Brennstoff, die Brennstoffstation bringt ihn automatisch in den Ofen.",
-  "en": "Goes with the finished cactus XP farm: the bamboo farm supplies the fuel, and the fuel station carries it into the furnace automatically.",
+  "de": "Passt zu den fertigen Farmen: Die Bambus-Brennstoffstation bringt den Bambus der Bambusfarm automatisch in den Ofen der Kaktus-XP-Farm.",
+  "en": "Goes with the finished farms: the bamboo fuel station carries the bamboo from the bamboo farm into the furnace of the cactus XP farm automatically.",
   "fuer": [
-   9,
    11
   ]
  },
@@ -117,7 +116,6 @@
    "titel": "Kaktus-XP-Farm mit Ofenbatterie",
    "text": "Kaktus wächst von selbst, Trichter bringen ihn in eine Reihe Öfen. Jeder Kaktus wird zu grünem Farbstoff und gibt 1 XP, die im Ofen gespeichert bleibt, bis du ihn leerst. Ganz ohne Monster.",
    "status": "verfuegbar",
-   "empfohlen": true,
    "plugins": [
     {
      "id": "fakeplayerplugin",
@@ -262,8 +260,7 @@
    "groesse": "klein",
    "titel": "Kleine Bambusfarm",
    "text": "Eine Reihe mit 8 Bambuspflanzen. Beobachter merken das Wachsen, Kolben brechen den Bambus ab, Trichter sammeln alles ein. Etwa 8 × 4 Blöcke.",
-   "status": "idee",
-   "empfohlen": true,
+   "status": "verfuegbar",
    "plugins": [
     {
      "id": "fakeplayerplugin",
@@ -273,7 +270,8 @@
    "en": {
     "titel": "Small bamboo farm",
     "text": "One row of 8 bamboo plants. Observers detect growth, pistons break the bamboo and hoppers collect everything. About 8 × 4 blocks."
-   }
+   },
+   "bauplan": "bambusfarm-klein"
   },
   {
    "nr": 10,
@@ -1420,7 +1418,8 @@
    "en": {
     "titel": "Log cabin by the lake",
     "text": "Logs, a fireplace and a small jetty."
-   }
+   },
+   "empfohlen": true
   },
   {
    "nr": 48,

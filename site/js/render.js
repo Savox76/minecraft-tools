@@ -9,7 +9,7 @@ export const shapeOf = (n) =>
   /Bett/.test(n) ? 'bed' :
   /Falltür/.test(n) ? 'plate' :
   /zauntor|tür/i.test(n) ? 'panel' :
-  /zaun|mauer|eisengitter|blitzableiter|laterne|leiter|fackel/i.test(n) ? 'thin' :
+  /zaun|mauer|eisengitter|blitzableiter|laterne|leiter|fackel|bambus/i.test(n) ? 'thin' :
   /Glasscheibe/.test(n) ? 'pane' :
   /Stufe/.test(n) ? 'slab' :
   /^Glas$/.test(n) ? 'glass' :
