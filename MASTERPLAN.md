@@ -702,7 +702,7 @@ Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
 
 | Nr. | Plugin-Idee | Beschreibung | Wunsch | Status |
 |---|---|---|---|---|
-| P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Gekämpft wird in einer Arena, jeden Raid stellst du per Befehl selbst zusammen. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
+| P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Spieler beschwören sie selbst an einem Altar, die Regeln jedes Raids stellst du per Befehl ein. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
 
 ### ✅ Umgesetzt (3)
 
@@ -776,7 +776,7 @@ Laut Dokumentation der eigenen Plugins. Ob es harte Abhängigkeiten sind (Plugin
 | Arbeiter | FakePlayerPlugin oder ChunkLoader (empfohlen) | Arbeiter arbeiten nur in geladenen Chunks |
 | ServerHilfe | alle eigenen Plugins (nur Texte) | Das Hilfe-Buch erklärt Shop, Lager, Arbeiter und Farm-Bot; bei neuen Befehlen die Texte anpassen |
 | Floodgate | Geyser | Floodgate lässt Bedrock-Spieler ohne Java-Konto herein; die Verbindung selbst stellt Geyser her. Geyser fehlt noch in der Liste der fremden Plugins |
-| BossRaid (geplant, P1) | ServerShop (optional) | Ruf-Gegenstand für Spieler-Raids im Shop verkaufen |
+| BossRaid (geplant, P1) | ServerShop (optional) | Beschwörungsgegenstände zusätzlich im Shop verkaufen |
 | EasyCommandBlocker | Befehle aller Plugins | Die Liste der für Spieler sichtbaren Befehle muss bei neuen Befehlen ergänzt werden |
 
 ### 16.6 Baupläne und Ideen brauchen Plugins
@@ -805,9 +805,9 @@ Ausgearbeitete Konzepte für geplante eigene Plugins. Die Kurzfassung steht in `
 
 ### 17.1 P1 BossRaid: Boss-Kämpfe mit Arena und Raids
 
-**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit und Scheitern ergänzt).
+**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit, Scheitern und Beschwörung ergänzt).
 
-**Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. Jeder Raid wird per Befehl selbst zusammengestellt.
+**Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. **Hauptweg ist die Beschwörung durch Spieler** an einem Altar; die Regeln jedes Raids stellt der Admin per Befehl ein. Admin-Start und feste Termine bleiben für Events.
 
 **Bosse** (jeder baut auf einem normalen Monster auf, kein Mod nötig)
 
@@ -850,6 +850,7 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 - `/bossarena bossspawn <name>`: Stelle, an der der Boss erscheint.
 - `/bossarena eingang <name>`: Start- und Wiederbelebungspunkt der Spieler.
 - `/bossarena tor <name>` (optional): Blöcke, die sich zum Kampf schließen und danach öffnen.
+- `/bossarena altar <name> <raid>`: setzt den Altar an die Stelle, auf die man schaut, und verbindet ihn mit einer Raid-Vorlage. Die vier Kerzenplätze werden automatisch an den Ecken um den Altar gesetzt (Abstand 3 Blöcke).
 - `/bossarena liste`, `/bossarena info <name>`, `/bossarena loeschen <name>`.
 - Während eines Raids: kein Bauen und Abbauen in der Arena, der Boss verlässt sie nicht (sonst zurückgesetzt), wer die Arena verlässt, gilt als geflohen und bekommt keinen Loot. Mehrere Arenen sind möglich.
 
@@ -866,9 +867,28 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 /raid set <name> leer <sekunden>         Wartezeit, wenn niemand mehr lebt (Standard 60)
 /raid set <name> spieler <min>-<max>
 /raid set <name> loot <faktor>
+/raid set <name> abklingzeit <minuten>   Pause am Altar nach einem Raid (Standard 60)
+/raid set <name> beschwoerung an|aus     ob Spieler den Raid am Altar beschwören dürfen
+/raid gegenstand <boss> [verflucht]      Admin: Beschwörungsgegenstand geben
 /raid info <name> · /raid liste · /raid loeschen <name>
 /raid start <name> · /raid stopp · /raid beitreten · /raid top
 ```
+
+**Beschwörung (Hauptweg)**
+- **Altar:** ein besonderer Block in der Arena (z. B. Seelenlaterne auf einem Podest aus Tiefenschiefer), per `/bossarena altar` mit einer Raid-Vorlage verbunden. Die Vorlage bestimmt Boss, Stufe, Todesregel, Leben, Zeitlimit und Spielerzahl. Mehrere Altäre in einer Arena sind möglich, aber immer nur ein Raid gleichzeitig.
+- **Beschwörungsgegenstand pro Boss**, hergestellt aus Fragmenten, die normale Monster selten fallen lassen (Chance in der Config, Standard 3 %). Beispiele:
+
+  | Boss | Gegenstand | Rezept |
+  |---|---|---|
+  | Nekromant | Seelenkristall | 8 Seelensplitter (Skelette, nur nachts) + 1 Wither-Skelett-Schädel |
+  | Steingolem | Golemkern | 8 Steinsplitter (Silberfischchen und Höhlenspinnen) + 1 Eisenblock |
+  | Sumpfhexe | Hexenauge | 8 Sumpfkräuter (Hexen und Schleime) + 1 Fermentiertes Spinnenauge |
+
+  Optional auch im ServerShop zu kaufen (teuer), einstellbar.
+- **Ritual:** Gegenstand auf den Altar legen (Rechtsklick), dann die vier Kerzen an den Ecken anzünden. Danach 10 Sekunden Ritual mit Partikeln, Donner ohne Schaden und Ansage im Chat. Wer in dieser Zeit in der Arena steht, ist Teilnehmer; danach beginnt der Raid wie unten beschrieben. Wird das Ritual abgebrochen (Altar verlassen, Kerze gelöscht), bekommt man den Gegenstand zurück.
+- **Schwierigkeit über den Gegenstand:** normaler Gegenstand = Stufe der Vorlage, **verfluchte Version** (zusätzlich 1 Netherstern-Splitter bzw. seltenes Material) = „schwer“ mit besserem Loot.
+- **Grenzen:** Abklingzeit pro Altar (`/raid set <name> abklingzeit <minuten>`, Standard 60), Mindestzahl an Spielern laut Vorlage (sonst startet das Ritual nicht), Warnung mit Bestätigung, wenn jemand allein beschwört. Der Gegenstand wird erst beim Erscheinen des Bosses verbraucht.
+- **Admin-Start bleibt:** `/raid start <name>` und feste Termine funktionieren ohne Gegenstand, z. B. für Event-Abende.
 
 **Zeitlimit und Scheitern**
 - **Der Boss ist nur eine feste Zeit aktiv** (`zeit`, Standard 15 Minuten). Die Zeit läuft ab dem Auftritt; die Boss-Leiste zeigt die Restzeit, im Chat kommen Warnungen bei 5 Minuten, 1 Minute und 10 Sekunden.
@@ -880,8 +900,8 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 - Gescheitert und gewonnen werden pro Raid gezählt (`/raid info`), für eine spätere Bestenliste.
 
 **Ablauf**
-1. Start: Admin mit `/raid start`, Spieler an einem Beschwörungsaltar in der Arena mit dem Ruf-Gegenstand (z. B. im ServerShop erhältlich) oder automatisch zu festen Zeiten.
-2. Sammeln: Ansage im Chat, 60 Sekunden zum Beitreten, Teleport zum Eingang.
+1. Start: in der Regel durch eine Beschwörung am Altar (siehe oben); außerdem Admin mit `/raid start` oder automatisch zu festen Zeiten.
+2. Sammeln: bei der Beschwörung die 10 Sekunden des Rituals; bei Admin-Start und Terminen Ansage im Chat, 60 Sekunden zum Beitreten mit `/raid beitreten`, Teleport zum Eingang.
 3. Auftritt: Tor schließt, Countdown, Bossname groß auf dem Bildschirm, Blitz ohne Schaden.
 4. Kampf mit Phasen, Boss-Leiste und angekündigten Spezialangriffen.
 5. Ende: Sieg mit Feuerwerk, persönlichem Loot und Schaden-Rangliste. Gescheitert, wenn die Zeit abläuft oder die Wartezeit ohne lebende Spieler vorbei ist; der Boss verschwindet. Danach öffnet sich das Tor.
@@ -899,4 +919,4 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 
 **Passende Baupläne:** Arena mit Tribüne (Idee Nr. 98) und Kolosseum (Nr. 36) als erste Arenen, mit eingezeichnetem Boss-Spawn, Eingang und Tor.
 
-**Offen:** Paper-Version des Servers, ob WorldEdit installiert ist (Arena dann auch per Auswahl), Test mit Bedrock-Spielern über Geyser (vergrößerte Bosse), endgültiger Name.
+**Offen:** Paper-Version des Servers, Abstimmung der Fragment-Chancen und Rezepte im Test, ob WorldEdit installiert ist (Arena dann auch per Auswahl), Test mit Bedrock-Spielern über Geyser (vergrößerte Bosse), endgültiger Name.

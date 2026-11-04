@@ -2233,27 +2233,28 @@
    "nr": "P1",
    "kategorie": "plugins",
    "titel": "BossRaid: Boss-Kämpfe mit Arena und Raids",
-   "text": "Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Gekämpft wird in einer Arena, jeden Raid stellst du per Befehl selbst zusammen.",
+   "text": "Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Spieler beschwören sie selbst an einem Altar, die Regeln jedes Raids stellst du per Befehl ein.",
    "status": "idee",
    "wunsch": 3,
    "en": {
     "titel": "BossRaid: boss fights with arena and raids",
-    "text": "Strong bosses with their own abilities, phases and boss bar that deal real damage and drop good loot. Fights take place in an arena, and you put together every raid yourself by command."
+    "text": "Strong bosses with their own abilities, phases and boss bar that deal real damage and drop good loot. Players summon them at an altar themselves, and you set the rules of every raid by command."
    },
    "name": "BossRaid",
    "plugins": [
     {
      "id": "servershop",
      "stufe": "optional",
-     "grund": "Den Ruf-Gegenstand, mit dem Spieler einen Boss selbst rufen, kann man im ServerShop verkaufen.",
+     "grund": "Beschwörungsgegenstände für Bosse können zusätzlich im ServerShop verkauft werden.",
      "en": {
-      "grund": "The summoning item that lets players call a boss themselves can be sold in the ServerShop."
+      "grund": "Summoning items for bosses can also be sold in the ServerShop."
      }
     }
    ],
    "konzept": {
     "de": [
      "Acht Bosse, zum Start Nekromant, Steingolem und Sumpfhexe, später Frostkönigin, Spinnenkönigin, Feuerdämon, Piratenkapitän und Endwächter",
+     "Beschwörung als Hauptweg: Spieler stellen aus seltenen Fragmenten einen Beschwörungsgegenstand her, legen ihn auf den Altar der Arena und zünden vier Kerzen an. Nach einem kurzen Ritual erscheint der Boss. Die verfluchte Version ruft ihn auf „schwer“",
      "Echter Schaden: Spezialangriffe können töten, werden aber 1 bis 2 Sekunden vorher angekündigt",
      "Drei Phasen bei 100, 66 und 33 % Leben, Boss-Leiste, Stufen leicht, normal und schwer",
      "Der Boss ist nur eine feste Zeit aktiv (Countdown in der Boss-Leiste). Läuft sie ab oder ist eine einstellbare Zeit lang kein Spieler mehr am Leben, verschwindet der Boss und der Raid gilt als gescheitert",
@@ -2265,6 +2266,7 @@
     ],
     "en": [
      "Eight bosses, starting with Necromancer, Stone Golem and Swamp Witch, later Frost Queen, Spider Queen, Fire Demon, Pirate Captain and End Warden",
+     "Summoning as the main way: players craft a summoning item from rare fragments, place it on the arena altar and light four candles. After a short ritual the boss appears. The cursed version summons it on “hard”",
      "Real damage: special attacks can kill, but are announced 1 to 2 seconds in advance",
      "Three phases at 100, 66 and 33 % health, boss bar, difficulties easy, normal and hard",
      "The boss is only active for a fixed time (countdown in the boss bar). If it runs out, or if no player is alive for an adjustable time, the boss despawns and the raid counts as failed",
