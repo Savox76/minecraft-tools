@@ -858,8 +858,31 @@ class Seiten:
                       inhalt, ld, bild=self.og(b['id'] + '-og'), bild_alt=t('Minecraft-Bauplan %s', 'Minecraft build %s') % titel,
                       og_typ='article', og_titel=t('%s – Minecraft-Bauplan', '%s – Minecraft build plan') % titel)
 
+    def konzept(self, i):
+        l = (i.get('konzept') or {}).get(self.lang) or (i.get('konzept') or {}).get('de')
+        if not l:
+            return ''
+        return '<details class="konzept"><summary>%s</summary><ul>%s</ul></details>' % (
+            self.t('Geplante Funktionen', 'Planned features'), ''.join('<li>%s</li>' % H(x) for x in l))
+
+    def geplantes_plugin(self, i):
+        t = self.t
+        from urllib.parse import quote
+        repo = 'https://github.com/Savox76/minecraft-tools'
+        ziel = ('%s/issues/%s' % (repo, i['wunsch'])) if i.get('wunsch') else \
+            '%s/issues/new?template=plugin-wunsch.yml&title=%s' % (repo, quote('Plugin-Wunsch: Idee #%s %s' % (i['nr'], i['titel'])))
+        name = i.get('name') or lok(i, 'titel', self.lang)
+        return ('<div class="karte plugin-karte geplant-plugin"><div class="text"><div class="plugin-kopf"><span class="plugin-symbol" aria-hidden="true">%s</span>'
+                '<div><h3>%s</h3><span class="marker status-%s">%s</span></div></div><p>%s</p>%s'
+                '<div class="fakten"><a class="btn zwei klein" href="%s" rel="noopener">👍 %s</a> <a class="marker" href="%s#idee-%s">Nr. %s</a></div></div></div>') % (
+            H(''.join(re.findall('[A-ZÄÖÜ]', name)[:2]) or name[0]), H(name), i['status'],
+            t('In Arbeit', 'In progress') if i['status'] == 'in-arbeit' else t('In Planung', 'Planned'),
+            H(lok(i, 'text', self.lang)), self.konzept(i), H(ziel), t('Mitstimmen', 'Vote too') if i.get('wunsch') else t('Wünschen', 'Vote'),
+            self.link('geplant'), i['nr'], i['nr'])
+
     def liste_plugins(self):
         k, t = self.k, self.t
+        geplant = [i for i in self.ideen['ideen'] if i['kategorie'] == 'plugins' and i['status'] != 'verfuegbar']
         fremd = ''.join('<li><b>%s</b>%s: %s%s</li>' % (
             H(p['name']), (t(' (von %s)', ' (by %s)') % H(p['autor'])) if p.get('autor') else '', H(lok(p, 'zweck', self.lang)),
             ' <a href="%s" rel="noopener">%s</a>' % (H(p['link']), t('Download-Seite', 'Download page')) if p.get('link') else '')
@@ -868,9 +891,11 @@ class Seiten:
                            t('Eigene Plugins für einen fairen Server mit Coins, Lager und Arbeitern, dazu bewährte Plugins anderer Entwickler.',
                              'Our own plugins for a fair server with coins, storage and workers, plus proven plugins by other developers.')) + \
             ('<section class="abschnitt" style="padding-top:8px"><div class="wrap"><h2>%s</h2>'
-             '<div class="raster" style="margin-top:14px">%s</div><h2 style="margin-top:30px">%s</h2>'
+             '<div class="raster" style="margin-top:14px">%s</div>%s<h2 style="margin-top:30px">%s</h2>'
              '<ul class="vor-liste">%s</ul></div></section>') % (
                 t('Eigene Plugins', 'Our plugins'), ''.join(self.plugin_karte(p) for p in k['plugins']),
+                ('<h2 style="margin-top:30px">%s</h2><div class="raster" style="margin-top:14px">%s</div>' % (
+                    t('In Planung', 'Planned'), ''.join(self.geplantes_plugin(i) for i in geplant))) if geplant else '',
                 t('Plugins anderer Entwickler', 'Plugins by other developers'), fremd)
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'CollectionPage', 'name': t('Plugins für Minecraft-Server', 'Plugins for Minecraft servers'), 'url': self.voll(pfad(self.lang, 'plugins')), 'inLanguage': self.lang},
@@ -989,9 +1014,9 @@ class Seiten:
                 plg = '<p class="idee-plugins">Plugin: %s</p>' % ', '.join(
                     '%s <span>(%s)</span>' % (self.plugin_a(x['id']), self.stufe(x['stufe']).lower()) for x in i['plugins'])
             return ('<article class="idee" data-kat="%s"%s><div class="idee-kopf"><span class="idee-nr">Nr. %s</span>'
-                    '<span class="marker">%s</span><span class="marker status-%s">%s</span></div><h3>%s</h3><p>%s</p>%s'
+                    '<span class="marker">%s</span><span class="marker status-%s">%s</span></div><h3>%s</h3><p>%s</p>%s%s'
                     '<div class="idee-fuss">%s</div></article>') % (
-                i['kategorie'], (' id="idee-%s"' % i['nr']) if mit_id else '', i['nr'], H(gr), i['status'], ST[i['status']], H(titel), H(lok(i, 'text', lang)), plg, aktion)
+                i['kategorie'], (' id="idee-%s"' % i['nr']) if mit_id else '', i['nr'], H(gr), i['status'], ST[i['status']], H(titel), H(lok(i, 'text', lang)), self.konzept(i), plg, aktion)
 
         teile = []
         empf = [i for i in IDS if i.get('empfohlen')]

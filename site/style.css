@@ -122,9 +122,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .banner-innen { padding-top: 16px; }
   .marke { gap: 10px; }
   .marke svg { width: 34px; height: 34px; }
-  .marke-text small { font-size: .82rem; }
+  .marke-text small { font-size: .82rem; white-space: normal; }
+  .marke { min-width: 0; flex: 1 1 auto; }
+  .marke-text { min-width: 0; }
   .schalter-leiste { display: none; }
-  .schalter-banner { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .schalter-banner { display: flex; flex: none; flex-direction: column; align-items: flex-end; gap: 6px; }
   .schalter-banner .sprache, .schalter-banner .thema-wahl { background: rgba(20, 30, 40, .72); border-color: rgba(255, 255, 255, .25); padding: 2px; }
   .schalter-banner .sprache a, .schalter-banner .thema-wahl button { min-width: 28px; height: 28px; padding: 0 4px; }
   .nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
@@ -394,6 +396,12 @@ td code, .prosa code { font: .86em var(--f-mono); background: var(--sheet-2); bo
 .marker.stufe-benoetigt { color: var(--hl-ink); background: var(--hl); border-color: var(--hl); }
 .marker.stufe-empfohlen { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
 .idee-plugins { font-size: .86rem !important; }
+details.konzept { font-size: .9rem; color: var(--ink-soft); margin-top: 4px; }
+details.konzept summary { cursor: pointer; font-weight: 700; color: var(--ink); width: fit-content; }
+details.konzept summary:focus-visible { outline: 2px solid var(--hl); outline-offset: 2px; }
+details.konzept ul { margin: 8px 0 2px; padding-left: 18px; display: grid; gap: 4px; }
+.geplant-plugin { border-style: dashed; }
+.geplant-plugin .fakten { align-items: center; margin-top: 10px; }
 .idee-plugins a { font-weight: 700; }
 .idee-plugins span { color: var(--ink-mute); }
 .verwendet { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }

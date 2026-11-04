@@ -253,14 +253,36 @@ function fremdKarte(p) {
     </div></div>`;
 }
 
+// Geplante Funktionen einer Idee (Plugin-Ideen mit Konzept)
+const konzeptListe = (i) => {
+  const l = (i.konzept || {})[L] || (i.konzept || {}).de;
+  return l?.length ? `<details class="konzept"><summary>${tr('Geplante Funktionen', 'Planned features')}</summary><ul>${l.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></details>` : '';
+};
+const wunschZiel = (i) => i.wunsch ? `${REPO}/issues/${i.wunsch}`
+  : `${REPO}/issues/new?template=plugin-wunsch.yml&title=${encodeURIComponent(`Plugin-Wunsch: Idee #${i.nr} ${i.titel}`)}`;
+function geplantesPlugin(i) {
+  return `<div class="karte plugin-karte geplant-plugin"><div class="text">
+      <div class="plugin-kopf"><span class="plugin-symbol" aria-hidden="true">${initialen(i.name || i.titel)}</span>
+        <div><h3>${esc(i.name || lo(i, 'titel'))}</h3><span class="marker status-${i.status}">${i.status === 'in-arbeit' ? tr('In Arbeit', 'In progress') : tr('In Planung', 'Planned')}</span></div></div>
+      <p>${esc(lo(i, 'text'))}</p>${konzeptListe(i)}
+      <div class="fakten"><a class="btn zwei klein" href="${esc(wunschZiel(i))}" target="_blank" rel="noopener">👍 ${i.wunsch ? tr('Mitstimmen', 'Vote too') : tr('Wünschen', 'Vote')}</a>
+        <a class="marker" href="${url('geplant')}#idee-${i.nr}">Nr. ${i.nr}</a></div>
+    </div></div>`;
+}
+
 async function pluginsSeite() {
   const k = await katalog();
+  if (!IDEEN) IDEEN = fetch(`${BASE}data/ideen.json?v=${V}`).then((r) => r.json()).catch(() => ({ ideen: [] }));
+  const geplant = (await IDEEN).ideen.filter((i) => i.kategorie === 'plugins' && i.status !== 'verfuegbar');
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
     <h1>Plugins</h1>
     <p class="lede">${tr('Eigene Plugins für einen fairen Server mit Coins, Lager und Arbeitern, dazu die bewährten Plugins anderer Entwickler, die auf dem Server laufen.', 'Our own plugins for a fair server with coins, storage and workers, plus the proven plugins by other developers that run on the server.')}</p></div></section>
     <section class="abschnitt" style="padding-top:8px"><div class="wrap">
       <div class="abschnitt-kopf"><div><h2>${tr('Eigene Plugins', 'Our plugins')}</h2><p>${tr('Von Savox entwickelt. Die Dokumentation ist komplett, Quellcode und Downloads folgen.', 'Developed by Savox. The documentation is complete, source code and downloads will follow.')}</p></div></div>
       <div class="raster">${k.plugins.map(pluginKarte).join('')}</div></div></section>
+    ${geplant.length ? `<section class="abschnitt"><div class="wrap">
+      <div class="abschnitt-kopf"><div><h2>${tr('In Planung', 'Planned')}</h2><p>${tr('Eigene Plugins, die als Nächstes entstehen sollen. Stimm mit 👍 ab, was zuerst kommt.', 'Own plugins that are coming next. Vote with 👍 for what comes first.')}</p></div></div>
+      <div class="raster">${geplant.map(geplantesPlugin).join('')}</div></div></section>` : ''}
     ${k.fremd?.length ? `<section class="abschnitt"><div class="wrap">
       <div class="abschnitt-kopf"><div><h2>${tr('Plugins anderer Entwickler', 'Plugins by other developers')}</h2><p>${tr('Bewährte Plugins, die es schon gibt. Heruntergeladen wird immer von der offiziellen Seite des Entwicklers.', 'Proven plugins that already exist. Always download them from the developer’s official page.')}</p></div></div>
       <div class="raster">${k.fremd.map(fremdKarte).join('')}</div></div></section>` : ''}`;
@@ -324,7 +346,7 @@ async function geplantSeite() {
     }
     return `<article class="idee" data-kat="${i.kategorie}"${mitId ? ` id="idee-${i.nr}"` : ''}>
       <div class="idee-kopf"><span class="idee-nr">Nr. ${i.nr}</span><span class="marker">${esc(GR[i.groesse] || (i.kategorie === 'plugins' ? 'Plugin' : tr('Anleitung', 'Guide')))}</span><span class="marker status-${i.status}">${ST[i.status]}</span></div>
-      <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p>
+      <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p>${konzeptListe(i)}
       ${(i.plugins || []).length ? `<p class="idee-plugins">${tr('Plugin', 'Plugin')}: ${i.plugins.map((x) => `${pluginLink(pluginRef(k, x.id))} <span>(${STUFE[x.stufe].toLowerCase()})</span>`).join(', ')}</p>` : ''}
       <div class="idee-fuss">${aktion}</div></article>`;
   };

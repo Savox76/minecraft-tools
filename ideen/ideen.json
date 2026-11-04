@@ -2232,13 +2232,46 @@
   {
    "nr": "P1",
    "kategorie": "plugins",
-   "titel": "Boss-Plugin: Bosse mit eigenen Fähigkeiten",
-   "text": "Admins rufen per Befehl verschiedene Bosse herbei, jeder mit eigener Lebensleiste, Fähigkeiten und Beute. Zum Beispiel ein Nekromant, der Skelette beschwört, ein Steingolem mit Schockwelle oder eine Hexe, die sich wegteleportiert. Bringt Abwechslung und passt zu Events in der Arena (Idee Nr. 98).",
+   "titel": "BossRaid: Boss-Kämpfe mit Arena und Raids",
+   "text": "Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Gekämpft wird in einer Arena, jeden Raid stellst du per Befehl selbst zusammen.",
    "status": "idee",
    "wunsch": 3,
    "en": {
-    "titel": "Boss plugin: bosses with their own abilities",
-    "text": "Admins summon different bosses with a command, each with its own health bar, abilities and loot. For example a necromancer who summons skeletons, a stone golem with a shockwave or a witch who teleports away. Adds variety and goes well with events in the arena (idea no. 98)."
+    "titel": "BossRaid: boss fights with arena and raids",
+    "text": "Strong bosses with their own abilities, phases and boss bar that deal real damage and drop good loot. Fights take place in an arena, and you put together every raid yourself by command."
+   },
+   "name": "BossRaid",
+   "plugins": [
+    {
+     "id": "servershop",
+     "stufe": "optional",
+     "grund": "Den Ruf-Gegenstand, mit dem Spieler einen Boss selbst rufen, kann man im ServerShop verkaufen.",
+     "en": {
+      "grund": "The summoning item that lets players call a boss themselves can be sold in the ServerShop."
+     }
+    }
+   ],
+   "konzept": {
+    "de": [
+     "Acht Bosse, zum Start Nekromant, Steingolem und Sumpfhexe, später Frostkönigin, Spinnenkönigin, Feuerdämon, Piratenkapitän und Endwächter",
+     "Echter Schaden: Spezialangriffe können töten, werden aber 1 bis 2 Sekunden vorher angekündigt",
+     "Drei Phasen bei 100, 66 und 33 % Leben, Boss-Leiste, Stufen leicht, normal und schwer",
+     "Arena per Befehl mit festem Radius, Boss-Spawn, Eingang und Tor, das sich zum Kampf schließt",
+     "Raids als Vorlagen per Befehl: Boss, Arena, Stufe, Regel beim Tod, Leben pro Spieler, Zeitlimit, Spielerzahl, Loot-Faktor",
+     "Beim Tod je nach Raid: Sachen fallen (nur für den Besitzer), Grabtruhe oder behalten",
+     "Persönlicher Loot nach Schadensanteil: sicher, selten, episch (einzigartiger Gegenstand) und Trophäe",
+     "Schutz gegen Tricks: kein Bauen im Kampf, Boss holt unerreichbare Spieler, kein Loot bei Tod durch Lava oder Fall"
+    ],
+    "en": [
+     "Eight bosses, starting with Necromancer, Stone Golem and Swamp Witch, later Frost Queen, Spider Queen, Fire Demon, Pirate Captain and End Warden",
+     "Real damage: special attacks can kill, but are announced 1 to 2 seconds in advance",
+     "Three phases at 100, 66 and 33 % health, boss bar, difficulties easy, normal and hard",
+     "Arena set up by command with a fixed radius, boss spawn, entrance and a gate that closes for the fight",
+     "Raids as templates by command: boss, arena, difficulty, death rule, lives per player, time limit, player count, loot factor",
+     "On death, depending on the raid: items drop (owner only), grave chest or keep inventory",
+     "Personal loot by damage share: guaranteed, rare, epic (unique item) and trophy",
+     "Protection against tricks: no building during the fight, the boss pulls unreachable players, no loot for deaths by lava or falling"
+    ]
    }
   }
  ]

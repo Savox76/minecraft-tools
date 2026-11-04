@@ -702,7 +702,7 @@ Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
 
 | Nr. | Plugin-Idee | Beschreibung | Wunsch | Status |
 |---|---|---|---|---|
-| P1 | Boss-Plugin: Bosse mit eigenen Fähigkeiten | Admins rufen per Befehl verschiedene Bosse herbei, jeder mit eigener Lebensleiste, Fähigkeiten und Beute. Zum Beispiel ein Nekromant, der Skelette beschwört, ein Steingolem mit Schockwelle oder eine Hexe, die sich wegteleportiert. Bringt Abwechslung und passt zu Events in der Arena (Idee Nr. 98). | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
+| P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Gekämpft wird in einer Arena, jeden Raid stellst du per Befehl selbst zusammen. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
 
 ### ✅ Umgesetzt (3)
 
@@ -776,6 +776,7 @@ Laut Dokumentation der eigenen Plugins. Ob es harte Abhängigkeiten sind (Plugin
 | Arbeiter | FakePlayerPlugin oder ChunkLoader (empfohlen) | Arbeiter arbeiten nur in geladenen Chunks |
 | ServerHilfe | alle eigenen Plugins (nur Texte) | Das Hilfe-Buch erklärt Shop, Lager, Arbeiter und Farm-Bot; bei neuen Befehlen die Texte anpassen |
 | Floodgate | Geyser | Floodgate lässt Bedrock-Spieler ohne Java-Konto herein; die Verbindung selbst stellt Geyser her. Geyser fehlt noch in der Liste der fremden Plugins |
+| BossRaid (geplant, P1) | ServerShop (optional) | Ruf-Gegenstand für Spieler-Raids im Shop verkaufen |
 | EasyCommandBlocker | Befehle aller Plugins | Die Liste der für Spieler sichtbaren Befehle muss bei neuen Befehlen ergänzt werden |
 
 ### 16.6 Baupläne und Ideen brauchen Plugins
@@ -790,8 +791,101 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
 | ServerHilfe (eigenes) | – | Idee Nr. 53 Rathaus mit Uhrturm am Spawn | – |
-| ServerShop (eigenes) | Idee Nr. 26 Marktplatz für Spieler-Shops | – | – |
+| ServerShop (eigenes) | Idee Nr. 26 Marktplatz für Spieler-Shops | – | Idee Nr. P1 BossRaid: Boss-Kämpfe mit Arena und Raids |
 | spark (fremdes) | Idee Nr. A7 Lag finden mit spark | – | – |
 
 Ohne Plugin (reines Minecraft): Eiffelturm, Leuchtturm, Japanisches Teehaus mit Garten, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
 <!-- abhaengigkeiten:ende -->
+
+---
+
+## 17. Plugin-Konzepte
+
+Ausgearbeitete Konzepte für geplante eigene Plugins. Die Kurzfassung steht in `ideen/ideen.json` (Feld `konzept`) und erscheint auf der Website unter „Plugins → In Planung“ und auf der Geplant-Seite.
+
+### 17.1 P1 BossRaid: Boss-Kämpfe mit Arena und Raids
+
+**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026.
+
+**Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. Jeder Raid wird per Befehl selbst zusammengestellt.
+
+**Bosse** (jeder baut auf einem normalen Monster auf, kein Mod nötig)
+
+| Boss | Basis | Fähigkeiten | Start |
+|---|---|---|---|
+| Nekromant | Wither-Skelett | ruft Skelett-Wellen; ab halbem Leben kurz unsichtbar, taucht woanders auf | ✅ |
+| Steingolem | großer Eisengolem | Schockwelle schleudert Spieler hoch, wirft Felsbrocken; langsam, viel Leben | ✅ |
+| Sumpfhexe | Hexe | wirft Tränke, teleportiert sich, ruft Schleime, heilt sich in Ruhe | ✅ |
+| Frostkönigin | Eiswanderer | Pfeile verlangsamen, Eisgefängnis um Spieler, Schneesturm | später |
+| Spinnenkönigin | große Höhlenspinne | schießt Netze, Eier mit kleinen Spinnen, klettert | später |
+| Feuerdämon | Lohe | Feuerregen, brennender Boden für kurze Zeit | später |
+| Piratenkapitän | Diener | Kanonenkugeln (nur Spielerschaden), ruft seine Crew | später |
+| Endwächter | Enderman | tauscht Platz mit Spielern, Schwebe-Zonen | später |
+
+**Schaden und Fairness**
+- Normale Angriffe 3 bis 5 Herzen, Spezialangriffe 6 bis 8 Herzen (können töten).
+- Jeder Spezialangriff wird 1 bis 2 Sekunden vorher angekündigt: Partikel am Boden, Ton, Chatzeile. Wer aufpasst, kann ausweichen.
+- Phasen bei 66 % und 33 % Leben, Boss-Leiste wechselt die Farbe, letzte Phase schneller und gefährlicher.
+- Stufen leicht, normal, schwer: ändern Leben, Schaden und Loot-Chancen.
+- Mehr Spieler im Raid = mehr Leben für den Boss.
+
+**Tod eines Spielers: wird pro Raid per Befehl eingestellt**
+
+| Regel | Was passiert |
+|---|---|
+| `normal` | Sachen fallen in der Arena, 10 Minuten nur für den Besitzer aufhebbar |
+| `grabtruhe` | Sachen kommen in eine Truhe am Todesort, nur der Besitzer kann sie öffnen |
+| `behalten` | Man behält alles, verliert die Hälfte der Level |
+
+Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `leben` (pro Raid) wird festgelegt, wie oft man sterben darf; danach ist man Zuschauer.
+
+**Loot**
+- Persönlich: Jeder Teilnehmer würfelt für sich, die Beute kann nur er aufheben.
+- Loot gibt es ab 5 % Schadensanteil, mehr Schaden = bessere Chancen.
+- Stufen: **sicher** (Erfahrung, Gold, Diamanten, Smaragde), **selten** (verzauberte Ausrüstung über der normalen Grenze, z. B. Schärfe VI, Schutz V), **episch** (ein einzigartiger Gegenstand pro Boss, z. B. Seelenstab des Nekromanten ruft zwei Skelett-Helfer, Steinherz-Brustplatte des Golems gegen Rückstoß, Hexenbeutel verdoppelt Trankdauer), **Trophäe** (Kopf des Bosses).
+- Auf „schwer“ etwa doppelte Chancen für selten und episch, dazu der Loot-Faktor des Raids.
+
+**Arena**
+- `/bossarena erstellen <name>`: Die Stelle, an der man steht, wird die Mitte. **Der Radius steht fest und wird automatisch gesetzt** (Standard 30 Blöcke, in der `config.yml` unter `arena.radius`, nicht per Befehl). Höhe: 10 Blöcke nach unten, 30 nach oben.
+- `/bossarena bossspawn <name>`: Stelle, an der der Boss erscheint.
+- `/bossarena eingang <name>`: Start- und Wiederbelebungspunkt der Spieler.
+- `/bossarena tor <name>` (optional): Blöcke, die sich zum Kampf schließen und danach öffnen.
+- `/bossarena liste`, `/bossarena info <name>`, `/bossarena loeschen <name>`.
+- Während eines Raids: kein Bauen und Abbauen in der Arena, der Boss verlässt sie nicht (sonst zurückgesetzt), wer die Arena verlässt, gilt als geflohen und bekommt keinen Loot. Mehrere Arenen sind möglich.
+
+**Raids (Vorlagen per Befehl)**
+
+```
+/raid erstellen <name>
+/raid set <name> boss <boss>
+/raid set <name> arena <arena>
+/raid set <name> stufe leicht|normal|schwer
+/raid set <name> tod normal|grabtruhe|behalten
+/raid set <name> leben <zahl>
+/raid set <name> zeit <minuten>
+/raid set <name> spieler <min>-<max>
+/raid set <name> loot <faktor>
+/raid info <name> · /raid liste · /raid loeschen <name>
+/raid start <name> · /raid stopp · /raid beitreten · /raid top
+```
+
+**Ablauf**
+1. Start: Admin mit `/raid start`, Spieler an einem Beschwörungsaltar in der Arena mit dem Ruf-Gegenstand (z. B. im ServerShop erhältlich) oder automatisch zu festen Zeiten.
+2. Sammeln: Ansage im Chat, 60 Sekunden zum Beitreten, Teleport zum Eingang.
+3. Auftritt: Tor schließt, Countdown, Bossname groß auf dem Bildschirm, Blitz ohne Schaden.
+4. Kampf mit Phasen, Boss-Leiste und angekündigten Spezialangriffen.
+5. Ende: Sieg mit Feuerwerk, persönlichem Loot und Schaden-Rangliste; Niederlage, wenn alle Leben verbraucht sind oder die Zeit abläuft. Danach öffnet sich das Tor.
+
+**Schutz gegen Tricks:** Unerreichbare Spieler (Turm, hinter Blöcken) werden zum Boss gezogen oder der Boss teleportiert sich zu ihnen; Schaden aus mehr als 30 Blöcken zählt halb; kein Loot, wenn der Boss durch Lava oder Fallschaden stirbt.
+
+**Technik (Paper)**
+- Werte über Attribute: Leben, Angriffsschaden, Rüstung, Rückstoß-Widerstand, Größe.
+- Schaden pro Spieler über den Treffer-Listener zählen; beim Tod des Bosses die normale Beute löschen und persönlichen Loot würfeln.
+- Fähigkeiten als Baukasten (Schockwelle, Beschwören, Teleport, Wurf, Bodenzone) mit Zeitgeber und Vorwarnung.
+- Spielertod in der Arena abfangen und die Regel des Raids anwenden.
+- Bosse, Fähigkeiten und Loot in einer Config-Datei, neue Bosse ohne Programmieren.
+- Besondere Gegenstände mit unsichtbarer Markierung, damit das Plugin ihre Fähigkeit erkennt.
+
+**Passende Baupläne:** Arena mit Tribüne (Idee Nr. 98) und Kolosseum (Nr. 36) als erste Arenen, mit eingezeichnetem Boss-Spawn, Eingang und Tor.
+
+**Offen:** Paper-Version des Servers, ob WorldEdit installiert ist (Arena dann auch per Auswahl), Test mit Bedrock-Spielern über Geyser (vergrößerte Bosse), endgültiger Name.
