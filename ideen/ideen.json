@@ -2256,8 +2256,9 @@
      "Acht Bosse, zum Start Nekromant, Steingolem und Sumpfhexe, später Frostkönigin, Spinnenkönigin, Feuerdämon, Piratenkapitän und Endwächter",
      "Echter Schaden: Spezialangriffe können töten, werden aber 1 bis 2 Sekunden vorher angekündigt",
      "Drei Phasen bei 100, 66 und 33 % Leben, Boss-Leiste, Stufen leicht, normal und schwer",
+     "Der Boss ist nur eine feste Zeit aktiv (Countdown in der Boss-Leiste). Läuft sie ab oder ist eine einstellbare Zeit lang kein Spieler mehr am Leben, verschwindet der Boss und der Raid gilt als gescheitert",
      "Arena per Befehl mit festem Radius, Boss-Spawn, Eingang und Tor, das sich zum Kampf schließt",
-     "Raids als Vorlagen per Befehl: Boss, Arena, Stufe, Regel beim Tod, Leben pro Spieler, Zeitlimit, Spielerzahl, Loot-Faktor",
+     "Raids als Vorlagen per Befehl: Boss, Arena, Stufe, Regel beim Tod, Leben pro Spieler, Zeitlimit, Wartezeit ohne Spieler, Spielerzahl, Loot-Faktor",
      "Beim Tod je nach Raid: Sachen fallen (nur für den Besitzer), Grabtruhe oder behalten",
      "Persönlicher Loot nach Schadensanteil: sicher, selten, episch (einzigartiger Gegenstand) und Trophäe",
      "Schutz gegen Tricks: kein Bauen im Kampf, Boss holt unerreichbare Spieler, kein Loot bei Tod durch Lava oder Fall"
@@ -2266,8 +2267,9 @@
      "Eight bosses, starting with Necromancer, Stone Golem and Swamp Witch, later Frost Queen, Spider Queen, Fire Demon, Pirate Captain and End Warden",
      "Real damage: special attacks can kill, but are announced 1 to 2 seconds in advance",
      "Three phases at 100, 66 and 33 % health, boss bar, difficulties easy, normal and hard",
+     "The boss is only active for a fixed time (countdown in the boss bar). If it runs out, or if no player is alive for an adjustable time, the boss despawns and the raid counts as failed",
      "Arena set up by command with a fixed radius, boss spawn, entrance and a gate that closes for the fight",
-     "Raids as templates by command: boss, arena, difficulty, death rule, lives per player, time limit, player count, loot factor",
+     "Raids as templates by command: boss, arena, difficulty, death rule, lives per player, time limit, waiting time without players, player count, loot factor",
      "On death, depending on the raid: items drop (owner only), grave chest or keep inventory",
      "Personal loot by damage share: guaranteed, rare, epic (unique item) and trophy",
      "Protection against tricks: no building during the fight, the boss pulls unreachable players, no loot for deaths by lava or falling"

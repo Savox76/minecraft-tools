@@ -805,7 +805,7 @@ Ausgearbeitete Konzepte für geplante eigene Plugins. Die Kurzfassung steht in `
 
 ### 17.1 P1 BossRaid: Boss-Kämpfe mit Arena und Raids
 
-**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026.
+**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit und Scheitern ergänzt).
 
 **Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. Jeder Raid wird per Befehl selbst zusammengestellt.
 
@@ -862,19 +862,29 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 /raid set <name> stufe leicht|normal|schwer
 /raid set <name> tod normal|grabtruhe|behalten
 /raid set <name> leben <zahl>
-/raid set <name> zeit <minuten>
+/raid set <name> zeit <minuten>          wie lange der Boss aktiv ist (Standard 15)
+/raid set <name> leer <sekunden>         Wartezeit, wenn niemand mehr lebt (Standard 60)
 /raid set <name> spieler <min>-<max>
 /raid set <name> loot <faktor>
 /raid info <name> · /raid liste · /raid loeschen <name>
 /raid start <name> · /raid stopp · /raid beitreten · /raid top
 ```
 
+**Zeitlimit und Scheitern**
+- **Der Boss ist nur eine feste Zeit aktiv** (`zeit`, Standard 15 Minuten). Die Zeit läuft ab dem Auftritt; die Boss-Leiste zeigt die Restzeit, im Chat kommen Warnungen bei 5 Minuten, 1 Minute und 10 Sekunden.
+- **Läuft die Zeit ab**, verschwindet der Boss sofort (Rauch, Ton, Spruch im Chat). Der Raid gilt als **gescheitert**.
+- **Lebt kein Spieler mehr**, startet die Wartezeit (`leer`, Standard 60 Sekunden). „Am Leben“ heißt: ein Teilnehmer steht lebend in der Arena. Tote, Zuschauer ohne Leben, Geflohene und Spieler, die den Server verlassen haben, zählen nicht. Kommt in der Wartezeit ein Spieler mit Restleben zurück in die Arena, läuft der Kampf weiter. Sonst verschwindet der Boss und der Raid ist gescheitert.
+- Während der Wartezeit greift der Boss niemanden an und heilt sich nicht. Er bleibt auf seinem Spawn stehen.
+- **Bei einem gescheiterten Raid:** kein Loot, die Sachen der Spieler bleiben nach der Todesregel des Raids erhalten (Truhe, Besitzerschutz), das Tor öffnet sich, Ansage „Raid gescheitert“ mit Restleben des Bosses in Prozent. Beim nächsten Start hat der Boss wieder volles Leben.
+- **Server-Neustart oder Plugin-Neustart** während eines Raids: Der Raid wird abgebrochen und als gescheitert gewertet. Bosse werden nicht dauerhaft gespeichert. Beim Start entfernt das Plugin übrig gebliebene Bosse (an ihrer Markierung erkennbar), damit nie ein Boss ohne Raid in der Welt steht.
+- Gescheitert und gewonnen werden pro Raid gezählt (`/raid info`), für eine spätere Bestenliste.
+
 **Ablauf**
 1. Start: Admin mit `/raid start`, Spieler an einem Beschwörungsaltar in der Arena mit dem Ruf-Gegenstand (z. B. im ServerShop erhältlich) oder automatisch zu festen Zeiten.
 2. Sammeln: Ansage im Chat, 60 Sekunden zum Beitreten, Teleport zum Eingang.
 3. Auftritt: Tor schließt, Countdown, Bossname groß auf dem Bildschirm, Blitz ohne Schaden.
 4. Kampf mit Phasen, Boss-Leiste und angekündigten Spezialangriffen.
-5. Ende: Sieg mit Feuerwerk, persönlichem Loot und Schaden-Rangliste; Niederlage, wenn alle Leben verbraucht sind oder die Zeit abläuft. Danach öffnet sich das Tor.
+5. Ende: Sieg mit Feuerwerk, persönlichem Loot und Schaden-Rangliste. Gescheitert, wenn die Zeit abläuft oder die Wartezeit ohne lebende Spieler vorbei ist; der Boss verschwindet. Danach öffnet sich das Tor.
 
 **Schutz gegen Tricks:** Unerreichbare Spieler (Turm, hinter Blöcken) werden zum Boss gezogen oder der Boss teleportiert sich zu ihnen; Schaden aus mehr als 30 Blöcken zählt halb; kein Loot, wenn der Boss durch Lava oder Fallschaden stirbt.
 
@@ -883,6 +893,7 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 - Schaden pro Spieler über den Treffer-Listener zählen; beim Tod des Bosses die normale Beute löschen und persönlichen Loot würfeln.
 - Fähigkeiten als Baukasten (Schockwelle, Beschwören, Teleport, Wurf, Bodenzone) mit Zeitgeber und Vorwarnung.
 - Spielertod in der Arena abfangen und die Regel des Raids anwenden.
+- Ein Zeitgeber pro Raid prüft jede Sekunde Restzeit und lebende Teilnehmer in der Arena; Bosse werden als nicht dauerhaft erzeugt (verschwinden beim Neustart), übrig gebliebene werden beim Start entfernt.
 - Bosse, Fähigkeiten und Loot in einer Config-Datei, neue Bosse ohne Programmieren.
 - Besondere Gegenstände mit unsichtbarer Markierung, damit das Plugin ihre Fähigkeit erkennt.
 
