@@ -972,9 +972,14 @@ class Seiten:
 
         def karte(i, mit_id=True):
             titel = lok(i, 'titel', lang)
-            gr = GR.get(i.get('groesse'), t('Anleitung', 'Guide'))
+            gr = GR.get(i.get('groesse'), t('Plugin', 'Plugin') if i['kategorie'] == 'plugins' else t('Anleitung', 'Guide'))
             if i['status'] == 'verfuegbar' and i.get('bauplan'):
                 aktion = '<a class="btn klein" href="%s">%s</a>' % (self.link('bau', i['bauplan']), t('Zum Bauplan', 'View build'))
+            elif i.get('wunsch'):       # Idee stammt aus einem Wunsch: dort mitstimmen
+                aktion = '<a class="btn zwei klein" href="%s/issues/%s" rel="noopener">👍 %s</a>' % (repo, i['wunsch'], t('Mitstimmen', 'Vote too'))
+            elif i['kategorie'] == 'plugins':
+                ziel = '%s/issues/new?template=plugin-wunsch.yml&title=%s' % (repo, quote('Plugin-Wunsch: Idee #%s %s' % (i['nr'], i['titel'])))
+                aktion = '<a class="btn zwei klein" href="%s" rel="noopener">👍 %s</a>' % (H(ziel), t('Wünschen', 'Vote'))
             else:
                 ziel = '%s/issues/new?template=bauwunsch.yml&title=%s&bauwerk=%s' % (
                     repo, quote('Bauwunsch: Idee #%s %s' % (i['nr'], i['titel'])), quote(i['titel']))
@@ -1005,8 +1010,9 @@ class Seiten:
                              'All ideas for new builds and guides: farms, factories, buildings and monuments. Vote with “Vote” for what gets built first.')) + \
             ('<section class="abschnitt" style="padding-top:8px"><div class="wrap"><div class="ideen-zahlen">%s</div>%s</div></section>') % (
                 ''.join('<div><b>%d</b><span>%s</span></div>' % (n, l) for n, l in (
-                    (sum(1 for i in IDS if i['kategorie'] != 'anleitungen'), t('Bauplan-Ideen', 'build ideas')),
+                    (sum(1 for i in IDS if i['kategorie'] not in ('anleitungen', 'plugins')), t('Bauplan-Ideen', 'build ideas')),
                     (sum(1 for i in IDS if i['kategorie'] == 'anleitungen'), t('Anleitungen', 'guides')),
+                    (sum(1 for i in IDS if i['kategorie'] == 'plugins'), t('Plugin-Ideen', 'plugin ideas')),
                     (zahl['in-arbeit'], ST['in-arbeit']), (self.ideen.get('umgesetzt', 0), t('schon als Bauplan fertig', 'already finished as builds')))),
                 ''.join(teile))
         ld = {'@context': 'https://schema.org', '@graph': [

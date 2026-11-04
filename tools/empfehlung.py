@@ -2,11 +2,12 @@
 
 Es stehen immer ANZAHL offene Bauplan-Ideen unter „Als Nächstes“ (Feld "empfohlen": true).
 Ist eine davon fertig (status "verfuegbar"), rückt per Zufall eine andere offene Bauplan-Idee nach.
-Anleitungen (Kategorie "anleitungen") werden dabei nicht gezogen.
+Anleitungen und Plugin-Ideen (Kategorien in OHNE_BAUPLAN) werden dabei nicht gezogen.
 """
 import random
 
 ANZAHL = 3
+OHNE_BAUPLAN = {'anleitungen', 'plugins'}   # Ideen ohne Bauplan
 
 NACHRUECKEN = {
     'de': 'Ist eine davon fertig, rückt per Zufall eine neue nach.',
@@ -27,7 +28,7 @@ def nachruecken(daten, zufall=None):
     zufall = zufall or random.Random()
     ideen = daten['ideen']
     aktuell = [i for i in ideen if offen(i) and i.get('empfohlen')]
-    kandidaten = sorted((i for i in ideen if offen(i) and not i.get('empfohlen') and i['kategorie'] != 'anleitungen'),
+    kandidaten = sorted((i for i in ideen if offen(i) and not i.get('empfohlen') and i['kategorie'] not in OHNE_BAUPLAN),
                         key=lambda i: str(i['nr']))
     neu = []
     while len(aktuell) + len(neu) < ANZAHL and kandidaten:

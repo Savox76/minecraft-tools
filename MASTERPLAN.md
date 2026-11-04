@@ -15,7 +15,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 148 offene Ideen für Baupläne und 14 für Anleitungen, mit Kurztext, auf der Website unter „Geplant“; 2 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 148 offene Ideen für Baupläne, 14 für Anleitungen und 1 für Plugins (Nummern mit P), mit Kurztext, auf der Website unter „Geplant“; 2 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -441,8 +441,10 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 
 **Ablauf**
 - Neue Idee: Eintrag in `ideen/ideen.json` mit der nächsten freien Nummer, danach `python tools/ideen_masterplan.py` ausführen. Das schreibt die Tabellen unten neu.
+- **Wünsche aus GitHub-Issues** (Bau- oder Plugin-Wunsch) werden als Idee aufgenommen. Das Feld `"wunsch": <Issue-Nummer>` verknüpft die Idee mit dem Issue: Auf der Geplant-Seite führt „Mitstimmen“ dann direkt dorthin, und die 👍 werden gezählt.
+- **Plugin-Ideen** stehen in der Kategorie `plugins` mit Nummern P1, P2 … (Anleitungen: A1, A2 …). Sie rücken nicht unter „Als Nächstes“ nach, weil dort nur Bauplan-Ideen stehen.
 - Wird eine Idee umgesetzt: `status` auf `in-arbeit`, dann auf `verfuegbar` mit `"bauplan": "<id>"`. **Fertige Ideen verschwinden dann automatisch von der Geplant-Seite** und stehen hier unten unter „Umgesetzt“ zur Erinnerung. In `ideen/ideen.json` bleiben sie erhalten (Nummern werden nie neu vergeben).
-- **„Als Nächstes“ rückt per Zufall nach:** Auf der Geplant-Seite stehen immer **3** offene Bauplan-Ideen unter „Als Nächstes“ (`"empfohlen": true`). Ist eine davon fertig, zieht `python tools/ideen_masterplan.py` per Zufall eine andere offene Bauplan-Idee nach (keine Anleitungen) und speichert sie in `ideen/ideen.json`. So bleibt die Auswahl fest, bis wieder etwas fertig ist. Vergisst man den Aufruf, ergänzt der Website-Build vorläufig selbst und meldet einen Hinweis. Die Regel steht in `tools/empfehlung.py`.
+- **„Als Nächstes“ rückt per Zufall nach:** Auf der Geplant-Seite stehen immer **3** offene Bauplan-Ideen unter „Als Nächstes“ (`"empfohlen": true`). Ist eine davon fertig, zieht `python tools/ideen_masterplan.py` per Zufall eine andere offene Bauplan-Idee nach (keine Anleitungen und keine Plugin-Ideen) und speichert sie in `ideen/ideen.json`. So bleibt die Auswahl fest, bis wieder etwas fertig ist. Vergisst man den Aufruf, ergänzt der Website-Build vorläufig selbst und meldet einen Hinweis. Die Regel steht in `tools/empfehlung.py`.
 - Der Text über „Als Nächstes“ steht in `ideen/ideen.json` unter `empfohlen_text`, mit `fuer` = die Nummern, zu denen er passt. Rückt eine Idee nach, für die er nicht passt, erscheint automatisch ein allgemeiner Text.
 - Plugins: Braucht eine Idee ein Plugin, steht es unter `plugins` mit `id` und `stufe` (`benoetigt`, `empfohlen`, `optional`). Die Geplant-Seite zeigt es auf der Karte.
 - Abstimmen: Auf der Geplant-Seite führt „Wünschen“ zu einem vorausgefüllten Bauwunsch („Idee #61: Kakaofarm“). Gibt es dazu schon einen offenen Wunsch, zeigt die Seite dessen 👍-Stimmen und verlinkt dorthin.
@@ -451,7 +453,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-162 offene Ideen (162 💡 Idee, 0 🔨 in Arbeit), 2 schon umgesetzt (siehe „Umgesetzt“ am Ende).
+163 offene Ideen (163 💡 Idee, 0 🔨 in Arbeit), 2 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
 **Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 47 Blockhütte am See, Nr. 50 Japanisches Teehaus mit Garten.
 
@@ -693,6 +695,14 @@ Wissen rund um Server, Farmen und Bauen.
 | A12 | Dorfbewohner-Handel verbessern | Arbeitsblöcke, Heilen von Zombie-Dorfbewohnern und bessere Preise. | 💡 Idee |
 | A13 | Wahrzeichen in Blöcke umrechnen | Wie man aus echten Maßen einen Maßstab wählt, damit der Nachbau machbar bleibt. | 💡 Idee |
 | A14 | Elytra finden und nutzen | Endstadt finden, Elytra reparieren, Raketen und sichere Landeplätze. | 💡 Idee |
+
+### Plugin-Ideen (1)
+
+Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
+
+| Nr. | Plugin-Idee | Beschreibung | Wunsch | Status |
+|---|---|---|---|---|
+| P1 | Boss-Plugin: Bosse mit eigenen Fähigkeiten | Admins rufen per Befehl verschiedene Bosse herbei, jeder mit eigener Lebensleiste, Fähigkeiten und Beute. Zum Beispiel ein Nekromant, der Skelette beschwört, ein Steingolem mit Schockwelle oder eine Hexe, die sich wegteleportiert. Bringt Abwechslung und passt zu Events in der Arena (Idee Nr. 98). | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
 
 ### ✅ Umgesetzt (2)
 

@@ -1,5 +1,5 @@
 {
- "_hinweis": "Ideen für neue Baupläne und Anleitungen. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py). Ideen mit status \"verfuegbar\" erscheinen nicht mehr auf der Website, sondern im Masterplan unter „Umgesetzt“.",
+ "_hinweis": "Ideen für neue Baupläne, Anleitungen und Plugins. Plugin-Ideen haben Nummern mit P, Anleitungen mit A; \"wunsch\" ist die Nummer des GitHub-Issues, aus dem die Idee stammt. Quelle für die Seite /geplant/ und Masterplan Abschnitt 15 (python tools/ideen_masterplan.py). Ideen mit status \"verfuegbar\" erscheinen nicht mehr auf der Website, sondern im Masterplan unter „Umgesetzt“.",
  "empfohlen_text": {
   "de": "Passt zu den fertigen Farmen: Die Bambus-Brennstoffstation bringt den Bambus der Bambusfarm automatisch in den Ofen der Kaktus-XP-Farm.",
   "en": "Goes with the finished farms: the bamboo fuel station carries the bamboo from the bamboo farm into the furnace of the cactus XP farm automatically.",
@@ -105,6 +105,15 @@
    "en": {
     "name": "Guides",
     "text": "Know-how about servers, farms and building."
+   }
+  },
+  {
+   "id": "plugins",
+   "name": "Plugin-Ideen",
+   "text": "Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.",
+   "en": {
+    "name": "Plugin ideas",
+    "text": "Own plugins still to be made, often requested directly by players."
    }
   }
  ],
@@ -2216,6 +2225,18 @@
    "en": {
     "titel": "Stargazers’ observatory",
     "text": "A domed tower with constellations of light blocks in the floor and a puzzle that can only be solved by looking at the night sky."
+   }
+  },
+  {
+   "nr": "P1",
+   "kategorie": "plugins",
+   "titel": "Boss-Plugin: Bosse mit eigenen Fähigkeiten",
+   "text": "Admins rufen per Befehl verschiedene Bosse herbei, jeder mit eigener Lebensleiste, Fähigkeiten und Beute. Zum Beispiel ein Nekromant, der Skelette beschwört, ein Steingolem mit Schockwelle oder eine Hexe, die sich wegteleportiert. Bringt Abwechslung und passt zu Events in der Arena (Idee Nr. 98).",
+   "status": "idee",
+   "wunsch": 3,
+   "en": {
+    "titel": "Boss plugin: bosses with their own abilities",
+    "text": "Admins summon different bosses with a command, each with its own health bar, abilities and loot. For example a necromancer who summons skeletons, a stone golem with a shockwave or a witch who teleports away. Adds variety and goes well with events in the arena (idea no. 98)."
    }
   }
  ]

@@ -34,7 +34,12 @@ def tabellen(daten):
         if not liste:
             continue
         zeilen += ['', '### %s (%d)' % (k['name'], len(liste)), '', k['text'], '']
-        if k['id'] == 'anleitungen':
+        if k['id'] == 'plugins':
+            zeilen += ['| Nr. | Plugin-Idee | Beschreibung | Wunsch | Status |', '|---|---|---|---|---|']
+            zeilen += ['| %s | %s | %s | %s | %s |' % (i['nr'], i['titel'], i['text'].replace('|', '\\|'),
+                       ('[Issue #%s](https://github.com/Savox76/minecraft-tools/issues/%s)' % (i['wunsch'], i['wunsch'])) if i.get('wunsch') else '–',
+                       STATUS[i['status']]) for i in liste]
+        elif k['id'] == 'anleitungen':
             zeilen += ['| Nr. | Anleitung | Inhalt | Status |', '|---|---|---|---|']
             zeilen += ['| %s | %s | %s | %s |' % (i['nr'], i['titel'], (i['text'] + ''.join(' Plugin: %s (%s).' % (x['id'], STUFE_TXT[x['stufe']]) for x in i.get('plugins', []))).replace('|', '\\|'), STATUS[i['status']]) for i in liste]
         else:

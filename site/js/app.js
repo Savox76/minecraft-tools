@@ -306,20 +306,24 @@ async function geplantSeite() {
   // vorhandene Wünsche zu einer Idee: Titel enthält „Idee #61“
   const stimmen = new Map();
   for (const w of k.wuensche || []) {
-    const m = /Idee #(A?\d+)\b/i.exec(w.titel);
+    const m = /Idee #([AP]?\d+)\b/i.exec(w.titel);
     if (m && (!stimmen.has(m[1].toUpperCase()) || stimmen.get(m[1].toUpperCase()).stimmen < w.stimmen)) stimmen.set(m[1].toUpperCase(), w);
   }
   const karte = (i, mitId = true) => {
-    const w = stimmen.get(String(i.nr).toUpperCase());
+    const w = (i.wunsch && (k.wuensche || []).find((x) => x.nr === i.wunsch)) || stimmen.get(String(i.nr).toUpperCase());
     let aktion;
     if (i.status === 'verfuegbar' && i.bauplan) aktion = `<a class="btn klein" href="${url('bau', i.bauplan)}">${tr('Zum Bauplan', 'View build')}</a>`;
     else if (w) aktion = `<a class="btn zwei klein" href="${esc(w.url)}" target="_blank" rel="noopener">👍 ${w.stimmen} · ${tr('Mitstimmen', 'Vote too')}</a>`;
-    else {
+    else if (i.wunsch) aktion = `<a class="btn zwei klein" href="${REPO}/issues/${i.wunsch}" target="_blank" rel="noopener">👍 ${tr('Mitstimmen', 'Vote too')}</a>`;
+    else if (i.kategorie === 'plugins') {
+      const ziel = `${REPO}/issues/new?template=plugin-wunsch.yml&title=${encodeURIComponent(`Plugin-Wunsch: Idee #${i.nr} ${i.titel}`)}`;
+      aktion = `<a class="btn zwei klein" href="${esc(ziel)}" target="_blank" rel="noopener">👍 ${tr('Wünschen', 'Vote')}</a>`;
+    } else {
       const ziel = `${REPO}/issues/new?template=bauwunsch.yml&title=${encodeURIComponent(`Bauwunsch: Idee #${i.nr} ${i.titel}`)}&bauwerk=${encodeURIComponent(i.titel)}`;
       aktion = `<a class="btn zwei klein" href="${esc(ziel)}" target="_blank" rel="noopener">👍 ${tr('Wünschen', 'Vote')}</a>`;
     }
     return `<article class="idee" data-kat="${i.kategorie}"${mitId ? ` id="idee-${i.nr}"` : ''}>
-      <div class="idee-kopf"><span class="idee-nr">Nr. ${i.nr}</span><span class="marker">${esc(GR[i.groesse] || tr('Anleitung', 'Guide'))}</span><span class="marker status-${i.status}">${ST[i.status]}</span></div>
+      <div class="idee-kopf"><span class="idee-nr">Nr. ${i.nr}</span><span class="marker">${esc(GR[i.groesse] || (i.kategorie === 'plugins' ? 'Plugin' : tr('Anleitung', 'Guide')))}</span><span class="marker status-${i.status}">${ST[i.status]}</span></div>
       <h3>${esc(lo(i, 'titel'))}</h3><p>${esc(lo(i, 'text'))}</p>
       ${(i.plugins || []).length ? `<p class="idee-plugins">${tr('Plugin', 'Plugin')}: ${i.plugins.map((x) => `${pluginLink(pluginRef(k, x.id))} <span>(${STUFE[x.stufe].toLowerCase()})</span>`).join(', ')}</p>` : ''}
       <div class="idee-fuss">${aktion}</div></article>`;
@@ -330,8 +334,9 @@ async function geplantSeite() {
     <h1>${tr('Geplant', 'Planned')}</h1>
     <p class="lede">${tr('Alle Ideen für neue Baupläne und Anleitungen: Farmen, Fabriken, Gebäude und Monumente. Stimm mit „Wünschen“ ab, was zuerst gebaut wird.', 'All ideas for new builds and guides: farms, factories, buildings and monuments. Vote with “Vote” for what gets built first.')}</p>
     <div class="ideen-zahlen">
-      <div><b>${IDS.filter((i) => i.kategorie !== 'anleitungen').length}</b><span>${tr('Bauplan-Ideen', 'build ideas')}</span></div>
+      <div><b>${IDS.filter((i) => i.kategorie !== 'anleitungen' && i.kategorie !== 'plugins').length}</b><span>${tr('Bauplan-Ideen', 'build ideas')}</span></div>
       <div><b>${IDS.filter((i) => i.kategorie === 'anleitungen').length}</b><span>${tr('Anleitungen', 'guides')}</span></div>
+      <div><b>${IDS.filter((i) => i.kategorie === 'plugins').length}</b><span>${tr('Plugin-Ideen', 'plugin ideas')}</span></div>
       <div><b>${zahl('in-arbeit')}</b><span>${ST['in-arbeit']}</span></div>
       <div><b>${D.umgesetzt || 0}</b><span><a href="${url('liste')}">${tr('schon als Bauplan fertig', 'already finished as builds')}</a></span></div>
     </div>
