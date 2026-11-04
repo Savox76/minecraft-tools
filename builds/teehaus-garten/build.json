@@ -1,0 +1,311 @@
+{
+  "id": "teehaus-garten",
+  "titel": "Japanisches Teehaus mit Garten",
+  "beschreibung": "Exklusives Teehaus in einem ummauerten Garten: Doppeldach aus Tiefenschiefer mit aufgebogenen Ecken, Shoji-Wände aus weißem Glas und Tatami-Boden aus Bambusmosaik. Davor ein Koi-Teich mit Insel, Wasserfall und roter Bogenbrücke, ein Kiesgarten mit Steingruppen, drei blühende Kirschbäume, ein Bambushain und Steinlaternen entlang des Weges.",
+  "kategorie": "villen",
+  "tags": [
+    "japanisch",
+    "teehaus",
+    "garten",
+    "kirschbaum",
+    "teich",
+    "brücke",
+    "deko"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 4,
+  "bauzeit_stunden": [
+    6,
+    10
+  ],
+  "grundflaeche": "33 × 33",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Achte besonders auf die Dachtreppen (die hohe Seite zeigt immer zur Dachmitte) und setze beim Wasserfall zuerst die Felsen, dann das Wasser.",
+  "abschnitte": [
+    {
+      "name": "Grundstück, Teich und Wege",
+      "von": 0,
+      "bis": 0,
+      "text": "Alles auf Bodenhöhe: der Sockel der Mauer, der Steinsockel des Teehauses, der Teich mit Bach, die Trittsteine vom Tor bis zur Treppe und der Kiesgarten. Der Teich ist einen Block tief. Grabe ihn aus, lege die Uferränder aus Andesit und fülle ihn mit Wasser."
+    },
+    {
+      "name": "Mauer, Boden und Garten",
+      "von": 1,
+      "bis": 1,
+      "text": "Die weiße Gartenmauer mit Pfosten aus dunklem Holz, der Boden des Teehauses (Veranda aus Fichte, Tatami aus Bambusmosaik), die Treppe am Eingang, Felsen, Büsche, Seerosen und der Fuß der Brücke."
+    },
+    {
+      "name": "Wände, Brücke und Laternen",
+      "von": 2,
+      "bis": 4,
+      "text": "Die Wände des Teehauses: Pfosten aus entrindetem Dunkeleichenstamm, dazwischen Shoji aus weißen Glasscheiben zur Garten- und Eingangsseite, weiße Wände zur Rückseite. Innen ein niedriger Tisch mit vier Sitzkissen und eine Bildnische mit Azalee. Draußen die rote Bogenbrücke, die Steinlaternen, der Wasserfall und die Stämme der Kirschbäume."
+    },
+    {
+      "name": "Unteres Dach und Torbau",
+      "von": 5,
+      "bis": 6,
+      "text": "Das untere Dach über der Veranda mit aufgebogenen Ecken, darunter hängen Laternen. Darüber ein Band aus dunklem Holz. Am Tor ein eigenes kleines Dach auf einem Querbalken."
+    },
+    {
+      "name": "Oberes Dach und Baumkronen",
+      "von": 7,
+      "bis": 11,
+      "text": "Das obere Walmdach Ring für Ring nach innen, mit First und Zierstufen an den Enden. Dazu die Kronen der Kirschbäume und die Spitzen des Bambushains."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Was es besonders macht",
+      "text": "Zwei Dächer übereinander, jeweils mit aufgebogenen Ecken, geben dem Teehaus seine edle Form. Das dunkle Holz, die weißen Shoji und der Tatami-Boden sind die klassischen Farben eines Teehauses. Die rote Brücke und die rosa Kirschblüten setzen die Farbakzente im Garten."
+    },
+    {
+      "titel": "Dachtreppen richtig setzen",
+      "text": "Jede Dachtreppe zeigt mit der hohen Seite zur Mitte des Daches. Am einfachsten: Stell dich in die Mitte des Hauses und setze die Treppen, während du nach außen schaust. Die Ecken sind volle Tiefenschiefer-Ziegel, die äußere Kante sind Stufen. Mit der Steinsäge wird aus jedem Bruchstein-Tiefenschiefer ohne Umweg eine Ziegeltreppe oder zwei Stufen."
+    },
+    {
+      "titel": "Wasserfall ohne Überschwemmung",
+      "text": "Setze zuerst alle Felsen um die Quelle herum, erst dann den Wassereimer ganz oben. Das Wasser hat nur nach Süden einen Ausgang und fällt von dort in den Teich. Fehlt ein Felsen, läuft es über den Rasen."
+    },
+    {
+      "titel": "Kois im Teich",
+      "text": "Fang tropische Fische mit einem Wassereimer im warmen Ozean und lass sie im Teich frei. Fische aus dem Eimer verschwinden nicht von selbst. Fünf bis acht bunte Fische reichen für einen lebendigen Teich."
+    },
+    {
+      "titel": "Kiesgarten: kein Wasser in der Nähe",
+      "text": "Der weiße und der hellgraue Kies sind Trockenbeton. Er wird sofort hart, wenn er Wasser berührt. Deshalb liegt der Kiesgarten weit weg vom Teich. Die grauen Ringe um die Steine sind die geharkten Linien."
+    },
+    {
+      "titel": "Material aus den eigenen Farmen",
+      "text": "Das Bambusmosaik für den Tatami-Boden und der Bambushain brauchen zusammen etwa 216 Bambus. Das liefert die kleine Bambusfarm in ein paar Stunden. Kirschlaub, Kirschstämme und Blütenblätter gibt es im Kirschblütenhain, das Laub nur mit der Schere."
+    },
+    {
+      "titel": "Schöner bei Nacht",
+      "text": "Neunzehn Laternen beleuchten Weg, Brücke, Veranda und Tor. Wer es heller mag, kann unter den Moosteppichen im Kiesgarten Leuchtsteine verstecken."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Andesit",
+      "menge": 354,
+      "quelle": "Höhlen und Berge",
+      "hinweis": "poliert für Sockel, Wege und Steinlaternen, roh für Ufer und Felsen"
+    },
+    {
+      "name": "Bruchstein-Tiefenschiefer",
+      "menge": 230,
+      "quelle": "Abbau unter Ebene 0",
+      "hinweis": "mit der Steinsäge zu Ziegeln, Ziegeltreppen und Ziegelstufen für alle Dächer"
+    },
+    {
+      "name": "Sand und Kies",
+      "menge": 149,
+      "quelle": "Strand, Wüste und Flussufer",
+      "hinweis": "je 149 Sand und Kies für 298 Trockenbeton, 202 davon mit Wasser zu weißem Beton härten"
+    },
+    {
+      "name": "Weißer Farbstoff",
+      "menge": 38,
+      "quelle": "Knochenmehl oder Maiglöckchen",
+      "hinweis": "für Beton, Trockenbeton und die Shoji-Scheiben, dazu etwas hellgrauer Farbstoff"
+    },
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 183,
+      "quelle": "Baumfarm (Dunkeleiche) oder Holzfäller-Arbeiter",
+      "hinweis": "mit der Axt entrinden für Pfosten und Balken, der Rest zu Brettern"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 11,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Veranda und Eingangstreppe"
+    },
+    {
+      "name": "Mangrovenstamm",
+      "menge": 15,
+      "quelle": "Mangrovensumpf",
+      "hinweis": "die rote Bogenbrücke"
+    },
+    {
+      "name": "Kirschstamm und Kirschlaub",
+      "menge": 232,
+      "quelle": "Kirschblütenhain",
+      "hinweis": "21 Stämme, 211 Laub mit der Schere, dazu 22 Blütenblätter"
+    },
+    {
+      "name": "Bambus",
+      "menge": 216,
+      "quelle": "Bambusfarm",
+      "hinweis": "Bambusmosaik für den Boden und Bambus zum Pflanzen"
+    },
+    {
+      "name": "Glas",
+      "menge": 14,
+      "quelle": "Sand schmelzen",
+      "hinweis": "zu weißen Buntglasscheiben für die Shoji"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 24,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und der Kessel für das Wasserbecken"
+    },
+    {
+      "name": "Moos",
+      "menge": 54,
+      "quelle": "üppige Höhle, mit Knochenmehl vermehren",
+      "hinweis": "Moosblöcke, Moosteppiche und bemooster Bruchstein"
+    },
+    {
+      "name": "Azaleenlaub, Seerosen, Topf-Azalee",
+      "menge": 25,
+      "quelle": "Azaleenbaum und Sumpf",
+      "hinweis": "Laub mit der Schere"
+    },
+    {
+      "name": "Wassereimer",
+      "menge": 3,
+      "quelle": "unendliche Wasserquelle",
+      "hinweis": "Teich, Bach, Wasserfall und Kessel"
+    }
+  ],
+  "schmelzvorgaenge": 14,
+  "version": "0.9.0",
+  "autor": "Savox",
+  "plugins": [],
+  "en": {
+    "titel": "Japanese Tea House with Garden",
+    "beschreibung": "An exclusive tea house in a walled garden: a double roof of deepslate tiles with upturned corners, shoji walls of white glass and a tatami floor of bamboo mosaic. In front, a koi pond with an island, a waterfall and a red arched bridge, a gravel garden with rock groups, three blossoming cherry trees, a bamboo grove and stone lanterns along the path.",
+    "grundflaeche": "33 × 33",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. Pay special attention to the roof stairs (the high side always faces the middle of the roof), and at the waterfall place the rocks first, then the water.",
+    "abschnitte": [
+      {
+        "name": "Plot, pond and paths",
+        "text": "Everything at ground level: the base of the wall, the stone base of the tea house, the pond with its stream, the stepping stones from the gate to the steps and the gravel garden. The pond is one block deep. Dig it out, lay the andesite banks and fill it with water."
+      },
+      {
+        "name": "Wall, floor and garden",
+        "text": "The white garden wall with dark wooden posts, the floor of the tea house (spruce veranda, bamboo mosaic tatami), the entrance steps, rocks, bushes, lily pads and the foot of the bridge."
+      },
+      {
+        "name": "Walls, bridge and lanterns",
+        "text": "The walls of the tea house: posts of stripped dark oak, with shoji of white glass panes between them on the garden and entrance sides and white walls at the back. Inside, a low table with four cushions and an alcove with an azalea. Outside, the red arched bridge, the stone lanterns, the waterfall and the trunks of the cherry trees."
+      },
+      {
+        "name": "Lower roof and gatehouse",
+        "text": "The lower roof above the veranda with upturned corners and lanterns hanging beneath it. Above it a band of dark wood. The gate gets its own small roof on a crossbeam."
+      },
+      {
+        "name": "Upper roof and treetops",
+        "text": "The upper hip roof ring by ring towards the middle, with a ridge and decorative slabs at its ends. Plus the crowns of the cherry trees and the tips of the bamboo grove."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "What makes it special",
+        "text": "Two roofs on top of each other, each with upturned corners, give the tea house its elegant shape. The dark wood, the white shoji and the tatami floor are the classic colours of a tea house. The red bridge and the pink cherry blossoms add colour to the garden."
+      },
+      {
+        "titel": "Placing the roof stairs",
+        "text": "Every roof stair has its high side facing the middle of the roof. Easiest way: stand in the middle of the house and place the stairs while looking outwards. The corners are full deepslate tiles, the outer edge is slabs. With a stonecutter, every cobbled deepslate becomes a tile stair or two slabs directly."
+      },
+      {
+        "titel": "A waterfall without flooding",
+        "text": "Place all the rocks around the source first, then the water bucket at the very top. The water only has an exit to the south and falls into the pond from there. If a rock is missing, it runs over the lawn."
+      },
+      {
+        "titel": "Koi in the pond",
+        "text": "Catch tropical fish with a water bucket in a warm ocean and release them in the pond. Fish from a bucket do not despawn. Five to eight colourful fish are enough for a lively pond."
+      },
+      {
+        "titel": "Gravel garden: no water nearby",
+        "text": "The white and light grey gravel is concrete powder. It hardens immediately when it touches water. That is why the gravel garden lies far away from the pond. The grey rings around the rocks are the raked lines."
+      },
+      {
+        "titel": "Materials from your own farms",
+        "text": "The bamboo mosaic for the tatami floor and the bamboo grove need about 216 bamboo together. The small bamboo farm delivers that in a few hours. Cherry leaves, cherry logs and petals come from a cherry grove, the leaves only with shears."
+      },
+      {
+        "titel": "Beautiful at night",
+        "text": "Nineteen lanterns light the path, bridge, veranda and gate. If you like it brighter, hide glowstone under the moss carpets in the gravel garden."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Andesite",
+        "quelle": "Caves and mountains",
+        "hinweis": "polished for the base, paths and stone lanterns, raw for banks and rocks"
+      },
+      {
+        "name": "Cobbled deepslate",
+        "quelle": "Mining below level 0",
+        "hinweis": "turned into tiles, tile stairs and tile slabs for all roofs with the stonecutter"
+      },
+      {
+        "name": "Sand and gravel",
+        "quelle": "Beach, desert and riverbanks",
+        "hinweis": "149 sand and gravel each for 298 concrete powder, harden 202 of it into white concrete with water"
+      },
+      {
+        "name": "White dye",
+        "quelle": "Bone meal or lily of the valley",
+        "hinweis": "for concrete, concrete powder and the shoji panes, plus some light grey dye"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak) or lumberjack worker",
+        "hinweis": "strip with an axe for posts and beams, the rest into planks"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "veranda and entrance steps"
+      },
+      {
+        "name": "Mangrove logs",
+        "quelle": "Mangrove swamp",
+        "hinweis": "the red arched bridge"
+      },
+      {
+        "name": "Cherry logs and leaves",
+        "quelle": "Cherry grove",
+        "hinweis": "21 logs, 211 leaves with shears, plus 22 pink petals"
+      },
+      {
+        "name": "Bamboo",
+        "quelle": "Bamboo farm",
+        "hinweis": "bamboo mosaic for the floor and bamboo for planting"
+      },
+      {
+        "name": "Glass",
+        "quelle": "Smelt sand",
+        "hinweis": "into white stained glass panes for the shoji"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and the cauldron for the water basin"
+      },
+      {
+        "name": "Moss",
+        "quelle": "Lush cave, multiply with bone meal",
+        "hinweis": "moss blocks, moss carpets and mossy cobblestone"
+      },
+      {
+        "name": "Azalea leaves, lily pads, potted azalea",
+        "quelle": "Azalea tree and swamp",
+        "hinweis": "leaves with shears"
+      },
+      {
+        "name": "Water buckets",
+        "quelle": "Infinite water source",
+        "hinweis": "pond, stream, waterfall and cauldron"
+      }
+    ]
+  }
+}

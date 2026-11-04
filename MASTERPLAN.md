@@ -10,12 +10,12 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 | Bereich | Status | Wo |
 |---|---|---|
-| 10 Baupläne | ✅ **verfügbar** als Entwurf: Bauschritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
+| 11 Baupläne | ✅ **verfügbar** als Entwurf: Bauschritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
 | 7 eigene Plugins | 🟡 **Doku verfügbar**, Quellcode und `.jar` integrierbar, sobald der Quellcode vorliegt | [`plugins/eigene/`](plugins/eigene/) |
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 148 offene Ideen für Baupläne, 14 für Anleitungen und 1 für Plugins (Nummern mit P), mit Kurztext, auf der Website unter „Geplant“; 2 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 147 offene Ideen für Baupläne, 14 für Anleitungen und 1 für Plugins (Nummern mit P), mit Kurztext, auf der Website unter „Geplant“; 3 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -61,7 +61,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 ## 3. Was hinein soll (Bestand)
 
-### Baupläne (10)
+### Baupläne (11)
 
 | ID | Name | Größe | Höhe | Blöcke ca. |
 |---|---|---|---|---|
@@ -75,6 +75,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | `kellerlager` | Kellerlager mit Sortieranlage (Java) | 17 × 12 | 8 | 800 |
 | `kaktus-xp-farm` | Kaktus-XP-Farm mit Ofen (Idee Nr. 1) | 9 × 10 | 6 | 320 |
 | `bambusfarm-klein` | Kleine Bambusfarm mit Kolben und Beobachtern (Idee Nr. 9) | 10 × 5 | 5 | 160 |
+| `teehaus-garten` | Japanisches Teehaus mit Garten, exklusive Ausführung (Idee Nr. 50, Wunsch #2) | 33 × 33 | 12 | 1.900 |
 
 Quelle: die bisherige Bauplan-Seite (Claude-Artifact „Spawn-Baupläne“).
 
@@ -453,9 +454,9 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-163 offene Ideen (163 💡 Idee, 0 🔨 in Arbeit), 2 schon umgesetzt (siehe „Umgesetzt“ am Ende).
+162 offene Ideen (162 💡 Idee, 0 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
-**Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 47 Blockhütte am See, Nr. 50 Japanisches Teehaus mit Garten.
+**Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 114 Holstentor Lübeck, Nr. 47 Blockhütte am See.
 
 ### Skillfarmen (XP) (9)
 
@@ -635,7 +636,7 @@ Nachbauten bekannter Wahrzeichen, mit passendem Maßstab.
 | 127 | Koloss von Rhodos | groß | Das antike Weltwunder als riesige Bronzestatue an einer Hafeneinfahrt, die Schiffe fahren darunter durch. | 💡 Idee |
 | 128 | Empire State Building | groß | Der Art-déco-Wolkenkratzer mit gestuften Absätzen und Spitze, gut im Maßstab 1:3. | 💡 Idee |
 
-### Gebäude (33)
+### Gebäude (32)
 
 Eigene Entwürfe vom Wachturm bis zum Luftschiff.
 
@@ -650,7 +651,6 @@ Eigene Entwürfe vom Wachturm bis zum Luftschiff.
 | 47 | Blockhütte am See | klein | Rundholz, Kamin und ein kleiner Steg. | 💡 Idee |
 | 48 | Baumhaus im Riesen-Dschungelbaum | mittel | Mehrere Plattformen, verbunden mit Hängebrücken. | 💡 Idee |
 | 49 | Unterwasser-Glaskuppel | mittel | Eine Wohnkuppel am Meeresgrund mit Blick auf die Fische. | 💡 Idee |
-| 50 | Japanisches Teehaus mit Garten | klein | Kirschbaumholz, Teich und Steinlaternen. | 💡 Idee |
 | 51 | Zwergenhalle im Berg | groß | Eine große Halle mit Säulen, in den Berg gebaut statt in die Tiefe. | 💡 Idee |
 | 52 | Hochhaus | groß | Moderne Glasfassade, jede Etage als eigener Bauabschnitt. | 💡 Idee |
 | 53 | Rathaus mit Uhrturm am Spawn | mittel | Treffpunkt für alle, mit Hilfe-Schildern und Infotafeln. Plugin: serverhilfe (empfohlen). | 💡 Idee |
@@ -704,13 +704,14 @@ Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
 |---|---|---|---|---|
 | P1 | Boss-Plugin: Bosse mit eigenen Fähigkeiten | Admins rufen per Befehl verschiedene Bosse herbei, jeder mit eigener Lebensleiste, Fähigkeiten und Beute. Zum Beispiel ein Nekromant, der Skelette beschwört, ein Steingolem mit Schockwelle oder eine Hexe, die sich wegteleportiert. Bringt Abwechslung und passt zu Events in der Arena (Idee Nr. 98). | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
 
-### ✅ Umgesetzt (2)
+### ✅ Umgesetzt (3)
 
 Diese Ideen sind fertige Baupläne. Sie stehen nicht mehr auf der Geplant-Seite, sondern bei den Bauplänen.
 
 | Nr. | Idee | Bauplan |
 |---|---|---|
 | 1 | Kaktus-XP-Farm mit Ofenbatterie | [`builds/kaktus-xp-farm`](builds/kaktus-xp-farm/) |
+| 50 | Japanisches Teehaus mit Garten | [`builds/teehaus-garten`](builds/teehaus-garten/) |
 | 9 | Kleine Bambusfarm | [`builds/bambusfarm-klein`](builds/bambusfarm-klein/) |
 <!-- ideen:ende -->
 
@@ -792,5 +793,5 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 | ServerShop (eigenes) | Idee Nr. 26 Marktplatz für Spieler-Shops | – | – |
 | spark (fremdes) | Idee Nr. A7 Lag finden mit spark | – | – |
 
-Ohne Plugin (reines Minecraft): Eiffelturm, Leuchtturm, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
+Ohne Plugin (reines Minecraft): Eiffelturm, Leuchtturm, Japanisches Teehaus mit Garten, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
 <!-- abhaengigkeiten:ende -->

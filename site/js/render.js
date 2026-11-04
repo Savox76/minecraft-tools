@@ -3,7 +3,7 @@
 
 export const shapeOf = (n) =>
   /Dorfbewohner/.test(n) ? 'mob' :
-  /Redstonestaub|Seerosenblatt/.test(n) ? 'flat' :
+  /Redstonestaub|Seerosenblatt|Teppich|Blütenblätter/.test(n) ? 'flat' :
   /Komparator|Verstärker/.test(n) ? 'low' :
   /Karotten|Kartoffeln/.test(n) ? 'crop' :
   /Bett/.test(n) ? 'bed' :

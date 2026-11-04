@@ -1319,7 +1319,8 @@
    "en": {
     "titel": "Holsten Gate Lübeck",
     "text": "The brick gate with two round towers and conical spires."
-   }
+   },
+   "empfohlen": true
   },
   {
    "nr": 115,
@@ -1460,12 +1461,13 @@
    "groesse": "klein",
    "titel": "Japanisches Teehaus mit Garten",
    "text": "Kirschbaumholz, Teich und Steinlaternen.",
-   "status": "idee",
+   "status": "verfuegbar",
    "en": {
     "titel": "Japanese tea house with garden",
     "text": "Cherry wood, a pond and stone lanterns."
    },
-   "empfohlen": true
+   "bauplan": "teehaus-garten",
+   "wunsch": 2
   },
   {
    "nr": 51,
