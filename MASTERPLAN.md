@@ -805,22 +805,181 @@ Ausgearbeitete Konzepte für geplante eigene Plugins. Die Kurzfassung steht in `
 
 ### 17.1 P1 BossRaid: Boss-Kämpfe mit Arena und Raids
 
-**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit, Scheitern und Beschwörung ergänzt).
+**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit, Scheitern, Beschwörung und Steckbriefe aller acht Bosse ergänzt).
 
 **Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. **Hauptweg ist die Beschwörung durch Spieler** an einem Altar; die Regeln jedes Raids stellt der Admin per Befehl ein. Admin-Start und feste Termine bleiben für Events.
 
-**Bosse** (jeder baut auf einem normalen Monster auf, kein Mod nötig)
+**Bosse: alle acht vollständig geplant**
 
-| Boss | Basis | Fähigkeiten | Start |
-|---|---|---|---|
-| Nekromant | Wither-Skelett | ruft Skelett-Wellen; ab halbem Leben kurz unsichtbar, taucht woanders auf | ✅ |
-| Steingolem | großer Eisengolem | Schockwelle schleudert Spieler hoch, wirft Felsbrocken; langsam, viel Leben | ✅ |
-| Sumpfhexe | Hexe | wirft Tränke, teleportiert sich, ruft Schleime, heilt sich in Ruhe | ✅ |
-| Frostkönigin | Eiswanderer | Pfeile verlangsamen, Eisgefängnis um Spieler, Schneesturm | später |
-| Spinnenkönigin | große Höhlenspinne | schießt Netze, Eier mit kleinen Spinnen, klettert | später |
-| Feuerdämon | Lohe | Feuerregen, brennender Boden für kurze Zeit | später |
-| Piratenkapitän | Diener | Kanonenkugeln (nur Spielerschaden), ruft seine Crew | später |
-| Endwächter | Enderman | tauscht Platz mit Spielern, Schwebe-Zonen | später |
+Jeder Boss baut auf einem normalen Monster auf (kein Mod nötig). Die Bosse sind in vier Stufen eingeteilt; der Loot früherer Bosse hilft gegen die späteren.
+
+| Stufe | Bosse | Umsetzung |
+|---|---|---|
+| I | Nekromant, Sumpfhexe | zuerst |
+| II | Steingolem, Spinnenkönigin, Frostkönigin | danach |
+| III | Piratenkapitän, Feuerdämon | danach |
+| IV (Finale) | Endwächter | zum Schluss |
+
+Für alle gilt:
+- **Leben** in der Tabelle für leicht · normal · schwer und einen Spieler. Ab dem zweiten Spieler +40 % Leben pro weiterem Teilnehmer.
+- **Schaden** auf leicht ×0,7, auf schwer ×1,3. Spezialangriffe der Phasen werden immer angekündigt (Zeichen in Klammern).
+- **Phasen:** Phase 1 ab Beginn, Phase 2 ab 66 % Leben, Phase 3 ab 33 % Leben.
+- **Fragmente** fallen mit 3 % Chance (Config) von den genannten Monstern, nur außerhalb von Arenen und nicht von beschworenen Helfern.
+- **Loot-Chancen** auf normal: selten 25 %, episch 5 %, Trophäe 10 %. Auf schwer doppelt, dazu der Loot-Faktor des Raids.
+- **Vorübergehende Blöcke** (Eier, Eis, Kessel, Kristallsäulen, Feuer) setzt nur das Plugin. Sie lassen nichts fallen und verschwinden spätestens am Ende des Raids.
+- **Boss-Pfad (optional, Config):** Den Endwächter kann eine Gruppe erst beschwören, wenn einer der Teilnehmer schon einen Boss der Stufe III besiegt hat.
+
+#### 1. Nekromant (Stufe I)
+
+| | |
+|---|---|
+| Basis | Wither-Skelett, Größe 1,3 |
+| Leben | 360 · 600 · 900 |
+| Angriff | 3 Herzen + Wither I (3 s), Rüstung 8 |
+| Phase 1 | Knochenpfeil-Salve aus 3 Pfeilen (Warnung: Bogen leuchtet). Ruft alle 20 s drei Skelette (Warnung: Seelenflammen am Boden). |
+| Phase 2 (66 %) | Wird 3 s unsichtbar und taucht hinter einem Spieler wieder auf. Ruft jetzt Wither-Skelette statt Skelette. |
+| Phase 3 (33 %) | Seelensturm: 8 s Wither-Zone mit Radius 5 um ihn (Ring aus Seelenpartikeln 2 s vorher). Beschworene Skelette heilen ihn, wenn sie ihn erreichen, also zuerst die Skelette besiegen. |
+| Schwäche | Bann wirkt doppelt, Heiltränke schaden ihm. Während er beschwört, nimmt er 3 s doppelten Schaden. |
+| Beschwörung | **Seelenkristall** aus 8 Seelensplitter (Skelette, nur nachts) + 1 Knochenblock |
+| Verflucht (schwer) | Seelenkristall + 1 Wither-Skelett-Schädel |
+| Loot sicher | 300 Erfahrung, 3–6 Diamanten, 16–32 Knochen |
+| Loot selten | Schwert mit Bann VI, Bogen mit Stärke VI |
+| Loot episch | **Seelenstab**: Rechtsklick ruft 2 Skelett-Helfer für 30 s, Abklingzeit 2 Minuten |
+| Trophäe | Wither-Skelett-Schädel „Kopf des Nekromanten“ |
+| Passende Arena | Friedhof mit Gruft (Nr. 148) |
+
+#### 2. Sumpfhexe (Stufe I)
+
+| | |
+|---|---|
+| Basis | Hexe, Größe 1,2 |
+| Leben | 300 · 500 · 750 |
+| Angriff | Schadenstränke 3–4 Herzen, Rüstung 4 |
+| Phase 1 | Wirft Gift- und Langsamkeitstränke. Kommt jemand in den Nahkampf, teleportiert sie sich weg (Warnung: lila Partikel). |
+| Phase 2 (66 %) | Ruft 4 große Schleime. Heilkreis: Bleibt sie 5 s ungestört, heilt sie 5 % pro Sekunde (grüner Ring sichtbar). Ein Treffer unterbricht. |
+| Phase 3 (33 %) | Drei Hexenkessel erscheinen in der Arena und verstärken sie. Jeder Kessel muss dreimal geschlagen werden. Dazu Fluch: zufällige Spieler 3 s blind. |
+| Schwäche | Pfeile, denn Fernkampf kann sie nicht ausweichen. Milch hebt ihre Effekte auf. |
+| Beschwörung | **Hexenauge** aus 8 Sumpfkräuter (Hexen und Schleime) + 1 Fermentiertes Spinnenauge |
+| Verflucht (schwer) | Hexenauge + 1 Kaninchenpfote |
+| Loot sicher | 250 Erfahrung, 8–16 Smaragde, 3 starke Tränke (Stufe II, lange Dauer) |
+| Loot selten | Verzauberte Bücher über der Grenze: Schutz V, Effizienz VI |
+| Loot episch | **Hexenbeutel**: in der Zweithand wirken Trankeffekte doppelt so lange |
+| Trophäe | Kopf der Sumpfhexe |
+| Passende Arena | Hexenturm im Sumpf (Nr. 144) |
+
+#### 3. Steingolem (Stufe II)
+
+| | |
+|---|---|
+| Basis | Eisengolem, Größe 2 |
+| Leben | 600 · 1000 · 1500 |
+| Angriff | 4–5 Herzen und Hochschleudern, Rüstung 20, langsam, kein Rückstoß |
+| Phase 1 | Faustschläge. Felswurf: zeigt 1,5 s mit dem Arm auf einen Spieler, dann fliegt ein Felsbrocken (4 Herzen, der Block verschwindet beim Aufprall). |
+| Phase 2 (66 %) | Schockwelle: stampft auf (Ring aus Bodenpartikeln 1,5 s vorher), 6 Herzen im Radius 6, schleudert hoch. Wegrennen oder rechtzeitig springen. |
+| Phase 3 (33 %) | Steinhaut: abwechselnd 5 s unverwundbar (graue Partikel) und 5 s verwundbar mit doppeltem Schaden. Schockwelle doppelt so oft. |
+| Schwäche | Spitzhacken machen 50 % mehr Schaden. |
+| Beschwörung | **Golemkern** aus 8 Steinsplitter (Silberfischchen und Höhlenspinnen) + 1 Eisenblock |
+| Verflucht (schwer) | Golemkern + 1 Netheritschrott |
+| Loot sicher | 400 Erfahrung, 2–4 Eisenblöcke, 4–8 Diamanten |
+| Loot selten | Spitzhacke mit Effizienz VI und Glück IV |
+| Loot episch | **Steinherz-Brustplatte**: Diamant mit Schutz V, kein Rückstoß mehr |
+| Trophäe | Kopf des Steingolems |
+| Passende Arena | Kolosseum (Nr. 36) oder Arena mit Tribüne (Nr. 98) |
+
+#### 4. Spinnenkönigin (Stufe II)
+
+| | |
+|---|---|
+| Basis | Höhlenspinne, Größe 3 |
+| Leben | 500 · 800 · 1200 |
+| Angriff | 3 Herzen + Gift, schnell, klettert |
+| Phase 1 | Netzschuss: hält einen Spieler 2 s fest (Warnung: Zischen, Augen leuchten). Klettert an den Wänden der Arena. |
+| Phase 2 (66 %) | Legt 3 Eier. Nach 8 s schlüpfen aus jedem 4 Höhlenspinnen, also vorher die Eier zerschlagen. |
+| Phase 3 (33 %) | Zieht sich an die Wand zurück, unter ihr regnet Gift. Alle 15 s Sprungangriff, ihr Schatten zeigt 1,5 s vorher, wo sie landet. |
+| Schwäche | Nemesis der Gliederfüßer wirkt doppelt, Feuer. |
+| Beschwörung | **Brutkokon** aus 8 Giftdrüsen (Spinnen und Höhlenspinnen, nur nachts) + 4 Spinnennetze |
+| Verflucht (schwer) | Brutkokon + 1 Goldener Apfel |
+| Loot sicher | 350 Erfahrung, 16–32 Schnur, 6–12 Smaragde |
+| Loot selten | Schwert mit Nemesis der Gliederfüßer VI, Stiefel mit Federfall V |
+| Loot episch | **Seidenbogen**: getroffene Gegner hängen 2 s im Netz fest |
+| Trophäe | Kopf der Spinnenkönigin |
+| Passende Arena | Geisterdorf (Nr. 145) |
+
+#### 5. Frostkönigin (Stufe II)
+
+| | |
+|---|---|
+| Basis | Eiswanderer, Größe 1,3 |
+| Leben | 450 · 700 · 1050 |
+| Angriff | Frostpfeile 3 Herzen + Langsamkeit, Rüstung 8 |
+| Phase 1 | Frostpfeile. Frostzone um sie (blaue Partikel) verlangsamt alle darin. |
+| Phase 2 (66 %) | Eisgefängnis: sperrt einen Spieler 3 s in Eisblöcke, er friert dabei. Mitspieler können ihn freischlagen. |
+| Phase 3 (33 %) | Schneesturm: 10 s Schneegestöber mit schlechter Sicht, sie selbst ist nur an ihrer Partikelspur zu erkennen. Ruft 4 Eiswanderer. |
+| Schwäche | Feuer und Flamme wirken doppelt. Wer neben einem Lagerfeuer in der Arena steht, friert nicht. |
+| Beschwörung | **Frostherz** aus 8 Eissplitter (Eiswanderer) + 1 Blaues Eis |
+| Verflucht (schwer) | Frostherz + 1 Ziegenhorn |
+| Loot sicher | 350 Erfahrung, 4–8 Diamanten, 16 Blaues Eis |
+| Loot selten | Stiefel mit Frostläufer III und Schutz V, Bogen mit Flamme und Stärke VI |
+| Loot episch | **Frostklinge**: Schwert, jeder Treffer gibt 2 s Langsamkeit II |
+| Trophäe | Kopf der Frostkönigin |
+| Passende Arena | Winterdorf mit Iglus (Nr. 106) |
+
+#### 6. Piratenkapitän (Stufe III)
+
+| | |
+|---|---|
+| Basis | Diener, Größe 1,2 |
+| Leben | 550 · 900 · 1350 |
+| Angriff | Säbelhiebe 4–5 Herzen, Rüstung 12 |
+| Phase 1 | Säbelhiebe. Ruft seine Crew: 3 Ertrunkene mit Dreizack. |
+| Phase 2 (66 %) | Kanonade: Kanonenkugeln schlagen auf markierten Stellen ein (rote Partikel 2 s vorher), 5 Herzen, kein Blockschaden. Schilde blocken sie. |
+| Phase 3 (33 %) | Enterhaken zieht einen Spieler zu ihm. „Alle Mann an Deck“: 6 Mann Crew. Trinkt Rum und heilt 10 %, wenn ihn niemand unterbricht. |
+| Schwäche | Dreizack wirkt doppelt, Schilde halten Kanonenkugeln auf. |
+| Beschwörung | **Kaperbrief** aus 8 Piratenmünzen (Ertrunkene und Plünderer) + 1 Schatzkarte |
+| Verflucht (schwer) | Kaperbrief + 1 Herz des Meeres |
+| Loot sicher | 450 Erfahrung, 16–32 Goldbarren, 8–16 Smaragde |
+| Loot selten | Dreizack mit Aufspießen VI, Herz des Meeres |
+| Loot episch | **Kapitänsfernrohr**: angeschaute Monster leuchten 10 s für die ganze Gruppe sichtbar |
+| Trophäe | Kopf des Piratenkapitäns |
+| Passende Arena | Piratenschiff (Nr. 59) oder Geisterschiff (Nr. 142) |
+
+#### 7. Feuerdämon (Stufe III)
+
+| | |
+|---|---|
+| Basis | Lohe, Größe 2,5, fliegt |
+| Leben | 450 · 750 · 1150 |
+| Angriff | Feuerkugeln 4 Herzen + Brand, Rüstung 10 |
+| Phase 1 | Feuerkugel-Salven, fliegt über der Arena. |
+| Phase 2 (66 %) | Feuerregen auf markierten Feldern (rote Kreise 1,5 s vorher). Der Boden brennt danach 5 s, das Feuer breitet sich nicht aus und verschwindet wieder. |
+| Phase 3 (33 %) | Landet in der Mitte, ein Glutring dehnt sich aus und muss übersprungen werden. Ruft 4 Lohen. |
+| Schwäche | Schneebälle (3 Schaden pro Treffer) und geworfene Wasserflaschen. Feuerresistenz-Tränke helfen sehr. |
+| Beschwörung | **Glutkern** aus 8 Glutsplitter (Lohen und Magmawürfel) + 1 Magmablock + 1 Lohenrute |
+| Verflucht (schwer) | Glutkern + 1 Ghast-Träne |
+| Loot sicher | 450 Erfahrung, 8–16 Lohenruten, 1–2 Netheritschrott |
+| Loot selten | Netheritbarren, Bogen mit Flamme und Stärke VI |
+| Loot episch | **Glutkrone**: Helm, gibt beim Tragen dauerhaft Feuerresistenz |
+| Trophäe | Kopf des Feuerdämons |
+| Passende Arena | Vulkanfestung (Nr. 130) |
+
+#### 8. Endwächter (Stufe IV, Finale)
+
+| | |
+|---|---|
+| Basis | Enderman, Größe 1,6 |
+| Leben | 600 · 1000 · 1500 |
+| Angriff | 5 Herzen, Rüstung 12, weicht Pfeilen aus |
+| Phase 1 | Teleportiert sich hinter Spieler (violette Partikel an der Zielstelle 1 s vorher) und schlägt zu. |
+| Phase 2 (66 %) | Platztausch: vertauscht zwei Spieler oder sich mit einem Spieler. Leerenzonen: 3 s Schweben in markierten Kreisen, danach droht Fallschaden. |
+| Phase 3 (33 %) | Ruft Endermiten und zwei Kristallsäulen, die ihn heilen, bis sie zerstört sind. Dunkelheit in Wellen. |
+| Schwäche | Wasser wie bei normalen Endermen (Wasserflaschen werfen). Ein Kürbis auf dem Kopf schützt vor dem Platztausch. |
+| Beschwörung | **Leerenauge** aus 8 Leerensplitter (Endermen) + 1 Enderauge |
+| Verflucht (schwer) | Leerenauge + 1 Shulker-Schale |
+| Loot sicher | 600 Erfahrung, 8–16 Enderperlen, 6–10 Diamanten |
+| Loot selten | 2 Shulker-Schalen, Brustplatte mit Schutz V |
+| Loot episch | **Leerenperle**: wiederverwendbare Enderperle, Abklingzeit 10 s, kein Schaden beim Teleport |
+| Trophäe | Kopf des Endwächters |
+| Passende Arena | Schwarzer Monolith (Nr. 147) |
 
 **Schaden und Fairness**
 - Normale Angriffe 3 bis 5 Herzen, Spezialangriffe 6 bis 8 Herzen (können töten).
@@ -876,17 +1035,22 @@ Dazu immer: Wiederbelebung am Arena-Eingang, der Boss heilt sich um 10 %. Mit `l
 
 **Beschwörung (Hauptweg)**
 - **Altar:** ein besonderer Block in der Arena (z. B. Seelenlaterne auf einem Podest aus Tiefenschiefer), per `/bossarena altar` mit einer Raid-Vorlage verbunden. Die Vorlage bestimmt Boss, Stufe, Todesregel, Leben, Zeitlimit und Spielerzahl. Mehrere Altäre in einer Arena sind möglich, aber immer nur ein Raid gleichzeitig.
-- **Beschwörungsgegenstand pro Boss**, hergestellt aus Fragmenten, die normale Monster selten fallen lassen (Chance in der Config, Standard 3 %). Beispiele:
+- **Beschwörungsgegenstand pro Boss**, hergestellt aus Fragmenten, die normale Monster selten fallen lassen (Chance in der Config, Standard 3 %). Alle acht:
 
-  | Boss | Gegenstand | Rezept |
-  |---|---|---|
-  | Nekromant | Seelenkristall | 8 Seelensplitter (Skelette, nur nachts) + 1 Wither-Skelett-Schädel |
-  | Steingolem | Golemkern | 8 Steinsplitter (Silberfischchen und Höhlenspinnen) + 1 Eisenblock |
-  | Sumpfhexe | Hexenauge | 8 Sumpfkräuter (Hexen und Schleime) + 1 Fermentiertes Spinnenauge |
+  | Boss | Gegenstand | Rezept | Verflucht |
+  |---|---|---|---|
+  | Nekromant | Seelenkristall | 8 Seelensplitter (Skelette, nur nachts) + 1 Knochenblock | + 1 Wither-Skelett-Schädel |
+  | Sumpfhexe | Hexenauge | 8 Sumpfkräuter (Hexen und Schleime) + 1 Fermentiertes Spinnenauge | + 1 Kaninchenpfote |
+  | Steingolem | Golemkern | 8 Steinsplitter (Silberfischchen und Höhlenspinnen) + 1 Eisenblock | + 1 Netheritschrott |
+  | Spinnenkönigin | Brutkokon | 8 Giftdrüsen (Spinnen und Höhlenspinnen, nur nachts) + 4 Spinnennetze | + 1 Goldener Apfel |
+  | Frostkönigin | Frostherz | 8 Eissplitter (Eiswanderer) + 1 Blaues Eis | + 1 Ziegenhorn |
+  | Piratenkapitän | Kaperbrief | 8 Piratenmünzen (Ertrunkene und Plünderer) + 1 Schatzkarte | + 1 Herz des Meeres |
+  | Feuerdämon | Glutkern | 8 Glutsplitter (Lohen und Magmawürfel) + 1 Magmablock + 1 Lohenrute | + 1 Ghast-Träne |
+  | Endwächter | Leerenauge | 8 Leerensplitter (Endermen) + 1 Enderauge | + 1 Shulker-Schale |
 
   Optional auch im ServerShop zu kaufen (teuer), einstellbar.
 - **Ritual:** Gegenstand auf den Altar legen (Rechtsklick), dann die vier Kerzen an den Ecken anzünden. Danach 10 Sekunden Ritual mit Partikeln, Donner ohne Schaden und Ansage im Chat. Wer in dieser Zeit in der Arena steht, ist Teilnehmer; danach beginnt der Raid wie unten beschrieben. Wird das Ritual abgebrochen (Altar verlassen, Kerze gelöscht), bekommt man den Gegenstand zurück.
-- **Schwierigkeit über den Gegenstand:** normaler Gegenstand = Stufe der Vorlage, **verfluchte Version** (zusätzlich 1 Netherstern-Splitter bzw. seltenes Material) = „schwer“ mit besserem Loot.
+- **Schwierigkeit über den Gegenstand:** normaler Gegenstand = Stufe der Vorlage, **verfluchte Version** (zusätzlich eine seltene Zutat, siehe Tabelle) = „schwer“ mit besserem Loot.
 - **Grenzen:** Abklingzeit pro Altar (`/raid set <name> abklingzeit <minuten>`, Standard 60), Mindestzahl an Spielern laut Vorlage (sonst startet das Ritual nicht), Warnung mit Bestätigung, wenn jemand allein beschwört. Der Gegenstand wird erst beim Erscheinen des Bosses verbraucht.
 - **Admin-Start bleibt:** `/raid start <name>` und feste Termine funktionieren ohne Gegenstand, z. B. für Event-Abende.
 
