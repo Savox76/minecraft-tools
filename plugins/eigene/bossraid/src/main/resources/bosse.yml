@@ -1,0 +1,230 @@
+# BossRaid – Bosse, Gegenstände und Fragmente
+#
+# Jeder Boss baut auf einem normalen Monster auf ("basis") und bekommt Fähigkeiten aus dem Baukasten.
+# Leben = Lebenspunkte auf "normal" für einen Spieler (2 Lebenspunkte = 1 Herz). Schaden in Herzen.
+# Nach Änderungen: /raid neuladen
+#
+# Fähigkeiten (art) – gemeinsame Werte: alle (Sekunden), ab-phase, bis-phase, warnung (Sekunden), text
+#   salve        anzahl, schaden                 Pfeile auf den nächsten Spieler
+#   beschwoeren  mob, anzahl, max, heilt (%),     Helfer erscheinen um den Boss
+#                groesse (Schleime), danach-verwundbar (Sekunden doppelter Schaden)
+#   teleport     unsichtbar (Sekunden)            Boss erscheint hinter einem Spieler
+#   zone         effekt, stufe, radius, dauer     Effekt-Ring um den Boss
+#   schockwelle  radius, schaden, hoch            trifft alle am Boden im Radius (Springen hilft)
+#   wurf         block, schaden                   Felsbrocken auf einen Spieler
+#   verstaerker  block, anzahl, treffer,          Blöcke in der Arena, die man zerschlagen muss;
+#                schutz (%), heilung (% pro s)    solange sie stehen: weniger Schaden, Heilung
+#   fluch        effekt, stufe, dauer             Effekt auf einen zufälligen Spieler
+#   flucht       radius, min, max                 Boss teleportiert sich weg, wenn jemand zu nah kommt
+#   heilkreis    ruhe (Sekunden), prozent         heilt sich, wenn er eine Zeit lang nicht getroffen wird
+#   steinhaut    an, aus (Sekunden)               abwechselnd unverwundbar und doppelt verwundbar
+#
+# Schwächen (art): verzauberung (wert = Verzauberung), waffe (wert = Ende des Namens, z. B. _PICKAXE),
+#   geschoss (alle Geschosse), wurfgeschoss (wert = Wesen, z. B. SNOWBALL). faktor = Schadens-Faktor.
+#
+# Loot-Einträge: "MATERIAL menge verzauberung:stufe" (menge auch als 3-6), "@id" für Gegenstände unten,
+#   Tränke mit "trank:typ", z. B. "POTION 1 trank:strong_strength".
+
+bosse:
+  nekromant:
+    name: "&5Nekromant"
+    boss-stufe: 1
+    basis: WITHER_SKELETON
+    groesse: 1.3
+    leben: 600
+    schaden: 3
+    ruestung: 8
+    tempo: 1.0
+    rueckstoss-schutz: 0.6
+    farbe: PURPLE
+    beschwoerung: seelenkristall
+    texte:
+      auftritt: "&5Nekromant: &7„Eure Seelen gehören mir!“"
+      phase2: "&5Der Nekromant verschmilzt mit den Schatten! &7(Phase 2)"
+      phase3: "&5Der Nekromant entfesselt den Seelensturm! &7(Phase 3)"
+      gescheitert: "&5Nekromant: &7„Kommt wieder, wenn ihr bereit seid zu sterben.“"
+    schwaechen:
+      - { art: verzauberung, wert: smite, faktor: 1.5 }
+    faehigkeiten:
+      - { art: salve, alle: 7, warnung: 1.0, anzahl: 3, schaden: 2 }
+      - { art: beschwoeren, bis-phase: 1, alle: 20, warnung: 1.5, mob: SKELETON, anzahl: 3, max: 6, danach-verwundbar: 3,
+          text: "&5Der Nekromant ruft die Toten! &7Seelenflammen zeigen, wo sie erscheinen." }
+      - { art: teleport, ab-phase: 2, alle: 15, warnung: 1.0, unsichtbar: 3,
+          text: "&5Der Nekromant verschwindet ... &7Achtung, {ziel}!" }
+      - { art: beschwoeren, ab-phase: 2, alle: 25, warnung: 1.5, mob: WITHER_SKELETON, anzahl: 2, max: 6, danach-verwundbar: 3,
+          text: "&5Der Nekromant ruft Wither-Skelette!" }
+      - { art: zone, ab-phase: 3, alle: 25, warnung: 2.0, effekt: wither, stufe: 1, radius: 5, dauer: 8,
+          text: "&5Seelensturm! &7Raus aus dem Ring um den Nekromanten!" }
+      - { art: beschwoeren, ab-phase: 3, alle: 18, warnung: 1.5, mob: SKELETON, anzahl: 3, max: 8, heilt: 5,
+          text: "&5Skelette eilen zum Nekromanten, um ihn zu heilen! &7Haltet sie auf!" }
+    loot:
+      erfahrung: 300
+      sicher: [ "DIAMOND 3-6", "BONE 16-32" ]
+      selten: { chance: 25, eintraege: [ "DIAMOND_SWORD 1 smite:6 unbreaking:3", "BOW 1 power:6 unbreaking:3" ] }
+      episch: { chance: 5, eintraege: [ "@seelenstab" ] }
+      trophaee: { chance: 10, eintraege: [ "@trophaee_nekromant" ] }
+
+  sumpfhexe:
+    name: "&2Sumpfhexe"
+    boss-stufe: 1
+    basis: WITCH
+    groesse: 1.2
+    leben: 500
+    schaden: 3
+    ruestung: 4
+    tempo: 1.0
+    rueckstoss-schutz: 0.4
+    farbe: GREEN
+    beschwoerung: hexenauge
+    texte:
+      auftritt: "&2Sumpfhexe: &7„Hihihi, frische Zutaten für meinen Kessel!“"
+      phase2: "&2Die Sumpfhexe ruft ihre Schleime! &7(Phase 2)"
+      phase3: "&2Die Sumpfhexe stellt ihre Kessel auf! &7(Phase 3)"
+      gescheitert: "&2Sumpfhexe: &7„Zu langsam, meine Lieben!“"
+    schwaechen:
+      - { art: geschoss, faktor: 1.5 }
+    faehigkeiten:
+      - { art: flucht, alle: 6, warnung: 0.5, radius: 3, min: 8, max: 15 }
+      - { art: beschwoeren, ab-phase: 2, alle: 25, warnung: 1.5, mob: SLIME, groesse: 3, anzahl: 4, max: 8,
+          text: "&2Die Sumpfhexe ruft große Schleime!" }
+      - { art: heilkreis, ab-phase: 2, ruhe: 5, prozent: 5,
+          text: "&aDie Sumpfhexe heilt sich! &7Ein Treffer unterbricht sie!" }
+      - { art: verstaerker, ab-phase: 3, alle: 40, warnung: 1.5, block: CAULDRON, anzahl: 3, treffer: 3, schutz: 50, heilung: 0.5,
+          text: "&2Drei Hexenkessel erscheinen! &7Zerschlagt sie!" }
+      - { art: fluch, ab-phase: 3, alle: 15, warnung: 1.0, effekt: blindness, dauer: 3,
+          text: "&2Die Sumpfhexe verflucht {ziel}!" }
+    loot:
+      erfahrung: 250
+      sicher: [ "EMERALD 8-16", "POTION 1 trank:strong_strength", "POTION 1 trank:long_swiftness", "SPLASH_POTION 1 trank:strong_healing" ]
+      selten: { chance: 25, eintraege: [ "ENCHANTED_BOOK 1 protection:5", "ENCHANTED_BOOK 1 efficiency:6" ] }
+      episch: { chance: 5, eintraege: [ "@hexenbeutel" ] }
+      trophaee: { chance: 10, eintraege: [ "@trophaee_sumpfhexe" ] }
+
+  steingolem:
+    name: "&7Steingolem"
+    boss-stufe: 2
+    basis: IRON_GOLEM
+    groesse: 2.0
+    leben: 1000
+    schaden: 4.5
+    ruestung: 20
+    tempo: 0.8
+    rueckstoss-schutz: 1.0
+    farbe: WHITE
+    beschwoerung: golemkern
+    texte:
+      auftritt: "&7Der Boden bebt. &fDer Steingolem erwacht!"
+      phase2: "&7Der Steingolem stampft vor Wut! &7(Phase 2)"
+      phase3: "&7Der Steingolem wird hart wie Fels! &7(Phase 3)"
+      gescheitert: "&7Der Steingolem versinkt wieder im Boden."
+    schwaechen:
+      - { art: waffe, wert: _PICKAXE, faktor: 1.5 }
+    faehigkeiten:
+      - { art: wurf, alle: 8, warnung: 1.5, block: COBBLESTONE, schaden: 4,
+          text: "&7Der Steingolem hebt einen Felsbrocken! &fAusweichen, {ziel}!" }
+      - { art: schockwelle, ab-phase: 2, alle: 12, warnung: 1.5, radius: 6, schaden: 6, hoch: 1.0,
+          text: "&7Der Steingolem hebt die Fäuste ... &fSpringt oder lauft weg!" }
+      - { art: schockwelle, ab-phase: 3, alle: 12, warnung: 1.5, radius: 6, schaden: 6, hoch: 1.0 }
+      - { art: steinhaut, ab-phase: 3, an: 5, aus: 5,
+          text: "&7Der Steingolem wird zu Stein! &fGleich prallt alles ab." }
+    loot:
+      erfahrung: 400
+      sicher: [ "IRON_BLOCK 2-4", "DIAMOND 4-8" ]
+      selten: { chance: 25, eintraege: [ "DIAMOND_PICKAXE 1 efficiency:6 fortune:4 unbreaking:3" ] }
+      episch: { chance: 5, eintraege: [ "@steinherz" ] }
+      trophaee: { chance: 10, eintraege: [ "@trophaee_steingolem" ] }
+
+# Gegenstände: art fragment | beschwoerung | episch | trophaee
+gegenstaende:
+  seelensplitter:
+    material: AMETHYST_SHARD
+    name: "&bSeelensplitter"
+    art: fragment
+    glanz: true
+    text: [ "Fällt selten von Skeletten in der Nacht.", "8 Stück um einen Knochenblock: Seelenkristall." ]
+  sumpfkraut:
+    material: GREEN_DYE
+    name: "&2Sumpfkraut"
+    art: fragment
+    glanz: true
+    text: [ "Fällt selten von Hexen und Schleimen.", "8 Stück um ein fermentiertes Spinnenauge: Hexenauge." ]
+  steinsplitter:
+    material: FLINT
+    name: "&7Steinsplitter"
+    art: fragment
+    glanz: true
+    text: [ "Fällt selten von Silberfischchen und Höhlenspinnen.", "8 Stück um einen Eisenblock: Golemkern." ]
+
+  seelenkristall:
+    material: ECHO_SHARD
+    name: "&5Seelenkristall"
+    art: beschwoerung
+    glanz: true
+    text: [ "Auf den Altar einer Boss-Arena legen,", "um den Nekromanten zu beschwören." ]
+    rezept: { teil: seelensplitter, kern: BONE_BLOCK, verflucht: WITHER_SKELETON_SKULL }
+  hexenauge:
+    material: FERMENTED_SPIDER_EYE
+    name: "&2Hexenauge"
+    art: beschwoerung
+    glanz: true
+    text: [ "Auf den Altar einer Boss-Arena legen,", "um die Sumpfhexe zu beschwören." ]
+    rezept: { teil: sumpfkraut, kern: FERMENTED_SPIDER_EYE, verflucht: RABBIT_FOOT }
+  golemkern:
+    material: RAW_IRON
+    name: "&fGolemkern"
+    art: beschwoerung
+    glanz: true
+    text: [ "Auf den Altar einer Boss-Arena legen,", "um den Steingolem zu beschwören." ]
+    rezept: { teil: steinsplitter, kern: IRON_BLOCK, verflucht: NETHERITE_SCRAP }
+
+  seelenstab:
+    material: BLAZE_ROD
+    name: "&dSeelenstab"
+    art: episch
+    faehigkeit: seelenstab
+    glanz: true
+    abklingzeit: 120
+    dauer: 30
+    anzahl: 2
+    text: [ "Rechtsklick: 2 Seelenkrieger kämpfen 30 s für dich.", "Lädt 2 Minuten nach." ]
+  hexenbeutel:
+    material: LEATHER
+    name: "&dHexenbeutel"
+    art: episch
+    faehigkeit: hexenbeutel
+    glanz: true
+    text: [ "In der Zweithand: Tränke wirken doppelt so lange." ]
+  steinherz:
+    material: DIAMOND_CHESTPLATE
+    name: "&dSteinherz-Brustplatte"
+    art: episch
+    slot: chest
+    verzauberungen: [ "protection:5", "unbreaking:3" ]
+    attribute: { armor: 8, armor_toughness: 2, knockback_resistance: 1.0 }
+    text: [ "Kein Rückstoß mehr." ]
+
+  trophaee_nekromant:
+    material: WITHER_SKELETON_SKULL
+    name: "&6Kopf des Nekromanten"
+    art: trophaee
+    text: [ "Trophäe aus einem Boss-Raid." ]
+  trophaee_sumpfhexe:
+    material: PLAYER_HEAD
+    name: "&6Kopf der Sumpfhexe"
+    art: trophaee
+    # Optional: Kopf-Textur (Base64-Wert "textures", z. B. von einer Kopf-Datenbank)
+    textur: ""
+    text: [ "Trophäe aus einem Boss-Raid." ]
+  trophaee_steingolem:
+    material: PLAYER_HEAD
+    name: "&6Kopf des Steingolems"
+    art: trophaee
+    textur: ""
+    text: [ "Trophäe aus einem Boss-Raid." ]
+
+# Woher die Fragmente kommen. chance in Prozent. Nur außerhalb von Arenen, mit Tageslimit (config.yml).
+fragmente:
+  seelensplitter: { mobs: [ SKELETON ], nur-nachts: true, chance: 3.0 }
+  sumpfkraut: { mobs: [ WITCH, SLIME ], chance: 3.0 }
+  # Höhlenspinnen gibt es nur an Spawnern, deshalb hier erlaubt
+  steinsplitter: { mobs: [ SILVERFISH, CAVE_SPIDER ], spawner-erlaubt: true, chance: 3.0 }

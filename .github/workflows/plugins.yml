@@ -48,6 +48,35 @@ jobs:
             echo "::endgroup::"
             ls -l "$d/build/libs"
           done
+      - name: Testserver (Paper startet mit den Plugins)
+        run: |
+          set -e
+          mkdir -p testserver/plugins && cd testserver
+          ver=1.21.4
+          url=$(curl -fsSL "https://fill.papermc.io/v3/projects/paper/versions/$ver/builds/latest" | jq -r '.downloads."server:default".url' || true)
+          if [ -z "$url" ] || [ "$url" = "null" ]; then
+            b=$(curl -fsSL "https://api.papermc.io/v2/projects/paper/versions/$ver/builds" | jq -r '.builds[-1].build')
+            url="https://api.papermc.io/v2/projects/paper/versions/$ver/builds/$b/downloads/paper-$ver-$b.jar"
+          fi
+          curl -fsSL -o paper.jar "$url"
+          cp ../plugins/eigene/*/build/libs/*.jar plugins/ 2>/dev/null || true
+          ls plugins
+          echo "eula=true" > eula.txt
+          printf 'online-mode=false\nlevel-type=minecraft\\:flat\ngenerate-structures=false\nspawn-protection=0\n' > server.properties
+          mkfifo eingabe
+          (sleep 600; echo stop) > eingabe &
+          java -Xmx1500M -jar paper.jar --nogui < eingabe > log.txt 2>&1 &
+          exec 3> eingabe
+          for i in $(seq 1 240); do grep -q 'Done (' log.txt && break; sleep 1; done
+          for c in "raid" "raid bosse" "raid rezepte" "raid liste" "bossarena liste" "raid gegenstand seelenkristall"; do echo "$c" >&3; sleep 1; done
+          echo "stop" >&3
+          for i in $(seq 1 60); do grep -q 'Closing Server\|Stopping server' log.txt && sleep 5 && break; sleep 1; done
+          exec 3>&-
+          sed -n '/Loading/,$p' log.txt | grep -iE 'bossraid|error|exception|warn' | head -80 || true
+          if grep -qiE 'Error occurred while enabling|Could not load .*plugins|Exception.*de\.savox|de\.savox.*Exception' log.txt; then
+            echo "::error::Ein Plugin hat beim Start einen Fehler gemeldet"; grep -iE -A15 'Error occurred|de\.savox' log.txt | head -120; exit 1
+          fi
+          grep -q 'BossRaid bereit' log.txt || { echo "::error::BossRaid wurde nicht gestartet"; tail -80 log.txt; exit 1; }
       - name: Release mit .jar
         if: startsWith(github.ref, 'refs/tags/')
         env:
