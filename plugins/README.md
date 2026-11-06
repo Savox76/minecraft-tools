@@ -23,6 +23,10 @@ Englische Texte stehen in `plugin.json` unter `"en"`: `kurz`, `beschreibung`, `f
 
 **Status:** Die Dokumentation ist vollständig. Quellcode und `.jar`-Downloads folgen (siehe [Masterplan](../MASTERPLAN.md), Phase 4). Der Quellcode kommt pro Plugin nach `src/` mit eigenem Gradle-Build. Fertige `.jar`-Dateien werden nicht ins Repo gelegt, sondern von GitHub Actions gebaut und an ein Release gehängt.
 
+**Bauen und veröffentlichen** (`.github/workflows/plugins.yml`): Jede Änderung am Quellcode wird gebaut und auf einem Paper-Testserver gestartet. Ein Release mit der `.jar` entsteht über *Actions → Plugins → Run workflow* mit der Plugin-ID (z. B. `bossraid`) oder über einen Tag `<id>-v<version>`.
+
+**In Arbeit:** [BossRaid](eigene/bossraid/) 0.1.0 (Testversion, Idee P1): Boss-Kämpfe mit Arena, Beschwörung und Raids. Erscheint auf der Website unter „Plugins → In Planung“, bis es im Spiel getestet ist.
+
 ## Fremde Plugins (`fremd/plugins.json`)
 
 Plugins anderer Entwickler. Hier liegen nur Beschreibung, Einsatz auf dem Server und Link zur offiziellen Download-Seite, keine Dateien.
