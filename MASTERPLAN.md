@@ -320,7 +320,7 @@ Aufwand in **Arbeitssitzungen** (eine Sitzung = ein Abend gemeinsam mit Claude).
 - [ ] **Sicherheits-Check vor dem Hochladen:** keine Passwörter, Server-IPs, playit-Adressen oder persönlichen Spielernamen im Code oder in Standard-Configs
 - [ ] Texte auslagern, damit sie übersetzbar sind (Deutsch und Englisch)
 - [x] Pro Plugin: README (Befehle, Rechte, Config, Änderungen)
-- [ ] Workflow: Ein Tag `<plugin>-v<version>` baut die `.jar` und hängt sie an ein Release
+- [x] Workflow: Ein Tag `<plugin>-v<version>` baut die `.jar` und hängt sie an ein Release (`.github/workflows/plugins.yml`, mit Testserver-Start)
 - [ ] Optional: zusätzlich auf Modrinth und Hangar veröffentlichen
 
 **Fertig, wenn:** Jedes Plugin einzeln über die Website als `.jar` herunterladbar ist.
@@ -454,7 +454,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-162 offene Ideen (162 💡 Idee, 0 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
+162 offene Ideen (161 💡 Idee, 1 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
 **Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 114 Holstentor Lübeck, Nr. 47 Blockhütte am See.
 
@@ -702,7 +702,7 @@ Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
 
 | Nr. | Plugin-Idee | Beschreibung | Wunsch | Status |
 |---|---|---|---|---|
-| P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Spieler beschwören sie selbst an einem Altar, die Regeln jedes Raids stellst du per Befehl ein. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 💡 Idee |
+| P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Spieler beschwören sie selbst an einem Altar, die Regeln jedes Raids stellst du per Befehl ein. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 🔨 in Arbeit |
 
 ### ✅ Umgesetzt (3)
 
@@ -805,7 +805,13 @@ Ausgearbeitete Konzepte für geplante eigene Plugins. Die Kurzfassung steht in `
 
 ### 17.1 P1 BossRaid: Boss-Kämpfe mit Arena und Raids
 
-**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 💡 Idee, Konzept abgestimmt am 04.11.2026 (Zeitlimit, Scheitern, Beschwörung und Steckbriefe aller acht Bosse ergänzt).
+**Herkunft:** Plugin-Wunsch [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3). Name „BossRaid“ ist ein Arbeitstitel. Status: 🔨 in Arbeit. Konzept abgestimmt am 04.11.2026, **Version 0.1.0 gebaut am 06.11.2026** (Quellcode und Anleitung: `plugins/eigene/bossraid/`).
+
+**Umsetzung 0.1.0 (06.11.2026)**
+- Fertig: Arenen mit festem Radius, Boss-Spawn, Eingang, Altar mit vier Kerzen, Tor per Torstab; Raid-Vorlagen mit allen Feldern; Beschwörung am Altar mit Ritual, verfluchte Version, Abklingzeit, Rückfrage bei Einzelspielern; Admin-Start mit `/raid beitreten`; drei Phasen, Boss-Leiste mit Restzeit; Fähigkeiten-Baukasten in `bosse.yml` (salve, beschwoeren, teleport, zone, schockwelle, wurf, verstaerker, fluch, flucht, heilkreis, steinhaut); Zeitlimit und Scheitern ohne lebende Spieler; Todesregeln normal, grabtruhe, behalten; Leben pro Spieler; persönlicher Loot nach Schadensanteil; Schutz gegen Tricks; Aufräumen nach Neustart; Bosse **Nekromant, Sumpfhexe, Steingolem** mit Fragmenten, Rezepten, epischen Gegenständen und Trophäen.
+- Ergänzt gegenüber dem Konzept: **Fragment-Tageslimit** (8 pro Spieler und Tag) und keine Fragmente von Spawner-Monstern (außer Höhlenspinnen), damit Monsterfarmen die Beschwörung nicht entwerten. Todesregel gilt nur in der Arena während eines Raids, sonst bleibt „Inventar behalten“ des Servers. Ausgeschiedene stehen normal wieder auf und kommen nicht mehr in die Arena (Zuschauermodus ist auf dem Server gesperrt). Farm-Bots per `ignorierte-spieler` ausgeschlossen. Das Hilfe-Buch wird nie abgenommen. Boss-Leben über der Minecraft-Grenze rechnet das Plugin intern um.
+- Build: `.github/workflows/plugins.yml` baut bei jeder Änderung, startet einen Paper-Testserver mit dem Plugin und prüft das Log. Ein Tag `bossraid-v<version>` hängt die `.jar` an ein Release.
+- Offen: Test im Spiel (Checkliste in der README), Paper-Version des Servers prüfen, die übrigen fünf Bosse (brauchen neue Bausteine: Fliegen, Eisgefängnis, Netze, Kanonade, Platztausch, Kristallsäulen), Boss-Pfad, feste Termine, Kopf-Texturen für Trophäen, Bestenliste.
 
 **Ziel:** Bosse, die richtig Schaden machen und an denen man auch sterben kann, dafür mit gutem Loot. **Hauptweg ist die Beschwörung durch Spieler** an einem Altar; die Regeln jedes Raids stellt der Admin per Befehl ein. Admin-Start und feste Termine bleiben für Events.
 

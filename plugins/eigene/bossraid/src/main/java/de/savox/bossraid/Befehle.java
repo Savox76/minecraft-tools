@@ -354,8 +354,8 @@ final class Befehle implements TabExecutor {
             }
             case "rezepte" -> {
                 Txt.an(s, "&6Rezepte &7(Werkbank, 8 Fragmente rund um den Kern):");
-                for (String z : pl.gegenstaende.rezeptTexte) {
-                    Txt.an(s, z);
+                for (Gegenstaende.RezeptInfo z : pl.gegenstaende.rezeptInfos) {
+                    s.sendMessage(Txt.komp(Txt.PREFIX).append(pl.gegenstaende.rezeptText(z)));
                 }
                 Txt.an(s, "&7Fragmente fallen selten von Monstern (höchstens &f" + pl.einst.fragmentTageslimit + " &7pro Tag), nicht in Arenen.");
             }

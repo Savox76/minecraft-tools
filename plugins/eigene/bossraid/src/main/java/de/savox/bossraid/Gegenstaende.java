@@ -43,7 +43,11 @@ final class Gegenstaende {
     final Map<String, ConfigurationSection> defs = new LinkedHashMap<>();
     final List<Quelle> quellen = new ArrayList<>();
     final List<NamespacedKey> rezepte = new ArrayList<>();
-    final List<String> rezeptTexte = new ArrayList<>();
+    /** Rezepte zum Anzeigen: Ergebnis, Fragment, Kern, Zutat für die verfluchte Version (oder null). */
+    record RezeptInfo(String ergebnis, String teil, Material kern, Material fluch) {
+    }
+
+    final List<RezeptInfo> rezeptInfos = new ArrayList<>();
 
     Gegenstaende(BossRaidPlugin pl) {
         this.pl = pl;
@@ -170,7 +174,7 @@ final class Gegenstaende {
             Bukkit.removeRecipe(k);
         }
         rezepte.clear();
-        rezeptTexte.clear();
+        rezeptInfos.clear();
         for (Map.Entry<String, ConfigurationSection> e : defs.entrySet()) {
             ConfigurationSection r = e.getValue().getConfigurationSection("rezept");
             if (r == null) {
@@ -193,7 +197,6 @@ final class Gegenstaende {
             if (Bukkit.addRecipe(sr)) {
                 rezepte.add(k);
             }
-            String text = "&f" + name(id) + "&7: 8× " + name(teil) + " &7um 1× " + kernName(kern);
             Material fluch = Material.matchMaterial(r.getString("verflucht", ""));
             if (fluch != null) {
                 NamespacedKey kv = new NamespacedKey(pl, "rezept_" + id + "_verflucht");
@@ -203,15 +206,20 @@ final class Gegenstaende {
                 if (Bukkit.addRecipe(vr)) {
                     rezepte.add(kv);
                 }
-                text += "&7, verflucht: + 1× " + kernName(fluch);
             }
-            rezeptTexte.add(text);
+            rezeptInfos.add(new RezeptInfo(id, teil, kern, fluch));
         }
     }
 
-    private static String kernName(Material m) {
-        String n = m.name().toLowerCase(Locale.ROOT).replace('_', ' ');
-        return Character.toUpperCase(n.charAt(0)) + n.substring(1);
+    /** Rezept als Text, Zutaten in der Sprache des Spielers. */
+    Component rezeptText(RezeptInfo r) {
+        Component c = Txt.komp("&f" + name(r.ergebnis()) + "&7: 8× " + name(r.teil()) + " &7um 1× ")
+                .append(Component.translatable(r.kern().translationKey()).color(net.kyori.adventure.text.format.NamedTextColor.WHITE));
+        if (r.fluch() != null) {
+            c = c.append(Txt.komp("&7, verflucht: + 1× "))
+                    .append(Component.translatable(r.fluch().translationKey()).color(net.kyori.adventure.text.format.NamedTextColor.WHITE));
+        }
+        return c;
     }
 
     // ---------- Loot-Einträge ----------
