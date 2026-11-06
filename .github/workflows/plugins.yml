@@ -17,6 +17,10 @@ on:
         description: 'Bibliotheken als Entwurfs-Release ablegen (nur für die Prüfung beim Entwickeln)'
         type: boolean
         default: false
+      release:
+        description: 'Plugin-ID (z. B. bossraid): Release <id>-v<version> mit der .jar anlegen'
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -86,6 +90,21 @@ jobs:
           id="${tag%-v*}"
           gh release create "$tag" plugins/eigene/$id/build/libs/*.jar --title "$tag" \
             --notes "Fertige Plugin-Datei. In den Ordner plugins des Servers legen und den Server neu starten. Anleitung: plugins/eigene/$id/README.md"
+      - name: Release per Knopfdruck
+        if: github.event_name == 'workflow_dispatch' && inputs.release != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ID: ${{ inputs.release }}
+        run: |
+          ver=$(grep -oP '^version = "\K[^"]+' "plugins/eigene/$ID/build.gradle.kts")
+          tag="$ID-v$ver"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag gibt es schon, die .jar wird ersetzt."
+            gh release upload "$tag" plugins/eigene/$ID/build/libs/*.jar --clobber
+          else
+            gh release create "$tag" plugins/eigene/$ID/build/libs/*.jar --target "$GITHUB_SHA" --title "$tag" \
+              --notes "Fertige Plugin-Datei. In den Ordner plugins des Servers legen und den Server neu starten. Anleitung: plugins/eigene/$ID/README.md"
+          fi
       - name: Bibliotheken für die Prüfung ablegen
         if: github.event_name == 'workflow_dispatch' && inputs.klassenpfad
         env:
