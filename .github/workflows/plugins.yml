@@ -1,0 +1,70 @@
+name: Plugins
+
+# Baut die eigenen Plugins mit eigenem Gradle-Build (plugins/eigene/<id>/build.gradle.kts).
+# Ein Tag <id>-v<version> (z. B. bossraid-v0.1.0) baut nur dieses Plugin und hängt die .jar an ein Release.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'plugins/eigene/*/src/**'
+      - 'plugins/eigene/*/build.gradle.kts'
+      - 'plugins/eigene/*/settings.gradle.kts'
+      - '.github/workflows/plugins.yml'
+    tags: ['*-v*']
+  workflow_dispatch:
+    inputs:
+      klassenpfad:
+        description: 'Bibliotheken als Entwurfs-Release ablegen (nur für die Prüfung beim Entwickeln)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.14.3'
+      - name: Plugins bauen
+        run: |
+          set -e
+          for d in plugins/eigene/*/; do
+            [ -f "$d/build.gradle.kts" ] || continue
+            id=$(basename "$d")
+            if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+              tag="${GITHUB_REF#refs/tags/}"
+              [ "$id" = "${tag%-v*}" ] || continue
+            fi
+            echo "::group::$id"
+            (cd "$d" && gradle --no-daemon --console=plain build)
+            echo "::endgroup::"
+            ls -l "$d/build/libs"
+          done
+      - name: Release mit .jar
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          id="${tag%-v*}"
+          gh release create "$tag" plugins/eigene/$id/build/libs/*.jar --title "$tag" \
+            --notes "Fertige Plugin-Datei. In den Ordner plugins des Servers legen und den Server neu starten. Anleitung: plugins/eigene/$id/README.md"
+      - name: Bibliotheken für die Prüfung ablegen
+        if: github.event_name == 'workflow_dispatch' && inputs.klassenpfad
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd plugins/eigene/bossraid
+          gradle --no-daemon -q klassenpfad
+          (cd build && zip -qr klassenpfad.zip klassenpfad)
+          gh release delete werkzeug-klassenpfad -y --cleanup-tag 2>/dev/null || true
+          gh release create werkzeug-klassenpfad build/klassenpfad.zip --draft \
+            --title "Werkzeug: Bibliotheken (Entwurf, nicht veröffentlichen)" --notes "Nur für die Prüfung beim Entwickeln."

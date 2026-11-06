@@ -1,0 +1,19 @@
+name: BossRaid
+version: '${version}'
+main: de.savox.bossraid.BossRaidPlugin
+api-version: '1.21'
+author: Savox
+description: Boss-Kämpfe mit Arena, Beschwörung und Raids
+commands:
+  bossarena:
+    description: Arenen für Boss-Kämpfe einrichten
+    permission: bossraid.admin
+  raid:
+    description: Raids verwalten, beitreten, Rezepte und Ranglisten
+permissions:
+  bossraid.admin:
+    description: Arenen und Raids einrichten, starten und stoppen
+    default: op
+  bossraid.spieler:
+    description: Raids beitreten, Rezepte und Ranglisten ansehen
+    default: true

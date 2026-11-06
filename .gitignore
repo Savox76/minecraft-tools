@@ -5,3 +5,7 @@ __pycache__/
 
 # Bildschirmfotos aus Tests gehören nicht ins Repo
 /*.png
+
+# Gradle
+.gradle/
+plugins/eigene/*/build/
