@@ -1,0 +1,295 @@
+{
+  "id": "villa-mediterran",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Warm und etwas gealtert: Putz mit Farbverläufen, Terrakotta, eine Pergola mit Wein, Fensterläden mit Tiefe, Zypressen und Olivenbäume. Leichte Gebrauchsspuren wie Moos am Sockel und Ranken an den Ecken gehören dazu.",
+  "titel": "Mediterrane Villa",
+  "beschreibung": "Die Mediterrane Villa, verfeinert wie von einem Creator: Putz mit Farbverlauf und Eckquadern, grüne Fensterläden mit Sohlbänken, eine Loggia mit Rundbögen, ein flaches Ziegeldach mit Schornsteinen und ein kleiner Aussichtsturm. Im Innenhof Bögen und ein Brunnen mit Schale, innen eingerichtete Räume auf beiden Etagen, draußen eine Weinpergola mit langer Tafel, Olivenbäume und ein Vorplatz mit Zypressen-Allee.",
+  "schwierigkeit": 5,
+  "bauzeit_stunden": [
+    16,
+    24
+  ],
+  "grundflaeche": "37 × 38 Grundstück, Haus 27 × 27, Innenhof 9 × 9",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte nach dem Einfügen kurz die Richtung von Fensterläden, Türen, Treppen und Betten ansehen.",
+  "abschnitte": [
+    {
+      "name": "Böden, Hof und Vorplatz",
+      "von": 0,
+      "bis": 0,
+      "text": "Sockel aus Steinziegeln, im Haus Cotto aus Terrakotta, im Innenhof ein Schachbrett aus Terrakotta und glattem Sandstein, unter dem Säulengang glatter Sandstein. Draußen der Vorplatz aus Kies mit Weg, die Cotto-Terrasse unter der Pergola und Rasen."
+    },
+    {
+      "name": "Erdgeschoss, Innenhof und Garten",
+      "von": 1,
+      "bis": 4,
+      "text": "Außenwände mit Steinsockel, Putz in drei Tönen und Eckquadern. Fenster mit Sohlbank, Sturz und grünen Läden. Im Süden die Loggia mit drei Rundbögen, im Osten eine dreiflügelige Terrassentür. Im Hof Säulen mit Bögen und der Brunnen. Innen Speisekammer, Küche, Esszimmer, Salon mit Kamin, Diele, Arbeitszimmer, Bibliothek mit Kamin und Waschküche. Draußen Pergola-Pfeiler, Tafel, Zypressen, Olivenbäume, Lavendel und Tor."
+    },
+    {
+      "name": "Zwischendecke und Gesims",
+      "von": 5,
+      "bis": 5,
+      "text": "Eichenboden für das Obergeschoss, außen ein Band aus glattem Sandstein mit einem Gesims aus umgedrehten Sandsteintreppen, das einen Block vorsteht. Darüber die Weinblätter der Pergola."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 9,
+      "text": "Fenster mit Läden und Blumentöpfen, zum Hof ebenso. Innen ein Flur rund um den Hof, Galerie mit Leseecke an der Treppe, Hauptschlafzimmer mit Leiter zum Turm, Gäste- und Kinderzimmer, Arbeitszimmer, Wohnzimmer und drei Bäder."
+    },
+    {
+      "name": "Dach",
+      "von": 10,
+      "bis": 12,
+      "text": "Flaches Walmdach aus Ziegelstufen im Wechsel unten und oben, so steigt es nur einen halben Block pro Reihe. Es steht einen Block über und hat zwei Schornsteine."
+    },
+    {
+      "name": "Aussichtsturm",
+      "von": 13,
+      "bis": 17,
+      "text": "Der Belvedere über der Loggia: Rundbögen auf allen vier Seiten mit Brüstung aus Sandsteinmauern, Bank und Laterne, darauf ein kleines Zeltdach."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Warm und etwas gealtert: Nichts ist ganz glatt. Der Putz mischt weiße Terrakotta mit glattem und normalem Sandstein, unten etwas mehr Sandstein. Der Sockel bekommt bemooste und rissige Steinziegel, an den Ecken wachsen Ranken. Mische frei, aber nicht zu gleichmäßig."
+    },
+    {
+      "titel": "Fensterläden",
+      "text": "Die Läden sind offene Wirrholzfalltüren, links und rechts vom Fenster an der Außenwand. Setze die Falltür an die Wand und klicke sie auf. Wer kein Wirrholz aus dem Nether hat, nimmt Fichten- oder Dunkeleichenfalltüren."
+    },
+    {
+      "titel": "Flaches Ziegeldach",
+      "text": "Toskanische Dächer sind flach. Deshalb wechseln sich Ziegelstufen in der unteren und der oberen Hälfte ab: Jede Reihe steigt nur einen halben Block. An den Graten braucht man so keine Eckstücke."
+    },
+    {
+      "titel": "Bögen",
+      "text": "Ein Bogen über drei Blöcke: links eine umgedrehte Sandsteintreppe, in der Mitte eine Stufe in der oberen Hälfte, rechts wieder eine umgedrehte Treppe. Die hohe Seite der Treppen zeigt jeweils zur Säule."
+    },
+    {
+      "titel": "Brunnen",
+      "text": "Die Wasserquelle sitzt oben auf der Säule über der Schale aus Sandsteinstufen. Das Wasser läuft über die Schale und fällt ins Becken. Im Plan ist nur die Quelle eingezeichnet, das fließende Wasser entsteht von selbst."
+    },
+    {
+      "titel": "Weinpergola",
+      "text": "Die Trauben sind Höhlenranken mit Leuchtbeeren aus der üppigen Höhle. Sie hängen unter dem Laub und leuchten abends. Ersatzweise einfach mehr Laub."
+    },
+    {
+      "titel": "Viel Ton",
+      "text": "Terrakotta und Ziegel bestehen aus Ton. Für dieses Haus brauchst du über 9.000 Tonklumpen. Am einfachsten über Schlamm: Erde mit einer Wasserflasche zu Schlamm machen und über einem Tropfstein zu Ton trocknen lassen, oder mit Wandernden Händlern und Steinmetzen handeln."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet)."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Tonklumpen",
+      "menge": 9210,
+      "quelle": "Schlamm über Tropfstein, Flüsse, Handel",
+      "hinweis": "1.829 Terrakotta und 473 Ziegelblöcke"
+    },
+    {
+      "name": "Sand",
+      "menge": 4105,
+      "quelle": "Wüste oder Strand",
+      "hinweis": "rund 1.015 Sandstein für Putz, Gesims, Bögen und Brüstungen, dazu 45 für Glas"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 160,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff für die weiße Terrakotta"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 290,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "Böden, Bücherregale, Fässer, Olivenbäume"
+    },
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 65,
+      "quelle": "Baumfarm (Dunkeleiche)",
+      "hinweis": "Pergola-Balken, Türen, Tische"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 35,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Stühle, Bänke, Geländer, Zypressen"
+    },
+    {
+      "name": "Wirrstiele",
+      "menge": 150,
+      "quelle": "Nether (Wirrwald)",
+      "hinweis": "200 Fensterläden, ersatzweise Fichtenholz"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 180,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "Steinziegel für den Sockel"
+    },
+    {
+      "name": "Fichten-, Eichen- und Azaleenlaub",
+      "menge": 305,
+      "quelle": "Bäume mit der Schere ernten",
+      "hinweis": "Zypressen, Weinlaub, Olivenbäume"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 112,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Kessel"
+    },
+    {
+      "name": "Bücher",
+      "menge": 177,
+      "quelle": "Kühe und Zuckerrohr",
+      "hinweis": "für die Bücherregale"
+    },
+    {
+      "name": "Leuchtbeeren",
+      "menge": 1,
+      "quelle": "Üppige Höhle",
+      "hinweis": "zum Anpflanzen der Ranken an der Pergola"
+    }
+  ],
+  "schmelzvorgaenge": 8300,
+  "plugins": [],
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "Warm and a little weathered: plaster with colour gradients, terracotta, a pergola with vines, shutters with depth, cypresses and olive trees. Light signs of age like moss on the base and vines on the corners belong to it.",
+    "beschreibung": "The Mediterranean Villa, refined the way a creator would: plaster with a colour gradient and corner stones, green shutters with sills, a loggia with round arches, a low tiled roof with chimneys and a small lookout tower. Arches and a fountain with a bowl in the courtyard, furnished rooms on both floors, and outside a vine pergola with a long table, olive trees and a forecourt with an avenue of cypresses.",
+    "grundflaeche": "37 × 38 plot, house 27 × 27, courtyard 9 × 9",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. After pasting, please check the direction of shutters, doors, stairs and beds.",
+    "abschnitte": [
+      {
+        "name": "Floors, courtyard and forecourt",
+        "text": "A base of stone bricks, terracotta tiles inside the house, a checkerboard of terracotta and smooth sandstone in the courtyard, smooth sandstone under the colonnade. Outside the gravel forecourt with a path, the terracotta terrace under the pergola and lawn."
+      },
+      {
+        "name": "Ground floor, courtyard and garden",
+        "text": "Outer walls with a stone base, plaster in three tones and corner stones. Windows with sill, lintel and green shutters. The loggia with three round arches to the south, a triple terrace door to the east. Columns with arches and the fountain in the courtyard. Inside a pantry, kitchen, dining room, salon with fireplace, hall, study, library with fireplace and a laundry. Outside pergola pillars, the long table, cypresses, olive trees, lavender and the gate."
+      },
+      {
+        "name": "Middle floor and cornice",
+        "text": "Oak floor for the upper floor, outside a band of smooth sandstone with a cornice of upside-down sandstone stairs that sticks out one block. Above that the vine leaves of the pergola."
+      },
+      {
+        "name": "Upper floor",
+        "text": "Windows with shutters and flower pots, also towards the courtyard. Inside a corridor around the courtyard, a gallery with a reading corner at the stairs, the master bedroom with a ladder to the tower, guest and kids' rooms, a study, a living room and three bathrooms."
+      },
+      {
+        "name": "Roof",
+        "text": "A low hipped roof of brick slabs alternating bottom and top, so it only rises half a block per row. It overhangs by one block and has two chimneys."
+      },
+      {
+        "name": "Lookout tower",
+        "text": "The belvedere above the loggia: round arches on all four sides with a parapet of sandstone walls, a bench and a lantern, topped by a small pyramid roof."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "Warm and a little weathered: nothing is completely smooth. The plaster mixes white terracotta with smooth and plain sandstone, a bit more sandstone near the bottom. The base gets mossy and cracked stone bricks, vines grow on the corners. Mix freely, but not too evenly."
+      },
+      {
+        "titel": "Shutters",
+        "text": "The shutters are open warped trapdoors to the left and right of the window on the outer wall. Place the trapdoor against the wall and click it open. If you have no warped wood from the Nether, use spruce or dark oak trapdoors."
+      },
+      {
+        "titel": "Low tiled roof",
+        "text": "Tuscan roofs are low. That is why brick slabs alternate between the bottom and top half: each row rises only half a block. You also need no corner pieces at the hips."
+      },
+      {
+        "titel": "Arches",
+        "text": "An arch over three blocks: an upside-down sandstone stair on the left, a slab in the top half in the middle, another upside-down stair on the right. The high side of each stair faces the column."
+      },
+      {
+        "titel": "Fountain",
+        "text": "The water source sits on top of the column above the bowl of sandstone slabs. The water runs over the bowl and falls into the basin. The plan only shows the source; the flowing water appears by itself."
+      },
+      {
+        "titel": "Vine pergola",
+        "text": "The grapes are cave vines with glow berries from the lush caves. They hang below the leaves and glow at night. Otherwise just use more leaves."
+      },
+      {
+        "titel": "Lots of clay",
+        "text": "Terracotta and bricks are made of clay. This house needs over 9,000 clay balls. The easiest way is mud: turn dirt into mud with a water bottle and let it dry into clay above pointed dripstone, or trade with wandering traders and masons."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline)."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Clay balls",
+        "quelle": "Mud above dripstone, rivers, trading",
+        "hinweis": "1,829 terracotta and 473 brick blocks"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Desert or beach",
+        "hinweis": "about 1,015 sandstone for plaster, cornice, arches and parapets, plus 45 for glass"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye for the white terracotta"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "floors, bookshelves, barrels, olive trees"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak)",
+        "hinweis": "pergola beams, doors, tables"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "chairs, benches, railings, cypresses"
+      },
+      {
+        "name": "Warped stems",
+        "quelle": "Nether (warped forest)",
+        "hinweis": "200 shutters, spruce wood as a substitute"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "stone bricks for the base"
+      },
+      {
+        "name": "Spruce, oak and azalea leaves",
+        "quelle": "Harvest trees with shears",
+        "hinweis": "cypresses, vine leaves, olive trees"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and cauldrons"
+      },
+      {
+        "name": "Books",
+        "quelle": "Cows and sugar cane",
+        "hinweis": "for the bookshelves"
+      },
+      {
+        "name": "Glow berries",
+        "quelle": "Lush cave",
+        "hinweis": "to plant the vines on the pergola"
+      }
+    ]
+  }
+}
