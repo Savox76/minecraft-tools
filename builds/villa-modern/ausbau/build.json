@@ -1,0 +1,277 @@
+{
+  "id": "villa-modern",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Hell und reduziert, aber mit eigenem Charakter: Betonsockel, viel helles Holz, Gründach, ein Garten mit Rasen, Birken und Pool, eingerichtete Räume. Schwarz nur als Akzent, ohne Steg und ohne Palmen.",
+  "titel": "Moderne Villa",
+  "beschreibung": "Die Moderne Villa, verfeinert wie von einem Creator: Das Obergeschoss ist eine Holzbox im weißen Betonrahmen mit Gründach und Oberlicht, darunter ein Glas-Erdgeschoss mit Holzpfosten auf einem grauen Sockel. Dazu eine Dachterrasse mit Pergola, eine überdachte Lounge mit Feuerstelle unter der Auskragung, eingerichtete Räume und ein Garten mit Rasen, Birken, Pooldeck und Pollerleuchten.",
+  "schwierigkeit": 3,
+  "bauzeit_stunden": [
+    8,
+    12
+  ],
+  "grundflaeche": "31 × 31 Grundstück mit Garten, Haus 25 × 14",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte nach dem Einfügen kurz die Richtung von Treppen, Türen und Betten ansehen.",
+  "abschnitte": [
+    {
+      "name": "Böden, Terrassen und Pool",
+      "von": 0,
+      "bis": 0,
+      "text": "Alles auf Bodenhöhe: grauer Betonsockel unter den Außenwänden, Eichenboden im Haus, Südterrasse aus glattem Stein, Holzdeck unter der Auskragung und am Pool, der Pool mit weißem Rand und Seelaternen, Trittsteine vom Gartentor zur Haustür. Der Rest ist Rasen. Den Pool zwei Blöcke tief ausheben, im Plan ist nur die Wasseroberfläche eingezeichnet."
+    },
+    {
+      "name": "Erdgeschoss und Garten",
+      "von": 1,
+      "bis": 4,
+      "text": "Nach Süden und Osten Glas bis unter die Decke mit Pfosten aus entrindeter Eiche, nach Norden und Westen weißer Beton auf einer grauen Sockelreihe. Der Eingang liegt in einer Holznische. Innen offene Küche mit Insel, Essplatz, Wohnbereich mit Kamin und L-Sofa, Treppe mit Bücherwand darunter. Draußen die Lounge mit Feuerstelle und der Essplatz unter der Auskragung, Hecke, Gartenmauer mit Pforte, Pollerleuchten, Blumenbeet, Liegen und Sonnenschirm am Pool und drei Birken."
+    },
+    {
+      "name": "Zwischendecke",
+      "von": 5,
+      "bis": 5,
+      "text": "Boden des Obergeschosses aus Eiche, über dem Erdgeschoss das Holzdeck der Dachterrasse mit weißer Kante. In der Untersicht der Auskragung sitzen Seelaternen als Einbauleuchten. Vordach über dem Eingang."
+    },
+    {
+      "name": "Obergeschoss und Dachterrasse",
+      "von": 6,
+      "bis": 9,
+      "text": "Holzbox aus entrindeter Eiche zwischen weißen Ecken, große Fenster nach Süden und Osten, Fensterschlitze nach Norden. Innen Kinder- oder Arbeitszimmer, Bad mit Wanne und Dusche, Schlafzimmer mit Glas nach zwei Seiten, Flur mit Leseecke am Treppenauge. Draußen auf der Dachterrasse eine Pergola aus Eichenbalken, Liegen und Pflanzkästen hinter dem Glasgeländer."
+    },
+    {
+      "name": "Dach mit Gründach",
+      "von": 10,
+      "bis": 12,
+      "text": "Dachplatte aus weißem Beton mit dünner Kante aus Steinstufen, darauf ein Gründach aus Moosblöcken mit Gräsern und Blüten, eingefasst von glattem Stein. Über dem Flur ein Oberlicht aus Glas."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Hell und reduziert heißt hier: wenige Materialien, sauber eingesetzt. Weißer Beton für den Rahmen, helles Eichenholz für die Box und die Fensterpfosten, grauer Beton als Sockel. Schwarz gibt es nur am Kamin und an den Pollern, damit die Fassade leicht bleibt."
+    },
+    {
+      "titel": "Holz senkrecht",
+      "text": "Die Holzbox besteht aus entrindeten Eichenstämmen, die senkrecht stehen. Setze sie auf eine Wand oder einen Boden, nicht seitlich, sonst liegen sie quer. Die Pergola-Balken dagegen liegen bewusst quer."
+    },
+    {
+      "titel": "Gründach",
+      "text": "Moosblöcke bekommst du schnell mit Knochenmehl: einen Moosblock setzen, Knochenmehl darauf, und er breitet sich aus. Die Gräser und Blüten setzt du danach einzeln, nicht zu dicht, sonst wirkt das Dach unruhig."
+    },
+    {
+      "titel": "Licht",
+      "text": "Die Seelaternen in der Decke über der Lounge liegen gleichzeitig im Schlafzimmerboden. Dort deckt ein weißer Teppich sie ab. Ersatzweise gehen Froschlichter oder Leuchtstein."
+    },
+    {
+      "titel": "Möbel aus Blöcken",
+      "text": "Sofas sind Treppen aus poliertem Diorit, Tische Eichenstufen in der oberen Hälfte, Stühle Eichentreppen, Hocker Zäune mit Druckplatte, die Wanne zwei Kessel mit Wasser, der Sonnenschirm ein Zaun mit weißer Wolle obendrauf."
+    },
+    {
+      "titel": "Pool ausheben",
+      "text": "Wie in der Grundversion: Grab das Becken zwei Blöcke tief. Zwei Wassereimer in eine Ecke ergeben eine unendliche Quelle zum Füllen."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet)."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Sand",
+      "menge": 728,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "88 für Glas und Scheiben, 640 für Beton"
+    },
+    {
+      "name": "Kies",
+      "menge": 640,
+      "quelle": "Fluss oder Kiesfarm",
+      "hinweis": "für weißen, hellgrauen und schwarzen Beton"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 110,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff und Moos verteilen"
+    },
+    {
+      "name": "Eichenstamm",
+      "menge": 330,
+      "quelle": "Baumfarm (Eiche)",
+      "hinweis": "Holzbox, Pfosten, Pergola, Boden, Möbel und Türen"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 46,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Holzdecks"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 225,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "zweimal schmelzen für glatten Stein, dazu poliertes Diorit"
+    },
+    {
+      "name": "Schwarzstein",
+      "menge": 24,
+      "quelle": "Nether (Basaltdeltas)",
+      "hinweis": "Kamin und Poller"
+    },
+    {
+      "name": "Birkenlaub (mit Schere)",
+      "menge": 288,
+      "quelle": "Birken mit der Schere ernten",
+      "hinweis": "Hecke und Baumkronen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 55,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Kessel"
+    },
+    {
+      "name": "Seelaternen",
+      "menge": 12,
+      "quelle": "Ozeanmonument",
+      "hinweis": "Pool und Einbauleuchten, ersatzweise Froschlicht oder Leuchtstein"
+    },
+    {
+      "name": "Bücher",
+      "menge": 48,
+      "quelle": "Kühe und Zuckerrohr",
+      "hinweis": "für die Bücherwand unter der Treppe"
+    },
+    {
+      "name": "Weiße Wolle",
+      "menge": 41,
+      "quelle": "Schafe",
+      "hinweis": "Betten, Teppiche, Sonnenschirm"
+    }
+  ],
+  "schmelzvorgaenge": 494,
+  "plugins": [],
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "Bright and minimal, but with its own character: a concrete base, lots of light wood, a green roof, a garden with lawn, birches and pool, furnished rooms. Black only as an accent, no jetty and no palm trees.",
+    "beschreibung": "The Modern Villa, refined the way a creator would: the upper floor is a wooden box in a white concrete frame with a green roof and skylight, above a glass ground floor with wooden mullions on a grey base. Plus a roof terrace with pergola, a covered lounge with fire pit under the cantilever, furnished rooms and a garden with lawn, birches, pool deck and bollard lights.",
+    "grundflaeche": "31 × 31 plot with garden, house 25 × 14",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. After pasting, please check the direction of stairs, doors and beds.",
+    "abschnitte": [
+      {
+        "name": "Floors, terraces and pool",
+        "text": "Everything at ground level: a grey concrete base under the outer walls, oak floor inside, a south terrace of smooth stone, a wooden deck under the cantilever and by the pool, the pool with a white edge and sea lanterns, stepping stones from the garden gate to the front door. The rest is lawn. Dig the pool two blocks deep; the plan only shows the water surface."
+      },
+      {
+        "name": "Ground floor and garden",
+        "text": "Glass up to the ceiling to the south and east with stripped oak mullions, white concrete on a grey base row to the north and west. The entrance sits in a wooden recess. Inside an open kitchen with island, a dining area, a living area with fireplace and L-shaped sofa, and stairs with a book wall underneath. Outside the lounge with fire pit and the dining table under the cantilever, hedge, garden wall with gate, bollard lights, a flower bed, loungers and a parasol by the pool, and three birches."
+      },
+      {
+        "name": "Middle floor slab",
+        "text": "Oak floor for the upper floor, above the ground floor the wooden deck of the roof terrace with a white edge. Sea lanterns sit in the underside of the cantilever as recessed lights. A canopy above the entrance."
+      },
+      {
+        "name": "Upper floor and roof terrace",
+        "text": "A box of stripped oak between white corners, large windows to the south and east, window slits to the north. Inside a kids' room or study, a bathroom with tub and shower, a bedroom with glass on two sides and a hallway with a reading corner at the stairwell. Outside on the roof terrace a pergola of oak beams, loungers and planters behind the glass railing."
+      },
+      {
+        "name": "Roof with green roof",
+        "text": "Roof slab of white concrete with a thin edge of stone slabs, on top a green roof of moss blocks with grasses and flowers, framed by smooth stone. A glass skylight above the hallway."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "Bright and minimal means few materials, used cleanly. White concrete for the frame, light oak for the box and the mullions, grey concrete for the base. Black only at the fireplace and the bollards so the facade stays light."
+      },
+      {
+        "titel": "Vertical wood",
+        "text": "The wooden box is made of stripped oak logs standing upright. Place them on a wall or floor, not from the side, or they lie across. The pergola beams on the other hand lie across on purpose."
+      },
+      {
+        "titel": "Green roof",
+        "text": "You get moss blocks quickly with bone meal: place one moss block, use bone meal on it and it spreads. Add the grasses and flowers one by one afterwards, not too densely, or the roof looks busy."
+      },
+      {
+        "titel": "Light",
+        "text": "The sea lanterns in the ceiling above the lounge are also in the bedroom floor. A white carpet covers them there. Froglights or glowstone work as a substitute."
+      },
+      {
+        "titel": "Furniture from blocks",
+        "text": "Sofas are polished diorite stairs, tables oak slabs in the top half, chairs oak stairs, stools fences with a pressure plate, the bathtub two water cauldrons, the parasol a fence with white wool on top."
+      },
+      {
+        "titel": "Digging the pool",
+        "text": "As in the base version: dig the basin two blocks deep. Two water buckets in one corner give an infinite source for filling."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline)."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "88 for glass and panes, 640 for concrete"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "River or gravel farm",
+        "hinweis": "for white, light grey and black concrete"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye and spreading moss"
+      },
+      {
+        "name": "Oak logs",
+        "quelle": "Tree farm (oak)",
+        "hinweis": "wooden box, mullions, pergola, floor, furniture and doors"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "wooden decks"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "smelt twice for smooth stone, plus polished diorite"
+      },
+      {
+        "name": "Blackstone",
+        "quelle": "Nether (basalt deltas)",
+        "hinweis": "fireplace and bollards"
+      },
+      {
+        "name": "Birch leaves (with shears)",
+        "quelle": "Harvest birches with shears",
+        "hinweis": "hedge and tree crowns"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and cauldrons"
+      },
+      {
+        "name": "Sea lanterns",
+        "quelle": "Ocean monument",
+        "hinweis": "pool and recessed lights, froglight or glowstone as a substitute"
+      },
+      {
+        "name": "Books",
+        "quelle": "Cows and sugar cane",
+        "hinweis": "for the book wall under the stairs"
+      },
+      {
+        "name": "White wool",
+        "quelle": "Sheep",
+        "hinweis": "beds, carpets, parasol"
+      }
+    ]
+  }
+}

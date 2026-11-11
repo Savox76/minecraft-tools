@@ -68,7 +68,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | `eiffelturm` | Eiffelturm (1:3) | 43 × 43 | 112 | 7.600 |
 | `leuchtturm` | Leuchtturm | Ø 17 | 65 | 2.600 |
 | `villa-am-wasser` | Villa am Wasser mit Pool und Wasser-Aufzug, dazu Ausbau-Version (3.223 Blöcke, 16 Ebenen) und Umbau | 27 × 27 | 15 | 2.700 |
-| `villa-modern` | Moderne Villa | 29 × 23 | 12 | 2.000 |
+| `villa-modern` | Moderne Villa, dazu Ausbau-Version (2.593 Blöcke, 13 Ebenen) und Umbau | 29 × 23 | 12 | 2.000 |
 | `villa-mediterran` | Mediterrane Villa | 27 × 27 | 16 | 3.750 |
 | `villa-gruenderzeit` | Gründerzeit-Villa mit Turm | 21 × 15 + Turm | 38 | 2.750 |
 | `gewaechshaus-farm` | Gewächshaus mit Dorfbewohner-Farm | 15 × 15 | 14 | 870 |
@@ -181,6 +181,23 @@ Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne
 - **Umbau:** Beide Modelle liegen mit derselben Ecke Nordwest unten übereinander. Zuerst Abbau-Schritte von oben nach unten (rot umrandet), dann nur die neuen Blöcke von unten nach oben (gelb umrandet). Was gleich bleibt, ist blass und zählt nicht mit. Bei der Villa ändert sich viel: 2.183 Blöcke abbauen, 2.710 neu (Neubau: 3.223).
 - **Exporte:** Glasscheiben, Eisengitter, Zäune und Mauern bekommen beim Export ihre Verbindungen zu den Nachbarn (north/east/south/west), weil Litematica und WorldEdit sie beim Einfügen nicht neu berechnen. Das gilt für alle Baupläne.
 - Karten auf der Website zeigen „+ Ausbau“, wenn es eine Ausbau-Version gibt.
+
+**Ausbau-Versionen, Stand und Reihenfolge** (Einteilung von Mario freigegeben am 11.11.2026):
+
+| Bauplan | Ausbau | Leitbild | Stand |
+| --- | --- | --- | --- |
+| Villa am Wasser | ja | modern, hell, luxuriös am Wasser | online (Pilot) |
+| Moderne Villa | ja | hell und reduziert, eigener Charakter: Betonsockel, viel helles Holz, Gründach, Garten mit Rasen, Birken und Pool, eingerichtet; Schwarz nur als Akzent, ohne Steg und Palmen | online, Erzeuger `tools/ausbau_villa_modern.py` |
+| Mediterrane Villa | ja | warm und etwas gealtert: Putz mit Farbverläufen, Terrakotta, Pergola mit Wein, Fensterläden mit Tiefe, Zypressen, Olivenbäume; leichte Gebrauchsspuren passen | als Nächstes |
+| Gründerzeit-Villa | ja | reich verziert: Gesimse, Erker, Stuck aus Stufen und Treppen, Gauben mit Dachrinnen, schmiedeeiserner Zaun, Vorgarten; Tiefe durch Vor- und Rücksprünge | geplant |
+| Leuchtturm | klein | rauer Küstenfels statt glattem Sockel, Wärterhaus, Steg mit Booten, Felsen im Wasser; Turm nur feinere Streifen und Geländer | geplant |
+| Gewächshaus-Farm | klein | Farm bleibt, dazu Rahmen aus dunklem Holz, Pflanzkästen, Wege, Laternen | geplant |
+| Kellerlager | klein | Gewölbe, Holzbalken, beschriftete Fass-Wand, Licht; Technik bleibt | geplant |
+| Eiffelturm | vielleicht | filigraner: Fachwerk aus Zäunen und Gittern, Abendbeleuchtung | zum Schluss |
+| Kaktus-XP-Farm, Kleine Bambusfarm | nein | bleiben kompakt und funktional | – |
+| Teehaus | nein | schon im neuen Stil gebaut | – |
+
+Echte Fehler in Grundversionen (falsch gedrehte Treppe, Tür ohne Richtung) werden korrigiert, das Design der Grundversion bleibt.
 
 **Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
 
