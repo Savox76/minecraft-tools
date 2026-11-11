@@ -1,0 +1,318 @@
+{
+  "id": "leuchtturm",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Rauer Küstenfels statt glattem Sockel, ein Wärterhaus, ein Steg mit Booten und Felsen im Wasser. Der Turm selbst bekommt nur feinere Streifen und ein leichteres Geländer.",
+  "titel": "Leuchtturm",
+  "beschreibung": "Der Leuchtturm, verfeinert wie von einem Creator: Er steht jetzt auf einem rauen Küstenfelsen statt auf einem glatten Sockel. Daneben ein Wärterhaus mit rotem Dach, ein Steg mit zwei Ruderbooten, Bojen und Felsen im Meer. Am Turm feinere rot-weiße Streifen, Gesimse mit Überstand, Konsolen unter dem Umgang und ein Terrassengeländer aus Eisengittern.",
+  "schwierigkeit": 3,
+  "bauzeit_stunden": [
+    8,
+    12
+  ],
+  "grundflaeche": "34 × 34 an der Küste, Turm Ø 17",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Das Meer ist als vorhanden eingezeichnet: Such dir eine Küste mit flachem Wasser oder lege Ebene 0 auf die Wasseroberfläche.",
+  "abschnitte": [
+    {
+      "name": "Wasserlinie",
+      "von": 0,
+      "bis": 0,
+      "text": "Auf Höhe des Meeres: der Felsfuß des Turms, das Plateau im Osten, der Absatz am Sockeleingang, die Pfähle des Stegs, Bojen und einzelne Felsen im Wasser. Das Wasser selbst ist schon da."
+    },
+    {
+      "name": "Felssockel, Steg und Boote",
+      "von": 1,
+      "bis": 4,
+      "text": "Der Sockel aus Stein, Andesit, Bruchstein, bemoostem Bruchstein und Tuff mit dem Lagerraum innen. Der Fels füllt die Ecken unregelmäßig auf und steigt im Osten zum Plateau an. Im Süden der Steg aus Fichtenstufen mit Laternen, Fässern und Fischernetz, daneben zwei Ruderboote aus Blöcken."
+    },
+    {
+      "name": "Terrasse und Wärterhaus",
+      "von": 5,
+      "bis": 6,
+      "text": "Die Terrasse um den Turm mit Geländer aus Eisengittern zwischen Steinpfosten, Laternen und einer Öffnung nach Osten. Das Wärterhaus mit Bruchsteinsockel, weißen Wänden, Fichtenecken, Fenstern mit Läden und zwei Türen. Innen Bett, Ofen, Spüle, Tisch, Kartentisch, Logbuch und Bücherregal."
+    },
+    {
+      "name": "Turm Abschnitt 1 und Hausdach",
+      "von": 7,
+      "bis": 21,
+      "text": "Der unterste Turmabschnitt in vier Blöcke hohen Streifen. Am Wärterhaus das rote Satteldach aus Rote-Netherziegel-Treppen mit Giebelfenstern und Schornstein."
+    },
+    {
+      "name": "Gesims und Zwischenboden",
+      "von": 22,
+      "bis": 22,
+      "text": "Zwischenboden mit einem Gesims aus umgedrehten Steinziegeltreppen, das einen Block übersteht."
+    },
+    {
+      "name": "Turm Abschnitt 2",
+      "von": 23,
+      "bis": 37,
+      "text": "Mittlerer Abschnitt, Streifen weiter im Vier-Block-Takt."
+    },
+    {
+      "name": "Gesims und Zwischenboden",
+      "von": 38,
+      "bis": 38,
+      "text": "Wie unten: Boden und Gesims mit Überstand."
+    },
+    {
+      "name": "Turm Abschnitt 3 mit Konsolen",
+      "von": 39,
+      "bis": 51,
+      "text": "Oberster Abschnitt. Ganz oben sitzen Konsolen aus umgedrehten Steinziegeltreppen unter dem Rand des Umgangs."
+    },
+    {
+      "name": "Umgang",
+      "von": 52,
+      "bis": 53,
+      "text": "Galerie mit Geländer aus Eisengittern."
+    },
+    {
+      "name": "Laternenraum",
+      "von": 53,
+      "bis": 56,
+      "text": "Verglaster Raum mit dem Leuchtfeuer aus Leuchtstein."
+    },
+    {
+      "name": "Kuppel und Spitze",
+      "von": 57,
+      "bis": 64,
+      "text": "Rote Kuppel mit Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Der Turm bleibt, was er ist. Verändert wird vor allem, worauf er steht: ein rauer Fels statt eines glatten Sockels, und rundherum Leben an der Küste. Am Turm sorgen schmalere Streifen und überstehende Gesimse für Feinheit."
+    },
+    {
+      "titel": "Fels mischen",
+      "text": "Nimm Stein, Andesit, Bruchstein, bemoosten Bruchstein und Tuff und setze sie bunt gemischt, nie in Reihen. Lass die Oberkante unregelmäßig, mal einen Block höher, mal tiefer. Oben auf das Plateau kommen Grasblöcke und etwas Kies."
+    },
+    {
+      "titel": "Streifen zählen",
+      "text": "Jeder Streifen ist genau vier Blöcke hoch und beginnt in Ebene 6. Am einfachsten setzt du erst einen ganzen Ring weiß, dann vier Ringe rot und so weiter, statt Block für Block nachzusehen."
+    },
+    {
+      "titel": "Konsolen",
+      "text": "Unter dem Rand des Umgangs sitzt jeweils eine umgedrehte Steinziegeltreppe, die hohe Seite zeigt zur Turmmitte. Setze sie von unten gegen den Umgang, dann dreht sie sich von selbst um."
+    },
+    {
+      "titel": "Boote",
+      "text": "Echte Boote sind Fahrzeuge und können nicht in einer Bauvorlage gespeichert werden. Die beiden Ruderboote sind deshalb aus Fichtenstufen und Treppen gebaut. Daneben kannst du natürlich ein echtes Boot anbinden."
+    },
+    {
+      "titel": "Rotes Dach",
+      "text": "Das Dach des Wärterhauses ist aus Rote-Netherziegel-Treppen, passend zur Kuppel. Ohne Nether gehen Mangroven- oder Akazientreppen."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Sand",
+      "menge": 805,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "715 für Beton, 90 für Glas"
+    },
+    {
+      "name": "Kies",
+      "menge": 731,
+      "quelle": "Fluss oder Kiesfarm",
+      "hinweis": "Beton und etwas Kies auf dem Plateau"
+    },
+    {
+      "name": "Roter Farbstoff",
+      "menge": 93,
+      "quelle": "Mohn, Rosen oder Rote Bete",
+      "hinweis": "roter Beton für die Streifen"
+    },
+    {
+      "name": "Knochenmehl",
+      "menge": 87,
+      "quelle": "Komposter oder Skelette",
+      "hinweis": "weißer Farbstoff"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 1750,
+      "quelle": "Bruchsteingenerator oder Abbau",
+      "hinweis": "Steinziegel für Turm und Gesimse, Stein und Bruchstein für den Fels"
+    },
+    {
+      "name": "Andesit und Tuff",
+      "menge": 424,
+      "quelle": "Abbau",
+      "hinweis": "für den Fels"
+    },
+    {
+      "name": "Ranken oder Moos",
+      "menge": 169,
+      "quelle": "Dschungel oder üppige Höhle",
+      "hinweis": "bemooster Bruchstein"
+    },
+    {
+      "name": "Netherziegel und Netherwarzen",
+      "menge": 278,
+      "quelle": "Nether",
+      "hinweis": "je 278 für das rote Dach"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 85,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Steg, Boote, Hausecken, Fensterläden"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 50,
+      "quelle": "Eisenfarm",
+      "hinweis": "Gitter, Laternen, Kessel"
+    },
+    {
+      "name": "Leuchtstein",
+      "menge": 3,
+      "quelle": "Nether",
+      "hinweis": "das Leuchtfeuer"
+    }
+  ],
+  "schmelzvorgaenge": 2700,
+  "plugins": [],
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "A rough coastal rock instead of a smooth base, a keeper's house, a jetty with boats and rocks in the water. The tower itself only gets finer stripes and a lighter railing.",
+    "beschreibung": "The Lighthouse, refined the way a creator would: it now stands on a rough coastal rock instead of a smooth base. Next to it a keeper's house with a red roof, a jetty with two rowing boats, buoys and rocks in the sea. On the tower finer red and white stripes, cornices that stick out, brackets under the gallery and a terrace railing of iron bars.",
+    "grundflaeche": "34 × 34 on the coast, tower Ø 17",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. The sea is drawn as existing: find a coast with shallow water or put layer 0 at the water surface.",
+    "abschnitte": [
+      {
+        "name": "Waterline",
+        "text": "At sea level: the rocky foot of the tower, the plateau to the east, the ledge at the base entrance, the jetty piles, buoys and single rocks in the water. The water itself is already there."
+      },
+      {
+        "name": "Rock base, jetty and boats",
+        "text": "The base of stone, andesite, cobblestone, mossy cobblestone and tuff with the storeroom inside. The rock fills the corners unevenly and rises to the plateau in the east. To the south the jetty of spruce slabs with lanterns, barrels and a fishing net, next to it two rowing boats made of blocks."
+      },
+      {
+        "name": "Terrace and keeper's house",
+        "text": "The terrace around the tower with a railing of iron bars between stone posts, lanterns and an opening to the east. The keeper's house with a cobblestone base, white walls, spruce corners, windows with shutters and two doors. Inside a bed, furnace, sink, table, cartography table, logbook and bookshelf."
+      },
+      {
+        "name": "Tower section 1 and house roof",
+        "text": "The lowest tower section in four-block stripes. On the keeper's house the red gable roof of red nether brick stairs with gable windows and a chimney."
+      },
+      {
+        "name": "Cornice and floor",
+        "text": "Floor with a cornice of upside-down stone brick stairs that sticks out one block."
+      },
+      {
+        "name": "Tower section 2",
+        "text": "Middle section, stripes still every four blocks."
+      },
+      {
+        "name": "Cornice and floor",
+        "text": "As below: floor and cornice with overhang."
+      },
+      {
+        "name": "Tower section 3 with brackets",
+        "text": "Top section. At the very top, brackets of upside-down stone brick stairs sit under the edge of the gallery."
+      },
+      {
+        "name": "Gallery",
+        "text": "Gallery with a railing of iron bars."
+      },
+      {
+        "name": "Lantern room",
+        "text": "Glazed room with the beacon of glowstone."
+      },
+      {
+        "name": "Dome and tip",
+        "text": "Red dome with lightning rod."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "The tower stays what it is. What changes most is what it stands on: a rough rock instead of a smooth base, and life on the coast around it. On the tower, narrower stripes and cornices that stick out add finesse."
+      },
+      {
+        "titel": "Mixing rock",
+        "text": "Take stone, andesite, cobblestone, mossy cobblestone and tuff and mix them freely, never in rows. Keep the top edge uneven, one block higher here, one lower there. Grass blocks and some gravel go on top of the plateau."
+      },
+      {
+        "titel": "Counting stripes",
+        "text": "Every stripe is exactly four blocks high and starts at layer 6. The easiest way is to place a whole ring white, then four rings red and so on, instead of checking block by block."
+      },
+      {
+        "titel": "Brackets",
+        "text": "Under the edge of the gallery sits an upside-down stone brick stair, high side towards the centre of the tower. Place it from below against the gallery and it flips by itself."
+      },
+      {
+        "titel": "Boats",
+        "text": "Real boats are vehicles and cannot be stored in a schematic. The two rowing boats are therefore built from spruce slabs and stairs. You can of course tie up a real boat next to them."
+      },
+      {
+        "titel": "Red roof",
+        "text": "The roof of the keeper's house is made of red nether brick stairs to match the dome. Without the Nether, use mangrove or acacia stairs."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "715 for concrete, 90 for glass"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "River or gravel farm",
+        "hinweis": "concrete and some gravel on the plateau"
+      },
+      {
+        "name": "Red dye",
+        "quelle": "Poppies, roses or beetroot",
+        "hinweis": "red concrete for the stripes"
+      },
+      {
+        "name": "Bone meal",
+        "quelle": "Composter or skeletons",
+        "hinweis": "white dye"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator or mining",
+        "hinweis": "stone bricks for tower and cornices, stone and cobblestone for the rock"
+      },
+      {
+        "name": "Andesite and tuff",
+        "quelle": "Mining",
+        "hinweis": "for the rock"
+      },
+      {
+        "name": "Vines or moss",
+        "quelle": "Jungle or lush cave",
+        "hinweis": "mossy cobblestone"
+      },
+      {
+        "name": "Nether bricks and nether wart",
+        "quelle": "Nether",
+        "hinweis": "278 of each for the red roof"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "jetty, boats, house corners, shutters"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "bars, lanterns, cauldron"
+      },
+      {
+        "name": "Glowstone",
+        "quelle": "Nether",
+        "hinweis": "the beacon"
+      }
+    ]
+  }
+}
