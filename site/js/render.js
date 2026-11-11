@@ -31,7 +31,7 @@ export function readBlock(s) {
 }
 const PLANTS = new Set(['short_grass', 'grass', 'fern', 'dead_bush', 'poppy', 'dandelion', 'cornflower', 'oxeye_daisy', 'allium',
   'azure_bluet', 'blue_orchid', 'lily_of_the_valley', 'sweet_berry_bush', 'wheat', 'carrots', 'potatoes', 'beetroots', 'kelp',
-  'seagrass', 'sugar_cane']);
+  'seagrass', 'sugar_cane', 'vine', 'cave_vines', 'cave_vines_plant', 'rose_bush', 'lilac', 'peony']);
 export function shapeOfBlock(bid, name) {
   if (!bid) return shapeOf(name);
   if (bid === 'water' || bid === 'bubble_column') return 'water';

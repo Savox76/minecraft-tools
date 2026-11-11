@@ -72,7 +72,7 @@ def art(bid, name):
         return 'flat'
     if bid in ('short_grass', 'grass', 'fern', 'dead_bush', 'poppy', 'dandelion', 'cornflower', 'oxeye_daisy', 'allium',
                'azure_bluet', 'blue_orchid', 'lily_of_the_valley', 'sweet_berry_bush', 'sapling', 'wheat', 'carrots',
-               'potatoes', 'beetroots', 'kelp', 'seagrass', 'sugar_cane') or bid.endswith('_tulip') or bid.endswith('_sapling'):
+               'potatoes', 'beetroots', 'kelp', 'seagrass', 'sugar_cane', 'vine', 'cave_vines', 'cave_vines_plant', 'rose_bush', 'lilac', 'peony') or bid.endswith('_tulip') or bid.endswith('_sapling'):
         return 'plant'
     if bid in ('lectern', 'enchanting_table', 'stonecutter'):
         return 'low'
