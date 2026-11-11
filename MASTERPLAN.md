@@ -155,6 +155,17 @@ Dazu gibt es pro Bauplan die Reiter **Teileliste** (gesamt, mit Stacks und Rohst
 - [ ] Lokal bauen (`python tools/build_site.py`) und in der Ausgabe Blöcke und Schritte prüfen. Danach im Browser einmal alle Schritte durchklicken und die Draufsicht ansehen.
 - [ ] Auf `main` pushen. Website, Schritte, Bilder und Downloads entstehen automatisch.
 
+### 4.2 Verfeinern wie ein Creator (Ausbau-Versionen)
+
+Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne Raffinesse wirken.
+
+- **Die Grundversion bleibt immer erhalten.** Sie wird nie überschrieben. Verbesserungen kommen als zweite Fassung, die **Ausbau-Version**, mit eigenem Modell, eigener Teileliste und eigenen Downloads. Auf der Bauplan-Seite schaltet man zwischen beiden um. Dazu gibt es Ausbau-Schritte „Von der Grundversion zum Ausbau“ für alle, die schon gebaut haben.
+- **Verfeinern wie ein Creator, der sein eigenes Bauwerk überarbeitet:** Grundidee, Grundriss und Funktionen bleiben, dann wird Schicht für Schicht verfeinert: Form, Fassadentiefe, Dach, Material, Details, Innenräume, Umgebung, Licht.
+- **Es muss zu dem passen, was das Bauwerk werden soll.** Jeder Bauplan bekommt ein **Leitbild** (zwei, drei Sätze): was er sein soll, welche Raffinesse passt und was bewusst weggelassen wird. Beispiele: Eine moderne Villa bekommt saubere Kanten, Glas und Licht, aber kein Moos und keine Risse. Eine kleine Farm bleibt kompakt und funktional und bekommt kein Haus drumherum. Nicht jeder Bauplan braucht eine Ausbau-Version.
+- **Echte Blockzustände:** Treppen, Stufen, Falltüren, Türen und Betten mit Richtung und Hälfte, damit die Details im Spiel genau so stehen wie geplant.
+- **Abnahme durch Mario:** Vor dem Veröffentlichen gibt es Bilder von allen vier Seiten, von oben und als Schnitt durch die Innenräume.
+- **Reihenfolge:** Pilot ist die Villa am Wasser (Leitbild: modern, hell, luxuriös am Wasser), danach die übrigen nach und nach.
+
 **Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
 
 ---
