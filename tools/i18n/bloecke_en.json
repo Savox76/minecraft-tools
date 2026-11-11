@@ -315,5 +315,13 @@
   "Steinziegeltreppe (verkehrt, hohe Seite nach Westen)": "Stone Brick Stairs (upside down, high side to the west)",
   "Fichtenfalltür (Fensterladen, offen nach Westen)": "Spruce Trapdoor (shutter, open to the west)",
   "Fichtentür (oben, Tür nach Westen)": "Spruce Door (top, facing west)",
-  "Fichtentür (unten, Tür nach Westen)": "Spruce Door (bottom, facing west)"
+  "Fichtentür (unten, Tür nach Westen)": "Spruce Door (bottom, facing west)",
+  "Podsol": "Podzol",
+  "Topf mit Kornblume": "Potted Cornflower",
+  "Topf mit Kaktus": "Potted Cactus",
+  "Rote Tulpe": "Red Tulip",
+  "Dunkle-Eichen-Falltür (Pflanzkasten, offen nach Norden)": "Dark Oak Trapdoor (planter, open to the north)",
+  "Dunkle-Eichen-Falltür (Pflanzkasten, offen nach Osten)": "Dark Oak Trapdoor (planter, open to the east)",
+  "Dunkle-Eichen-Falltür (Pflanzkasten, offen nach Süden)": "Dark Oak Trapdoor (planter, open to the south)",
+  "Dunkle-Eichen-Falltür (Pflanzkasten, offen nach Westen)": "Dark Oak Trapdoor (planter, open to the west)"
 }

@@ -71,7 +71,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | `villa-modern` | Moderne Villa, dazu Ausbau-Version (2.593 Blöcke, 13 Ebenen) und Umbau | 29 × 23 | 12 | 2.000 |
 | `villa-mediterran` | Mediterrane Villa, dazu Ausbau-Version (5.612 Blöcke, 18 Ebenen, Aussichtsturm) und Umbau | 27 × 27 | 16 | 3.750 |
 | `villa-gruenderzeit` | Gründerzeit-Villa, dazu Ausbau-Version (3.775 Blöcke, 39 Ebenen) und Umbau | 21 × 15 + Turm | 38 | 2.750 |
-| `gewaechshaus-farm` | Gewächshaus mit Dorfbewohner-Farm | 15 × 15 | 14 | 870 |
+| `gewaechshaus-farm` | Gewächshaus mit Dorfbewohner-Farm, dazu Ausbau-Version (1.059 Blöcke) und Umbau | 15 × 15 | 14 | 870 |
 | `kellerlager` | Kellerlager mit Sortieranlage (Java) | 17 × 12 | 8 | 800 |
 | `kaktus-xp-farm` | Kaktus-XP-Farm mit Ofen (Idee Nr. 1) | 9 × 10 | 6 | 320 |
 | `bambusfarm-klein` | Kleine Bambusfarm mit Kolben und Beobachtern (Idee Nr. 9) | 10 × 5 | 5 | 160 |
@@ -191,8 +191,8 @@ Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne
 | Mediterrane Villa | ja | warm und etwas gealtert: Putz mit Farbverläufen, Terrakotta, Pergola mit Wein, Fensterläden mit Tiefe, Zypressen, Olivenbäume; leichte Gebrauchsspuren passen. Dazu (von Mario freigegeben) Loggia mit Bögen, flaches Ziegeldach und Aussichtsturm | online, Erzeuger `tools/ausbau_villa_mediterran.py` |
 | Gründerzeit-Villa | ja | reich verziert: Gesimse, Erker, Stuck aus Stufen und Treppen, Gauben mit Dachrinnen, schmiedeeiserner Zaun, Vorgarten; Tiefe durch Vor- und Rücksprünge. Umgesetzt mit Zwerchhaus (Norden), Erker (Osten), Schieferdach, Balkon über der Veranda | online, Erzeuger `tools/ausbau_villa_gruenderzeit.py` |
 | Leuchtturm | klein | rauer Küstenfels statt glattem Sockel, Wärterhaus, Steg mit Booten, Felsen im Wasser; Turm nur feinere Streifen und Geländer | online, Erzeuger `tools/ausbau_leuchtturm.py` (liest den Turm aus der Grundversion) |
-| Gewächshaus-Farm | klein | Farm bleibt, dazu Rahmen aus dunklem Holz, Pflanzkästen, Wege, Laternen | als Nächstes |
-| Kellerlager | klein | Gewölbe, Holzbalken, beschriftete Fass-Wand, Licht; Technik bleibt | geplant |
+| Gewächshaus-Farm | klein | Farm bleibt, dazu Rahmen aus dunklem Holz, Pflanzkästen, Wege, Laternen | online, Erzeuger `tools/ausbau_gewaechshaus.py` (liest die Grundversion). Fehler der Grundversion behoben: Pfosten vor der Nische ist jetzt Glas |
+| Kellerlager | klein | Gewölbe, Holzbalken, beschriftete Fass-Wand, Licht; Technik bleibt | als Nächstes |
 | Eiffelturm | vielleicht | filigraner: Fachwerk aus Zäunen und Gittern, Abendbeleuchtung | zum Schluss |
 | Kaktus-XP-Farm, Kleine Bambusfarm | nein | bleiben kompakt und funktional | – |
 | Teehaus | nein | schon im neuen Stil gebaut | – |

@@ -1,0 +1,185 @@
+{
+  "id": "gewaechshaus-farm",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Die Farm bleibt genau wie sie ist. Dazu kommen ein Rahmen aus dunklem Holz, Pflanzkästen, Wege und Laternen, damit das Gewächshaus in einen Garten passt.",
+  "titel": "Gewächshaus-Farm",
+  "beschreibung": "Die Gewächshaus-Farm, verfeinert wie von einem Creator: Die Technik bleibt unverändert, außen herum gibt es mehr Pfosten und Sparren aus dunkler Eiche, einen Steinsockel, einen Zierkamm auf dem First, Pflanztische mit Blumentöpfen innen, Pflanzkästen an den Längsseiten und einen Weg mit Laternen, Beeten, Bank und Regentonne.",
+  "schwierigkeit": 2,
+  "bauzeit_stunden": [
+    3,
+    4
+  ],
+  "grundflaeche": "19 × 25 mit Weg und Pflanzkästen, Gewächshaus 15 × 15 plus Nische",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Die Technik ist dieselbe wie in der Grundversion: Trichter, Truhe, Komposter, Bett und Nische nicht verändern.",
+  "abschnitte": [
+    {
+      "name": "Boden, Acker, Trichter und Weg",
+      "von": 0,
+      "bis": 0,
+      "text": "Wie in der Grundversion: Steinziegelboden, 9 × 9 Acker mit Wasser in der Mitte, 5 Trichter vor der Nordwand in die Truhe. Neu ist der Weg aus glattem Stein und Kies zum Tor im Süden."
+    },
+    {
+      "name": "Wände, Technik und Garten",
+      "von": 1,
+      "bis": 4,
+      "text": "Unten ein Sockel aus Steinziegeln, darüber Glas mit Pfosten aus dunkler Eiche und oben ein liegender Balken als Rahmen. Vor der Nische bleibt die Wand ganz aus Glas, damit der Bauer den zweiten Dorfbewohner sieht. Innen Pflanztische mit Blumentöpfen an den Längswänden. Außen Pflanzkästen mit Blumen, Laternenpfähle am Weg, Beete, Bank und Regentonne."
+    },
+    {
+      "name": "Glasdach mit First",
+      "von": 5,
+      "bis": 14,
+      "text": "Glasdach mit fünf Sparren aus dunklen Eichentreppen, die zum First zeigen. Auf dem First ein Balken mit Zierkamm aus Eisengittern, an den Enden Laternen. Darunter drei Hängelaternen."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Bei einer Farm zählt die Technik. Deshalb ändert die Ausbau-Version nichts am Inneren, sondern gibt dem Gewächshaus einen Rahmen, damit es nach Garten aussieht und nicht nach Glaskasten."
+    },
+    {
+      "titel": "Freie Sicht zur Nische",
+      "text": "Der Bauer muss den zweiten Dorfbewohner sehen können. Deshalb ist die Wand vor der Nische unten ganz aus Glas, ohne Pfosten und ohne Steinsockel. In der Grundversion stand dort versehentlich ein Holzpfosten, das ist jetzt auch dort korrigiert."
+    },
+    {
+      "titel": "Pflanzkästen",
+      "text": "Ein Kasten ist eine Reihe Podsol eine Ebene über dem Boden, davor offene Falltüren aus dunkler Eiche. Die Blumen kommen oben auf den Podsol."
+    },
+    {
+      "titel": "Zierkamm",
+      "text": "Der Kamm auf dem First ist eine Reihe Eisengitter. Sie verbinden sich miteinander zu einem durchgehenden Gitter. An den Enden stehen Zaunpfosten mit Laternen."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet). Die Farm kann dabei weiterlaufen."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Sand",
+      "menge": 125,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "Glas"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 200,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "Steinziegel und glatter Stein"
+    },
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 130,
+      "quelle": "Baumfarm (Dunkeleiche)",
+      "hinweis": "Pfosten, Balken, Sparren, Pflanzkästen, Tische"
+    },
+    {
+      "name": "Podsol",
+      "menge": 26,
+      "quelle": "Riesentaiga oder mit Behutsamkeit abbauen",
+      "hinweis": "Erde für die Pflanzkästen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 20,
+      "quelle": "Eisenfarm",
+      "hinweis": "Trichter, Laternen, Zierkamm, Regentonne"
+    },
+    {
+      "name": "Erde",
+      "menge": 80,
+      "quelle": "Oberfläche",
+      "hinweis": "wird mit der Hacke zu Ackerboden"
+    },
+    {
+      "name": "Blumen und Pflanzen",
+      "menge": 60,
+      "quelle": "Wiesen, Knochenmehl auf Gras",
+      "hinweis": "Beete, Kästen und Töpfe"
+    }
+  ],
+  "schmelzvorgaenge": 330,
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "The farm stays exactly as it is. A frame of dark wood, planters, paths and lanterns are added so the greenhouse fits into a garden.",
+    "beschreibung": "The Greenhouse Farm, refined the way a creator would: the technology stays unchanged, around it there are more dark oak posts and rafters, a stone base, decorative cresting on the ridge, potting tables with flower pots inside, planters along the long sides and a path with lanterns, flower beds, a bench and a rain barrel.",
+    "grundflaeche": "19 × 25 with path and planters, greenhouse 15 × 15 plus niche",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. The technology is the same as in the base version: do not change hoppers, chest, composter, bed or niche.",
+    "abschnitte": [
+      {
+        "name": "Floor, farmland, hoppers and path",
+        "text": "As in the base version: stone brick floor, 9 × 9 farmland with water in the middle, 5 hoppers in front of the north wall leading into the chest. New is the path of smooth stone and gravel to the gate in the south."
+      },
+      {
+        "name": "Walls, technology and garden",
+        "text": "A base of stone bricks at the bottom, glass with dark oak posts above and a horizontal beam on top as a frame. In front of the niche the wall stays all glass so the farmer can see the second villager. Inside, potting tables with flower pots along the long walls. Outside, planters with flowers, lamp posts along the path, flower beds, a bench and a rain barrel."
+      },
+      {
+        "name": "Glass roof with ridge",
+        "text": "Glass roof with five rafters of dark oak stairs pointing to the ridge. On the ridge a beam with cresting of iron bars and lanterns at the ends. Below it three hanging lanterns."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "With a farm the technology matters most. That is why the extended version changes nothing inside, but gives the greenhouse a frame so it looks like a garden rather than a glass box."
+      },
+      {
+        "titel": "Clear view to the niche",
+        "text": "The farmer has to be able to see the second villager. That is why the wall in front of the niche is all glass at the bottom, with no post and no stone base. In the base version a wooden post accidentally stood there; that has been fixed there too."
+      },
+      {
+        "titel": "Planters",
+        "text": "A planter is a row of podzol one layer above the ground with open dark oak trapdoors in front. The flowers go on top of the podzol."
+      },
+      {
+        "titel": "Cresting",
+        "text": "The cresting on the ridge is a row of iron bars. They connect to each other into a continuous grille. Fence posts with lanterns stand at the ends."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline). The farm can keep running meanwhile."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "glass"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "stone bricks and smooth stone"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak)",
+        "hinweis": "posts, beams, rafters, planters, tables"
+      },
+      {
+        "name": "Podzol",
+        "quelle": "Giant taiga or mined with silk touch",
+        "hinweis": "soil for the planters"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "hoppers, lanterns, cresting, rain barrel"
+      },
+      {
+        "name": "Dirt",
+        "quelle": "Surface",
+        "hinweis": "turned into farmland with a hoe"
+      },
+      {
+        "name": "Flowers and plants",
+        "quelle": "Meadows, bone meal on grass",
+        "hinweis": "beds, planters and pots"
+      }
+    ]
+  }
+}
