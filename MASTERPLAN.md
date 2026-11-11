@@ -67,7 +67,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 |---|---|---|---|---|
 | `eiffelturm` | Eiffelturm (1:3) | 43 × 43 | 112 | 7.600 |
 | `leuchtturm` | Leuchtturm | Ø 17 | 65 | 2.600 |
-| `villa-am-wasser` | Villa am Wasser mit Pool und Wasser-Aufzug | 27 × 27 | 15 | 2.700 |
+| `villa-am-wasser` | Villa am Wasser mit Pool und Wasser-Aufzug, dazu Ausbau-Version (3.223 Blöcke, 16 Ebenen) und Umbau | 27 × 27 | 15 | 2.700 |
 | `villa-modern` | Moderne Villa | 29 × 23 | 12 | 2.000 |
 | `villa-mediterran` | Mediterrane Villa | 27 × 27 | 16 | 3.750 |
 | `villa-gruenderzeit` | Gründerzeit-Villa mit Turm | 21 × 15 + Turm | 38 | 2.750 |
@@ -165,6 +165,22 @@ Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne
 - **Echte Blockzustände:** Treppen, Stufen, Falltüren, Türen und Betten mit Richtung und Hälfte, damit die Details im Spiel genau so stehen wie geplant.
 - **Abnahme durch Mario:** Vor dem Veröffentlichen gibt es Bilder von allen vier Seiten, von oben und als Schnitt durch die Innenräume.
 - **Reihenfolge:** Pilot ist die Villa am Wasser (Leitbild: modern, hell, luxuriös am Wasser), danach die übrigen nach und nach.
+
+**Umsetzung (Stand 11.11.2026, Pilot freigegeben und online):**
+
+| Was | Wo |
+| --- | --- |
+| Ausbau-Version als eigener Ordner mit `build.json` (nur Abweichungen, Rest kommt aus der Grundversion) und `model.json` | `builds/<id>/ausbau/` |
+| Erzeuger-Skript der Villa (Modell neu erzeugen) | `tools/ausbau_villa_am_wasser.py` |
+| Fassungen und Umbau berechnen | `tools/varianten.py`, aufgerufen von `tools/build_site.py` |
+| Daten für die Website | `data/builds/<id>--ausbau.json`, `data/builds/<id>--umbau.json` |
+| Downloads | `downloads/<id>/<id>-ausbau.litematic`, `.schem`, `-ausbau-teileliste.csv`, `-umbau-liste.csv` |
+| Seite | `…/bau/<id>/?fassung=ausbau` bzw. `?fassung=umbau`, Schalter oben auf der Bauplan-Seite, Vorher-Nachher-Regler |
+| Echte Blockformen (Treppen, Stufen, Falltüren, Türen, Scheiben, Zäune, Laternen, Pflanzen …) | `tools/vorschau.py` (Bilder) und `site/js/render.js` (3D-Ansicht), beide lesen die Zustände aus der Minecraft-ID |
+
+- **Umbau:** Beide Modelle liegen mit derselben Ecke Nordwest unten übereinander. Zuerst Abbau-Schritte von oben nach unten (rot umrandet), dann nur die neuen Blöcke von unten nach oben (gelb umrandet). Was gleich bleibt, ist blass und zählt nicht mit. Bei der Villa ändert sich viel: 2.183 Blöcke abbauen, 2.710 neu (Neubau: 3.223).
+- **Exporte:** Glasscheiben, Eisengitter, Zäune und Mauern bekommen beim Export ihre Verbindungen zu den Nachbarn (north/east/south/west), weil Litematica und WorldEdit sie beim Einfügen nicht neu berechnen. Das gilt für alle Baupläne.
+- Karten auf der Website zeigen „+ Ausbau“, wenn es eine Ausbau-Version gibt.
 
 **Wichtige Änderung gegenüber heute:** Die bisherigen Modelle kennen keine **Blockrichtungen** (wohin eine Treppe zeigt, obere oder untere Stufe). Für echte Genauigkeit wird jeder Bau einmal in einer Kreativ-Testwelt nachgebaut oder geprüft und als `.litematic` exportiert. Diese Datei ist ab dann die Quelle für alles andere. Dabei wird jeder Bauplan automatisch einmal real getestet.
 

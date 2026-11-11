@@ -60,7 +60,7 @@ def art(bid, name):
         return 'pot'
     if bid in ('lantern', 'soul_lantern'):
         return 'lantern'
-    if bid in ('end_rod', 'lightning_rod', 'chain', 'bamboo', 'torch', 'soul_torch', 'ladder'):
+    if bid in ('end_rod', 'lightning_rod', 'chain', 'bamboo', 'ladder') or bid.endswith('torch'):
         return 'rod'
     if bid in ('campfire', 'soul_campfire'):
         return 'campfire'

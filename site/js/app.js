@@ -1,4 +1,4 @@
-import { prepare, draw, partIcon, shapeOf, VIEWS } from './render.js';
+import { prepare, draw, partIcon } from './render.js';
 
 const REPO = 'https://github.com/Savox76/minecraft-tools';
 const BASE = document.querySelector('meta[name="site-base"]')?.content || '/';
@@ -59,7 +59,7 @@ async function ladeBau(id) {
   if (!builds.has(id)) builds.set(id, fetch(`${BASE}data/builds/${id}.json?v=${V}`).then((r) => r.json()));
   return builds.get(id);
 }
-const farben = () => ({ fadeTo: cssv('--sheet'), highlight: cssv('--hl'), ground: cssv('--sheet-2'), gridLine: cssv('--line') });
+const farben = () => ({ fadeTo: cssv('--sheet'), highlight: cssv('--hl'), highlightWeg: cssv('--weg'), ground: cssv('--sheet-2'), gridLine: cssv('--line') });
 
 /* ---------- Neu zeichnen bei Größe/Thema ---------- */
 let redrawers = [];
@@ -102,7 +102,7 @@ function bauKarte(b) {
   return `<a class="karte" href="${url('bau', b.id)}" data-thumb="${b.id}">
     <div class="bild"><canvas role="img" aria-label="${esc(tr(`Minecraft-Bauplan ${titel}, fertiges Bauwerk`, `Minecraft build ${titel}, finished`))}"></canvas></div>
     <div class="text">
-      <div class="chips">${editionen(b.edition)}${(b.plugins || []).some((x) => x.stufe === 'benoetigt') ? `<span class="marker stufe-benoetigt">${tr('Plugin nötig', 'Plugin needed')}</span>` : ''}${b.status === 'entwurf' ? `<span class="marker entwurf">${tr('Entwurf', 'Draft')}</span>` : ''}</div>
+      <div class="chips">${editionen(b.edition)}${(b.plugins || []).some((x) => x.stufe === 'benoetigt') ? `<span class="marker stufe-benoetigt">${tr('Plugin nötig', 'Plugin needed')}</span>` : ''}${b.status === 'entwurf' ? `<span class="marker entwurf">${tr('Entwurf', 'Draft')}</span>` : ''}${(b.varianten || []).length ? `<span class="marker ausbau">${tr('+ Ausbau', '+ Extended')}</span>` : ''}</div>
       <h3>${esc(titel)}</h3>
       <p>${esc(lo(b, 'beschreibung'))}</p>
       <div class="fakten">${punkte(b.schwierigkeit)}<span><b>${fmt(b.bloecke)}</b> ${tr('Blöcke', 'blocks')}</span><span><b>${b.schritte}</b> ${tr('Schritte', 'steps')}</span><span>${stunden(b.bauzeit_stunden)}</span></div>
@@ -491,20 +491,23 @@ function ebenePlan(cv, P, y, { maxW = 720, sicht = () => 2, hover = null } = {})
     if (i <= X) { g.beginPath(); g.moveTo(pad + i * cs + .5, pad); g.lineTo(pad + i * cs + .5, pad + Z * cs); g.stroke(); }
     if (i <= Z) { g.beginPath(); g.moveTo(pad, pad + i * cs + .5); g.lineTo(pad + X * cs, pad + i * cs + .5); g.stroke(); }
   }
-  const neu = [];
+  const neu = [], weg = [];
   for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
     const i = grid[at(x, y, z)]; if (i < 0) continue;
     const st = sicht(i, x, z); if (!st) continue;
-    const p = pal[i]; const small = /thin|pane|panel|plate|mob/.test(p.shape);
+    const p = pal[i]; const small = /rod|lantern|pane|fence|wall|door|gate|plate|button|pot|plant|stand|mob/.test(p.shape);
     const ins = small ? Math.max(1, Math.round(cs * .22)) : 1;
     g.globalAlpha = p.context ? .3 : st === 1 ? .38 : 1; g.fillStyle = p.color;
     g.fillRect(pad + x * cs + ins, pad + z * cs + ins, cs - ins * 2 + 1, cs - ins * 2 + 1);
     g.globalAlpha = 1;
     if (st === 3) neu.push([x, z]);
+    if (st === 4) weg.push([x, z]);
   }
-  if (neu.length) {   // neue Blöcke gelb umrandet, wie in der 3D-Ansicht
-    g.strokeStyle = cssv('--hl'); g.lineWidth = Math.max(1.5, cs * .14);
-    for (const [x, z] of neu) g.strokeRect(pad + x * cs + 1.5, pad + z * cs + 1.5, cs - 3, cs - 3);
+  // neue Blöcke gelb, abzubauende rot umrandet, wie in der 3D-Ansicht
+  for (const [liste, farbe] of [[neu, cssv('--hl')], [weg, cssv('--weg')]]) {
+    if (!liste.length) continue;
+    g.strokeStyle = farbe; g.lineWidth = Math.max(1.5, cs * .14);
+    for (const [x, z] of liste) g.strokeRect(pad + x * cs + 1.5, pad + z * cs + 1.5, cs - 3, cs - 3);
   }
   const cx = (X - 1) / 2, cz = (Z - 1) / 2;
   g.fillStyle = cssv('--ink-mute'); g.font = `10px ${cssv('--f-mono')}`; g.textAlign = 'center'; g.textBaseline = 'middle';
@@ -523,23 +526,75 @@ function planAblesen(P, y, x, z) {
 }
 
 /* ---------- Bauplan-Detail ---------- */
+// Modell auf X × Y × Z vergrößern (leere Zellen dazu), damit zwei Fassungen genau übereinander liegen
+function auffuellen(m, X, Y, Z) {
+  const L = m.layers.map((e) => e.map((r) => r.padEnd(X, '.')).concat(Array(Z - e.length).fill('.'.repeat(X))));
+  while (L.length < Y) L.push(Array(Z).fill('.'.repeat(X)));
+  return { ...m, layers: L, size: { x: X, y: Y, z: Z } };
+}
+// Vorher-Nachher: beide Fassungen im selben Maßstab, ein Regler schiebt die Grenze
+function vergleich(el, vorher, nachher) {
+  const X = Math.max(vorher.size.x, nachher.size.x), Y = Math.max(vorher.size.y, nachher.size.y), Z = Math.max(vorher.size.z, nachher.size.z);
+  const PV = prepare(auffuellen(vorher, X, Y, Z)), PN = prepare(auffuellen(nachher, X, Y, Z));
+  el.innerHTML = `<div class="vg-buehne bauplan"><canvas class="vg-nach" role="img" aria-label="${tr('Ausbau-Version', 'Extended version')}"></canvas>
+    <div class="vg-vor bauplan"><canvas role="img" aria-label="${tr('Grundversion', 'Base version')}"></canvas></div><div class="vg-linie" aria-hidden="true"></div>
+    <span class="vg-label links">${tr('Grundversion', 'Base version')}</span><span class="vg-label rechts">${tr('Ausbau', 'Extended')}</span></div>
+    <input class="leiste" type="range" min="0" max="100" value="50" aria-label="${tr('Vergleich verschieben: links Grundversion, rechts Ausbau', 'Move the comparison: left base version, right extended')}">`;
+  const buehne = el.querySelector('.vg-buehne'), vor = el.querySelector('.vg-vor'), linie = el.querySelector('.vg-linie'), regler = el.querySelector('input');
+  const setze = (v) => { regler.value = v; vor.style.clipPath = `inset(0 ${100 - v}% 0 0)`; linie.style.left = v + '%'; };
+  const paint = () => {
+    if (!el.isConnected) return;
+    const w = buehne.clientWidth, h = Math.max(260, Math.min(w * .62, 520));
+    const o = { width: w, maxHeight: h, rot: 0, ...farben(), fadeTo: cssv('--plan'), ground: null };
+    draw(el.querySelector('.vg-nach'), PN, o); draw(vor.querySelector('canvas'), PV, o);
+    setze(+regler.value);
+  };
+  regler.oninput = () => setze(+regler.value);
+  let zieh = false;
+  const nachZeiger = (e) => { const r = buehne.getBoundingClientRect(); setze(Math.round(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * 100)); };
+  buehne.addEventListener('pointerdown', (e) => { zieh = true; buehne.setPointerCapture(e.pointerId); nachZeiger(e); });
+  buehne.addEventListener('pointermove', (e) => zieh && nachZeiger(e));
+  buehne.addEventListener('pointerup', () => { zieh = false; });
+  buehne.addEventListener('pointercancel', () => { zieh = false; });
+  paint.vergleich = true; onRedraw(paint); paint();
+}
+
 async function bauSeite(id, tab) {
   const k = await katalog();
   const kb = k.builds.find((b) => b.id === id);
   if (!kb) return nichtGefunden();
-  const d = await ladeBau(id);
+  const d0 = await ladeBau(id);
+  const VAR = d0.varianten || [];
+  let fassung = new URLSearchParams(location.search).get('fassung');
+  if (!VAR.some((v) => v.id === fassung)) fassung = null;
+  const d = fassung ? await ladeBau(`${id}--${fassung}`) : d0;
+  const umbau = fassung === 'umbau';
+  const sk = fassung ? `${id}--${fassung}` : id;   // eigener Fortschritt pro Fassung
+  const bloecke = d.teileliste.reduce((a, t) => a + t.n, 0);
+  const abbau = (d.abbau || []).reduce((a, t) => a + t.n, 0);
   const tabs = [['anleitung', tr('Anleitung', 'Instructions')], ['teile', tr('Teileliste', 'Parts list')], ['ebenen', tr('Ebenen', 'Layers')], ['downloads', 'Downloads']];
   const HASH = { teile: tr('teile', 'parts'), ebenen: tr('ebenen', 'layers'), downloads: 'downloads' };
   tab = Object.keys(HASH).find((x) => HASH[x] === tab || x === tab) || tab;
   tab = tabs.some((t) => t[0] === tab) ? tab : 'anleitung';
+  const fLink = (f) => url('bau', id) + (f ? '?fassung=' + f : '') + location.hash;
+  const fassungen = VAR.length ? `<nav class="fassungen" aria-label="${tr('Fassung', 'Version')}">
+      <a href="${fLink(null)}"${!fassung ? ' aria-current="page"' : ''}><b>${tr('Grundversion', 'Base version')}</b><small>${fmt(kb.bloecke)} ${tr('Blöcke', 'blocks')}</small></a>
+      ${VAR.map((v) => `<a href="${fLink(v.id)}"${fassung === v.id ? ' aria-current="page"' : ''}><b>${esc(lo(v, 'titel'))}</b><small>${v.id === 'umbau'
+        ? tr(`${fmt(v.abbau)} abbauen, ${fmt(v.bloecke)} neu`, `${fmt(v.abbau)} to remove, ${fmt(v.bloecke)} new`) : `${fmt(v.bloecke)} ${tr('Blöcke', 'blocks')}`}</small></a>`).join('')}
+    </nav>` : '';
   main.innerHTML = `<section class="detail-kopf"><div class="wrap">
     <div class="krumen"><a href="${url('liste')}">${tr('Baupläne', 'Builds')}</a> / ${esc(kats(k)[d.kategorie] || '')}</div>
-    <h1>${esc(lo(d, 'titel'))}</h1>
+    <h1>${esc(lo(d, 'titel'))}${fassung ? ` <span class="fassung-titel">${esc(lo(VAR.find((v) => v.id === fassung), 'titel'))}</span>` : ''}</h1>
+    ${fassungen}
     <p class="lede">${esc(lo(d, 'beschreibung'))}</p>
+    ${fassung && d.leitbild ? `<p class="leitbild"><b>${tr('Leitbild', 'Guiding idea')}:</b> ${esc(lo(d, 'leitbild'))}</p>` : ''}
+    ${umbau ? `<div class="hinweis umbau-hinweis"><span aria-hidden="true">🔨</span><span>${tr(`Für alle, die die Grundversion schon gebaut haben: Zuerst kommen die Schritte zum Abbauen (rot umrandet, von oben nach unten), danach nur die neuen Blöcke (gelb umrandet). Was bleibt, ist blass zu sehen. Hier ändert sich viel: ${fmt(abbau)} Blöcke abbauen, ${fmt(bloecke)} neu setzen. Neu bauen kostet ${fmt(VAR.find((v) => v.id !== 'umbau')?.bloecke || 0)} Blöcke.`,
+      `For everyone who already built the base version: first come the steps to take down (red outline, from the top down), then only the new blocks (yellow outline). What stays is shown faded. A lot changes here: ${fmt(abbau)} blocks to remove, ${fmt(bloecke)} to place. Building from scratch takes ${fmt(VAR.find((v) => v.id !== 'umbau')?.bloecke || 0)} blocks.`)}</span></div>` : ''}
     <dl class="specs">
       <div><dt>${tr('Schwierigkeit', 'Difficulty')}</dt><dd>${punkte(d.schwierigkeit)}</dd></div>
-      <div><dt>${tr('Blöcke', 'Blocks')}</dt><dd>${fmt(kb.bloecke)}</dd></div>
-      <div><dt>${tr('Schritte', 'Steps')}</dt><dd>${kb.schritte}</dd></div>
+      <div><dt>${umbau ? tr('Neue Blöcke', 'New blocks') : tr('Blöcke', 'Blocks')}</dt><dd>${fmt(bloecke)}</dd></div>
+      ${umbau ? `<div><dt>${tr('Abbauen', 'Remove')}</dt><dd>${fmt(abbau)}</dd></div>` : ''}
+      <div><dt>${tr('Schritte', 'Steps')}</dt><dd>${d.schritte.length}</dd></div>
       <div><dt>${tr('Grundfläche', 'Footprint')}</dt><dd>${esc(lo(d, 'grundflaeche'))}</dd></div>
       <div><dt>${tr('Höhe', 'Height')}</dt><dd>${d.model.size.y} ${tr('Ebenen', 'layers')}</dd></div>
       <div><dt>${tr('Bauzeit', 'Build time')}</dt><dd>${stunden(d.bauzeit_stunden)}</dd></div>
@@ -547,22 +602,29 @@ async function bauSeite(id, tab) {
       <div><dt>Plugins</dt><dd>${(d.plugins || []).length ? (d.plugins || []).map((x) => `${esc(pluginRef(k, x.id).name)} <small>(${STUFE[x.stufe].toLowerCase()})</small>`).join(', ') : tr('keine nötig', 'none needed')}</dd></div>
     </dl>
     ${d.status === 'entwurf' ? `<div class="hinweis"><span aria-hidden="true">⚠️</span><span><b>${tr('Entwurf', 'Draft')}:</b> ${esc(lo(d, 'hinweis') || '')}</span></div>` : ''}
+    ${fassung ? `<h2 class="vg-titel">${tr('Vorher und nachher', 'Before and after')}</h2><div class="vergleich" id="vergleich"></div>` : ''}
     ${pluginKasten(k, d.plugins)}
     <div class="reiter" role="tablist">${tabs.map(([t, n]) => `<button role="tab" aria-selected="${t === tab}" data-tab="${t}">${n}</button>`).join('')}</div>
   </div></section>
   <section class="tafel"><div class="wrap" id="tafel"></div></section>`;
+  if (fassung) {
+    const nachher = umbau ? (await ladeBau(`${id}--${VAR.find((v) => v.id !== 'umbau').id}`)).model : d.model;
+    vergleich(main.querySelector('#vergleich'), d0.model, nachher);
+  }
   main.querySelectorAll('.reiter button').forEach((b) => b.addEventListener('click', () => {
-    history.replaceState(null, '', url('bau', id) + (b.dataset.tab === 'anleitung' ? '' : '#' + HASH[b.dataset.tab]));
+    history.replaceState(null, '', url('bau', id) + location.search + (b.dataset.tab === 'anleitung' ? '' : '#' + HASH[b.dataset.tab]));
     sprachLinks();
+    main.querySelectorAll('.fassungen a').forEach((a) => { const u = new URL(a.href); u.hash = location.hash; a.href = u.pathname + u.search + u.hash; });
     main.querySelectorAll('.reiter button').forEach((x) => x.setAttribute('aria-selected', x === b));
     zeigeTab(b.dataset.tab);
   }));
   const P = prepare(d.model, { schnitt: d.ansicht?.schnitt });
+  const PV = d.model_vorher ? prepare(d.model_vorher) : null;
   const pal = P.pal;
   const tafel = main.querySelector('#tafel');
   const zaehlt = (p) => !(p.flags || []).some((f) => ['vorhanden', 'kein-block', 'zweiter-teil'].includes(f));
   function zeigeTab(t) {
-    redrawers = []; keyHandler = null;
+    redrawers = redrawers.filter((f) => f.vergleich); keyHandler = null;
     if (t === 'anleitung') anleitungTab(tafel, d, P);
     if (t === 'teile') teileTab(tafel, d, pal);
     if (t === 'ebenen') ebenenTab(tafel, d, P);
@@ -572,10 +634,13 @@ async function bauSeite(id, tab) {
 
   function anleitungTab(el, d, P) {
     const S = d.schritte, n = S.length;
-    const stepOf = schrittKarte(P, S);
-    const keyDone = 'erledigt.' + d.id;
+    // Umbau: Abbau-Schritte gehören zum Modell „vorher“, alle anderen zum fertigen Modell
+    const stepOf = schrittKarte(P, S.map((s) => (s.weg ? { c: [] } : s)));
+    const wegOf = PV ? schrittKarte(PV, S.map((s) => (s.weg ? s : { c: [] }))) : null;
+    const istWeg = () => !!S[cur].weg;
+    const keyDone = 'erledigt.' + sk;
     const done = new Set(store.get(keyDone, []));
-    let cur = Math.min(store.get('schritt.' + d.id, 0), n - 1), rot = 0, alles = false;
+    let cur = Math.min(store.get('schritt.' + sk, 0), n - 1), rot = 0, alles = false;
     el.innerHTML = `<div class="schritt-raster">
       <div class="buehne bauplan">
         <div class="nummer" id="nr" aria-live="polite"></div>
@@ -588,7 +653,7 @@ async function bauSeite(id, tab) {
         <div class="blick"><span id="blick"></span><span class="dreh-hinweis">${matchMedia('(pointer: coarse)').matches ? tr('Wischen zum Drehen', 'Swipe to rotate') : tr('Ziehen zum Drehen', 'Drag to rotate')}</span></div>
       </div>
       <div class="plan-kasten">
-        <div class="plan-kopf"><h3 id="plan-titel"></h3><span class="eyebrow">${tr('Draufsicht, Norden oben, gelb umrandet ist neu', 'Top view, north up, yellow outline is new')}</span></div>
+        <div class="plan-kopf"><h3 id="plan-titel"></h3><span class="eyebrow" id="plan-info"></span></div>
         <div class="plan-huelle"><canvas id="plan" aria-label="${tr('Draufsicht der Ebene dieses Schritts', 'Top view of this step’s layer')}"></canvas></div>
         <div class="ablesen" id="plan-les">${tr('Zeige oder tippe auf ein Feld für Block und Position.', 'Point at or tap a square for block and position.')}</div>
       </div>
@@ -610,19 +675,28 @@ async function bauSeite(id, tab) {
     let planGeo = null, planHover = null;
     const zustand = (x, y, z) => {
       if (alles) return 2;
+      if (istWeg()) { const s = wegOf[PV.at(x, y, z)]; return s < 0 ? 2 : s < cur ? 0 : s === cur ? 4 : 2; }
       const s = stepOf[P.at(x, y, z)];
       if (s < 0) return 1;
       return s < cur ? 1 : s === cur ? 3 : 0;
     };
+    const modell = () => (istWeg() && !alles ? PV : P);
     const paint = () => {
       const w = cv.parentElement.clientWidth - 2;
       const h = Math.max(320, Math.min(window.innerHeight * .62, 560));
-      draw(cv, P, { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), fadeTo: cssv('--plan'), ground: null, state: (i, x, y, z) => zustand(x, y, z) });
+      draw(cv, modell(), { width: w, maxHeight: h, rot, fit: true, padTop: 70, ...farben(), fadeTo: cssv('--plan'), ground: null, state: (i, x, y, z) => zustand(x, y, z) });
       el.querySelector('#blick').textContent = tr(`Blick von ${RICHTUNG[rot]}`, `View from the ${RICHTUNG[rot]}`);
       paintPlan();
     };
     const paintPlan = () => {
       const y = S[cur].y[0];
+      if (istWeg()) {
+        planGeo = ebenePlan(pc, PV, y, { maxW: 760, hover: planHover, sicht: (i, x, z) => {
+          const st = wegOf[PV.at(x, y, z)];
+          return st < 0 ? 2 : st < cur ? 0 : st === cur ? 4 : 2;
+        } });
+        return;
+      }
       planGeo = ebenePlan(pc, P, y, { maxW: 760, hover: planHover, sicht: (i, x, z) => {
         const st = stepOf[P.at(x, y, z)];
         if (st < 0) return 2;               // Gelände, schon vorhanden
@@ -633,7 +707,7 @@ async function bauSeite(id, tab) {
       const r = pc.getBoundingClientRect();
       const x = Math.floor((e.clientX - r.left - planGeo.pad) / planGeo.cs), z = Math.floor((e.clientY - r.top - planGeo.pad) / planGeo.cs);
       planHover = x >= 0 && z >= 0 && x < P.X && z < P.Z ? { x, z } : null; paintPlan();
-      if (planHover) el.querySelector('#plan-les').innerHTML = planAblesen(P, S[cur].y[0], x, z);
+      if (planHover) el.querySelector('#plan-les').innerHTML = planAblesen(istWeg() ? PV : P, S[cur].y[0], x, z);
     });
     pc.addEventListener('pointerleave', () => { planHover = null; paintPlan(); });
     // Drehen: Knöpfe, Ziehen mit Maus oder Finger (alle 60 px eine Vierteldrehung), Tasten Q und E
@@ -649,14 +723,18 @@ async function bauSeite(id, tab) {
     cv.addEventListener('pointerup', loslassen); cv.addEventListener('pointercancel', loslassen);
     const update = () => {
       const s = S[cur];
-      store.set('schritt.' + d.id, cur);
+      store.set('schritt.' + sk, cur);
+      const weg = istWeg(), tp = weg ? PV.pal : pal;
+      el.querySelector('#plan-info').textContent = weg ? tr('Draufsicht, Norden oben, rot umrandet: abbauen', 'Top view, north up, red outline: remove')
+        : tr('Draufsicht, Norden oben, gelb umrandet ist neu', 'Top view, north up, yellow outline is new');
       el.querySelector('#nr').innerHTML = `${cur + 1}<small>${tr('von', 'of')} ${n}</small>`;
       const zahl = new Map();
       for (let j = 3; j < s.c.length; j += 4) zahl.set(s.c[j], (zahl.get(s.c[j]) || 0) + 1);
-      const teile = [...zahl].filter(([i]) => zaehlt(pal[i]) || (pal[i].flags || []).includes('kein-block')).sort((a, b) => b[1] - a[1]);
-      const summe = teile.filter(([i]) => zaehlt(pal[i])).reduce((a, [, c]) => a + c, 0);
-      el.querySelector('#teile').innerHTML = `<h3>${tr('Neue Teile in diesem Schritt', 'New parts in this step')} <span>${summe} ${tr('Blöcke', 'blocks')}</span></h3>
-        <div class="teile">${teile.map(([i, c]) => `<div class="teil" title="${esc(bn(pal[i]))}"><img src="${partIcon(pal[i])}" alt=""><b>×${c}</b><span>${esc(bn(pal[i]))}</span></div>`).join('')}</div>`;
+      const teile = [...zahl].filter(([i]) => zaehlt(tp[i]) || (tp[i].flags || []).includes('kein-block')).sort((a, b) => b[1] - a[1]);
+      const summe = teile.filter(([i]) => zaehlt(tp[i])).reduce((a, [, c]) => a + c, 0);
+      el.querySelector('#teile').classList.toggle('abbau', weg);
+      el.querySelector('#teile').innerHTML = `<h3>${weg ? tr('Abbauen in diesem Schritt', 'Remove in this step') : tr('Neue Teile in diesem Schritt', 'New parts in this step')} <span>${summe} ${tr('Blöcke', 'blocks')}</span></h3>
+        <div class="teile">${teile.map(([i, c]) => `<div class="teil" title="${esc(bn(tp[i]))}"><img src="${partIcon(tp[i])}" alt=""><b>×${c}</b><span>${esc(bn(tp[i]))}</span></div>`).join('')}</div>`;
       const ab = (lo(d, 'abschnitte') || [])[s.a] || {};
       const teil = s.t && s.t[1] > 1 ? tr(` · Teil ${s.t[0]} von ${s.t[1]}`, ` · part ${s.t[0]} of ${s.t[1]}`) : '';
       const ebene = ebeneText(s.y[0], s.y[1]) + teil;
@@ -695,17 +773,22 @@ async function bauSeite(id, tab) {
 
   function teileTab(el, d, pal) {
     const gesamt = d.teileliste.reduce((a, t) => a + t.n, 0);
+    const zeile = (p, n) => `<tr><td><div class="block-zelle"><img src="${partIcon(p, 30)}" alt=""><div>${esc(bn(p))}<small>${esc((p.block || '').replace(/\[.*$/, ''))}</small></div></div></td><td class="zahl">${fmt(n)}</td><td class="zahl">${stacks(n)}</td></tr>`;
+    const abbauListe = PV && d.abbau ? `<h2 style="margin-bottom:12px">${tr('Abbauen', 'Remove')}</h2>
+        <div class="tabelle-huelle" style="margin-bottom:26px"><table><thead><tr><th>Block</th><th class="zahl">${tr('Anzahl', 'Count')}</th><th class="zahl">Stacks</th></tr></thead><tbody>
+        ${d.abbau.map((t) => zeile(PV.pal[t.i], t.n)).join('')}
+        <tr><td><b>${tr('Summe', 'Total')}</b></td><td class="zahl"><b>${fmt(abbau)}</b></td><td class="zahl">${stacks(abbau)}</td></tr></tbody></table></div>` : '';
     el.innerHTML = `<div class="zwei-spalten">
-      <div><h2 style="margin-bottom:12px">${tr('Gesamt-Teileliste', 'Complete parts list')}</h2>
+      <div>${abbauListe}<h2 style="margin-bottom:12px">${umbau ? tr('Neu setzen', 'Place new') : tr('Gesamt-Teileliste', 'Complete parts list')}</h2>
         <div class="tabelle-huelle"><table><thead><tr><th>Block</th><th class="zahl">${tr('Anzahl', 'Count')}</th><th class="zahl">Stacks</th></tr></thead><tbody>
         ${d.teileliste.map((t) => { const p = pal[t.i]; return `<tr><td><div class="block-zelle"><img src="${partIcon(p, 30)}" alt=""><div>${esc(bn(p))}<small>${esc((p.block || '').replace(/\[.*$/, ''))}</small></div></div></td><td class="zahl">${fmt(t.n)}</td><td class="zahl">${stacks(t.n)}</td></tr>`; }).join('')}
         <tr><td><b>${tr('Summe', 'Total')}</b></td><td class="zahl"><b>${fmt(gesamt)}</b></td><td class="zahl">${stacks(gesamt)}</td></tr>
         </tbody></table></div></div>
-      <div><h2 style="margin-bottom:12px">${tr('Was deine Farmen liefern müssen', 'What your farms need to deliver')}</h2>
+      <div>${umbau ? '' : `<h2 style="margin-bottom:12px">${tr('Was deine Farmen liefern müssen', 'What your farms need to deliver')}</h2>
         <div class="tabelle-huelle"><table><thead><tr><th>${tr('Rohstoff', 'Material')}</th><th class="zahl">${tr('Menge', 'Amount')}</th></tr></thead><tbody>
         ${(lo(d, 'rohstoffe') || []).map((r, i) => `<tr><td><b>${esc(r.name)}</b><div style="font-size:.85rem;color:var(--ink-soft)">${esc(r.quelle)} · ${esc(r.hinweis)}</div></td><td class="zahl">${fmt(d.rohstoffe[i].menge)}</td></tr>`).join('')}
         </tbody></table></div>
-        ${d.schmelzvorgaenge ? `<div class="tipp" style="margin-top:14px"><b>${tr('Ofen-Arbeit', 'Furnace work')}</b>${tr(`${fmt(d.schmelzvorgaenge)} Schmelzvorgänge, also rund ${fmt(Math.ceil(d.schmelzvorgaenge / 20))} getrocknete Seetangblöcke oder ${fmt(Math.ceil(d.schmelzvorgaenge / 8))} Kohle.`, `${fmt(d.schmelzvorgaenge)} smelting operations, about ${fmt(Math.ceil(d.schmelzvorgaenge / 20))} dried kelp blocks or ${fmt(Math.ceil(d.schmelzvorgaenge / 8))} coal.`)}</div>` : ''}
+        `}${!umbau && d.schmelzvorgaenge ? `<div class="tipp" style="margin-top:14px"><b>${tr('Ofen-Arbeit', 'Furnace work')}</b>${tr(`${fmt(d.schmelzvorgaenge)} Schmelzvorgänge, also rund ${fmt(Math.ceil(d.schmelzvorgaenge / 20))} getrocknete Seetangblöcke oder ${fmt(Math.ceil(d.schmelzvorgaenge / 8))} Kohle.`, `${fmt(d.schmelzvorgaenge)} smelting operations, about ${fmt(Math.ceil(d.schmelzvorgaenge / 20))} dried kelp blocks or ${fmt(Math.ceil(d.schmelzvorgaenge / 8))} coal.`)}</div>` : ''}
         <h2 style="margin:26px 0 12px">${tr('Bauabschnitte', 'Build sections')}</h2>
         ${(lo(d, 'abschnitte') || []).map((a, i) => `<div class="abschnitt-info" style="margin-bottom:8px"><span class="eyebrow">${ebeneText(d.abschnitte[i].von, d.abschnitte[i].bis)}</span><h3 style="margin-top:4px">${esc(a.name)}</h3><p>${esc(a.text)}</p></div>`).join('')}
       </div></div>`;
@@ -753,9 +836,10 @@ async function bauSeite(id, tab) {
     const info = {
       litematic: ['Litematica', tr('Für Java mit der Mod Litematica: Der Bauplan erscheint als Geisterblöcke im Spiel. Datei in den Ordner .minecraft/schematics legen.', 'For Java with the Litematica mod: the build appears as ghost blocks in the game. Put the file into the .minecraft/schematics folder.')],
       schem: ['WorldEdit', tr('Für WorldEdit oder FastAsyncWorldEdit auf dem Server: in den Ordner plugins/WorldEdit/schematics legen, dann //schem load.', 'For WorldEdit or FastAsyncWorldEdit on the server: put it into the plugins/WorldEdit/schematics folder, then //schem load.')],
-      csv: [tr('Teileliste', 'Parts list'), tr('Alle Blöcke mit Anzahl und Stacks, öffnet sich in Excel, LibreOffice oder Google Tabellen.', 'All blocks with count and stacks, opens in Excel, LibreOffice or Google Sheets.')],
+      csv: [tr('Teileliste', 'Parts list'), umbau ? tr('Was abgebaut und was neu gesetzt wird, mit Anzahl und Stacks. Öffnet sich in Excel, LibreOffice oder Google Tabellen.', 'What to remove and what to place, with count and stacks. Opens in Excel, LibreOffice or Google Sheets.')
+        : tr('Alle Blöcke mit Anzahl und Stacks, öffnet sich in Excel, LibreOffice oder Google Tabellen.', 'All blocks with count and stacks, opens in Excel, LibreOffice or Google Sheets.')],
     };
-    el.innerHTML = `${d.downloads.length ? `<div class="dl-raster">${d.downloads.map((x) => `<div class="dl"><span class="eyebrow">${info[x.art][0]}</span><span class="endung">.${x.art}</span><p>${info[x.art][1]}</p><a class="btn" href="${BASE}downloads/${d.id}/${x.datei}" download>${tr('Herunterladen', 'Download')} <span style="font-weight:400;opacity:.75">${(x.groesse / 1024).toFixed(x.groesse < 10240 ? 1 : 0)} KB</span></a></div>`).join('')}</div>` : `<div class="leer">${tr('Downloads werden beim nächsten Aufbau der Seite erzeugt.', 'Downloads are generated on the next site build.')}</div>`}
+    el.innerHTML = `${umbau ? `<div class="hinweis" style="margin-bottom:18px"><span aria-hidden="true">ℹ️</span><span>${tr('Die Litematica- und WorldEdit-Dateien sind die der Ausbau-Version. Setzt du sie an derselben Stelle ein wie die Grundversion (gleiche Ecke Nordwest unten), ersetzen sie das alte Gebäude.', 'The Litematica and WorldEdit files are those of the extended version. If you paste them at the same spot as the base version (same north-west bottom corner), they replace the old building.')}</span></div>` : ''}${d.downloads.length ? `<div class="dl-raster">${d.downloads.map((x) => `<div class="dl"><span class="eyebrow">${info[x.art][0]}</span><span class="endung">.${x.art}</span><p>${info[x.art][1]}</p><a class="btn" href="${BASE}downloads/${d.id}/${x.datei}" download>${tr('Herunterladen', 'Download')} <span style="font-weight:400;opacity:.75">${(x.groesse / 1024).toFixed(x.groesse < 10240 ? 1 : 0)} KB</span></a></div>`).join('')}</div>` : `<div class="leer">${tr('Downloads werden beim nächsten Aufbau der Seite erzeugt.', 'Downloads are generated on the next site build.')}</div>`}
       ${d.status === 'entwurf' ? `<div class="hinweis" style="margin-top:18px"><span aria-hidden="true">⚠️</span><span>${tr('Dieser Bauplan ist ein Entwurf: Die Richtung von Treppen, Türen und Trichtern stimmt in den Dateien eventuell noch nicht. Nach dem Einfügen kurz prüfen.', 'This build is a draft: the direction of stairs, doors and hoppers may not be right in the files yet. Check briefly after pasting.')}</span></div>` : ''}`;
   }
 }
@@ -774,7 +858,7 @@ function sprachLinks() {
   const h = location.hash.replace(/^#/, '');
   document.querySelectorAll('[data-lang]').forEach((l) => {
     const lang = l.dataset.lang;
-    l.href = url(aktuell.art, aktuell.id, lang) + (h && lang !== L ? '#' + (HASH_ANDERS[h] || h) : h ? '#' + h : '');
+    l.href = url(aktuell.art, aktuell.id, lang) + location.search + (h && lang !== L ? '#' + (HASH_ANDERS[h] || h) : h ? '#' + h : '');
   });
 }
 
@@ -827,7 +911,7 @@ document.addEventListener('click', (e) => {
   if (ziel.origin !== location.origin || !ziel.pathname.startsWith(BASE)) return;
   if (/\.(xml|txt|json|png|svg|litematic|schem|csv)$/.test(ziel.pathname)) return;
   if (istEn(decodeURIComponent(ziel.pathname)) !== (L === 'en')) return;
-  if (ziel.pathname === location.pathname && ziel.hash) return;   // Sprungmarken auf derselben Seite
+  if (ziel.pathname === location.pathname && ziel.search === location.search && ziel.hash) return;   // Sprungmarken auf derselben Seite
   e.preventDefault();
   history.pushState(null, '', ziel.pathname + ziel.search + ziel.hash);
   route().then(() => window.scrollTo(0, 0));

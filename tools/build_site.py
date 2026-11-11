@@ -8,6 +8,7 @@ Schreibt nach  _site/ :
   index.html, Styles, Skripte (aus site/)
   data/katalog.json            Übersicht aller Einträge
   data/builds/<id>.json        Modell, Bauschritte, Teileliste
+  data/builds/<id>--<fassung>.json  Ausbau-Version und Umbau (tools/varianten.py)
   data/seiten/<id>.html        Anleitungs-Texte als HTML
   <pfad>/index.html            vorgerenderte Seiten mit Meta-Daten (tools/seiten.py)
   bilder/, sitemap.xml, robots.txt, 404.html
@@ -139,19 +140,65 @@ def teileliste(model):
     return sorted(menge.items(), key=lambda kv: -kv[1])
 
 
+def verbunden(model):
+    """Minecraft-ID pro Position, bei Scheiben, Gittern, Zäunen und Mauern mit den passenden Verbindungen.
+
+    Beim Einfügen (Litematica, //paste) werden Nachbarn nicht neu berechnet. Ohne diese Zustände stünden
+    Glasscheiben und Zäune als einzelne Pfosten da. Was schon Zustände wie north=... hat, bleibt unverändert.
+    """
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from vorschau import lese_block, art
+    pal = model['palette']
+    info = []
+    for p in pal:
+        bid, zust = lese_block(p.get('block') or '')
+        info.append((art(bid, p['name']) if bid else None, bid))
+    g = {(x, y, z): i for x, y, z, i in zellen(model) if exportierbar(pal[i])}
+    voll = lambda a, bid: a in ('full', 'glass') and not bid.endswith('leaves')
+    erg = {}
+    for (x, y, z), i in g.items():
+        a, bid = info[i]
+        spec = pal[i]['block']
+        if a not in ('pane', 'fence', 'wall') or 'north=' in spec:
+            erg[(x, y, z)] = spec
+            continue
+        an = {}
+        for name, dx, dz in (('north', 0, -1), ('south', 0, 1), ('east', 1, 0), ('west', -1, 0)):
+            j = g.get((x + dx, y, z + dz))
+            if j is None:
+                an[name] = False
+                continue
+            na, nbid = info[j]
+            if a == 'pane':
+                an[name] = voll(na, nbid) or na in ('pane', 'wall')
+            elif a == 'fence':
+                holz = lambda b: b != 'nether_brick_fence'
+                an[name] = voll(na, nbid) or na == 'gate' or (na == 'fence' and holz(bid) == holz(nbid))
+            else:
+                an[name] = voll(na, nbid) or na in ('wall', 'pane', 'gate')
+        if a == 'wall':
+            gerade = (an['north'] and an['south'] and not an['east'] and not an['west']) or \
+                     (an['east'] and an['west'] and not an['north'] and not an['south'])
+            props = {k: ('low' if v else 'none') for k, v in an.items()}
+            props['up'] = 'false' if gerade else 'true'
+        else:
+            props = {k: ('true' if v else 'false') for k, v in an.items()}
+        b, alt = block_id(spec)
+        props = {**props, **alt}
+        erg[(x, y, z)] = b + '[' + ','.join(f'{k}={v}' for k, v in sorted(props.items())) + ']'
+    return erg
+
+
 def export_litematic(build, model, pfad):
     from litemapy import Region, BlockState
     s = model['size']
     reg = Region(0, 0, 0, s['x'], s['y'], s['z'])
     cache = {}
-    for x, y, z, i in zellen(model):
-        p = model['palette'][i]
-        if not exportierbar(p):
-            continue
-        if i not in cache:
-            bid, props = block_id(p['block'])
-            cache[i] = BlockState(bid, **props)
-        reg[x, y, z] = cache[i]
+    for (x, y, z), spec in verbunden(model).items():
+        if spec not in cache:
+            bid, props = block_id(spec)
+            cache[spec] = BlockState(bid, **props)
+        reg[x, y, z] = cache[spec]
     schem = reg.as_schematic(name=build['titel'], author=build.get('autor', ''),
                              description=build.get('beschreibung', '')[:200], mc_version=DATA_VERSION)
     schem.save(pfad)
@@ -177,11 +224,7 @@ def export_schem(build, model, pfad):
     W, H, L = s['x'], s['y'], s['z']
     palette = {'minecraft:air': 0}
     ids = [0] * (W * H * L)
-    for x, y, z, i in zellen(model):
-        p = model['palette'][i]
-        if not exportierbar(p):
-            continue
-        spec = p['block']
+    for (x, y, z), spec in verbunden(model).items():
         if spec not in palette:
             palette[spec] = len(palette)
         ids[x + z * W + y * W * L] = palette[spec]
@@ -264,6 +307,32 @@ def main():
     base = urlparse(cfg['site_url']).path or '/'
     alle_builds, docs_html = [], {}
 
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import varianten as VAR
+    varianten_modelle = {}   # (id, variante) -> Modell, für die Vorschaubilder
+
+    def namen_en(model):
+        for p in model['palette']:
+            if p['name'] not in bloecke_en:
+                print(f'  Hinweis: keine englische Bezeichnung für „{p["name"]}“ (tools/i18n/bloecke_en.json)')
+            p['name_en'] = bloecke_en.get(p['name'], p['name'])
+
+    def exportieren(bid, build, model, liste, endung=''):
+        downloads = []
+        if not exporte:
+            return downloads
+        ziel = os.path.join(OUT, 'downloads', bid)
+        os.makedirs(ziel, exist_ok=True)
+        export_litematic(build, model, os.path.join(ziel, f'{bid}{endung}.litematic'))
+        downloads.append({'datei': f'{bid}{endung}.litematic', 'art': 'litematic'})
+        export_schem(build, model, os.path.join(ziel, f'{bid}{endung}.schem'))
+        downloads.append({'datei': f'{bid}{endung}.schem', 'art': 'schem'})
+        export_csv(build, model, liste, os.path.join(ziel, f'{bid}{endung}-teileliste.csv'))
+        downloads.append({'datei': f'{bid}{endung}-teileliste.csv', 'art': 'csv'})
+        for d in downloads:
+            d['groesse'] = os.path.getsize(os.path.join(ziel, d['datei']))
+        return downloads
+
     for bid in sorted(os.listdir(os.path.join(ROOT, 'builds'))):
         ordner = os.path.join(ROOT, 'builds', bid)
         if not os.path.isfile(os.path.join(ordner, 'build.json')):
@@ -271,27 +340,75 @@ def main():
         build = lies_json(os.path.join(ordner, 'build.json'))
         model = lies_json(os.path.join(ordner, 'model.json'))
         assert build['id'] == bid, f'{bid}: id in build.json passt nicht zum Ordnernamen'
-        for p in model['palette']:
-            if p['name'] not in bloecke_en:
-                print(f'  Hinweis: keine englische Bezeichnung für „{p["name"]}“ (tools/i18n/bloecke_en.json)')
-            p['name_en'] = bloecke_en.get(p['name'], p['name'])
+        namen_en(model)
         liste = teileliste(model)
         schritte = bau_schritte(build, model)
-        downloads = []
-        if exporte:
-            ziel = os.path.join(OUT, 'downloads', bid)
-            os.makedirs(ziel, exist_ok=True)
-            export_litematic(build, model, os.path.join(ziel, f'{bid}.litematic'))
-            downloads.append({'datei': f'{bid}.litematic', 'art': 'litematic'})
-            export_schem(build, model, os.path.join(ziel, f'{bid}.schem'))
-            downloads.append({'datei': f'{bid}.schem', 'art': 'schem'})
-            export_csv(build, model, liste, os.path.join(ziel, f'{bid}-teileliste.csv'))
-            downloads.append({'datei': f'{bid}-teileliste.csv', 'art': 'csv'})
-            for d in downloads:
-                d['groesse'] = os.path.getsize(os.path.join(ziel, d['datei']))
+        downloads = exportieren(bid, build, model, liste)
         gesamt = sum(n for _, n in liste)
         daten = {**build, 'model': model, 'schritte': schritte,
-                 'teileliste': [{'i': i, 'n': n} for i, n in liste], 'downloads': downloads}
+                 'teileliste': [{'i': i, 'n': n} for i, n in liste], 'downloads': downloads, 'varianten': []}
+
+        # Ausbau-Versionen (builds/<id>/ausbau/) und der Umbau von der Grundversion dorthin
+        for var in VAR.VARIANTEN:
+            vordner = os.path.join(ordner, var)
+            if not os.path.isfile(os.path.join(vordner, 'build.json')):
+                continue
+            vb = VAR.zusammen(build, lies_json(os.path.join(vordner, 'build.json')))
+            vm = lies_json(os.path.join(vordner, 'model.json'))
+            namen_en(vm)
+            vl = teileliste(vm)
+            vs = bau_schritte(vb, vm)
+            vexp = dict(vb, titel=f"{vb['titel']} ({vb.get('variante_titel', var)})")
+            vd = exportieren(bid, vexp, vm, vl, '-' + var)
+            vdaten = {**vb, 'fassung': var, 'model': vm, 'schritte': vs,
+                      'teileliste': [{'i': i, 'n': n} for i, n in vl], 'downloads': vd}
+            schreib_json(os.path.join(OUT, 'data', 'builds', f'{bid}--{var}.json'), vdaten)
+            varianten_modelle[(bid, var)] = vm
+            vsumme = sum(n for _, n in vl)
+            daten['varianten'].append({'id': var, 'titel': vb.get('variante_titel') or VAR.TITEL[var][0],
+                                       'en': {'titel': vb.get('en', {}).get('variante_titel') or VAR.TITEL[var][1]},
+                                       'bloecke': vsumme, 'schritte': len(vs), 'hoehe': vm['size']['y'],
+                                       'schwierigkeit': vb.get('schwierigkeit'), 'bauzeit_stunden': vb.get('bauzeit_stunden')})
+            print(f'  Fassung {var:14} {vsumme:6} Blöcke  {len(vs):4} Schritte')
+
+            # Umbau: erst abbauen (von oben), dann nur die neuen Blöcke (von unten)
+            um, vor, weg = VAR.umbau(model, vm, MAX_TEILE)
+            namen_en(um)
+            namen_en(vor)
+            ab_de = [dict(VAR.RUECKBAU['de'], von=min(c[1] for c in weg), bis=max(c[1] for c in weg))] + vb.get('abschnitte', [])
+            ub = dict(vb, abschnitte=ab_de, en=dict(vb.get('en', {}), abschnitte=[VAR.RUECKBAU['en']] + vb.get('en', {}).get('abschnitte', [])))
+            plus = bau_schritte(vb, um)
+            for st in plus:
+                st['a'] += 1
+            ws = VAR.weg_schritte(weg, MAX_TEILE)
+            ul = teileliste(um)
+            abbau = {}
+            for x, y, z, i in weg:
+                if zaehlt(vor['palette'][i]):
+                    abbau[i] = abbau.get(i, 0) + 1
+            udaten = {**ub, 'fassung': 'umbau', 'model': um, 'model_vorher': vor, 'schritte': ws + plus,
+                      'teileliste': [{'i': i, 'n': n} for i, n in ul],
+                      'abbau': [{'i': i, 'n': n} for i, n in sorted(abbau.items(), key=lambda kv: -kv[1])],
+                      'downloads': [d for d in vd if d['art'] != 'csv']}
+            if exporte:
+                datei = f'{bid}-umbau-liste.csv'
+                with open(os.path.join(OUT, 'downloads', bid, datei), 'w', encoding='utf-8-sig', newline='') as f:
+                    w = csv.writer(f, delimiter=';')
+                    w.writerow(['Schritt', 'Block', 'Minecraft-ID', 'Anzahl', 'Stacks (64)'])
+                    for i, n in sorted(abbau.items(), key=lambda kv: -kv[1]):
+                        p = vor['palette'][i]
+                        w.writerow(['abbauen', p['name'], p.get('block') or '', n, f'{n // 64} + {n % 64}'])
+                    for i, n in ul:
+                        p = um['palette'][i]
+                        w.writerow(['neu setzen', p['name'], p.get('block') or '', n, f'{n // 64} + {n % 64}'])
+                udaten['downloads'].append({'datei': datei, 'art': 'csv', 'groesse': os.path.getsize(os.path.join(OUT, 'downloads', bid, datei))})
+            schreib_json(os.path.join(OUT, 'data', 'builds', f'{bid}--umbau.json'), udaten)
+            daten['varianten'].append({'id': 'umbau', 'titel': VAR.TITEL['umbau'][0], 'en': {'titel': VAR.TITEL['umbau'][1]},
+                                       'bloecke': sum(n for _, n in ul), 'abbau': sum(abbau.values()),
+                                       'schritte': len(ws) + len(plus), 'hoehe': um['size']['y'],
+                                       'schwierigkeit': vb.get('schwierigkeit'), 'bauzeit_stunden': vb.get('bauzeit_stunden')})
+            print(f'  Fassung umbau          {sum(n for _, n in ul):6} neu, {sum(abbau.values())} abbauen, {len(ws)} + {len(plus)} Schritte')
+
         schreib_json(os.path.join(OUT, 'data', 'builds', f'{bid}.json'), daten)
         alle_builds.append(daten)
         katalog['builds'].append({
@@ -300,7 +417,7 @@ def main():
         } | {'plugins': [{'id': x['id'], 'stufe': x['stufe']} for x in build.get('plugins', [])],
              'en': {k: build.get('en', {}).get(k) for k in ('titel', 'beschreibung', 'grundflaeche')},
              'bloecke': gesamt, 'schritte': len(schritte), 'hoehe': model['size']['y'],
-             'blocksorten': len(liste)})
+             'blocksorten': len(liste), 'varianten': [v['id'] for v in daten['varianten'] if v['id'] != 'umbau']})
         print(f'Bauplan  {bid:22} {gesamt:6} Blöcke  {len(schritte):4} Schritte')
 
     for pid in sorted(os.listdir(os.path.join(ROOT, 'plugins', 'eigene'))):
@@ -404,6 +521,7 @@ def main():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from seiten import Seiten
     s = Seiten(OUT, ROOT, cfg, katalog, alle_builds, docs_html, bloecke_en, ideen)
+    s.varianten_modelle = varianten_modelle
     s.alles()
     print(f'Seiten: {s.anzahl} Adressen (Deutsch und Englisch) in sitemap.xml · Basis {cfg["site_url"]}')
     print('Fertig:', OUT)

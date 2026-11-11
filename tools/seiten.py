@@ -60,138 +60,20 @@ def hexrgb(h):
 
 def zeichne_modell(model, breite, hoehe, schnitt=False, fuellung=.92, schatten=False):
     """Isometrisches Bild des fertigen Bauwerks mit transparentem Hintergrund.
-    Zeichnet genau wie site/js/render.js (durchscheinendes Glas und Wasser, gleiche Schattierung),
-    damit das vorgerenderte Bild und die Ansicht im Browser gleich aussehen. Vierfache Auflösung für saubere Kanten."""
-    from PIL import Image, ImageDraw, ImageFilter
-    S = 4
-    W, Hh = breite * S, hoehe * S
-    X, Y, Z = model['size']['x'], model['size']['y'], model['size']['z']
-    pal = model['palette']
-    idx = {p['key']: i for i, p in enumerate(pal)}
-    formen = [form(p['name']) for p in pal]
-    farben = [hexrgb(p['color']) for p in pal]
-    kontext = ['vorhanden' in (p.get('flags') or []) for p in pal]
-    grid = {}
-    for y, ebene in enumerate(model['layers']):
-        for z, reihe in enumerate(ebene):
-            for x, ch in enumerate(reihe):
-                if ch == '.':
-                    continue
-                n = pal[idx[ch]]['name']
-                if schnitt and ('(Decke)' in n or ('(Wand)' in n and (x == X - 1 or z == Z - 1))):
-                    continue
-                grid[(x, y, z)] = idx[ch]
-    bild = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
-    if not grid:
-        return bild.resize((breite, hoehe))
-    K = 1.15
-    xs = [x - z for (x, y, z) in grid]
-    ys = [(x + z) / 2 - (y + 1) * K for (x, y, z) in grid] + [(x + z) / 2 + 1 for (x, y, z) in grid]
-    x0, x1, y0, y1 = min(xs) - 1, max(xs) + 1, min(ys), max(ys)
-    a = min(W * fuellung / (x1 - x0), Hh * fuellung / (y1 - y0))
-    ox = W / 2 - (x0 + x1) / 2 * a
-    oy = Hh / 2 - (y0 + y1) / 2 * a
-    c = a * K
-
-    def P(u, v, y):
-        return (ox + (u - v) * a, oy + (u + v) * a / 2 - y * c)
-
-    if schatten:
-        boden = [P(x + du, z + dv, 0) for (x, y, z) in grid if y <= 1 for du in (0, 1) for dv in (0, 1)]
-        sch = Image.new('RGBA', (W, Hh), (0, 0, 0, 0))
-        bx0, bx1 = min(p[0] for p in boden), max(p[0] for p in boden)
-        by0, by1 = min(p[1] for p in boden), max(p[1] for p in boden)
-        mx, my = (bx0 + bx1) / 2, by1 - (by1 - by0) * .35
-        rx, ry = (bx1 - bx0) * .5, max((by1 - by0) * .4, a * 1.5)
-        ImageDraw.Draw(sch).ellipse([mx - rx, my - ry, mx + rx, my + ry], fill=(20, 30, 40, 60))
-        bild.alpha_composite(sch.filter(ImageFilter.GaussianBlur(max(6, a * 1.2))))
-
-    g = ImageDraw.Draw(bild)
-    hg = (255, 255, 255)
-    kante = max(1, round(.6 * S))
-
-    def farbe(col, f, al):
-        return (min(255, round(col[0] * f)), min(255, round(col[1] * f)), min(255, round(col[2] * f)), round(255 * al))
-
-    def flaeche(pts, fuell):
-        # Deckende Flächen direkt zeichnen; durchscheinende (Glas, Wasser) wirklich überblenden,
-        # denn ImageDraw ersetzt auf RGBA-Bildern sonst die Pixel samt Transparenz.
-        if fuell[3] == 255:
-            g.polygon(pts, fill=fuell)
-            return
-        bx0, by0 = int(min(q[0] for q in pts)), int(min(q[1] for q in pts))
-        bx1, by1 = int(max(q[0] for q in pts)) + 2, int(max(q[1] for q in pts)) + 2
-        if bx1 <= bx0 or by1 <= by0:
-            return
-        stueck = Image.new('RGBA', (bx1 - bx0, by1 - by0), (0, 0, 0, 0))
-        ImageDraw.Draw(stueck).polygon([(q[0] - bx0, q[1] - by0) for q in pts], fill=fuell)
-        bild.alpha_composite(stueck, dest=(bx0, by0))
-
-    def nachbar(x, y, z):
-        k = grid.get((x, y, z))
-        return None if k is None else formen[k]
-
-    for (x, y, z) in sorted(grid, key=lambda q: (q[0] + q[1] + q[2], q[1])):
-        k = grid[(x, y, z)]
-        shp, col = formen[k], farben[k]
-        u0, u1, v0, v1, y0_, y1_, al = x, x + 1, z, z + 1, y, y + 1, 1.0
-        if shp == 'thin':
-            u0 += .32; u1 -= .32; v0 += .32; v1 -= .32
-        elif shp == 'slab':
-            y1_ = y + .5
-        elif shp == 'bed':
-            y1_ = y + .56
-        elif shp == 'flat':
-            y1_ = y + .07
-        elif shp == 'low':
-            y1_ = y + .14
-        elif shp == 'crop':
-            y1_ = y + .45; u0 += .12; u1 -= .12; v0 += .12; v1 -= .12
-        elif shp == 'mob':
-            y1_ = y + 1.85; u0 += .26; u1 -= .26; v0 += .26; v1 -= .26
-        elif shp == 'glass':
-            al = .42
-        elif shp == 'water':
-            al = .7; y1_ = y + .88
-        if shp in ('pane', 'panel'):
-            wand = lambda n: n is not None and n != 'water'
-            au = wand(nachbar(x - 1, y, z)) or wand(nachbar(x + 1, y, z))
-            av = wand(nachbar(x, y, z - 1)) or wand(nachbar(x, y, z + 1))
-            t = .44 if shp == 'pane' else .4
-            if au and not av:
-                v0 += t; v1 -= t
-            elif av and not au:
-                u0 += t; u1 -= t
-            else:
-                u0 += t; u1 -= t; v0 += t; v1 -= t
-            if shp == 'pane':
-                al = .6
-        if shp == 'plate':
-            voll_ = lambda n: n == 'full'
-            if voll_(nachbar(x - 1, y, z)): u1 = x + .18
-            elif voll_(nachbar(x + 1, y, z)): u0 = x + .82
-            elif voll_(nachbar(x, y, z - 1)): v1 = z + .18
-            elif voll_(nachbar(x, y, z + 1)): v0 = z + .82
-            else: u0 += .4; u1 -= .4; v0 += .4; v1 -= .4
-        ist_voll = shp in ('full', 'glass', 'water')
-        verdeckt = lambda n: n is not None and (n == 'full' or (n == shp and shp in ('glass', 'water')))
-        oben = not (ist_voll and shp != 'water' and verdeckt(nachbar(x, y + 1, z)))
-        rechts = not (ist_voll and verdeckt(nachbar(x + 1, y, z)))
-        links = not (ist_voll and verdeckt(nachbar(x, y, z + 1)))
-        if kontext[k]:
-            col = tuple(round(col[i] + (hg[i] - col[i]) * .62) for i in range(3))
-            if al < 1:
-                al *= .6
-        if links:
-            flaeche([P(u0, v1, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u0, v1, y0_)], farbe(col, .64, al))
-        if rechts:
-            flaeche([P(u1, v0, y1_), P(u1, v1, y1_), P(u1, v1, y0_), P(u1, v0, y0_)], farbe(col, .8, al))
-        if oben:
-            deckel = [P(u0, v0, y1_), P(u1, v0, y1_), P(u1, v1, y1_), P(u0, v1, y1_)]
-            flaeche(deckel, farbe(col, 1, al))
-            if shp == 'full' and a >= 5 * S:
-                g.line(deckel + [deckel[0]], fill=(0, 0, 0, 36), width=kante)
-    return bild.resize((breite, hoehe), Image.LANCZOS)
+    Nutzt tools/vorschau.py (echte Blockformen aus den Zuständen), genau wie site/js/render.js im Browser.
+    schnitt: Decke und vordere Wände ausblenden (Keller)."""
+    import copy
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from vorschau import zeichne
+    if schnitt:
+        model = copy.deepcopy(model)
+        X, Z = model['size']['x'], model['size']['z']
+        weg = {p['key'] for p in model['palette'] if '(Decke)' in p['name']}
+        wand = {p['key'] for p in model['palette'] if '(Wand)' in p['name']}
+        model['layers'] = [[''.join('.' if ch in weg or (ch in wand and (x == X - 1 or z == Z - 1)) else ch
+                                    for x, ch in enumerate(r)) for z, r in enumerate(e)] for e in model['layers']]
+    return zeichne(model, breite, hoehe, fuellung=fuellung, schatten=schatten)
 
 
 def landschaft(nacht=False, spalten=240, zeilen=22, B=8):
@@ -657,7 +539,8 @@ class Seiten:
             self.link("bau", b["id"]), self.base + 'bilder/%s.png?v=%s' % (b['id'], self.cfg.get('version', '1')),
             H(self.t('Minecraft-Bauplan %s, fertiges Bauwerk', 'Minecraft build %s, finished') % titel), edition(b['edition']),
             ('<span class="marker stufe-benoetigt">%s</span>' % self.t('Plugin nötig', 'Plugin needed') if any(x['stufe'] == 'benoetigt' for x in b.get('plugins', [])) else '') +
-            ('<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else ''),
+            ('<span class="marker entwurf">%s</span>' % L['entwurf'] if b['status'] == 'entwurf' else '') +
+            ('<span class="marker ausbau">%s</span>' % self.t('+ Ausbau', '+ Extended') if b.get('varianten') else ''),
             H(titel), H(lok(b, 'beschreibung', self.lang)), punkte(b['schwierigkeit'], self.lang),
             fmt(b['bloecke'], self.lang), L['bloecke'], b['schritte'], L['schritte'])
 
@@ -708,6 +591,8 @@ class Seiten:
             img = zeichne_modell(b['model'], 800, 600, schnitt=schnitt)
             img.save(os.path.join(self.out, 'bilder', '%s.png' % b['id']), optimize=True)
             self.modellbilder[b['id']] = zeichne_modell(b['model'], 590, 590, schnitt=schnitt, fuellung=.9, schatten=True)
+        for (bid, var), m in getattr(self, 'varianten_modelle', {}).items():
+            zeichne_modell(m, 800, 600).save(os.path.join(self.out, 'bilder', '%s--%s.png' % (bid, var)), optimize=True)
 
     def banner(self):
         """Minecraft-Landschaft für den Kopfbereich, als Tag- und Nachtbild."""
@@ -823,7 +708,7 @@ class Seiten:
             '<section class="detail-kopf"><div class="wrap"><div class="krumen"><a href="%s">%s</a> / %s</div>'
             '<h1>%s</h1><p class="lede">%s</p><dl class="specs">%s</dl>%s</div></section>'
             '<section class="tafel"><div class="wrap">'
-            '<img class="vor-bild" src="%s" alt="%s" width="800" height="600">'
+            '<img class="vor-bild" src="%s" alt="%s" width="800" height="600">%s'
             '<h2 style="margin:26px 0 10px">%s</h2><ol class="vor-liste">%s</ol><p style="margin-top:10px">%s</p>'
             '<div class="zwei-spalten" style="margin-top:26px"><div><h2 style="margin-bottom:12px">%s</h2><div class="tabelle-huelle"><table>'
             '<thead><tr><th>%s</th><th class="zahl">%s</th><th class="zahl">Stacks</th></tr></thead><tbody>%s</tbody></table></div></div>'
@@ -834,6 +719,7 @@ class Seiten:
              ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % s for s in specs),
              ('<div class="hinweis"><span><b>%s:</b> %s</span></div>' % (T[lang]['entwurf'], H(lok(b, 'hinweis', lang) or '')) if b.get('status') == 'entwurf' else '') + self.plugin_kasten(b.get('plugins', [])),
              self.base + 'bilder/%s.png' % b['id'], H(t('Minecraft %s, fertig gebaut', 'Minecraft %s, finished build') % titel),
+             self.ausbau_kasten(b),
              t('Bauabschnitte', 'Build sections'), ab_html,
              t('Die Anleitung führt dich in %d Bauschritten Ebene für Ebene von unten nach oben durch den Bau, mit höchstens 60 neuen Blöcken pro Schritt. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
                'The instructions guide you through the build in %d build steps, layer by layer from the bottom up, with at most 60 new blocks per step. Every step shows a rotatable 3D view and a top view of the layer.') % kb['schritte'],
@@ -857,6 +743,24 @@ class Seiten:
                           titel, kb['schritte'], fmt(kb['bloecke'], lang), lok(b, 'beschreibung', lang)),
                       inhalt, ld, bild=self.og(b['id'] + '-og'), bild_alt=t('Minecraft-Bauplan %s', 'Minecraft build %s') % titel,
                       og_typ='article', og_titel=t('%s – Minecraft-Bauplan', '%s – Minecraft build plan') % titel)
+
+    def ausbau_kasten(self, b):
+        """Hinweis auf die Ausbau-Version (wird im Browser durch den Fassungs-Schalter ersetzt)."""
+        v = next((x for x in b.get('varianten', []) if x['id'] != 'umbau'), None)
+        if not v:
+            return ''
+        t = self.t
+        ziel = self.link('bau', b['id']) + '?fassung=' + v['id']
+        return ('<div class="ausbau-hinweis"><img src="%s" alt="%s" width="800" height="600" loading="lazy"><div>'
+                '<span class="eyebrow">%s</span><h2>%s</h2><p>%s</p><a class="btn" href="%s">%s</a></div></div>') % (
+            self.base + 'bilder/%s--%s.png' % (b['id'], v['id']),
+            H(t('Minecraft %s, Ausbau-Version', 'Minecraft %s, extended version') % lok(b, 'titel', self.lang)),
+            t('Auch als Ausbau-Version', 'Also as an extended version'), H(lok(v, 'titel', self.lang)),
+            t('Dasselbe Bauwerk, verfeinert: mehr Tiefe, Details, Einrichtung und Umgebung. %s Blöcke in %d Schritten. '
+              'Wer die Grundversion schon gebaut hat, kann sie Schritt für Schritt umbauen.',
+              'The same build, refined: more depth, details, furnishing and surroundings. %s blocks in %d steps. '
+              'If you already built the base version, you can rebuild it step by step.') % (fmt(v['bloecke'], self.lang), v['schritte']),
+            ziel, t('Ausbau-Version ansehen', 'View the extended version'))
 
     def konzept(self, i):
         l = (i.get('konzept') or {}).get(self.lang) or (i.get('konzept') or {}).get('de')

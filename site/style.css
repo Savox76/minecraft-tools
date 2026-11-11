@@ -16,6 +16,7 @@
   --callout-line: #b4cbe0;
   --hl: #f6b500;
   --hl-ink: #16202a;
+  --weg: #e5483b;
   --plan: #1b3f6b;
   --plan-tief: #15335a;
   --plan-linie: rgba(255, 255, 255, .07);
@@ -40,14 +41,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --page: #0e141a; --sheet: #17202a; --sheet-2: #131b23; --ink: #e8eef4; --ink-soft: #a9b7c4; --ink-mute: #7f8d9b;
-    --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c;
+    --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c; --weg: #ff6a5c;
     --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12); --leiste: #151a20; --banner-bild: url("bilder/banner-nacht.png?v=__VERSION__"); --banner-himmel: #223a62; --banner-ink: #f2f6fb; --banner-soft: #b8c9de; --banner-schatten: 0 1px 3px rgba(0, 0, 0, .6);
     --ok: #5cc27e; --warn: #e0a64a; --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --page: #0e141a; --sheet: #17202a; --sheet-2: #131b23; --ink: #e8eef4; --ink-soft: #a9b7c4; --ink-mute: #7f8d9b;
-  --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c;
+  --line: #29353f; --callout: #1c2e40; --callout-line: #2f4a63; --hl: #ffc629; --hl-ink: #10161c; --weg: #ff6a5c;
   --plan: #12304f; --plan-tief: #0f2843; --plan-linie: rgba(255, 255, 255, .06); --plan-linie-stark: rgba(255, 255, 255, .12); --leiste: #151a20; --banner-bild: url("bilder/banner-nacht.png?v=__VERSION__"); --banner-himmel: #223a62; --banner-ink: #f2f6fb; --banner-soft: #b8c9de; --banner-schatten: 0 1px 3px rgba(0, 0, 0, .6);
   --ok: #5cc27e; --warn: #e0a64a; --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25); color-scheme: dark;
 }
@@ -407,3 +408,32 @@ details.konzept ul { margin: 8px 0 2px; padding-left: 18px; display: grid; gap: 
 .verwendet { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
 .verwendet li { background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .verwendet a { font-weight: 700; }
+
+/* ---------- Fassungen: Grundversion, Ausbau-Version, Umbau ---------- */
+.fassungen { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 4px; }
+.fassungen a { display: flex; flex-direction: column; gap: 2px; padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); text-decoration: none; min-width: 0; }
+.fassungen a b { font-size: .95rem; }
+.fassungen a small { font-size: .8rem; color: var(--ink-soft); }
+.fassungen a:hover { border-color: var(--ink-mute); }
+.fassungen a[aria-current="page"] { border-color: var(--hl); box-shadow: inset 0 -3px 0 var(--hl); }
+.fassung-titel { display: inline-block; vertical-align: middle; font: 700 .9rem var(--f-body); padding: 3px 10px; border-radius: 8px; background: var(--hl); color: var(--hl-ink); margin-left: 6px; }
+.leitbild { margin-top: 10px; max-width: 70ch; color: var(--ink-soft); font-size: .95rem; }
+.leitbild b { color: var(--ink); }
+.umbau-hinweis { background: color-mix(in srgb, var(--weg) 9%, var(--sheet)); border-color: color-mix(in srgb, var(--weg) 35%, var(--line)); }
+.marker.ausbau { color: var(--ink); border-color: color-mix(in srgb, var(--hl) 60%, var(--line)); background: color-mix(in srgb, var(--hl) 14%, var(--sheet)); }
+.teile-kasten.abbau { background: color-mix(in srgb, var(--weg) 10%, var(--sheet)); border-color: color-mix(in srgb, var(--weg) 45%, var(--line)); }
+.vg-titel { margin: 26px 0 10px; font-size: 1.25rem; }
+.vergleich { max-width: 900px; }
+.vg-buehne { position: relative; border: 1px solid var(--plan-tief); border-radius: 18px; overflow: hidden; cursor: ew-resize; touch-action: pan-y; user-select: none; }
+.vg-buehne canvas { display: block; margin: 0 auto; }
+.vg-vor { position: absolute; inset: 0; display: flex; justify-content: center; }
+.vg-linie { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: var(--hl); pointer-events: none; }
+.vg-linie::after { content: "⇆"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 34px; height: 34px; border-radius: 50%; background: var(--hl); color: var(--hl-ink); display: grid; place-items: center; font-weight: 900; }
+.vg-label { position: absolute; top: 12px; font: 700 .82rem var(--f-body); padding: 3px 9px; border-radius: 6px; background: rgba(0, 0, 0, .35); color: var(--plan-ink); pointer-events: none; }
+.vg-label.links { left: 12px; } .vg-label.rechts { right: 12px; }
+.vergleich .leiste { width: 100%; margin-top: 10px; }
+.ausbau-hinweis { display: grid; grid-template-columns: minmax(0, 320px) 1fr; gap: 20px; align-items: center; margin-top: 22px; padding: 16px; border-radius: 14px; border: 1.5px solid color-mix(in srgb, var(--hl) 55%, var(--line)); background: var(--sheet); max-width: 900px; }
+.ausbau-hinweis img { width: 100%; height: auto; }
+.ausbau-hinweis h2 { margin: 4px 0 8px; font-size: 1.3rem; }
+.ausbau-hinweis p { margin-bottom: 12px; }
+@media (max-width: 640px) { .ausbau-hinweis { grid-template-columns: 1fr; } .fassungen a { flex: 1 1 140px; } }

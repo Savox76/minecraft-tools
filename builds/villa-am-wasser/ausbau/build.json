@@ -1,0 +1,286 @@
+{
+  "id": "villa-am-wasser",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Modern, hell, luxuriös am Wasser. Klare Kanten, viel Glas und Licht, warme Holzlamellen als Gegenpol. Bewusst ohne Verwitterung, Moos oder verspielte Verzierungen.",
+  "titel": "Villa am Wasser",
+  "beschreibung": "Die Villa am Wasser, verfeinert wie von einem Creator: vorstehende Deckenkanten mit zurückgesetztem Glas und schlanken Säulen, Holzlamellen vor dunklen Wänden, eingerichtete Räume auf allen Etagen, Penthouse mit Bar, Garten mit Palmen und ein Steg ins Meer. Glasfront, Pool, Dachterrasse und Wasser-Aufzug sind geblieben.",
+  "schwierigkeit": 4,
+  "bauzeit_stunden": [
+    12,
+    18
+  ],
+  "grundflaeche": "33 × 38 Grundstück mit Steg, Haus 24 × 16",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte vor allem die Richtung der Treppen, Falltür-Lamellen, Türen und Betten nach dem Einfügen kurz ansehen.",
+  "abschnitte": [
+    {
+      "name": "Böden, Pool und Steg",
+      "von": 0,
+      "bis": 0,
+      "text": "Alles auf Bodenhöhe: Sockel aus hellgrauem Beton unter den Außenwänden, Birkenboden im Haus, Eingangsweg mit Fuge, Beete vor dem Haus, Holzterrasse mit Steinkante und Steinweg zum Strand, Pool-Boden mit Seelaternen, die Feuerstelle aus Tiefenschiefer und der Steg ins Meer. Im Westen Seelensand und Magmablock für den Wasser-Aufzug."
+    },
+    {
+      "name": "Erdgeschoss und Garten",
+      "von": 1,
+      "bis": 4,
+      "text": "Glasfronten mit Quarzsäulen nach Süden und Osten, im Westen und Norden dunkle Wände mit Holzlamellen aus offenen Fichtenfalltüren. Der Eingang liegt in einer Nische. Innen Küche mit Insel, Essplatz, Sofa-Ecke mit Blick aufs Wasser und eine Treppe mit Stauraum darunter. Draußen Pool mit Glaskante, Liegen, Lounge um die Feuerstelle, Palmen, Hecke, Beete und Steg mit Laternen."
+    },
+    {
+      "name": "Auskragende Decke",
+      "von": 5,
+      "bis": 5,
+      "text": "Die Decke ragt nach Süden und Osten über die Terrasse hinaus. Ihre Kante steht vor, das Glas des Obergeschosses sitzt dahinter. Innen Birkenboden, über dem Eingang ein Vordach mit Licht. Unter der Kante hängen Endstäbe als Lichtleiste."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 6,
+      "bis": 9,
+      "text": "Glas mit Säulen nach Süden und Osten, nach Norden ein dunkles Fensterband, nach Westen Lamellen. Innen Bad mit Wanne, Arbeitszimmer mit Bücherwand, Lounge und Schlafzimmer mit Doppelbett. Trennwände unten aus Beton, oben aus Mattglas. Pendelleuchten unter der Decke."
+    },
+    {
+      "name": "Dach",
+      "von": 10,
+      "bis": 10,
+      "text": "Dachplatte mit dünner Kante aus Quarzstufen und Holzdeck für die Liegen. Unter dem Überstand hängt die zweite Lichtleiste."
+    },
+    {
+      "name": "Dachterrasse und Penthouse",
+      "von": 11,
+      "bis": 13,
+      "text": "Glasgeländer mit Lichtpunkten an den Ecken, Penthouse mit Bar, Hockern und Lounge, Whirlpool, Liegen und Essplatz unter freiem Himmel."
+    },
+    {
+      "name": "Penthouse-Dach",
+      "von": 14,
+      "bis": 15,
+      "text": "Flachdach mit dünner Kante und einer Solaranlage aus Tageslichtsensoren."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Modern heißt hier: klare Kanten, viel Glas, viel Licht. Die Raffinesse steckt in der Tiefe: Deckenkanten stehen vor, das Glas sitzt zurück, Säulen gliedern die Fronten. Warme Holzlamellen setzen den Gegenpol zu Weiß und Grau."
+    },
+    {
+      "titel": "Lamellen aus Falltüren",
+      "text": "Die Lamellen sind offene Fichtenfalltüren vor der dunklen Wand. Setze die Falltür an die Wand und klicke sie einmal auf, dann steht sie senkrecht. Immer einen Block Abstand lassen, dann entstehen die Schatten."
+    },
+    {
+      "titel": "Lichtleisten",
+      "text": "Die Endstäbe unter den Auskragungen setzt du an die Unterseite der Decke, dann hängen sie nach unten. Statt Endstäben gehen auch Laternen, falls dir der Chorus aus dem End fehlt."
+    },
+    {
+      "titel": "Quarz oder Beton",
+      "text": "Glatter Quarz sieht am edelsten aus. braucht aber viel Netherquarz (rund 4.004 Stück) und viel Ofenarbeit. Wer sparen will. nimmt für die Wände weißen Beton und behält Quarz nur für Kanten. Säulen und Stufen."
+    },
+    {
+      "titel": "Möbel aus Blöcken",
+      "text": "Sofas und Liegen sind Quarztreppen, Couchtische geschlossene Falltüren, Hocker Zäune mit Druckplatte, Tische Stufen auf einem Zaun. Die Wanne sind zwei Kessel mit Wasser."
+    },
+    {
+      "titel": "Wasser-Aufzug",
+      "text": "Wie in der Grundversion: Beide Schächte brauchen in jedem Block eine Wasserquelle. Oben Wasser hinein, unten Seetang bis nach oben wachsen lassen und wieder abbauen. Erst dann Seelensand und Magmablock einsetzen."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet)."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Netherquarz",
+      "menge": 4004,
+      "quelle": "Nether",
+      "hinweis": "für 1001 Quarzblöcke: glatter Quarz, Stufen, Treppen, Säulen und Tageslichtsensoren"
+    },
+    {
+      "name": "Sand",
+      "menge": 430,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "320 für Glas und Scheiben, der Rest mit Kies für 220 Beton"
+    },
+    {
+      "name": "Kies",
+      "menge": 110,
+      "quelle": "Fluss oder Kiesfarm",
+      "hinweis": "für weißen, hellgrauen und schwarzen Beton"
+    },
+    {
+      "name": "Birkenstamm",
+      "menge": 109,
+      "quelle": "Baumfarm (Birke)",
+      "hinweis": "Böden im Haus"
+    },
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 55,
+      "quelle": "Baumfarm (Dunkeleiche)",
+      "hinweis": "Terrasse, Stühle, Türen, Tische, Schränke"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 85,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Lamellen, Steg, Hocker"
+    },
+    {
+      "name": "Bruchstein-Tiefenschiefer",
+      "menge": 182,
+      "quelle": "Abbau unter Ebene 0",
+      "hinweis": "polierter Tiefenschiefer für Wände, Küche und Bar"
+    },
+    {
+      "name": "Endstäbe",
+      "menge": 51,
+      "quelle": "Lohenruten und Chorusfrüchte",
+      "hinweis": "Lichtleisten und Lampen, ersatzweise Laternen"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 38,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen und Kessel"
+    },
+    {
+      "name": "Bücher",
+      "menge": 93,
+      "quelle": "Kühe und Zuckerrohr",
+      "hinweis": "für die Bücherregale"
+    },
+    {
+      "name": "Tropenbaumstamm und -laub",
+      "menge": 82,
+      "quelle": "Dschungel",
+      "hinweis": "Palmen, Laub mit der Schere"
+    }
+  ],
+  "schmelzvorgaenge": 1220,
+  "plugins": [],
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "Modern, bright, luxurious by the water. Clean edges, lots of glass and light, warm wooden slats as a counterpoint. Deliberately without weathering, moss or playful ornaments.",
+    "beschreibung": "The Villa by the Water, refined the way a creator would: protruding floor edges with recessed glass and slim columns, wooden slats in front of dark walls, furnished rooms on every floor, a penthouse with a bar, a garden with palm trees and a jetty into the sea. The glass front, pool, roof terrace and water elevator are still there.",
+    "grundflaeche": "33 × 38 plot with jetty, house 24 × 16",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. After pasting, please check the direction of stairs, trapdoor slats, doors and beds.",
+    "abschnitte": [
+      {
+        "name": "Floors, pool and jetty",
+        "text": "Everything at ground level: a light grey concrete base under the outer walls, birch floor inside, an entrance path with a joint line, flower beds in front of the house, a wooden deck with stone edging and a stone path to the beach, pool floor with sea lanterns, the deepslate fire pit and the jetty into the sea. Soul sand and magma block for the water elevator in the west."
+      },
+      {
+        "name": "Ground floor and garden",
+        "text": "Glass fronts with quartz columns to the south and east, dark walls with wooden slats of open spruce trapdoors to the west and north. The entrance sits in a recess. Inside a kitchen with an island, a dining area, a sofa corner facing the water and a staircase with storage underneath. Outside the pool with its glass edge, loungers, a lounge around the fire pit, palm trees, hedge, flower beds and the jetty with lanterns."
+      },
+      {
+        "name": "Cantilevered ceiling",
+        "text": "The ceiling reaches out over the terrace to the south and east. Its edge protrudes, the upper floor's glass sits behind it. Birch floor inside, a canopy with a light above the entrance. End rods hang under the edge as a light strip."
+      },
+      {
+        "name": "Upper floor",
+        "text": "Glass with columns to the south and east, a dark window band to the north, slats to the west. Inside a bathroom with a tub, a study with a book wall, a lounge and a bedroom with a double bed. Partition walls of concrete below and frosted glass above. Pendant lights under the ceiling."
+      },
+      {
+        "name": "Roof",
+        "text": "Roof slab with a thin edge of quartz slabs and a wooden deck for the loungers. The second light strip hangs under the overhang."
+      },
+      {
+        "name": "Roof terrace and penthouse",
+        "text": "Glass railing with corner lights, a penthouse with bar, stools and lounge, the whirlpool, loungers and an outdoor dining table."
+      },
+      {
+        "name": "Penthouse roof",
+        "text": "Flat roof with a thin edge and a solar array of daylight detectors."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "Modern here means clean edges, lots of glass and light. The refinement is in the depth: floor edges protrude, the glass sits back, columns divide the fronts. Warm wooden slats balance the white and grey."
+      },
+      {
+        "titel": "Slats from trapdoors",
+        "text": "The slats are open spruce trapdoors in front of the dark wall. Place the trapdoor against the wall and click it open once so it stands upright. Always leave one block of space between them to create the shadows."
+      },
+      {
+        "titel": "Light strips",
+        "text": "Place the end rods under the cantilevers against the underside of the ceiling so they hang down. Lanterns work too if you have no chorus fruit from the End."
+      },
+      {
+        "titel": "Quartz or concrete",
+        "text": "Smooth quartz looks the most elegant but needs a lot of Nether quartz (about 4,004) and a lot of furnace work. To save, use white concrete for the walls and keep quartz only for edges, columns and slabs."
+      },
+      {
+        "titel": "Furniture from blocks",
+        "text": "Sofas and loungers are quartz stairs, coffee tables closed trapdoors, stools fences with a pressure plate, tables slabs on a fence. The bathtub is two water cauldrons."
+      },
+      {
+        "titel": "Water elevator",
+        "text": "As in the base version: both shafts need a water source in every block. Pour water in at the top, grow kelp up from the bottom and break it again. Only then put in the soul sand and magma block."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline)."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Nether quartz",
+        "quelle": "Nether",
+        "hinweis": "for 1001 quartz blocks: smooth quartz, slabs, stairs, pillars and daylight detectors"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "320 for glass and panes, the rest with gravel for 220 concrete"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "River or gravel farm",
+        "hinweis": "for white, light grey and black concrete"
+      },
+      {
+        "name": "Birch logs",
+        "quelle": "Tree farm (birch)",
+        "hinweis": "floors inside the house"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak)",
+        "hinweis": "deck, chairs, doors, tables, cabinets"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "slats, jetty, stools"
+      },
+      {
+        "name": "Cobbled deepslate",
+        "quelle": "Mining below level 0",
+        "hinweis": "polished deepslate for walls, kitchen and bar"
+      },
+      {
+        "name": "End rods",
+        "quelle": "Blaze rods and chorus fruit",
+        "hinweis": "light strips and lamps, lanterns as a substitute"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns and cauldrons"
+      },
+      {
+        "name": "Books",
+        "quelle": "Cows and sugar cane",
+        "hinweis": "for the bookshelves"
+      },
+      {
+        "name": "Jungle logs and leaves",
+        "quelle": "Jungle",
+        "hinweis": "palm trees, leaves with shears"
+      }
+    ]
+  }
+}
