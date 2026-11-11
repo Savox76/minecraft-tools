@@ -65,7 +65,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 | ID | Name | Größe | Höhe | Blöcke ca. |
 |---|---|---|---|---|
-| `eiffelturm` | Eiffelturm (1:3) | 43 × 43 | 112 | 7.600 |
+| `eiffelturm` | Eiffelturm (1:3), dazu Ausbau-Version (6.652 Blöcke, filigran, Abendbeleuchtung) und Umbau | 43 × 43 | 112 | 7.600 |
 | `leuchtturm` | Leuchtturm, dazu Ausbau-Version (4.149 Blöcke, Küstenfels, Wärterhaus, Steg) und Umbau | Ø 17 | 65 | 2.600 |
 | `villa-am-wasser` | Villa am Wasser mit Pool und Wasser-Aufzug, dazu Ausbau-Version (3.223 Blöcke, 16 Ebenen) und Umbau | 27 × 27 | 15 | 2.700 |
 | `villa-modern` | Moderne Villa, dazu Ausbau-Version (2.593 Blöcke, 13 Ebenen) und Umbau | 29 × 23 | 12 | 2.000 |
@@ -193,7 +193,7 @@ Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne
 | Leuchtturm | klein | rauer Küstenfels statt glattem Sockel, Wärterhaus, Steg mit Booten, Felsen im Wasser; Turm nur feinere Streifen und Geländer | online, Erzeuger `tools/ausbau_leuchtturm.py` (liest den Turm aus der Grundversion) |
 | Gewächshaus-Farm | klein | Farm bleibt, dazu Rahmen aus dunklem Holz, Pflanzkästen, Wege, Laternen | online, Erzeuger `tools/ausbau_gewaechshaus.py` (liest die Grundversion). Fehler der Grundversion behoben: Pfosten vor der Nische ist jetzt Glas |
 | Kellerlager | klein | Gewölbe, Holzbalken, beschriftete Fass-Wand, Licht; Technik bleibt | als Nächstes |
-| Eiffelturm | vielleicht | filigraner: Fachwerk aus Zäunen und Gittern, Abendbeleuchtung | zum Schluss |
+| Eiffelturm | ja (von Mario vorgezogen) | filigraner: Fachwerk mit offenen Feldern, Bögen zwischen den Beinen, Abendbeleuchtung (Froschlichter, Lichterketten, Bodenstrahler), Platz mit Brunnen | online, Erzeuger `tools/ausbau_eiffelturm.py` (liest die Grundversion) |
 | Kaktus-XP-Farm, Kleine Bambusfarm | nein | bleiben kompakt und funktional | – |
 | Teehaus | nein | schon im neuen Stil gebaut | – |
 

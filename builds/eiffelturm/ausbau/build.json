@@ -1,0 +1,243 @@
+{
+  "id": "eiffelturm",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Filigraner: Fachwerk mit offenen Feldern statt voller Zaunringe, große Bögen zwischen den Beinen und eine Abendbeleuchtung. Form und Höhe bleiben.",
+  "titel": "Eiffelturm",
+  "beschreibung": "Der Eiffelturm, verfeinert wie von einem Creator: offenes Gitterwerk mit Eckstielen und Mittelpfosten statt geschlossener Zaunringe, geschwungene Bögen auf allen vier Seiten, eine Abendbeleuchtung aus Froschlichtern, Lichterketten und Bodenstrahlern und ein Platz mit Brunnen, Beeten, Kieswegen, Bänken und Laternen.",
+  "schwierigkeit": 5,
+  "bauzeit_stunden": [
+    15,
+    25
+  ],
+  "grundflaeche": "45 × 45 mit Platz",
+  "massstab": "ca. 1 : 3 (1 Block ≈ 3 m)",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte nach dem Einfügen die Richtung der Bänke ansehen. Das Gitterwerk folgt einem festen Takt: gerade Ebenen ganzer Ring, ungerade Ebenen nur Ecken und Mitte.",
+  "abschnitte": [
+    {
+      "name": "Fundament und Platz",
+      "von": 0,
+      "bis": 1,
+      "text": "Die vier Steinsockel der Grundversion, dazu der Platz: runder Brunnen mit Fontäne in der Mitte, Rand aus glatten Steinstufen, Kieswege zu allen Seiten, ein Kiesring, Beete mit Buchs und Tulpen, Bänke und Laternen. Bodenstrahler aus Froschlichtern an den Innenecken der Füße."
+    },
+    {
+      "name": "Beine und Bögen",
+      "von": 2,
+      "bis": 16,
+      "text": "Die Beine als offenes Gitterwerk: in geraden Ebenen ein ganzer Zaunring, in ungeraden nur die Eckstiele aus Brettern und ein Mittelpfosten. Alle sechs Ebenen sitzt ein Froschlicht in den Ecken. Unter der ersten Plattform spannt sich auf jeder Seite ein Bogen aus Brettern mit senkrechten Zaunstäben darüber, darunter hängen Laternen."
+    },
+    {
+      "name": "Fries und 1. Plattform",
+      "von": 17,
+      "bis": 20,
+      "text": "Wie in der Grundversion: Fries, Boden aus Stufen und Geländer aus Eisengittern mit Laternen an den Ecken."
+    },
+    {
+      "name": "Mittelteil",
+      "von": 21,
+      "bis": 37,
+      "text": "Die Beine laufen zusammen, weiter im offenen Gittertakt mit Lichtern in den Ecken. Unter der zweiten Plattform eine Lichterkette."
+    },
+    {
+      "name": "2. Plattform",
+      "von": 38,
+      "bis": 39,
+      "text": "Boden aus Stufen, Geländer aus Eisengittern."
+    },
+    {
+      "name": "Oberer Schaft",
+      "von": 40,
+      "bis": 91,
+      "text": "Der lange Schaft im selben Gittertakt. Die Froschlichter in den Ecken bilden abends eine Lichterlinie bis nach oben. Unter der Aussichtsetage hängen Laternen."
+    },
+    {
+      "name": "Aussichtsetage",
+      "von": 92,
+      "bis": 96,
+      "text": "Verglaste Aussichtsetage mit Umgang wie in der Grundversion."
+    },
+    {
+      "name": "Spitze und Antenne",
+      "von": 97,
+      "bis": 111,
+      "text": "Spitze und Antenne mit Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Der echte Turm wirkt leicht, weil man durch ihn hindurchsieht. Deshalb ist nur jede zweite Ebene ein geschlossener Ring. Die offenen Felder dazwischen machen den Unterschied, besonders von weitem."
+    },
+    {
+      "titel": "Der Takt",
+      "text": "Gerade Ebene: ganzer Zaunring mit Brettern in den Ecken. Ungerade Ebene: nur die vier Eckbretter und je Seite ein Zaun in der Mitte. Wer diesen Takt einmal im Kopf hat, braucht für die Beine kaum noch den Plan."
+    },
+    {
+      "titel": "Bögen",
+      "text": "Die Bögen liegen in der äußersten Ebene der Plattform und beginnen tief an den Beinen. Baue zuerst die Bogenlinie aus Brettern, dann setze in jeder zweiten Spalte Zäune nach oben bis unter die Plattform."
+    },
+    {
+      "titel": "Abendbeleuchtung",
+      "text": "Ockerfarbene Froschlichter entstehen, wenn ein Frosch aus einem gemäßigten Biom ein kleines Magmawürfel frisst. Wer das nicht einrichten will, nimmt Leuchtstein oder Pilzlicht, die Wirkung ist ähnlich."
+    },
+    {
+      "titel": "Holz brennt",
+      "text": "Wie in der Grundversion: Kein Feuer, keine Lava und keine Lagerfeuer in der Nähe. Die Laternen sind sicher."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), vor allem Zäune in den ungeraden Ebenen, und danach nur die neuen Teile (gelb umrandet)."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 1460,
+      "quelle": "Baumfarm (Dunkeleiche, 2 × 2 pflanzen)",
+      "hinweis": "Bretter, Zäune, Stufen, Bänke"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 700,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "Steinziegel für die Sockel, glatter Stein für den Brunnen"
+    },
+    {
+      "name": "Kies",
+      "menge": 244,
+      "quelle": "Fluss oder Kiesfarm",
+      "hinweis": "Wege"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 170,
+      "quelle": "Eisenfarm",
+      "hinweis": "Geländer und Laternen"
+    },
+    {
+      "name": "Ockerfarbene Froschlichter",
+      "menge": 120,
+      "quelle": "Frosch aus gemäßigtem Biom und kleine Magmawürfel",
+      "hinweis": "ersatzweise Leuchtstein oder Pilzlicht"
+    },
+    {
+      "name": "Sand",
+      "menge": 36,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "Glasscheiben der Aussichtsetage"
+    },
+    {
+      "name": "Blumen und Laub",
+      "menge": 36,
+      "quelle": "Wiese, Eichen mit der Schere",
+      "hinweis": "Beete um den Brunnen"
+    }
+  ],
+  "schmelzvorgaenge": 780,
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "More delicate: lattice with open panels instead of solid fence rings, large arches between the legs and evening lighting. Shape and height stay.",
+    "beschreibung": "The Eiffel Tower, refined the way a creator would: open lattice with corner posts and centre posts instead of closed fence rings, curved arches on all four sides, evening lighting from froglights, light chains and floodlights, and a square with a fountain, flower beds, gravel paths, benches and lanterns.",
+    "grundflaeche": "45 × 45 with square",
+    "massstab": "approx. 1 : 3 (1 block ≈ 3 m)",
+    "hinweis": "Not tested in a test world yet. After pasting, please check the direction of the benches. The lattice follows a fixed rhythm: even layers a full ring, odd layers only corners and centre.",
+    "abschnitte": [
+      {
+        "name": "Foundation and square",
+        "text": "The four stone bases of the base version plus the square: a round fountain with a jet in the middle, an edge of smooth stone slabs, gravel paths to all sides, a gravel ring, beds with box hedges and tulips, benches and lanterns. Froglight floodlights at the inner corners of the feet."
+      },
+      {
+        "name": "Legs and arches",
+        "text": "The legs as open lattice: on even layers a full fence ring, on odd layers only the plank corner posts and one centre post. Every six layers a froglight sits in the corners. Below the first platform an arch of planks spans each side with vertical fence bars above it, lanterns hang below."
+      },
+      {
+        "name": "Frieze and 1st platform",
+        "text": "As in the base version: frieze, floor of slabs and a railing of iron bars with lanterns at the corners."
+      },
+      {
+        "name": "Middle section",
+        "text": "The legs come together, still in the open lattice rhythm with lights in the corners. A light chain below the second platform."
+      },
+      {
+        "name": "2nd platform",
+        "text": "Floor of slabs, railing of iron bars."
+      },
+      {
+        "name": "Upper shaft",
+        "text": "The long shaft in the same lattice rhythm. The froglights in the corners form a line of light to the top at night. Lanterns hang below the observation deck."
+      },
+      {
+        "name": "Observation deck",
+        "text": "Glazed observation deck with gallery as in the base version."
+      },
+      {
+        "name": "Tip and antenna",
+        "text": "Tip and antenna with lightning rod."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "The real tower looks light because you can see through it. That is why only every other layer is a closed ring. The open panels in between make the difference, especially from far away."
+      },
+      {
+        "titel": "The rhythm",
+        "text": "Even layer: a full fence ring with planks in the corners. Odd layer: only the four corner planks and one fence in the middle of each side. Once you have this rhythm in your head, you hardly need the plan for the legs."
+      },
+      {
+        "titel": "Arches",
+        "text": "The arches sit in the outermost plane of the platform and start low on the legs. Build the arch line of planks first, then place fences upwards in every second column up to the platform."
+      },
+      {
+        "titel": "Evening lighting",
+        "text": "Ochre froglights appear when a frog from a temperate biome eats a small magma cube. If you don't want to set that up, use glowstone or shroomlight; the effect is similar."
+      },
+      {
+        "titel": "Wood burns",
+        "text": "As in the base version: no fire, no lava and no campfires nearby. The lanterns are safe."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline), mostly fences on the odd layers, and then only the new parts (yellow outline)."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak, plant 2 × 2)",
+        "hinweis": "planks, fences, slabs, benches"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "stone bricks for the bases, smooth stone for the fountain"
+      },
+      {
+        "name": "Gravel",
+        "quelle": "River or gravel farm",
+        "hinweis": "paths"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "railings and lanterns"
+      },
+      {
+        "name": "Ochre froglights",
+        "quelle": "Frog from a temperate biome and small magma cubes",
+        "hinweis": "glowstone or shroomlight as a substitute"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "glass panes of the observation deck"
+      },
+      {
+        "name": "Flowers and leaves",
+        "quelle": "Meadow, oak trees with shears",
+        "hinweis": "beds around the fountain"
+      }
+    ]
+  }
+}
