@@ -1,0 +1,297 @@
+{
+  "id": "villa-gruenderzeit",
+  "variante": "ausbau",
+  "variante_titel": "Ausbau-Version",
+  "leitbild": "Reich verziert: Gesimse, Erker, Stuck aus Stufen und Treppen, Gauben mit Dachrinnen, schmiedeeiserner Zaun und Vorgarten. Tiefe entsteht durch Vor- und Rücksprünge.",
+  "titel": "Gründerzeit-Villa",
+  "beschreibung": "Die Gründerzeit-Villa, verfeinert wie von einem Creator: Fenster mit weißen Stürzen, Sohlbänken und Verdachungen, ein umlaufendes Gesims, ein Zwerchhaus mit Fachwerkgiebel, ein Erker, ein Schieferdach mit Gauben, Dachrinnen und Fallrohren, ein Turm mit spitzem Schieferhelm, eine Veranda mit Balkon, eingerichtete Räume und ein Vorgarten mit Eisenzaun, Rosen und Linde.",
+  "schwierigkeit": 5,
+  "bauzeit_stunden": [
+    12,
+    18
+  ],
+  "grundflaeche": "30 × 32 Grundstück mit Vorgarten, Haus 21 × 15 plus Turm Ø 7 und Erker",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte nach dem Einfügen kurz die Richtung von Treppen, Verdachungen, Türen und Betten ansehen.",
+  "abschnitte": [
+    {
+      "name": "Sockel und Vorgarten",
+      "von": 0,
+      "bis": 0,
+      "text": "Steinziegel unter Haus, Turm und Erker, der Boden der Veranda aus dunkler Eiche, der Weg aus glattem Stein mit Kiesrand und der Rasen."
+    },
+    {
+      "name": "Erdgeschoss und Garten",
+      "von": 1,
+      "bis": 5,
+      "text": "Sockel aus Steinziegeln mit schrägen Steintreppen davor, darüber Backstein. Fenster mit weißem Sturz, Sohlbank und Verdachung. Haustür mit Oberlicht, der Erker im Osten, der Turm im Südosten. Innen Diele mit großer Treppe und Standuhr, Esszimmer mit Kamin, Küche, Salon mit Klavier und Erkerplatz, Herrenzimmer und Bibliothek im Turm. Draußen Veranda mit Zierbügeln, Eisenzaun mit Ziegelpfeilern, Beete mit Buchs, Rosen und Pfingstrosen, eine Linde mit Bank und Gaslaternen."
+    },
+    {
+      "name": "Gesims und Decke",
+      "von": 6,
+      "bis": 6,
+      "text": "Das weiße Gurtgesims aus umgedrehten Diorit-Treppen läuft einen Block vor der Wand um Haus, Turm und Erker. Innen der Fichtenboden des Obergeschosses mit dem Treppenloch. Darüber der Balkon auf der Veranda mit Eisengeländer."
+    },
+    {
+      "name": "Obergeschoss",
+      "von": 7,
+      "bis": 11,
+      "text": "Fenster wie unten, die Balkontür über der Haustür, oben ein weißes Band und der Zahnschnitt unter der Traufe. Innen zwei Schlafzimmer, Kinderzimmer, Bad, Galerie und ein Lesezimmer im Turm."
+    },
+    {
+      "name": "Dach, Zwerchhaus, Gauben und Kamine",
+      "von": 12,
+      "bis": 21,
+      "text": "Steiles Satteldach aus Tiefenschiefer-Ziegeln mit Dachrinnen und Fallrohren. In den Giebeln Zierfachwerk aus dunkler Eiche mit Kalzit. Im Norden steigt das Zwerchhaus aus der Wand, auf beiden Seiten sitzen zwei Gauben. Die Kamine haben ein weißes Band und einen Kragen."
+    },
+    {
+      "name": "Turm-Obergeschoss",
+      "von": 22,
+      "bis": 24,
+      "text": "Die obersten Turmfenster und der Zahnschnitt unter dem Helm."
+    },
+    {
+      "name": "Turmhelm",
+      "von": 25,
+      "bis": 38,
+      "text": "Achteckiger Helm aus Schiefer, der sich in Stufen verjüngt, oben ein Blitzableiter."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "Das Leitbild",
+      "text": "Reich verziert heißt hier: Jedes Fenster bekommt einen Rahmen, jede Kante ein Gesims. Weiß (Diorit) auf Backstein, dunkler Schiefer obendrauf. Die Tiefe kommt von Teilen, die vorstehen: Gesims, Sohlbänke, Verdachungen, Erker und Zwerchhaus."
+    },
+    {
+      "titel": "Stuck aus Stufen und Treppen",
+      "text": "Die Verdachung über einem Fenster ist eine umgedrehte Diorit-Treppe vor der Wand, die hohe Seite zeigt zur Wand. Die Sohlbank darunter ist eine Diorit-Stufe in der oberen Hälfte. Das Gesims ist dasselbe, nur rund ums Haus."
+    },
+    {
+      "titel": "Dachrinne und Fallrohr",
+      "text": "Die Rinne ist eine Eisenfalltür in der oberen Hälfte des Blocks, direkt vor der untersten Dachreihe. Die Fallrohre an den Ecken sind senkrechte Ketten."
+    },
+    {
+      "titel": "Fachwerk im Giebel",
+      "text": "Setze zuerst die waagerechten Balken (liegende dunkle Eichenstämme), dann die Pfosten, und fülle die Felder mit Kalzit. Kalzit gibt es in Amethystgeoden, ersatzweise weißer Beton oder Diorit."
+    },
+    {
+      "titel": "Turmhelm",
+      "text": "Der Helm wird in Ringen gebaut. Wo der nächste Ring kleiner wird, kommt eine Treppe, sonst ein voller Block. Arbeite von unten nach oben und prüfe jeden Ring im Plan, weil die Ecken als Stufen gesetzt sind."
+    },
+    {
+      "titel": "Sessel",
+      "text": "Die roten Sessel sind Rote-Netherziegel-Treppen. Wer keinen Nether-Zugang hat, nimmt Treppen aus Akazien- oder Mangrovenholz."
+    },
+    {
+      "titel": "Schon die Grundversion gebaut?",
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet)."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Tonklumpen",
+      "menge": 3570,
+      "quelle": "Schlamm über Tropfstein, Flüsse, Handel",
+      "hinweis": "892 Ziegelblöcke"
+    },
+    {
+      "name": "Bruchstein",
+      "menge": 1090,
+      "quelle": "Bruchsteingenerator",
+      "hinweis": "Steinziegel für den Sockel und Zaun, dazu Diorit"
+    },
+    {
+      "name": "Netherquarz",
+      "menge": 555,
+      "quelle": "Nether",
+      "hinweis": "Diorit für Gesimse, Rahmen und Bänder"
+    },
+    {
+      "name": "Bruchtiefenschiefer",
+      "menge": 710,
+      "quelle": "Abbau unter Ebene 0",
+      "hinweis": "Tiefenschiefer-Ziegel für Dach und Turmhelm"
+    },
+    {
+      "name": "Sand",
+      "menge": 70,
+      "quelle": "Strand oder Wüste",
+      "hinweis": "Glas für die Fenster"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 255,
+      "quelle": "Eisenfarm",
+      "hinweis": "Dachrinnen, Fallrohre, Gitter, Laternen, Kessel"
+    },
+    {
+      "name": "Fichtenstamm",
+      "menge": 80,
+      "quelle": "Baumfarm (Fichte)",
+      "hinweis": "Böden und Stühle"
+    },
+    {
+      "name": "Dunkeleichenstamm",
+      "menge": 100,
+      "quelle": "Baumfarm (Dunkeleiche)",
+      "hinweis": "Fachwerk, Treppe, Veranda, Türen, Linde"
+    },
+    {
+      "name": "Kalzit",
+      "menge": 30,
+      "quelle": "Amethystgeode",
+      "hinweis": "Felder im Fachwerk"
+    },
+    {
+      "name": "Laub (mit Schere)",
+      "menge": 172,
+      "quelle": "Eiche und Dunkeleiche",
+      "hinweis": "Buchs-Einfassung und Linde"
+    },
+    {
+      "name": "Bücher",
+      "menge": 87,
+      "quelle": "Kühe und Zuckerrohr",
+      "hinweis": "für die Bücherregale"
+    },
+    {
+      "name": "Kupferbarren",
+      "menge": 6,
+      "quelle": "Abbau",
+      "hinweis": "Blitzableiter auf Turm und Zwerchhaus"
+    }
+  ],
+  "schmelzvorgaenge": 5000,
+  "plugins": [],
+  "en": {
+    "variante_titel": "Extended version",
+    "leitbild": "Richly decorated: cornices, a bay window, stucco from slabs and stairs, dormers with gutters, a wrought-iron fence and a front garden. Depth comes from parts that step forward and back.",
+    "beschreibung": "The Gründerzeit Villa, refined the way a creator would: windows with white lintels, sills and hoods, a cornice all around, a cross gable with half-timbering, a bay window, a slate roof with dormers, gutters and downpipes, a tower with a pointed slate spire, a veranda with balcony, furnished rooms and a front garden with iron fence, roses and a linden tree.",
+    "grundflaeche": "30 × 32 plot with front garden, house 21 × 15 plus tower Ø 7 and bay window",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. After pasting, please check the direction of stairs, window hoods, doors and beds.",
+    "abschnitte": [
+      {
+        "name": "Base and front garden",
+        "text": "Stone bricks under the house, tower and bay window, the dark oak floor of the veranda, the smooth stone path with gravel edging and the lawn."
+      },
+      {
+        "name": "Ground floor and garden",
+        "text": "A base of stone bricks with sloping stone stairs in front, brick above. Windows with white lintel, sill and hood. The front door with a transom, the bay window to the east, the tower to the south-east. Inside a hall with a grand staircase and a grandfather clock, a dining room with fireplace, kitchen, salon with piano and bay seat, a study and a library in the tower. Outside the veranda with brackets, an iron fence with brick pillars, beds with box hedges, roses and peonies, a linden tree with a bench and gas lamps."
+      },
+      {
+        "name": "Cornice and floor",
+        "text": "The white cornice of upside-down diorite stairs runs one block in front of the wall around house, tower and bay window. Inside the spruce floor of the upper floor with the stairwell. Above it the balcony on the veranda with an iron railing."
+      },
+      {
+        "name": "Upper floor",
+        "text": "Windows as below, the balcony door above the front door, a white band at the top and dentils under the eaves. Inside two bedrooms, a kids' room, a bathroom, a gallery and a reading room in the tower."
+      },
+      {
+        "name": "Roof, cross gable, dormers and chimneys",
+        "text": "A steep gable roof of deepslate tiles with gutters and downpipes. Decorative half-timbering of dark oak with calcite in the gables. The cross gable rises from the wall to the north, two dormers sit on each side. The chimneys have a white band and a collar."
+      },
+      {
+        "name": "Tower top floor",
+        "text": "The highest tower windows and the dentils under the spire."
+      },
+      {
+        "name": "Tower spire",
+        "text": "Octagonal slate spire that tapers in steps, a lightning rod on top."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "The guiding idea",
+        "text": "Richly decorated means every window gets a frame and every edge a cornice. White (diorite) on brick, dark slate on top. The depth comes from parts that stick out: cornice, sills, hoods, bay window and cross gable."
+      },
+      {
+        "titel": "Stucco from slabs and stairs",
+        "text": "The hood above a window is an upside-down diorite stair in front of the wall, high side towards the wall. The sill below is a diorite slab in the top half. The cornice is the same, just all around the house."
+      },
+      {
+        "titel": "Gutter and downpipe",
+        "text": "The gutter is an iron trapdoor in the top half of the block, right in front of the lowest roof row. The downpipes at the corners are vertical chains."
+      },
+      {
+        "titel": "Half-timbering in the gable",
+        "text": "Place the horizontal beams first (dark oak logs lying down), then the posts, and fill the panels with calcite. Calcite is found in amethyst geodes; white concrete or diorite work as a substitute."
+      },
+      {
+        "titel": "Tower spire",
+        "text": "The spire is built in rings. Where the next ring gets smaller, place a stair, otherwise a full block. Work from the bottom up and check each ring in the plan because the corners are set as slabs."
+      },
+      {
+        "titel": "Armchairs",
+        "text": "The red armchairs are red nether brick stairs. Without Nether access use acacia or mangrove stairs."
+      },
+      {
+        "titel": "Already built the base version?",
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline)."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Clay balls",
+        "quelle": "Mud above dripstone, rivers, trading",
+        "hinweis": "892 brick blocks"
+      },
+      {
+        "name": "Cobblestone",
+        "quelle": "Cobblestone generator",
+        "hinweis": "stone bricks for the base and fence, plus diorite"
+      },
+      {
+        "name": "Nether quartz",
+        "quelle": "Nether",
+        "hinweis": "diorite for cornices, frames and bands"
+      },
+      {
+        "name": "Cobbled deepslate",
+        "quelle": "Mining below level 0",
+        "hinweis": "deepslate tiles for roof and spire"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Beach or desert",
+        "hinweis": "glass for the windows"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "gutters, downpipes, bars, lanterns, cauldrons"
+      },
+      {
+        "name": "Spruce logs",
+        "quelle": "Tree farm (spruce)",
+        "hinweis": "floors and chairs"
+      },
+      {
+        "name": "Dark oak logs",
+        "quelle": "Tree farm (dark oak)",
+        "hinweis": "half-timbering, staircase, veranda, doors, linden tree"
+      },
+      {
+        "name": "Calcite",
+        "quelle": "Amethyst geode",
+        "hinweis": "panels in the half-timbering"
+      },
+      {
+        "name": "Leaves (with shears)",
+        "quelle": "Oak and dark oak",
+        "hinweis": "box hedges and linden tree"
+      },
+      {
+        "name": "Books",
+        "quelle": "Cows and sugar cane",
+        "hinweis": "for the bookshelves"
+      },
+      {
+        "name": "Copper ingots",
+        "quelle": "Mining",
+        "hinweis": "lightning rods on tower and cross gable"
+      }
+    ]
+  }
+}

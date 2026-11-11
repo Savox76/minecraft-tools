@@ -90,7 +90,7 @@ SESSEL = je_richtung('Rote-Netherziegel-Treppe (hohe Seite nach %s)', 'minecraft
 TPLATTE = DSTUFE_O
 LESEPULT = block('Lesepult', 'minecraft:lectern[facing=south]', '#8a6438')
 KLAVIER = block('Notenblock', 'minecraft:note_block', '#6b4a32')
-UHR = block('Standuhr (Dunkler Eichenstamm)', 'minecraft:dark_oak_wood', '#3e2c1c')
+UHR = block('Dunkles Eichenholz (Standuhr)', 'minecraft:dark_oak_wood', '#3e2c1c')
 BETT = {r: (block('Rotes Bett (Fußende, Kopf nach %s)' % RICHT[r], 'minecraft:red_bed[part=foot,facing=%s]' % r, '#9c3a2e'),
             block('Rotes Bett (Kopfende, Kopf nach %s)' % RICHT[r], 'minecraft:red_bed[part=head,facing=%s]' % r, '#9c3a2e', ['zweiter-teil']))
         for r in ('north', 'east', 'west')}
