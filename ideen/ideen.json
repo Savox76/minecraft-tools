@@ -258,9 +258,9 @@
       "nr": 117,
       "kategorie": "xp",
       "groesse": "groß",
-      "titel": "Große Handelshalle (Markthalle)",
+      "titel": "Große Handelshalle (Unterirdischer Basar)",
       "text": "16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt.",
-      "status": "idee",
+      "status": "verfuegbar",
       "plugins": [
         {
           "id": "arbeiter",
@@ -268,7 +268,7 @@
         }
       ],
       "en": {
-        "titel": "Large trading hall (market hall)",
+        "titel": "Large trading hall (underground bazaar)",
         "text": "16 cells in two facing rows, all 13 professions once and several librarians. With a minecart track to bring villagers in and a curing station for zombie villagers that gives permanently better prices."
       },
       "konzept": {
@@ -288,7 +288,8 @@
           "Curing station: a zombie converts a villager in a secured chamber, then a splash potion of weakness and a golden apple. This gives permanently better prices. Conversion is only certain on “hard”.",
           "Brightly lit so no monsters spawn. Info board at the entrance: who sells what."
         ]
-      }
+      },
+      "bauplan": "handelshalle-basar"
     },
     {
       "nr": 9,

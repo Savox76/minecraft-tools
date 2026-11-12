@@ -1,0 +1,237 @@
+{
+  "id": "handelshalle-basar",
+  "titel": "Handelshalle: Unterirdischer Basar",
+  "beschreibung": "Quadratische Handelshalle unter der Erde für 16 Dorfbewohner: alle 13 Berufe und 4 Bibliothekare, jeder in einer eigenen Zelle hinter seinem Arbeitsblock als Ladentheke. Gewölbe aus Schlammziegeln mit Sandsteinrippen und Pilzlicht, bunte Markisen, Brunnen in der Mitte, Heilstation für bessere Preise, Smaragd-Kasse und Treppe zur Oberfläche.",
+  "kategorie": "technik",
+  "tags": [
+    "handelshalle",
+    "dorfbewohner",
+    "handel",
+    "basar",
+    "unterirdisch",
+    "heilstation"
+  ],
+  "edition": [
+    "java",
+    "bedrock"
+  ],
+  "schwierigkeit": 3,
+  "bauzeit_stunden": [
+    6,
+    10
+  ],
+  "grundflaeche": "21 × 21 Saal, mit Eingangstunnel 23 × 31",
+  "massstab": "1 : 1",
+  "status": "entwurf",
+  "hinweis": "Noch nicht in einer Testwelt geprüft. Bitte vor allem die Richtung der Lesepulte, der Eisentür und des Hebels ansehen.",
+  "ansicht": {
+    "schnitt": false
+  },
+  "abschnitte": [
+    {
+      "name": "Boden",
+      "von": 0,
+      "bis": 0,
+      "text": "Den Hohlraum ausheben: 21 × 21 Blöcke und 12 hoch, dazu der Tunnel nach Süden. Boden aus glattem Sandstein, im Gang ein Schachbrett aus Terrakotta und weißer Terrakotta, in der Mitte das Becken des Brunnens."
+    },
+    {
+      "name": "Stände, Brunnen und Heilstation",
+      "von": 1,
+      "bis": 2,
+      "text": "Rundum die Wand, davor auf jeder Seite vier Zellen mit Pfosten dazwischen. Vor jeder Zelle der Arbeitsblock als Ladentheke, darüber bleibt ein Spalt zum Handeln frei. In der Mitte der Brunnen mit vier Bänken und Teppichen. Im Norden die Heilstation mit Heilzelle, Eisentür und Zombiezelle hinter Glas, im Osten die Kasse, im Westen die Sitzecke. Die Dorfbewohner kommen erst, wenn die Zellen fertig sind (siehe Tipps)."
+    },
+    {
+      "name": "Stürze, Markisen und Licht",
+      "von": 3,
+      "bis": 4,
+      "text": "Über jeder Zelle eine Decke, über jeder Theke ein Sturz aus farbiger Wolle. Darauf die Markise, die einen Block in den Gang ragt, mit einer Laterne darunter. Säulen am Eingang mit Laternen."
+    },
+    {
+      "name": "Gewölbe und Eingangstunnel",
+      "von": 5,
+      "bis": 12,
+      "text": "Klostergewölbe: Es steigt von allen vier Wänden zur Mitte an. Die Rippen aus glattem Sandstein laufen über die Diagonalen und die Mittelachsen, im Scheitel sitzt ein Kreis aus Pilzlicht. Laternen hängen an Ketten. Im Süden steigt die Treppe im Gewölbetunnel bis zur Oberfläche."
+    }
+  ],
+  "tipps": [
+    {
+      "titel": "So funktioniert ein Stand",
+      "text": "Der Dorfbewohner steht in einer 1 × 1 Zelle, davor sein Arbeitsblock. Gehandelt wird über die Theke hinweg. Der Sturz über der Theke verhindert, dass er hinaufspringt und herausläuft. Weil der Arbeitsblock direkt vor ihm steht, füllt er seine Ware bis zu zweimal am Tag auf."
+    },
+    {
+      "titel": "Dorfbewohner hineinbringen",
+      "text": "Lass die Theke zuerst weg. Leg eine kurze Schiene in die Zelle, schieb den Dorfbewohner in einer Lore hinein und bau die Lore ab. Dann Schiene entfernen und den Arbeitsblock als Theke setzen. Der Dorfbewohner nimmt den Beruf an, solange er noch nie gehandelt hat."
+    },
+    {
+      "titel": "Bibliothekare würfeln",
+      "text": "Gefällt dir das Buch eines Bibliothekars nicht, bau das Lesepult ab und setz es wieder hin, bevor du zum ersten Mal mit ihm handelst. Er bekommt dann neue Angebote. Das geht so oft du willst."
+    },
+    {
+      "titel": "Heilstation",
+      "text": "Bring einen neuen Dorfbewohner in die Heilzelle und einen Zombie mit Namensschild in die Zombiezelle. Hebel umlegen: Die Eisentür öffnet sich, der Zombie verwandelt den Dorfbewohner. Hebel zurück, dann durch den Spalt einen Wurftrank der Schwäche werfen und einen goldenen Apfel geben. Nach ein paar Minuten ist er geheilt und gibt dir dauerhaft niedrige Preise. Danach die Theke der Heilzelle abbauen und ihn per Lore in seinen Stand bringen."
+    },
+    {
+      "titel": "Schwierigkeit",
+      "text": "Auf „schwer“ wird jeder Dorfbewohner sicher zum Zombie-Dorfbewohner. Auf „normal“ klappt es nur in der Hälfte der Fälle, sonst stirbt er. Stell die Schwierigkeit zum Heilen kurz um oder hab Ersatz-Dorfbewohner bereit."
+    },
+    {
+      "titel": "Sicher und hell",
+      "text": "Der Saal ist hell genug, damit keine Monster entstehen. Der Zombie braucht ein Namensschild, sonst verschwindet er. Unter der Erde verbrennt er nicht."
+    },
+    {
+      "titel": "Material sparen",
+      "text": "Schlammziegel brauchen viel Weizen. Wer sparen will, nimmt normale Ziegel oder Terrakotta für die Wände. Pilzlicht gibt es im Nether, ersatzweise Leuchtstein oder Laternen."
+    }
+  ],
+  "rohstoffe": [
+    {
+      "name": "Erde und Weizen",
+      "menge": 1157,
+      "quelle": "Oberfläche, Weizenfeld",
+      "hinweis": "je 1157: Erde mit Wasserflasche zu Schlamm, mit Weizen zu Lehm, dann zu Schlammziegeln"
+    },
+    {
+      "name": "Sand",
+      "menge": 3140,
+      "quelle": "Wüste oder Strand",
+      "hinweis": "rund 785 Sandstein für Boden, Rippen, Pfosten und Treppen"
+    },
+    {
+      "name": "Tonklumpen",
+      "menge": 640,
+      "quelle": "Flüsse oder Schlamm über Tropfstein",
+      "hinweis": "160 Terrakotta für den Gang"
+    },
+    {
+      "name": "Wolle",
+      "menge": 90,
+      "quelle": "Schafe",
+      "hinweis": "Markisen und Teppiche in acht Farben"
+    },
+    {
+      "name": "Eisenbarren",
+      "menge": 55,
+      "quelle": "Eisenfarm",
+      "hinweis": "Laternen, Ketten, Eisentür, Kessel, Schmelzofen, Schmiedetisch, Steinsäge"
+    },
+    {
+      "name": "Pilzlicht",
+      "menge": 9,
+      "quelle": "Nether (Karmesin- und Wirrwald)",
+      "hinweis": "Kreis im Scheitel des Gewölbes"
+    },
+    {
+      "name": "Arbeitsblöcke",
+      "menge": 16,
+      "quelle": "selbst herstellen",
+      "hinweis": "4 Lesepulte und je einer der übrigen 12 Berufe"
+    },
+    {
+      "name": "Dorfbewohner",
+      "menge": 16,
+      "quelle": "Dorf oder Dorfbewohner-Zucht",
+      "hinweis": "dazu 1 Zombie mit Namensschild, Wurftränke der Schwäche und goldene Äpfel"
+    }
+  ],
+  "schmelzvorgaenge": 1700,
+  "version": "0.9.0",
+  "autor": "Savox",
+  "plugins": [],
+  "en": {
+    "titel": "Trading hall: Underground bazaar",
+    "beschreibung": "Square underground trading hall for 16 villagers: all 13 professions and 4 librarians, each in its own cell behind its job block as the counter. A vault of mud bricks with sandstone ribs and shroomlight, colourful awnings, a fountain in the middle, a curing station for better prices, an emerald till and stairs to the surface.",
+    "grundflaeche": "21 × 21 hall, with entrance tunnel 23 × 31",
+    "massstab": "1 : 1",
+    "hinweis": "Not tested in a test world yet. Please check the direction of the lecterns, the iron door and the lever.",
+    "abschnitte": [
+      {
+        "name": "Floor",
+        "text": "Dig out the space: 21 × 21 blocks and 12 high, plus the tunnel to the south. Floor of smooth sandstone, a checkerboard of terracotta and white terracotta in the aisle, the fountain basin in the middle."
+      },
+      {
+        "name": "Stalls, fountain and curing station",
+        "text": "The wall all around, in front of it four cells on each side with posts between them. In front of each cell the job block as the counter, with a gap above it for trading. In the middle the fountain with four benches and carpets. To the north the curing station with curing cell, iron door and zombie cell behind glass, to the east the till, to the west the seating corner. The villagers only come in when the cells are finished (see tips)."
+      },
+      {
+        "name": "Lintels, awnings and lights",
+        "text": "A ceiling over every cell and a lintel of coloured wool over every counter. On top the awning, which sticks one block into the aisle, with a lantern below. Pillars with lanterns at the entrance."
+      },
+      {
+        "name": "Vault and entrance tunnel",
+        "text": "Cloister vault: it rises from all four walls to the middle. The ribs of smooth sandstone run along the diagonals and the centre lines, a ring of shroomlight sits at the top. Lanterns hang on chains. To the south the staircase rises in a vaulted tunnel to the surface."
+      }
+    ],
+    "tipps": [
+      {
+        "titel": "How a stall works",
+        "text": "The villager stands in a 1 × 1 cell with its job block in front. You trade across the counter. The lintel above the counter stops it from jumping up and walking out. Because the job block is right in front of it, it restocks up to twice a day."
+      },
+      {
+        "titel": "Getting villagers in",
+        "text": "Leave out the counter first. Lay a short rail into the cell, push the villager in with a minecart and break the minecart. Then remove the rail and place the job block as the counter. The villager takes the profession as long as it has never traded."
+      },
+      {
+        "titel": "Rerolling librarians",
+        "text": "If you don't like a librarian's book, break the lectern and place it again before trading with it for the first time. It then gets new offers. You can repeat this as often as you like."
+      },
+      {
+        "titel": "Curing station",
+        "text": "Bring a new villager into the curing cell and a zombie with a name tag into the zombie cell. Flip the lever: the iron door opens and the zombie converts the villager. Flip it back, then throw a splash potion of weakness through the gap and give a golden apple. After a few minutes it is cured and gives you permanently low prices. Then break the counter of the curing cell and take it to its stall by minecart."
+      },
+      {
+        "titel": "Difficulty",
+        "text": "On “hard” every villager is certain to become a zombie villager. On “normal” it only works half the time, otherwise it dies. Switch the difficulty briefly for curing or keep spare villagers ready."
+      },
+      {
+        "titel": "Safe and bright",
+        "text": "The hall is bright enough that no monsters spawn. The zombie needs a name tag or it despawns. Underground it does not burn."
+      },
+      {
+        "titel": "Saving materials",
+        "text": "Mud bricks need a lot of wheat. To save, use normal bricks or terracotta for the walls. Shroomlight comes from the Nether; glowstone or lanterns work as a substitute."
+      }
+    ],
+    "rohstoffe": [
+      {
+        "name": "Dirt and wheat",
+        "quelle": "Surface, wheat field",
+        "hinweis": "1157 each: dirt with a water bottle to mud, with wheat to packed mud, then to mud bricks"
+      },
+      {
+        "name": "Sand",
+        "quelle": "Desert or beach",
+        "hinweis": "about 785 sandstone for floor, ribs, posts and stairs"
+      },
+      {
+        "name": "Clay balls",
+        "quelle": "Rivers or mud above dripstone",
+        "hinweis": "160 terracotta for the aisle"
+      },
+      {
+        "name": "Wool",
+        "quelle": "Sheep",
+        "hinweis": "awnings and carpets in eight colours"
+      },
+      {
+        "name": "Iron ingots",
+        "quelle": "Iron farm",
+        "hinweis": "lanterns, chains, iron door, cauldron, blast furnace, smithing table, stonecutter"
+      },
+      {
+        "name": "Shroomlight",
+        "quelle": "Nether (crimson and warped forest)",
+        "hinweis": "ring at the top of the vault"
+      },
+      {
+        "name": "Job blocks",
+        "quelle": "Craft them",
+        "hinweis": "4 lecterns and one for each of the other 12 professions"
+      },
+      {
+        "name": "Villagers",
+        "quelle": "Village or villager breeder",
+        "hinweis": "plus 1 zombie with a name tag, splash potions of weakness and golden apples"
+      }
+    ]
+  }
+}

@@ -10,12 +10,12 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 | Bereich | Status | Wo |
 |---|---|---|
-| 11 Baupläne | ✅ **verfügbar** als Entwurf: Bauschritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
+| 12 Baupläne | ✅ **verfügbar** als Entwurf (8 davon mit Ausbau-Version und Umbau): Bauschritte, Teileliste, `.litematic`, `.schem`, CSV | [`builds/`](builds/) |
 | 7 eigene Plugins | 🟡 **Doku verfügbar**, Quellcode und `.jar` integrierbar, sobald der Quellcode vorliegt | [`plugins/eigene/`](plugins/eigene/) |
 | Fremde Plugins | 🟡 **vorläufige Liste** (7) aus den Server-Notizen, wird mit der vollständigen Liste ergänzt | [`plugins/fremd/plugins.json`](plugins/fremd/plugins.json) |
 | 2 Anleitungen | ✅ verfügbar (Farm-Bot, CoreProtect) | [`docs/`](docs/) |
 | Website | ✅ automatisch per GitHub Actions auf GitHub Pages, **Deutsch und Englisch**, Hell/Dunkel/Automatisch, suchmaschinenfreundlich (siehe 14.) | [`site/`](site/), [`tools/build_site.py`](tools/build_site.py), [`tools/seiten.py`](tools/seiten.py) |
-| Geplant | 💡 147 offene Ideen für Baupläne, 14 für Anleitungen und 1 für Plugins (Nummern mit P), mit Kurztext, auf der Website unter „Geplant“; 3 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
+| Geplant | 💡 153 offene Ideen für Baupläne, 14 für Anleitungen und 1 für Plugins (Nummern mit P), mit Kurztext, auf der Website unter „Geplant“; 4 schon umgesetzt | [`ideen/ideen.json`](ideen/ideen.json), Abschnitt 15 |
 | Abhängigkeiten | ✅ Werkzeuge, Dienste, Spiel, Server und Plugins, teils automatisch erzeugt | Abschnitt 16 |
 | Bauwünsche | ✅ Issue-Formulare, Wunschliste täglich auf der Website | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) |
 
@@ -76,6 +76,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 | `kaktus-xp-farm` | Kaktus-XP-Farm mit Ofen (Idee Nr. 1) | 9 × 10 | 6 | 320 |
 | `bambusfarm-klein` | Kleine Bambusfarm mit Kolben und Beobachtern (Idee Nr. 9) | 10 × 5 | 5 | 160 |
 | `teehaus-garten` | Japanisches Teehaus mit Garten, exklusive Ausführung (Idee Nr. 50, Wunsch #2) | 33 × 33 | 12 | 1.900 |
+| `handelshalle-basar` | Große Handelshalle als unterirdischer Basar, quadratisch, 16 Dorfbewohner, Heilstation (Idee Nr. 117) | 21 × 21 (mit Tunnel 23 × 31) | 13 | 2.280 |
 
 Quelle: die bisherige Bauplan-Seite (Claude-Artifact „Spawn-Baupläne“).
 
@@ -498,11 +499,11 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-169 offene Ideen (168 💡 Idee, 1 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
+168 offene Ideen (167 💡 Idee, 1 🔨 in Arbeit), 4 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
 **Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 114 Holstentor Lübeck, Nr. 47 Blockhütte am See.
 
-### Skillfarmen (XP) (9)
+### Skillfarmen (XP) (8)
 
 Erfahrung für Verzauberungen und Reparaturen.
 
@@ -515,7 +516,6 @@ Erfahrung für Verzauberungen und Reparaturen.
 | 6 | Goldfarm auf dem Nether-Dach | groß | Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold. | 💡 Idee |
 | 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
 | 8 | Kleine Handelshalle | klein | Sechs Dorfbewohner in einer Reihe, jeder in einer eigenen Zelle hinter seinem Arbeitsblock. Gehandelt wird über den Block hinweg, so kann niemand weglaufen. Mit zwei Bibliothekaren für Verzauberungsbücher, etwa 15 × 9 Blöcke. Plugin: arbeiter (optional). | 💡 Idee |
-| 117 | Große Handelshalle (Markthalle) | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
 | 118 | Große Handelshalle im Stil einer Zauberschule | groß | Eine hohe Halle mit Spitzbogen-Gewölbe, schwebenden Kerzen aus Lichtblöcken und langen Tafeln in der Mitte. Die Händler stehen in Nischen an den Seitenwänden, über ihnen Galerien mit Bücherregalen und Bannern. Plugin: arbeiter (optional). | 💡 Idee |
 
 ### Farmen für Baumaterial (21)
@@ -762,13 +762,14 @@ Eigene Plugins, die noch entstehen sollen, oft direkt von Spielern gewünscht.
 |---|---|---|---|---|
 | P1 | BossRaid: Boss-Kämpfe mit Arena und Raids | Starke Bosse mit eigenen Fähigkeiten, Phasen und Boss-Leiste, die richtig Schaden machen und guten Loot fallen lassen. Spieler beschwören sie selbst an einem Altar, die Regeln jedes Raids stellst du per Befehl ein. Ausgearbeitetes Konzept: Abschnitt 17. | [Issue #3](https://github.com/Savox76/minecraft-tools/issues/3) | 🔨 in Arbeit |
 
-### ✅ Umgesetzt (3)
+### ✅ Umgesetzt (4)
 
 Diese Ideen sind fertige Baupläne. Sie stehen nicht mehr auf der Geplant-Seite, sondern bei den Bauplänen.
 
 | Nr. | Idee | Bauplan |
 |---|---|---|
 | 1 | Kaktus-XP-Farm mit Ofenbatterie | [`builds/kaktus-xp-farm`](builds/kaktus-xp-farm/) |
+| 117 | Große Handelshalle (Unterirdischer Basar) | [`builds/handelshalle-basar`](builds/handelshalle-basar/) |
 | 50 | Japanisches Teehaus mit Garten | [`builds/teehaus-garten`](builds/teehaus-garten/) |
 | 9 | Kleine Bambusfarm | [`builds/bambusfarm-klein`](builds/bambusfarm-klein/) |
 <!-- ideen:ende -->
@@ -844,7 +845,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 <!-- abhaengigkeiten:start -->
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
-| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle (Markthalle), Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
+| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
 | FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Kleine Bambusfarm, Bauplan Gewächshaus-Farm, Bauplan Kaktus-XP-Farm, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 150 Große Kaktusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
@@ -852,7 +853,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 | ServerShop (eigenes) | Idee Nr. 26 Marktplatz für Spieler-Shops | – | Idee Nr. P1 BossRaid: Boss-Kämpfe mit Arena und Raids |
 | spark (fremdes) | Idee Nr. A7 Lag finden mit spark | – | – |
 
-Ohne Plugin (reines Minecraft): Eiffelturm, Leuchtturm, Japanisches Teehaus mit Garten, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
+Ohne Plugin (reines Minecraft): Eiffelturm, Handelshalle: Unterirdischer Basar, Leuchtturm, Japanisches Teehaus mit Garten, Villa am Wasser, Gründerzeit-Villa, Mediterrane Villa, Moderne Villa.
 <!-- abhaengigkeiten:ende -->
 
 ---
