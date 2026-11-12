@@ -498,7 +498,7 @@ Alle Ideen stehen in [`ideen/ideen.json`](ideen/ideen.json), jeweils mit Nummer,
 **Hinweis zu Paper:** Farmen, die Sand, TNT oder Teppiche vervielfältigen, laufen auf Paper normalerweise nicht und stehen deshalb nicht auf der Liste. Bäume fällt am besten der Holzfäller aus dem Arbeiter-Plugin. Monsterfarmen laufen nur, wenn ein Spieler oder der Farm-Bot in der Nähe ist.
 
 <!-- ideen:start -->
-162 offene Ideen (161 💡 Idee, 1 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
+169 offene Ideen (168 💡 Idee, 1 🔨 in Arbeit), 3 schon umgesetzt (siehe „Umgesetzt“ am Ende).
 
 **Als Nächstes empfohlen:** Nr. 11 Bambus-Brennstoffstation, Nr. 114 Holstentor Lübeck, Nr. 47 Blockhütte am See.
 
@@ -515,10 +515,10 @@ Erfahrung für Verzauberungen und Reparaturen.
 | 6 | Goldfarm auf dem Nether-Dach | groß | Zombifizierte Piglins werden mit Schildkröteneiern angelockt und fallen in eine Kammer. Sehr viel XP und Gold. | 💡 Idee |
 | 7 | Endermanfarm im End | groß | Die schnellste XP-Quelle im Spiel, dazu Enderperlen. Der Enderdrache muss vorher besiegt sein. | 💡 Idee |
 | 8 | Kleine Handelshalle | klein | Sechs Dorfbewohner in einer Reihe, jeder in einer eigenen Zelle hinter seinem Arbeitsblock. Gehandelt wird über den Block hinweg, so kann niemand weglaufen. Mit zwei Bibliothekaren für Verzauberungsbücher, etwa 15 × 9 Blöcke. Plugin: arbeiter (optional). | 💡 Idee |
-| 117 | Große Handelshalle | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
+| 117 | Große Handelshalle (Markthalle) | groß | 16 Zellen in zwei Reihen gegenüber, alle 13 Berufe einmal und Bibliothekare mehrfach. Mit Lore-Zufahrt zum Einbringen der Dorfbewohner und einer Heilstation für Zombie-Dorfbewohner, die dauerhaft bessere Preise bringt. Plugin: arbeiter (optional). | 💡 Idee |
 | 118 | Große Handelshalle im Stil einer Zauberschule | groß | Eine hohe Halle mit Spitzbogen-Gewölbe, schwebenden Kerzen aus Lichtblöcken und langen Tafeln in der Mitte. Die Händler stehen in Nischen an den Seitenwänden, über ihnen Galerien mit Bücherregalen und Bannern. Plugin: arbeiter (optional). | 💡 Idee |
 
-### Farmen für Baumaterial (20)
+### Farmen für Baumaterial (21)
 
 Liefern die Blöcke und Rohstoffe für die Baupläne.
 
@@ -544,6 +544,7 @@ Liefern die Blöcke und Rohstoffe für die Baupläne.
 | 67 | Chorusfrucht-Farm im End | mittel | Halbautomatisch: Chorusblumen wachsen nach, du erntest. Chorusfrüchte werden zu Purpurblöcken. | 💡 Idee |
 | 68 | Pilzfarm | klein | Ein dunkler Raum, in dem sich Pilze von selbst ausbreiten. Für Suppen und Riesenpilz-Deko. | 💡 Idee |
 | 150 | Große Kaktusfarm | groß | Mehrere Etagen mit Kaktus auf Sand. Wächst ein Kaktus an einen Zaun heran, bricht er ab und fällt in Wasserrinnen, die alles zu Trichtern und Fässern führen. Zusammen mit einer großen Ofenbatterie eine starke XP-Quelle und viel grüner Farbstoff. Plugin: fakeplayerplugin (empfohlen). | 💡 Idee |
+| 156 | Dorfbewohner-Zucht | mittel | Dorfbewohner vermehren sich mit Betten und Essen von einem Bauern. Die Kinder werden per Wasserkanal zur Handelshalle gebracht. | 💡 Idee |
 
 ### Monsterfarmen (3)
 
@@ -571,7 +572,7 @@ Machen aus Rohstoffen fertige Dinge, ganz von selbst.
 | 74 | Automatische Küche | klein | Räucheröfen mit Trichtern, gefüttert aus der Kuh- und Hühnerfarm. | 💡 Idee |
 | 75 | Buch-Station | mittel | Zuckerrohr und Leder werden zu Büchern und Bücherregalen. | 💡 Idee |
 
-### Funktionale Bauten (21)
+### Funktionale Bauten (16)
 
 Technik und Komfort für Basis und Server.
 
@@ -582,11 +583,6 @@ Technik und Komfort für Basis und Server.
 | 27 | Lorenbahnhof | mittel | Gleise vom Spawn zu allen Farmen, mit Haltestellen und Fahrplan-Schildern. | 💡 Idee |
 | 76 | Blasen-Aufzug | klein | Seelensand fährt hoch, Magmablock runter. Als eigener Bauplan zum Einbauen in jedes Haus. | 💡 Idee |
 | 77 | Item-Aufzug | klein | Eine Blasensäule hebt Gegenstände vom Keller nach oben ins Lager. | 💡 Idee |
-| 78 | Versteckte Kolbentür 2 × 2 | klein | Öffnet per Knopf oder Druckplatte und verschwindet in der Wand. | 💡 Idee |
-| 79 | Geheimgang hinter Bücherregal | klein | Der klassische Geheimeingang, zum Beispiel zum Lager. | 💡 Idee |
-| 80 | Tresor mit Zahlenschloss | mittel | Ein Redstone-Kombinationsschloss mit Hebeln. Nur wer den Code kennt, kommt rein. | 💡 Idee |
-| 81 | Automatisches Licht | klein | Ein Tageslichtsensor schaltet Redstone-Lampen ab Abend ein. | 💡 Idee |
-| 82 | Zugbrücke | mittel | Kolben fahren die Brücke ein und aus. Passt zur Burg. | 💡 Idee |
 | 83 | Leuchtfeuer-Pyramide | mittel | Eisenblöcke aus der Eisenfarm, Effekte wie Eile beim Abbauen. | 💡 Idee |
 | 84 | Aquisitor-Rahmen | klein | Gibt Atmung unter Wasser, zum Beispiel rund um die Glaskuppel. | 💡 Idee |
 | 85 | Nether-Knotenpunkt | groß | Portale zu allen Basen und eine Eisstraße für schnelle Bootsfahrten. | 💡 Idee |
@@ -598,6 +594,24 @@ Technik und Komfort für Basis und Server.
 | 91 | Beleuchteter Spawn | mittel | Ein Laternen-Raster, damit am Spawn keine Monster entstehen, und das sieht trotzdem gut aus. | 💡 Idee |
 | 103 | Sortiermodul | klein | Eine einzelne Sortierstrecke zum Anbauen an jede Farm, ohne ganzes Kellerlager. | 💡 Idee |
 | 104 | Müllschlucker | klein | Eine Truhe, deren Inhalt in Kaktus oder Lava verschwindet. Für Überschuss, den niemand braucht. | 💡 Idee |
+
+### Redstone-Projekte (11)
+
+Geheimtüren, Anzeigen, Steuerungen und Spielereien mit Redstone.
+
+| Nr. | Vorschlag | Größe | Beschreibung | Status |
+|---|---|---|---|---|
+| 78 | Versteckte Kolbentür 2 × 2 | klein | Öffnet per Knopf oder Druckplatte und verschwindet in der Wand. | 💡 Idee |
+| 79 | Geheimgang hinter Bücherregal | klein | Der klassische Geheimeingang, zum Beispiel zum Lager. | 💡 Idee |
+| 80 | Tresor mit Zahlenschloss | mittel | Ein Redstone-Kombinationsschloss mit Hebeln. Nur wer den Code kennt, kommt rein. | 💡 Idee |
+| 81 | Automatisches Licht | klein | Ein Tageslichtsensor schaltet Redstone-Lampen ab Abend ein. | 💡 Idee |
+| 82 | Zugbrücke | mittel | Kolben fahren die Brücke ein und aus. Passt zur Burg. | 💡 Idee |
+| 151 | Versenkbare Treppe | klein | Auf Knopfdruck fährt eine Treppe aus dem Boden und führt in einen geheimen Keller. Danach verschwindet sie wieder. | 💡 Idee |
+| 152 | Lager-Füllstandsanzeige | klein | Komparatoren lesen Truhen und Fässer aus, eine Reihe Redstone-Lampen zeigt, wie voll das Lager ist. | 💡 Idee |
+| 153 | Schaltzentrale | mittel | Ein Raum mit Hebeln und Kontrolllampen schaltet Licht, Türen und Farmen der ganzen Basis. | 💡 Idee |
+| 154 | Notenblock-Glockenspiel | klein | Verstärker geben den Takt vor, Notenblöcke spielen eine Melodie. Startet per Knopf, die Lieder lassen sich umstecken. | 💡 Idee |
+| 155 | Disco-Tanzfläche | mittel | Redstone-Lampen im Boden blinken in wechselnden Mustern, ein Taktgeber steuert sie. Für Events auf dem Server. | 💡 Idee |
+| 157 | Versteckte Kolbentür 3 × 3 | mittel | Bündig in der Wand, öffnet sich von innen und außen. Größer und aufwendiger als die 2 × 2 Tür. | 💡 Idee |
 
 ### Tiere (5)
 
@@ -830,7 +844,7 @@ Wird aus `plugins` in `builds/*/build.json` und `ideen/ideen.json` erzeugt.
 <!-- abhaengigkeiten:start -->
 | Plugin | Benötigt von | Empfohlen für | Optional bei |
 |---|---|---|---|
-| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle, Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
+| Arbeiter (eigenes) | Idee Nr. 69 Holzkohle-Station | – | Idee Nr. 8 Kleine Handelshalle, Idee Nr. 117 Große Handelshalle (Markthalle), Idee Nr. 118 Große Handelshalle im Stil einer Zauberschule |
 | FakePlayerPlugin (fremdes) | Idee Nr. 87 Farm-Bot-Zentrale | Bauplan Kleine Bambusfarm, Bauplan Gewächshaus-Farm, Bauplan Kaktus-XP-Farm, Idee Nr. 3 Dunkelraum-Monsterfarm, Idee Nr. 4 Spawner-XP-Farm, Idee Nr. 5 Lohenfarm, Idee Nr. 10 Große Bambusfarm, Idee Nr. 150 Große Kaktusfarm, Idee Nr. 12 Melonen- und Kürbisfarm, Idee Nr. 15 Eisenfarm, Idee Nr. 60 Zuckerrohrfarm, Idee Nr. 61 Kakaofarm, Idee Nr. 22 Schleimfarm, Idee Nr. 23 Hexenfarm, Idee Nr. 24 Creeperfarm | Idee Nr. A11 Farmen klein halten |
 | Floodgate (fremdes) | Idee Nr. A5 Bedrock-Spieler verbinden | – | – |
 | InfiniteLager (eigenes) | Idee Nr. 88 Lagerhalle mit Einlagern-Truhen | – | Bauplan Kellerlager |
