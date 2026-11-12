@@ -38,7 +38,7 @@ def art(bid, name):
     """Grobe Formklasse eines Blocks."""
     if not bid:
         n = name
-        for f, rx in (('mob', r'Dorfbewohner'), ('flat', r'Redstonestaub|Seerosenblatt|Teppich|Blütenblätter'),
+        for f, rx in (('mob', r'Dorfbewohner|Zombie'), ('flat', r'Redstonestaub|Seerosenblatt|Teppich|Blütenblätter'),
                       ('bed', r'Bett'), ('trapdoor', r'Falltür'), ('door', r'(?i)tür'), ('fence', r'(?i)zaun'),
                       ('wall', r'(?i)mauer'), ('thin', r'(?i)eisengitter|blitzableiter|laterne|leiter|fackel|bambus'),
                       ('pane', r'Glasscheibe'), ('slab', r'Stufe'), ('glass', r'^Glas$'), ('water', r'Wasser|Meer')):

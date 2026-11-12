@@ -4,7 +4,7 @@
 
 // Ältere Modelle ohne Minecraft-ID: Form aus dem deutschen Namen raten
 export const shapeOf = (n) =>
-  /Dorfbewohner/.test(n) ? 'mob' :
+  /Dorfbewohner|Zombie/.test(n) ? 'mob' :
   /Redstonestaub|Seerosenblatt|Teppich|Blütenblätter/.test(n) ? 'flat' :
   /Komparator|Verstärker/.test(n) ? 'thinplate' :
   /Karotten|Kartoffeln/.test(n) ? 'plant' :
