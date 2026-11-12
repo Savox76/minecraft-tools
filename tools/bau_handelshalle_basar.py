@@ -1,16 +1,18 @@
-"""Unterirdischer Basar – große Handelshalle für 16 Dorfbewohner (Idee Nr. 117).
+"""Unterirdischer Basar – quadratische Handelshalle für 16 Dorfbewohner (Idee Nr. 117).
 
-Leitbild: ein Basar unter der Erde. Gewölbe aus Schlammziegeln mit Gurtbögen aus Sandstein, warmes Licht aus
-Laternen und Pilzlicht, bunte Markisen über jedem Stand, Teppiche, ein Brunnen in der Mitte.
+Leitbild: ein Basar unter der Erde. Quadratischer Saal unter einem Klostergewölbe aus Schlammziegeln mit
+Rippen aus Sandstein, warmes Licht aus Pilzlicht und Laternen, bunte Markisen über jedem Stand, Teppiche und ein
+Brunnen in der Mitte. Auf jeder Seite vier Stände, dazwischen in der Mitte jeder Seite etwas Besonderes:
+Süden der Eingang mit Treppe zur Oberfläche, Norden die Heilstation, Osten die Smaragd-Kasse, Westen eine
+Sitzecke.
 
 Technik (Java und Bedrock):
-- Jeder Dorfbewohner steht in einer 1 × 1 Zelle. Davor sein Arbeitsblock als Ladentheke. Darüber ein Spalt
-  zum Handeln und ein Sturz, damit niemand auf die Theke klettern und herauslaufen kann.
-- Alle 13 Berufe sind vertreten, dazu drei weitere Bibliothekare (4 insgesamt).
-- Heilstation am Nordende: Heilzelle, Zombiezelle, dazwischen eine Eisentür mit Hebel. Ein geheilter
-  Dorfbewohner behält seine niedrigen Preise auch nach dem Umzug in seinen Stand.
+- Jeder Dorfbewohner steht in einer 1 × 1 Zelle an der Außenwand. Davor sein Arbeitsblock als Ladentheke,
+  darüber ein Spalt zum Handeln und ein Sturz, damit niemand auf die Theke klettert.
+- Alle 13 Berufe, dazu drei weitere Bibliothekare (4 insgesamt).
+- Heilstation: Heilzelle und Zombiezelle, dazwischen eine Eisentür mit Hebel.
 
-Koordinaten: x nach Osten, z nach Süden, y nach oben. Ebene 0 = Hallenboden.
+Koordinaten: x nach Osten, z nach Süden, y nach oben. Ebene 0 = Hallenboden. Mitte der Halle x11 z11.
 Aufruf: python tools/bau_handelshalle_basar.py builds/handelshalle-basar [zaehlung.json]
 """
 import json
@@ -19,7 +21,9 @@ import os
 import sys
 
 ZIEL = sys.argv[1]
-X, Y, Z = 17, 13, 38
+X, Y, Z = 23, 13, 31
+M = 11                       # Mitte
+A, B = 1, 21                 # Außenwände
 
 P = []
 ZEICHEN = iter('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&*+-/:;<=>?@^_~' +
@@ -49,7 +53,6 @@ HAENGE = block('Laterne (hängend)', 'minecraft:lantern[hanging=true]', '#f2b33d
 LATERNE = block('Laterne', 'minecraft:lantern', '#f2b33d')
 WASSER = block('Wasser', 'minecraft:water', '#3f86f0')
 GLAS = block('Glas', 'minecraft:glass', '#a9dcec')
-TREPPE = {r: block('Schlammziegeltreppe (hohe Seite nach %s)' % RICHT[r], 'minecraft:mud_brick_stairs[facing=%s]' % r, '#8c6a50') for r in VIER}
 SITZ = {r: block('Sandsteintreppe (hohe Seite nach %s)' % RICHT[r], 'minecraft:sandstone_stairs[facing=%s]' % r, '#d8c88e') for r in VIER}
 TEPPICH = block('Roter Teppich', 'minecraft:red_carpet', '#9c3a2e')
 TEPPICH2 = block('Oranger Teppich', 'minecraft:orange_carpet', '#d8782e')
@@ -62,41 +65,34 @@ TOEPFE = [block(n, mc, c) for n, mc, c in (('Topf mit Kaktus', 'minecraft:potted
                                            ('Topf mit Bambus', 'minecraft:potted_bamboo', '#7fae3a'))]
 FASS = block('Fass', 'minecraft:barrel[facing=up]', '#8a6438')
 TRUHE = block('Truhe (nach Westen)', 'minecraft:chest[facing=west]', '#a5793f')
-BRAU = block('Braustand', 'minecraft:brewing_stand', '#6a6a6a')
+TRUHE_S = block('Truhe (nach Süden)', 'minecraft:chest[facing=south]', '#a5793f')
 DORF = block('Dorfbewohner (kein Block)', None, '#8b6b4a', ['kein-block'])
 ZOMBIE = block('Zombie mit Namensschild (kein Block)', None, '#4f7a4a', ['kein-block'])
-EISENTUER_U = block('Eisentür (unten)', 'minecraft:iron_door[half=lower,facing=north]', '#c9c9c9')
-EISENTUER_O = block('Eisentür (oben)', 'minecraft:iron_door[half=upper,facing=north]', '#c9c9c9', ['zweiter-teil'])
-HEBEL = block('Hebel (an der Wand, nach Osten)', 'minecraft:lever[face=wall,facing=east]', '#7a6a50')
+EISENTUER_U = block('Eisentür (unten)', 'minecraft:iron_door[half=lower,facing=east]', '#c9c9c9')
+EISENTUER_O = block('Eisentür (oben)', 'minecraft:iron_door[half=upper,facing=east]', '#c9c9c9', ['zweiter-teil'])
+HEBEL = block('Hebel (an der Wand, nach Süden)', 'minecraft:lever[face=wall,facing=south]', '#7a6a50')
 STUFEN_EINGANG = block('Sandsteintreppe (Eingang, hohe Seite nach Süden)', 'minecraft:sandstone_stairs[facing=south]', '#d8c88e')
+BRAU = block('Braustand', 'minecraft:brewing_stand', '#6a6a6a')
+TISCH = block('Glatte-Sandstein-Stufe (Tisch)', 'minecraft:smooth_sandstone_slab[type=top]', '#e0d3a3')
 
-# Arbeitsblöcke: (Name, Block, Farbe, Beruf)
-def ab(name, mc, farbe):
-    return block(name, mc, farbe)
-
-
-WEST = [  # Theke zeigt nach Osten in den Gang
-    ab('Lesepult (Bibliothekar)', 'minecraft:lectern[facing=east]', '#8a6438'),
-    ab('Kartentisch (Kartograf)', 'minecraft:cartography_table', '#7a5a36'),
-    BRAU,
-    ab('Komposter (Bauer)', 'minecraft:composter', '#7a5a36'),
-    ab('Fass (Fischer)', 'minecraft:barrel[facing=east]', '#8a6438'),
-    ab('Bognertisch (Pfeilmacher)', 'minecraft:fletching_table', '#b39a6a'),
-    ab('Kessel (Gerber)', 'minecraft:cauldron', '#4a4a50'),
-    None,  # zweiter Bibliothekar
-]
-WEST[7] = WEST[0]
-OST = [  # Theke zeigt nach Westen in den Gang
-    ab('Lesepult (Bibliothekar, nach Westen)', 'minecraft:lectern[facing=west]', '#8a6438'),
-    ab('Schmelzofen (Rüstungsschmied)', 'minecraft:blast_furnace[facing=west]', '#5d5d62'),
-    ab('Räucherofen (Fleischer)', 'minecraft:smoker[facing=west]', '#5d5a55'),
-    ab('Steinsäge (Steinmetz)', 'minecraft:stonecutter[facing=west]', '#7d7d7d'),
-    ab('Webstuhl (Schäfer)', 'minecraft:loom[facing=west]', '#b39a6a'),
-    ab('Schmiedetisch (Werkzeugschmied)', 'minecraft:smithing_table', '#3a3a44'),
-    ab('Schleifstein (Waffenschmied)', 'minecraft:grindstone[face=floor,facing=west]', '#7d7d7d'),
-    None,
-]
-OST[7] = OST[0]
+# Arbeitsblöcke je Seite, Theke zeigt jeweils in die Halle
+LESE = {r: block('Lesepult (Bibliothekar, nach %s)' % RICHT[r], 'minecraft:lectern[facing=%s]' % r, '#8a6438') for r in ('east', 'west')}
+SEITEN = {
+    'west': ['L', 'L', block('Kartentisch (Kartograf)', 'minecraft:cartography_table', '#7a5a36'),
+             block('Braustand (Kleriker)', 'minecraft:brewing_stand', '#6a6a6a')],
+    'north': [block('Komposter (Bauer)', 'minecraft:composter', '#7a5a36'),
+              block('Fass (Fischer)', 'minecraft:barrel[facing=south]', '#8a6438'),
+              block('Bognertisch (Pfeilmacher)', 'minecraft:fletching_table', '#b39a6a'),
+              block('Kessel (Gerber)', 'minecraft:cauldron', '#4a4a50')],
+    'east': ['L', 'L', block('Schmelzofen (Rüstungsschmied)', 'minecraft:blast_furnace[facing=west]', '#5d5d62'),
+             block('Räucherofen (Fleischer)', 'minecraft:smoker[facing=west]', '#5d5a55')],
+    'south': [block('Steinsäge (Steinmetz)', 'minecraft:stonecutter[facing=north]', '#7d7d7d'),
+              block('Webstuhl (Schäfer)', 'minecraft:loom[facing=north]', '#b39a6a'),
+              block('Schmiedetisch (Werkzeugschmied)', 'minecraft:smithing_table', '#3a3a44'),
+              block('Schleifstein (Waffenschmied)', 'minecraft:grindstone[face=floor,facing=north]', '#7d7d7d')],
+}
+SEITEN['west'] = [LESE['east'] if k == 'L' else k for k in SEITEN['west']]
+SEITEN['east'] = [LESE['west'] if k == 'L' else k for k in SEITEN['east']]
 
 NAME = {e['key']: e['name'] for e in P}
 G = {}
@@ -115,180 +111,207 @@ def leer(x, y, z):
     return (x, y, z) not in G
 
 
-Z0, Z1 = 9, 36          # Halle von der Südwand bis zur Nordwand
-ZELLEN = list(range(14, 29, 2))   # 8 Stände je Seite
+def seite_pos(seite, s, tiefe):
+    """Koordinate (x, z) auf einer Seite: s läuft an der Wand entlang, tiefe = Abstand zur Außenwand (1 = Zelle)."""
+    if seite == 'west':
+        return (A + tiefe, s)
+    if seite == 'east':
+        return (B - tiefe, s)
+    if seite == 'north':
+        return (s, A + tiefe)
+    return (s, B - tiefe)
 
 
 # =====================================================================
-# Gewölbe und Wände
+# Klostergewölbe: Höhe hängt vom Abstand zur Mitte ab (max von dx, dz), Rippen auf den Diagonalen und Achsen
 # =====================================================================
-def gew(x):
-    """Höhe des Gewölbes über Spalte x (Wand bei x1 und x15)."""
-    return 5 + int(round(5 * math.sin(math.pi * (x - 1) / 14)))
+def hoehe(x, z):
+    m = max(abs(x - M), abs(z - M))
+    return 5 + int(round(6 * math.cos(math.pi * m / 20)))
 
 
-RIPPEN = {Z0, 13, 17, 21, 25, 29, Z1}
-for z in range(Z0, Z1 + 1):
-    rippe = z in RIPPEN
-    vorher = None
-    for x in range(1, 16):
-        y = gew(x)
+for x in range(A, B + 1):
+    for z in range(A, B + 1):
+        h = hoehe(x, z)
+        dx, dz = abs(x - M), abs(z - M)
+        rippe = dx == dz or dx == 0 or dz == 0
         k = SANDST if rippe else SCHLAMM
-        for yy in ([y] if vorher is None else range(min(y, vorher), max(y, vorher) + 1)):
-            put(x, yy, z, k, True)
-        vorher = y
-    for x in (1, 15):
-        for y in range(1, 5):
-            put(x, y, z, SANDST if rippe else SCHLAMM, True)
-# Pilzlicht im Scheitel, Laternen an Ketten
-for z in range(Z0 + 2, Z1, 4):
-    put(8, gew(8), z, PILZ, True)
-for z in (11, 15, 19, 23, 27, 33):
-    for y in range(gew(8) - 2, gew(8)):
-        put(8, y, z, KETTE)
-    put(8, gew(8) - 3, z, HAENGE)
-# Stirnwände
-for z in (Z0, Z1):
-    for x in range(2, 15):
-        for y in range(1, gew(x)):
-            if z == Z0 and 7 <= x <= 9 and y <= 4:
-                continue                    # Eingang
-            if leer(x, y, z):
-                put(x, y, z, SANDST if (y in (1, 5) or x in (2, 14)) else SCHLAMM)
-put(8, 5, Z0, GEMEISSELT, True)
-for x in (7, 9):
-    put(x, 4, Z0, SS_OBEN, True)
+        # Lücken zum Nachbarn schließen, damit die Schale dicht ist
+        tief = min([h] + [hoehe(x + a, z + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                          if A <= x + a <= B and A <= z + b <= B])
+        for y in range(tief, h + 1):
+            put(x, y, z, k, True)
+# Oculus aus Pilzlicht im Scheitel
+for x in (M - 1, M, M + 1):
+    for z in (M - 1, M, M + 1):
+        put(x, hoehe(x, z), z, PILZ, True)
+# Laternen an Ketten über den vier Ecken des Gangs
+for (x, z) in ((M - 4, M - 4), (M + 4, M - 4), (M - 4, M + 4), (M + 4, M + 4)):
+    h = min(y for y in range(5, Y) if (x, y, z) in G)
+    for y in (h - 2, h - 1):
+        put(x, y, z, KETTE)
+    put(x, h - 3, z, HAENGE)
+# Außenwände bis zum Gewölbeansatz
+for x in range(A, B + 1):
+    for z in range(A, B + 1):
+        if x in (A, B) or z in (A, B):
+            for y in range(1, hoehe(x, z)):
+                ecke = x in (A, B) and z in (A, B)
+                put(x, y, z, SANDST if (ecke or y == 1 or (x == M or z == M)) else SCHLAMM)
 # Boden
-for x in range(1, 16):
-    for z in range(Z0, Z1 + 1):
-        gang = 4 <= x <= 12
-        if gang:
-            muster = COTTO if (x + z) % 2 == 0 else WEISSE_T
-            put(x, 0, z, SANDST if x in (4, 12) else muster)
+for x in range(A, B + 1):
+    for z in range(A, B + 1):
+        innen = A + 3 <= x <= B - 3 and A + 3 <= z <= B - 3
+        if innen:
+            rand = x in (A + 3, B - 3) or z in (A + 3, B - 3)
+            put(x, 0, z, SANDST if rand else (COTTO if (x + z) % 2 == 0 else WEISSE_T))
         else:
             put(x, 0, z, SANDST)
 
 # =====================================================================
-# Stände: Zelle, Theke, Handelsspalt, Sturz, Markise, Licht
+# 16 Stände: je Seite vier, zwei links und zwei rechts der Mitte
 # =====================================================================
-for seite, (xz, xt, xa, liste) in (('west', (2, 3, 4, WEST)), ('ost', (14, 13, 12, OST))):
-    for i, z in enumerate(ZELLEN):
-        farbe = WOLLE[i % len(WOLLE)]
-        # Zelle
-        put(xz, 1, z, DORF)
-        put(xz, 3, z, SCHLAMM)
-        # Theke = Arbeitsblock, darüber Spalt, darüber Sturz aus Wolle
-        put(xt, 1, z, liste[i])
-        put(xt, 3, z, farbe)
-        # Markise ragt in den Gang
-        for x in (xz, xt, xa):
+STAENDE = (4, 6, 16, 18)
+POSTEN = (3, 5, 7, 15, 17, 19)
+farbe_nr = 0
+for seite in ('west', 'north', 'east', 'south'):
+    for i, s in enumerate(STAENDE):
+        farbe = WOLLE[farbe_nr % len(WOLLE)]
+        farbe_nr += 1
+        zx, zz = seite_pos(seite, s, 1)       # Zelle
+        tx, tz = seite_pos(seite, s, 2)       # Theke
+        ax, az = seite_pos(seite, s, 3)       # erste Reihe im Gang
+        put(zx, 1, zz, DORF)
+        put(zx, 3, zz, SCHLAMM)
+        put(tx, 1, tz, SEITEN[seite][i])
+        put(tx, 3, tz, farbe)
+        for (x, z) in ((zx, zz), (tx, tz), (ax, az)):
             put(x, 4, z, farbe, True)
-        put(xa, 3, z, HAENGE)
-    # Trennwände zwischen den Ständen (Pfosten an der Theke)
-    for z in range(13, 30, 2):
-        for y in range(1, 4):
-            put(xz, y, z, SCHLAMM)
-            put(xt, y, z, SANDST)
-        for x in (xz, xt, xa):
+        put(ax, 3, az, HAENGE)
+    for s in POSTEN:
+        for tiefe, k in ((1, SCHLAMM), (2, SANDST)):
+            x, z = seite_pos(seite, s, tiefe)
+            for y in range(1, 4):
+                put(x, y, z, k, True)
+        for tiefe in (1, 2, 3):
+            x, z = seite_pos(seite, s, tiefe)
             put(x, 4, z, SANDST, True)
 
 # =====================================================================
-# Brunnen in der Mitte des Gangs mit Sitzstufen
+# Brunnen in der Mitte mit vier Bänken
 # =====================================================================
-BX, BZ = 8, 21
-for x in range(BX - 2, BX + 3):
-    for z in range(BZ - 2, BZ + 3):
-        rand = abs(x - BX) == 2 or abs(z - BZ) == 2
+for x in range(M - 2, M + 3):
+    for z in range(M - 2, M + 3):
+        rand = abs(x - M) == 2 or abs(z - M) == 2
         if rand:
-            put(x, 1, z, SS_UNTEN if (abs(x - BX) == 2 and abs(z - BZ) == 2) else SANDST)
+            put(x, 1, z, SS_UNTEN if (abs(x - M) == 2 and abs(z - M) == 2) else SANDST)
         else:
             put(x, 0, z, WASSER, True)
-put(BX, 0, BZ, SANDST, True)
-put(BX, 1, BZ, SANDST)
-put(BX, 2, BZ, GEMEISSELT)
-put(BX, 3, BZ, WASSER)
-for (x, z, r) in ((BX, BZ - 3, 'north'), (BX, BZ + 3, 'south')):
+put(M, 0, M, SANDST, True)
+put(M, 1, M, SANDST)
+put(M, 2, M, SANDST)
+put(M, 3, M, GEMEISSELT)
+put(M, 4, M, WASSER)
+for (x, z, r) in ((M, M - 4, 'north'), (M, M + 4, 'south'), (M - 4, M, 'west'), (M + 4, M, 'east')):
     put(x, 1, z, SITZ[r])
-
-# =====================================================================
-# Teppichläufer, Pflanzen, Vorhalle
-# =====================================================================
-for z in range(Z0 + 1, Z1):
-    for x in (7, 9):
-        if leer(x, 1, z) and not (BZ - 3 <= z <= BZ + 3):
+# Teppiche: Läufer vom Eingang, Ring um den Brunnen
+for z in range(M + 3, B):
+    for x in (M - 1, M + 1):
+        if leer(x, 1, z) and z != M + 4:
             put(x, 1, z, TEPPICH)
-    if leer(8, 1, z) and not (BZ - 3 <= z <= BZ + 3):
-        put(8, 1, z, TEPPICH3 if z % 4 == 0 else TEPPICH2)
-for (x, z) in ((2, 10), (14, 10), (2, 12), (14, 12), (4, 30), (12, 30)):
-    put(x, 1, z, FASS)
-    put(x, 2, z, TOEPFE[(x + z) % 3])
-for (x, z) in ((5, 11), (11, 11)):
+    if leer(M, 1, z):
+        put(M, 1, z, TEPPICH3 if z % 2 else TEPPICH2)
+for x in range(M - 3, M + 4):
+    for z in range(M - 3, M + 4):
+        if (abs(x - M) == 3 or abs(z - M) == 3) and leer(x, 1, z):
+            put(x, 1, z, TEPPICH2)
+
+# =====================================================================
+# Mitte jeder Seite: Süden Eingang, Norden Heilstation, Osten Kasse, Westen Sitzecke
+# =====================================================================
+# Süden: Eingang (x10..12) mit Bogen, Säulen links und rechts
+for x in (M - 1, M, M + 1):
+    for y in range(1, 5):
+        G.pop((x, y, B), None)
+put(M - 1, 4, B, SS_OBEN, True)
+put(M + 1, 4, B, SS_OBEN, True)
+put(M, 5, B, GEMEISSELT, True)
+for x in (M - 3, M + 3):
     for y in (1, 2, 3):
-        put(x, y, z, SANDST)
-    put(x, 4, z, GEMEISSELT)
-    put(x, 5, z, LATERNE)
+        put(x, y, B - 1, SANDST)
+    put(x, 4, B - 1, LATERNE)
+for x in (9, 13):
+    put(x, 1, B - 2, FASS)
+    put(x, 2, B - 2, TOEPFE[x % 3])
 
-# =====================================================================
-# Nordende: Heilstation (West) und Smaragd-Kasse (Ost)
-# =====================================================================
-# Heilzelle z31, Eisentür z32, Zombiezelle z33
-for z in (30, 34):
-    for x in (2, 3):
-        for y in range(1, 4):
-            put(x, y, z, SCHLAMM)
-for z in (31, 32, 33):
-    put(2, 3, z, SCHLAMM)
-put(2, 1, 31, DORF)
-put(3, 1, 31, SANDST)                       # Theke (zum Umziehen abbauen)
-put(3, 3, 31, GEMEISSELT)
-put(2, 1, 32, EISENTUER_U)
-put(2, 2, 32, EISENTUER_O)
+# Norden: Heilstation – Heilzelle (x10), Eisentür (x11), Zombiezelle (x12)
+for x in (9, 13):
+    for y in range(1, 4):
+        put(x, y, A + 1, SCHLAMM)
+        put(x, y, A + 2, SANDST)
+for x in (10, 11, 12):
+    put(x, 3, A + 1, SCHLAMM)
+put(10, 1, A + 1, DORF)
+put(10, 1, A + 2, SANDST)                    # Theke (zum Umziehen abbauen)
+put(10, 3, A + 2, GEMEISSELT)
+put(11, 1, A + 1, EISENTUER_U)
+put(11, 2, A + 1, EISENTUER_O)
 for y in (1, 2, 3):
-    put(3, y, 32, SANDST)
-put(4, 2, 32, HEBEL)
-put(2, 1, 33, ZOMBIE)
-put(3, 1, 33, GLAS)
-put(3, 2, 33, GLAS)
-put(3, 3, 33, SANDST)
-for x in (2, 3):
-    put(x, 4, 31, WOLLE[6], True)
-    put(x, 4, 32, WOLLE[6], True)
-    put(x, 4, 33, WOLLE[6], True)
-put(4, 1, 35, BRAU)
-put(5, 1, 35, TRUHE)
-# Smaragd-Kasse im Osten
-for z in (31, 32, 33):
-    put(14, 1, z, FASS)
-    put(13, 1, z, SS_OBEN if z != 32 else TRUHE)
-put(14, 2, 32, LATERNE)
-for z in (31, 33):
-    put(13, 2, z, TOEPFE[z % 3])
-put(11, 1, 35, SITZ['north'])
-put(12, 1, 35, SITZ['north'])
+    put(11, y, A + 2, SANDST)
+put(11, 2, A + 3, HEBEL)
+put(12, 1, A + 1, ZOMBIE)
+put(12, 1, A + 2, GLAS)
+put(12, 2, A + 2, GLAS)
+put(12, 3, A + 2, SANDST)
+for x in range(9, 14):
+    for z in (A + 1, A + 2, A + 3):
+        put(x, 4, z, WOLLE[6] if x in (10, 11, 12) else SANDST, True)
+put(8, 1, A + 2, BRAU)
+put(14, 1, A + 2, TRUHE_S)
+put(11, 3, A + 3, HAENGE)
+
+# Osten: Smaragd-Kasse – Theke mit Truhe, Fässer an der Wand
+for z in range(9, 14):
+    put(B - 1, 1, z, FASS)
+for z in (10, 11, 12):
+    put(B - 3, 1, z, SS_OBEN if z != M else TRUHE)
+put(B - 1, 2, M, LATERNE)
+for z in (10, 12):
+    put(B - 3, 2, z, TOEPFE[z % 3])
+put(B - 2, 1, 9, SITZ['north'])
+
+# Westen: Sitzecke mit Tisch und Pflanzen
+for z in (10, 11, 12):
+    put(A + 1, 1, z, SITZ['west'])
+put(A + 2, 1, 9, SITZ['north'])
+put(A + 2, 1, 13, SITZ['south'])
+put(A + 3, 1, M, TISCH)
+put(A + 3, 2, M, LATERNE)
+for z in (9, 13):
+    put(A + 1, 1, z, FASS)
+    put(A + 1, 2, z, TOEPFE[z % 3])
 
 # =====================================================================
-# Treppe zur Oberfläche (Süden): Stufen z1..z8 steigen nach Süden an, Tunnel mit Gewölbe
+# Treppe zur Oberfläche im Süden (z22..30), Tunnel mit Gewölbe
 # =====================================================================
-for z in range(0, Z0):
-    stufe = Z0 - z               # 9 .. 1
-    yb = min(stufe, 8)
-    for x in (7, 8, 9):
-        if z == 0:
+for z in range(B + 1, Z):
+    yb = min(z - B, 8)
+    for x in (M - 1, M, M + 1):
+        if z == Z - 1:
             put(x, 8, z, SANDST)
         else:
             put(x, yb, z, STUFEN_EINGANG)
-            for y in range(0, yb):
-                put(x, y, z, SCHLAMM)
-    for x in (6, 10):
+        for y in range(0, yb):
+            put(x, y, z, SCHLAMM)
+    for x in (M - 2, M + 2):
         for y in range(0, yb + 4):
             put(x, y, z, SANDST if z % 3 == 0 else SCHLAMM)
-    for x in (7, 8, 9):
-        put(x, yb + 4, z, SCHLAMM if x != 8 else SANDST)
+    for x in (M - 1, M, M + 1):
+        put(x, yb + 4, z, SANDST if x == M else SCHLAMM)
     if z % 3 == 1:
-        put(8, yb + 3, z, HAENGE)
-# Portal oben
-for x in range(6, 11):
-    put(x, 12, 0, GEMEISSELT if x == 8 else SANDST, True)
+        put(M, yb + 3, z, HAENGE)
+for x in range(M - 2, M + 3):
+    put(x, 12, Z - 1, GEMEISSELT if x == M else SANDST, True)
 
 # =====================================================================
 model = {'format': 1, 'size': {'x': X, 'y': Y, 'z': Z}, 'palette': P,
