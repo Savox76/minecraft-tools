@@ -437,3 +437,9 @@ details.konzept ul { margin: 8px 0 2px; padding-left: 18px; display: grid; gap: 
 .ausbau-hinweis h2 { margin: 4px 0 8px; font-size: 1.3rem; }
 .ausbau-hinweis p { margin-bottom: 12px; }
 @media (max-width: 640px) { .ausbau-hinweis { grid-template-columns: 1fr; } .fassungen a { flex: 1 1 140px; } }
+
+/* Schritt-Modus: ganze Ebene oder kleine Schritte */
+.modus { display: flex; border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+.modus button { flex: 1; padding: 8px 10px; border: 0; background: var(--sheet); color: var(--ink-soft); font: 700 .88rem var(--f-body); cursor: pointer; }
+.modus button + button { border-left: 1.5px solid var(--line); }
+.modus button[aria-pressed="true"] { background: var(--hl); color: var(--hl-ink); }

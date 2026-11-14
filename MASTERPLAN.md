@@ -37,7 +37,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 ## 1. Ziel
 
-- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als **Schritt-für-Schritt-Anleitungen**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden.
+- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als **Schritt-für-Schritt-Anleitungen**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden. Standard ist **eine ganze Ebene pro Schritt** (Wunsch von Mario, 14.11.2026): die Ebene komplett im Plan, Fertiges blass. Wer lieber kleinere Happen will, schaltet auf „Kleine Schritte“ (höchstens 60 Blöcke, gelb umrandet). Die Wahl merkt sich der Browser.
 - **Alle eigenen Plugins** mit Quellcode, Doku und Download.
 - **Jeder Bauplan und jedes Plugin einzeln** verfügbar, ohne Gesamtpaket.
 - **Gleiche Oberfläche** auf Windows, Linux und macOS.

@@ -594,7 +594,7 @@ async function bauSeite(id, tab) {
       <div><dt>${tr('Schwierigkeit', 'Difficulty')}</dt><dd>${punkte(d.schwierigkeit)}</dd></div>
       <div><dt>${umbau ? tr('Neue Blöcke', 'New blocks') : tr('Blöcke', 'Blocks')}</dt><dd>${fmt(bloecke)}</dd></div>
       ${umbau ? `<div><dt>${tr('Abbauen', 'Remove')}</dt><dd>${fmt(abbau)}</dd></div>` : ''}
-      <div><dt>${tr('Schritte', 'Steps')}</dt><dd>${d.schritte.length}</dd></div>
+      <div><dt>${tr('Schritte', 'Steps')}</dt><dd>${ganzeEbenen(d.schritte).length} <small>${tr(`Ebenen · ${d.schritte.length} klein`, `layers · ${d.schritte.length} small`)}</small></dd></div>
       <div><dt>${tr('Grundfläche', 'Footprint')}</dt><dd>${esc(lo(d, 'grundflaeche'))}</dd></div>
       <div><dt>${tr('Höhe', 'Height')}</dt><dd>${d.model.size.y} ${tr('Ebenen', 'layers')}</dd></div>
       <div><dt>${tr('Bauzeit', 'Build time')}</dt><dd>${stunden(d.bauzeit_stunden)}</dd></div>
@@ -632,15 +632,29 @@ async function bauSeite(id, tab) {
   }
   zeigeTab(tab);
 
+  // Ganze Ebene je Schritt (Standard) oder kleine Schritte von höchstens 60 Blöcken
+  function ganzeEbenen(R) {
+    const out = [];
+    for (const s of R) {
+      const l = out[out.length - 1];
+      if (l && l.y[0] === s.y[0] && l.y[1] === s.y[1] && !!l.weg === !!s.weg) l.c = l.c.concat(s.c);
+      else out.push({ ...s, t: null, c: s.c.slice() });
+    }
+    return out;
+  }
+
   function anleitungTab(el, d, P) {
-    const S = d.schritte, n = S.length;
+    const modus = store.get('schrittmodus', 'ebene');
+    const S = modus === 'ebene' ? ganzeEbenen(d.schritte) : d.schritte, n = S.length;
+    const mk = modus === 'ebene' ? '.ebene' : '';
     // Umbau: Abbau-Schritte gehören zum Modell „vorher“, alle anderen zum fertigen Modell
     const stepOf = schrittKarte(P, S.map((s) => (s.weg ? { c: [] } : s)));
     const wegOf = PV ? schrittKarte(PV, S.map((s) => (s.weg ? s : { c: [] }))) : null;
     const istWeg = () => !!S[cur].weg;
-    const keyDone = 'erledigt.' + sk;
+    const keyDone = 'erledigt.' + sk + mk;
     const done = new Set(store.get(keyDone, []));
-    let cur = Math.min(store.get('schritt.' + sk, 0), n - 1), rot = 0, alles = false;
+    let cur = Math.min(store.get('schritt.' + sk + mk, 0), n - 1), rot = 0, alles = false;
+    const neu = modus === 'ebene' ? 2 : 3;   // ganze Ebene: neue Blöcke normal, Fertiges blass; Teile: gelb umrandet
     el.innerHTML = `<div class="schritt-raster">
       <div class="buehne bauplan">
         <div class="nummer" id="nr" aria-live="polite"></div>
@@ -658,6 +672,10 @@ async function bauSeite(id, tab) {
         <div class="ablesen" id="plan-les">${tr('Zeige oder tippe auf ein Feld für Block und Position.', 'Point at or tap a square for block and position.')}</div>
       </div>
       <div class="seite">
+        <div class="modus" role="group" aria-label="${tr('Schritte', 'Steps')}">
+          <button data-m="ebene" aria-pressed="${modus === 'ebene'}">${tr('Ganze Ebene', 'Whole layer')}</button>
+          <button data-m="teile" aria-pressed="${modus === 'teile'}">${tr('Kleine Schritte', 'Small steps')}</button>
+        </div>
         <div class="teile-kasten" id="teile"></div>
         <div class="steuer">
           <button class="btn zwei" id="zurueck" aria-label="${tr('Vorheriger Schritt', 'Previous step')}">← ${tr('Zurück', 'Back')}</button>
@@ -678,7 +696,7 @@ async function bauSeite(id, tab) {
       if (istWeg()) { const s = wegOf[PV.at(x, y, z)]; return s < 0 ? 2 : s < cur ? 0 : s === cur ? 4 : 2; }
       const s = stepOf[P.at(x, y, z)];
       if (s < 0) return 1;
-      return s < cur ? 1 : s === cur ? 3 : 0;
+      return s < cur ? 1 : s === cur ? neu : 0;
     };
     const modell = () => (istWeg() && !alles ? PV : P);
     const paint = () => {
@@ -700,7 +718,7 @@ async function bauSeite(id, tab) {
       planGeo = ebenePlan(pc, P, y, { maxW: 760, hover: planHover, sicht: (i, x, z) => {
         const st = stepOf[P.at(x, y, z)];
         if (st < 0) return 2;               // Gelände, schon vorhanden
-        return st < cur ? 1 : st === cur ? 3 : 0;
+        return st < cur ? 1 : st === cur ? neu : 0;
       } });
     };
     pc.addEventListener('pointermove', (e) => {
@@ -723,9 +741,10 @@ async function bauSeite(id, tab) {
     cv.addEventListener('pointerup', loslassen); cv.addEventListener('pointercancel', loslassen);
     const update = () => {
       const s = S[cur];
-      store.set('schritt.' + sk, cur);
+      store.set('schritt.' + sk + mk, cur);
       const weg = istWeg(), tp = weg ? PV.pal : pal;
       el.querySelector('#plan-info').textContent = weg ? tr('Draufsicht, Norden oben, rot umrandet: abbauen', 'Top view, north up, red outline: remove')
+        : modus === 'ebene' ? tr('Draufsicht, Norden oben, die ganze Ebene', 'Top view, north up, the whole layer')
         : tr('Draufsicht, Norden oben, gelb umrandet ist neu', 'Top view, north up, yellow outline is new');
       el.querySelector('#nr').innerHTML = `${cur + 1}<small>${tr('von', 'of')} ${n}</small>`;
       const zahl = new Map();
@@ -733,7 +752,7 @@ async function bauSeite(id, tab) {
       const teile = [...zahl].filter(([i]) => zaehlt(tp[i]) || (tp[i].flags || []).includes('kein-block')).sort((a, b) => b[1] - a[1]);
       const summe = teile.filter(([i]) => zaehlt(tp[i])).reduce((a, [, c]) => a + c, 0);
       el.querySelector('#teile').classList.toggle('abbau', weg);
-      el.querySelector('#teile').innerHTML = `<h3>${weg ? tr('Abbauen in diesem Schritt', 'Remove in this step') : tr('Neue Teile in diesem Schritt', 'New parts in this step')} <span>${summe} ${tr('Blöcke', 'blocks')}</span></h3>
+      el.querySelector('#teile').innerHTML = `<h3>${weg ? tr('Abbauen in diesem Schritt', 'Remove in this step') : modus === 'ebene' ? tr('Blöcke in dieser Ebene', 'Blocks in this layer') : tr('Neue Teile in diesem Schritt', 'New parts in this step')} <span>${summe} ${tr('Blöcke', 'blocks')}</span></h3>
         <div class="teile">${teile.map(([i, c]) => `<div class="teil" title="${esc(bn(tp[i]))}"><img src="${partIcon(tp[i])}" alt=""><b>×${c}</b><span>${esc(bn(tp[i]))}</span></div>`).join('')}</div>`;
       const ab = (lo(d, 'abschnitte') || [])[s.a] || {};
       const teil = s.t && s.t[1] > 1 ? tr(` · Teil ${s.t[0]} von ${s.t[1]}`, ` · part ${s.t[0]} of ${s.t[1]}`) : '';
@@ -755,6 +774,17 @@ async function bauSeite(id, tab) {
     el.querySelector('#rl').onclick = () => drehe(-1);
     el.querySelector('#rr').onclick = () => drehe(1);
     el.querySelector('#all').onclick = (e) => { alles = !alles; e.currentTarget.setAttribute('aria-pressed', alles); paint(); };
+    el.querySelectorAll('.modus button').forEach((b) => b.addEventListener('click', () => {
+      if (b.dataset.m === modus) return;
+      // an derselben Stelle weitermachen: Ebene des aktuellen Schritts suchen
+      const y = S[cur].y[0], w = !!S[cur].weg;
+      store.set('schrittmodus', b.dataset.m);
+      const ziel = b.dataset.m === 'ebene' ? ganzeEbenen(d.schritte) : d.schritte;
+      const k = ziel.findIndex((t) => t.y[0] === y && !!t.weg === w);
+      store.set('schritt.' + sk + (b.dataset.m === 'ebene' ? '.ebene' : ''), Math.max(0, k));
+      redrawers = redrawers.filter((f) => f.vergleich); keyHandler = null;
+      anleitungTab(el, d, P);
+    }));
     el.querySelector('#ok').onchange = (e) => {
       e.target.checked ? done.add(cur) : done.delete(cur);
       store.set(keyDone, [...done]); update();
