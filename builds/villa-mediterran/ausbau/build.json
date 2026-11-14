@@ -83,7 +83,7 @@
     },
     {
       "titel": "Schon die Grundversion gebaut?",
-      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet)."
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile."
     }
   ],
   "rohstoffe": [
@@ -226,7 +226,7 @@
       },
       {
         "titel": "Already built the base version?",
-        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline)."
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts."
       }
     ],
     "rohstoffe": [

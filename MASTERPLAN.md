@@ -37,7 +37,7 @@ Stand: 01.11.2026 · Website: <https://savox76.github.io/minecraft-tools/>
 
 ## 1. Ziel
 
-- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als **Schritt-für-Schritt-Anleitungen**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden. Standard ist **eine ganze Ebene pro Schritt** (Wunsch von Mario, 14.11.2026): die Ebene komplett im Plan, Fertiges blass. Wer lieber kleinere Happen will, schaltet auf „Kleine Schritte“ (höchstens 60 Blöcke, gelb umrandet). Die Wahl merkt sich der Browser.
+- **Alle Baupläne** (Türme, Villen, Farmen, Technik) als **Schritt-für-Schritt-Anleitungen**: Zu jedem Schritt ist sofort klar, welche Blöcke in welcher Menge gebraucht werden. Jeder Schritt ist **genau eine ganze Ebene** (Wunsch von Mario, 14.11.2026): die Ebene komplett im Plan, Fertiges blass, Späteres ausgeblendet. Kleine Teilschritte gibt es nicht mehr.
 - **Alle eigenen Plugins** mit Quellcode, Doku und Download.
 - **Jeder Bauplan und jedes Plugin einzeln** verfügbar, ohne Gesamtpaket.
 - **Gleiche Oberfläche** auf Windows, Linux und macOS.
@@ -113,7 +113,7 @@ So sieht eine Bauanleitung aus:
 2. **Gesamt-Teileliste:** alle Blöcke mit Bild und Anzahl, zusätzlich in Stacks (z. B. „12 St. + 30“). Darunter die Rohstoffe aus Farmen, zum Beispiel „1.050 Sand = Glas und Beton“.
 3. **Bauschritte, nummeriert, einer pro Seite:** siehe den festen Ablauf in 4.1
 4. **Unterbaugruppen** wie in einem Bauheft: Teile, die mehrfach vorkommen (Palme, Fenster-Modul, Laternenpfahl), werden einmal gezeigt und mit **„2 ×“** markiert.
-5. **Schritt-Regeln:** Ebene für Ebene, höchstens 60 neue Blöcke pro Schritt (Einzelheiten in 4.1). Die Schritte entstehen automatisch.
+5. **Schritt-Regeln:** Ebene für Ebene, eine ganze Ebene pro Schritt (Einzelheiten in 4.1). Die Schritte entstehen automatisch.
 6. **Ausgaben pro Bauplan:**
    - Web-Ansicht zum Durchblättern, auf dem Handy wischbar
    - druckbares **PDF-Heft** im selben Look
@@ -127,8 +127,8 @@ Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablau
 
 **So werden die Schritte gebildet**
 
-1. **Ein Schritt gehört immer zu genau einer Ebene.** Es werden nie mehrere Ebenen in einem Schritt zusammengefasst, auch wenn eine Ebene nur wenige Blöcke hat.
-2. **Höchstens 60 neue Blöcke pro Schritt.** Hat eine Ebene mehr, wird sie in gleich große Teile zerlegt: „Ebene 1 · Teil 3 von 5“. Die Teile folgen Kacheln von 8 × 8 Blöcken in Schlangenlinie, damit man im Spiel nicht kreuz und quer laufen muss.
+1. **Ein Schritt ist immer genau eine ganze Ebene.** Es werden nie mehrere Ebenen zusammengefasst und keine Ebene wird in Teile zerlegt, egal wie viele oder wenige Blöcke sie hat.
+2. **Die ganze Ebene ist sichtbar:** In 3D-Ansicht und Draufsicht stehen die Blöcke der aktuellen Ebene normal, Fertiges blass, Späteres ist ausgeblendet. Beim Umbau sind abzubauende Blöcke rot umrandet und werden von oben nach unten Ebene für Ebene abgebaut.
 3. **Zweite Teile gehören zum ersten:** Die obere Türhälfte und das Kopfteil vom Bett erscheinen im selben Schritt wie der untere Teil, weil Minecraft sie automatisch mitsetzt. Sie zählen nicht in der Teileliste.
 4. **Gelände** (`vorhanden`) wird nie als Schritt gezeigt, sondern blass als Umgebung.
 5. **Bauabschnitte** (`abschnitte` in `build.json`) teilen die Ebenen in sinnvolle Bereiche („Fundament“, „Erdgeschoss & Pool“). Jeder Schritt zeigt seinen Abschnitt mit Beschreibung.
@@ -138,11 +138,11 @@ Jeder Bauplan wird **Ebene für Ebene von unten nach oben** gebaut. Dieser Ablau
 | Bereich | Inhalt |
 |---|---|
 | Schrittnummer | groß oben links, „13 von 52“ |
-| 3D-Ansicht | neue Blöcke gelb umrandet, gebaute blass, spätere ausgeblendet. **Drehbar** in vier Richtungen (Südost, Nordost, Nordwest, Südwest): Knöpfe ⟲ ⟳, Ziehen mit der Maus, Wischen auf dem Handy oder Tasten Q und E. ◎ zeigt das ganze Bauwerk |
-| Draufsicht der Ebene | Raster der aktuellen Ebene, Norden oben, Koordinaten ab der Mitte. Neue Blöcke gelb umrandet, schon gebaute blass, die Ebene darunter als Schatten. Antippen zeigt Block, Position und Minecraft-ID |
+| 3D-Ansicht | die ganze aktuelle Ebene normal, gebaute blass, spätere ausgeblendet. **Drehbar** in vier Richtungen (Südost, Nordost, Nordwest, Südwest): Knöpfe ⟲ ⟳, Ziehen mit der Maus, Wischen auf dem Handy oder Tasten Q und E. ◎ zeigt das ganze Bauwerk |
+| Draufsicht der Ebene | Raster der aktuellen Ebene, Norden oben, Koordinaten ab der Mitte. Die ganze Ebene normal, schon gebaute blass, die Ebene darunter als Schatten. Antippen zeigt Block, Position und Minecraft-ID |
 | Plugins | Oben auf der Bauplan-Seite: „Kein Plugin nötig“ oder jedes Plugin mit Stufe (benötigt, empfohlen, optional), Grund und Link. Karten zeigen „Plugin nötig“, Plugin-Seiten listen umgekehrt alle Baupläne und Ideen, die sie verwenden |
-| Neue Teile | Kasten wie in einem Bauheft: Block-Bild, „× 12“, Name |
-| Abschnitt | „Ebene 1 · Teil 3 von 5“, Name und Text des Bauabschnitts |
+| Blöcke der Ebene | Kasten wie in einem Bauheft: Block-Bild, „× 12“, Name |
+| Abschnitt | „Ebene 3“, Name und Text des Bauabschnitts |
 | Steuerung | Zurück/Weiter, Schieberegler, Pfeiltasten, „Schritt erledigt“ mit Fortschrittsbalken (im Browser gespeichert) |
 
 Dazu gibt es pro Bauplan die Reiter **Teileliste** (gesamt, mit Stacks und Rohstoffen), **Ebenen** (jede Ebene einzeln als Draufsicht) und **Downloads** (`.litematic`, `.schem`, CSV).
@@ -179,7 +179,7 @@ Festgelegt am 11.11.2026, weil die ersten Fassungen im Spiel zu einfach und ohne
 | Seite | `…/bau/<id>/?fassung=ausbau` bzw. `?fassung=umbau`, Schalter oben auf der Bauplan-Seite, Vorher-Nachher-Regler |
 | Echte Blockformen (Treppen, Stufen, Falltüren, Türen, Scheiben, Zäune, Laternen, Pflanzen …) | `tools/vorschau.py` (Bilder) und `site/js/render.js` (3D-Ansicht), beide lesen die Zustände aus der Minecraft-ID |
 
-- **Umbau:** Beide Modelle liegen mit derselben Ecke Nordwest unten übereinander. Zuerst Abbau-Schritte von oben nach unten (rot umrandet), dann nur die neuen Blöcke von unten nach oben (gelb umrandet). Was gleich bleibt, ist blass und zählt nicht mit. Bei der Villa ändert sich viel: 2.183 Blöcke abbauen, 2.710 neu (Neubau: 3.223).
+- **Umbau:** Beide Modelle liegen mit derselben Ecke Nordwest unten übereinander. Zuerst Abbau-Schritte von oben nach unten (rot umrandet), dann nur die neuen Blöcke von unten nach oben, je eine ganze Ebene. Was gleich bleibt, ist blass und zählt nicht mit. Bei der Villa ändert sich viel: 2.183 Blöcke abbauen, 2.710 neu (Neubau: 3.223).
 - **Exporte:** Glasscheiben, Eisengitter, Zäune und Mauern bekommen beim Export ihre Verbindungen zu den Nachbarn (north/east/south/west), weil Litematica und WorldEdit sie beim Einfügen nicht neu berechnen. Das gilt für alle Baupläne.
 - Karten auf der Website zeigen „+ Ausbau“, wenn es eine Ausbau-Version gibt.
 
@@ -450,7 +450,7 @@ Entscheidungen aus Abschnitt 12 treffen (vor allem die Lizenz), dann den Plugin-
 - **Echte Adressen** pro Seite, z. B. `…/bau/leuchtturm/` statt `…/#/bau/leuchtturm`. Alte `#/`-Links werden umgeleitet.
 - **Zwei Sprachen:** jede Seite gibt es auf Deutsch und auf Englisch (`…/en/build/leuchtturm/`). `hreflang`-Verweise sagen Google, welche Seite zu welcher Sprache gehört, so erscheint im Ausland die englische Fassung. Keine automatische Umleitung, der Besucher wählt selbst.
 - **Vorgerenderte Seiten:** Jede Seite enthält ihren kompletten Text (Beschreibung, Bauabschnitte, Teileliste, Rohstoffe, Downloads, Befehle) schon im HTML. Suchmaschinen lesen ihn ohne JavaScript, im Browser übernimmt dann die interaktive Ansicht.
-- **Pro Seite:** eigener Titel mit Suchbegriffen („Leuchtturm in Minecraft bauen – Bauplan in 58 Schritten“), Beschreibung, Canonical-Link, Open-Graph- und Twitter-Vorschau.
+- **Pro Seite:** eigener Titel mit Suchbegriffen („Leuchtturm in Minecraft bauen – Bauplan in 65 Schritten“), Beschreibung, Canonical-Link, Open-Graph- und Twitter-Vorschau.
 - **Vorschaubilder:** pro Bauplan ein Bild (800 × 600) und ein Link-Vorschaubild (1200 × 630) für WhatsApp, Discord und soziale Netzwerke.
 - **Strukturierte Daten (JSON-LD):** `HowTo` für Baupläne (Material und Bauabschnitte), `SoftwareApplication` für Plugins, `TechArticle` für Anleitungen, `BreadcrumbList` überall.
 - **`sitemap.xml`** mit allen Seiten und Bildern, `404.html`, interne Links im Fußbereich zu allen Seiten.

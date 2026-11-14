@@ -721,8 +721,8 @@ class Seiten:
              self.base + 'bilder/%s.png' % b['id'], H(t('Minecraft %s, fertig gebaut', 'Minecraft %s, finished build') % titel),
              self.ausbau_kasten(b),
              t('Bauabschnitte', 'Build sections'), ab_html,
-             t('Die Anleitung führt dich in %d Bauschritten Ebene für Ebene von unten nach oben durch den Bau, mit höchstens 60 neuen Blöcken pro Schritt. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
-               'The instructions guide you through the build in %d build steps, layer by layer from the bottom up, with at most 60 new blocks per step. Every step shows a rotatable 3D view and a top view of the layer.') % kb['schritte'],
+             t('Die Anleitung führt dich in %d Bauschritten Ebene für Ebene von unten nach oben durch den Bau, jeder Schritt ist eine ganze Ebene. Jeder Schritt zeigt eine drehbare 3D-Ansicht und die Draufsicht der Ebene.',
+               'The instructions guide you through the build in %d build steps, layer by layer from the bottom up, one whole layer per step. Every step shows a rotatable 3D view and a top view of the layer.') % kb['schritte'],
              t('Teileliste', 'Parts list'), 'Block', t('Anzahl', 'Count'), teile_rows,
              t('Rohstoffe aus Farmen', 'Raw materials from farms'), t('Rohstoff', 'Material'), t('Menge', 'Amount'), roh_rows, dl,
              '<h2 style="margin:30px 0 12px">%s</h2><div class="raster">%s</div>' % (t('Tipps', 'Tips'), tipps) if tipps else '')

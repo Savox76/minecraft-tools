@@ -59,7 +59,7 @@ def _schluessel():
             yield c
 
 
-def umbau(basis_model, aus_model, max_teile):
+def umbau(basis_model, aus_model):
     """Liefert (neu_model, vorher_model, weg_zellen).
 
     neu_model:    Ausbau-Modell, Blöcke die schon so in der Grundversion stehen sind als 'vorhanden' markiert
@@ -106,27 +106,14 @@ def umbau(basis_model, aus_model, max_teile):
     return neu, vor, weg
 
 
-def weg_schritte(weg, max_teile, abschnitt=0):
-    """Abbau von oben nach unten, je Ebene in Kacheln wie beim Bauen."""
+def weg_schritte(weg, abschnitt=0):
+    """Abbau von oben nach unten, eine ganze Ebene pro Schritt."""
     pro = {}
     for c in weg:
         pro.setdefault(c[1], []).append(c)
-
-    def ordnung(c):
-        tz, tx = c[2] // 8, c[0] // 8
-        return (tz, tx if tz % 2 == 0 else -tx, c[2], c[0])
-
-    schritte = []
-    for y in sorted(pro, reverse=True):
-        zellen = sorted(pro[y], key=ordnung)
-        n = math.ceil(len(zellen) / max_teile)
-        gr = math.ceil(len(zellen) / n)
-        for k in range(n):
-            teil = zellen[k * gr:(k + 1) * gr]
-            if teil:
-                schritte.append({'a': abschnitt, 'y': [y, y], 't': [k + 1, n], 'weg': True,
-                                 'c': [v for z in teil for v in z]})
-    return schritte
+    return [{'a': abschnitt, 'y': [y, y], 'weg': True,
+             'c': [v for z in sorted(pro[y], key=lambda c: (c[2], c[0])) for v in z]}
+            for y in sorted(pro, reverse=True)]
 
 
 RUECKBAU = {

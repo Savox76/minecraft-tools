@@ -20,7 +20,6 @@ import csv, gzip, io, json, math, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, '_site')
-MAX_TEILE = 60          # höchstens so viele neue Blöcke pro Bauschritt
 DATA_VERSION = 3953     # Minecraft Java 1.21, ältere Versionen werden beim Laden automatisch umgewandelt
 
 KATEGORIEN = {
@@ -84,9 +83,7 @@ def zellen(model):
 def bau_schritte(build, model):
     """Teilt das Modell in Bauschritte: Ebene für Ebene von unten nach oben.
 
-    Jeder Schritt gehört zu genau einer Ebene. Ebenen mit mehr als MAX_TEILE neuen Blöcken
-    werden in gleich große Teile zerlegt (Kacheln von 8 × 8 in Schlangenlinie), damit man
-    beim Bauen nicht kreuz und quer laufen muss. 't' = [Teil, Anzahl Teile] der Ebene.
+    Jeder Schritt ist genau eine ganze Ebene, egal wie viele Blöcke sie hat.
     """
     pal = model['palette']
     pro_ebene, zweite = {}, []
@@ -107,19 +104,8 @@ def bau_schritte(build, model):
                 return ai
         return len(abschnitte) - 1
 
-    def ordnung(c):
-        tz, tx = c[2] // 8, c[0] // 8
-        return (tz, tx if tz % 2 == 0 else -tx, c[2], c[0])
-
-    schritte = []
-    for y in sorted(pro_ebene):
-        neu = sorted(pro_ebene[y], key=ordnung)
-        n = math.ceil(len(neu) / MAX_TEILE)
-        groesse = math.ceil(len(neu) / n)
-        for k in range(n):
-            teil = neu[k * groesse:(k + 1) * groesse]
-            if teil:
-                schritte.append({'a': abschnitt(y), 'y': [y, y], 't': [k + 1, n], 'c': list(teil)})
+    schritte = [{'a': abschnitt(y), 'y': [y, y], 'c': sorted(pro_ebene[y], key=lambda c: (c[2], c[0]))}
+                for y in sorted(pro_ebene)]
     # zweite Teile in den Schritt ihres ersten Teils (darunter oder daneben)
     wo = {(c[0], c[1], c[2]): k for k, st in enumerate(schritte) for c in st['c']}
     for x, y, z, i in zweite:
@@ -372,7 +358,7 @@ def main():
             print(f'  Fassung {var:14} {vsumme:6} Blöcke  {len(vs):4} Schritte')
 
             # Umbau: erst abbauen (von oben), dann nur die neuen Blöcke (von unten)
-            um, vor, weg = VAR.umbau(model, vm, MAX_TEILE)
+            um, vor, weg = VAR.umbau(model, vm)
             namen_en(um)
             namen_en(vor)
             ab_de = [dict(VAR.RUECKBAU['de'], von=min(c[1] for c in weg), bis=max(c[1] for c in weg))] + vb.get('abschnitte', [])
@@ -380,7 +366,7 @@ def main():
             plus = bau_schritte(vb, um)
             for st in plus:
                 st['a'] += 1
-            ws = VAR.weg_schritte(weg, MAX_TEILE)
+            ws = VAR.weg_schritte(weg)
             ul = teileliste(um)
             abbau = {}
             for x, y, z, i in weg:

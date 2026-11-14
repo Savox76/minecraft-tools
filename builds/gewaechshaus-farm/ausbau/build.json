@@ -53,7 +53,7 @@
     },
     {
       "titel": "Schon die Grundversion gebaut?",
-      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile (gelb umrandet). Die Farm kann dabei weiterlaufen."
+      "text": "Dann wähle oben die Fassung „Umbau“. Sie zeigt zuerst, was weg muss (rot umrandet), und danach nur die neuen Teile. Die Farm kann dabei weiterlaufen."
     }
   ],
   "rohstoffe": [
@@ -141,7 +141,7 @@
       },
       {
         "titel": "Already built the base version?",
-        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts (yellow outline). The farm can keep running meanwhile."
+        "text": "Then choose the “Rebuild” version at the top. It first shows what has to go (red outline) and then only the new parts. The farm can keep running meanwhile."
       }
     ],
     "rohstoffe": [
